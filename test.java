@@ -20,11 +20,8 @@ public class test {
         // y a des moments faut savoir s'arrêter 
         // je suis d'accord
         //ehh calme toi 
-        // test fusion
-        // test 2
-        // blablabla
-        // test 2
-        // test 3
+        // test fusion pour la 5e fois 
+        
 
     }
 }
