@@ -18,7 +18,7 @@ public class test {
         //Marylou? oui? est ce que ton pere est un voleur?Par ce qu'il a voler toutes les etoiles du ciels pour les mettre dans tes yeux
         //pardon ... jarrete 
         // y a des moments faut savoir s'arrêter 
-        
+        // test fusion
 
     }
 }
