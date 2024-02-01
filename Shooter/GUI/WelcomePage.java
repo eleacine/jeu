@@ -64,8 +64,9 @@ public class WelcomePage extends JFrame {
         textField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         nouvellePartie = new JButton("GO !");
-        nouvellePartie.setBackground(Color.BLACK);
-        nouvellePartie.setForeground(Color.WHITE);
+        //nouvellePartie.setBackground(Color.BLACK);
+        nouvellePartie.setOpaque(false);
+        nouvellePartie.setForeground(Color.BLACK);
         nouvellePartie.setAlignmentX(Component.CENTER_ALIGNMENT);
         nouvellePartie.addActionListener(new ActionListener() {
             @Override
