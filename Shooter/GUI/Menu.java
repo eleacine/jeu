@@ -11,18 +11,47 @@ public class Menu extends JFrame {
     private CardLayout cardLayout;
     private Player player;
     private JFrame frame;
-
-    public Menu (Player player){
+    public Menu(Player player) {
         this.player = player;
-        this.frame = new JFrame();
-        JLabel label = new JLabel("MENU");
-        frame.add(label);
-        frame.setBackground(Color.GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);    
-        frame.setVisible(true);
+ 
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(Color.BLACK);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        JLabel titleLabel = new JLabel("MENU");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        titleLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(50, 0, 20, 0); 
+        mainPanel.add(titleLabel, gbc);
+
+        JButton settingsButton = new JButton("Settings");
+        JButton levelButton = new JButton("Levels");
+        JButton playButton = new JButton("Play");
+        JButton exitButton = new JButton("Quit");
+
+        gbc.gridy = 1;
+        gbc.insets = new Insets(10, 0, 10, 0); 
+        mainPanel.add(settingsButton, gbc);
+
+        gbc.gridy = 2;
+        mainPanel.add(levelButton, gbc);
+
+        gbc.gridy = 3;
+        mainPanel.add(playButton, gbc);
+
+        gbc.gridy = 4;
+        mainPanel.add(exitButton, gbc);
+
+
+        getContentPane().add(mainPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
