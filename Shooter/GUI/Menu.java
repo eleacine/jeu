@@ -14,8 +14,17 @@ public class Menu extends JFrame {
     public Menu(Player player) {
         this.player = player;
  
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(Color.BLACK);
+        JPanel mainPanel = new JPanel(new GridBagLayout()) {
+        
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon background = new ImageIcon("image/cible.png"); 
+                Image image = background.getImage();
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+       // mainPanel.setBackground(Color.BLACK);
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("MENU");
