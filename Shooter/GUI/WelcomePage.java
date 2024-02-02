@@ -100,7 +100,7 @@ public class WelcomePage extends JFrame {
 
     private void init() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);     
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         setResizable(false);
