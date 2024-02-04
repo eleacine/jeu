@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import Shooter.pasDeNom.Player;
+import Shooter.model.Player;
 
 public class WelcomePage extends JFrame {
 
