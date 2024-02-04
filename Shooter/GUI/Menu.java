@@ -13,6 +13,7 @@ public class Menu extends JFrame {
     private JFrame frame;
     public Menu(Player player) {
         this.player = player;
+
  
         JPanel mainPanel = new JPanel(new GridBagLayout()) {
         
@@ -24,7 +25,8 @@ public class Menu extends JFrame {
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         };
-       // mainPanel.setBackground(Color.BLACK);
+    
+        mainPanel.setBackground(Color.BLACK);
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("MENU");
@@ -39,6 +41,8 @@ public class Menu extends JFrame {
         JButton levelButton = new JButton("Levels");
         JButton playButton = new JButton("Play");
         JButton exitButton = new JButton("Quit");
+        exitButton.addActionListener(e -> System.exit(0));
+
 
         gbc.gridy = 1;
         gbc.insets = new Insets(10, 0, 10, 0); 
@@ -57,8 +61,8 @@ public class Menu extends JFrame {
         getContentPane().add(mainPanel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);    
         setResizable(false);
         setVisible(true);
     }

@@ -5,6 +5,9 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import Shooter.pasDeNom.Player;
 
@@ -20,7 +23,7 @@ public class WelcomePage extends JFrame {
     public WelcomePage() {
         init();
         JLabel label = new JLabel("Welcome to Shooter");
-        label.setFont(new Font("Arial", Font.BOLD, 50));
+       // label.setFont(new Font("Arial", Font.BOLD, 50));
         label.setForeground(Color.WHITE);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
@@ -37,9 +40,12 @@ public class WelcomePage extends JFrame {
 
     public WelcomePage(String titre) {
         init();
+        Font PunkFont = loadPunkFont();
 
         JLabel welcome = new JLabel("Welcome to Shooter !!!");
+        welcome.setFont(PunkFont.deriveFont(Font.BOLD, 30));
         welcome.setForeground(Color.WHITE);
+        welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.backgroundPanel = new JPanel();
         backgroundPanel.setLayout(new BoxLayout(backgroundPanel, BoxLayout.Y_AXIS));
@@ -121,7 +127,20 @@ public class WelcomePage extends JFrame {
             JOptionPane.showMessageDialog(this.backgroundPanel, "Veuillez entrer un nom valide."); // Afficher un message d'erreur
         }
     }
-    
+
+
+private Font loadPunkFont() {
+    try {
+        File fontFile = new File("image/punk.ttf");
+        return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
+    } catch (Exception e) {
+        e.printStackTrace();
+        // En cas d'erreur, utilisez la police par défaut
+        return new Font("SansSerif", Font.PLAIN, 14);
+    }
+}
+
+
 
     public Player getPlayer() {
         return this.player;
