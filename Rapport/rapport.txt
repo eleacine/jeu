@@ -1,0 +1,18 @@
+SEMAINE 1:
+
+Les objectifs de cette semaine étaient de mettre en place le projet, de définir 
+de manière claire et réalisable les objectifs pour les prochaines semaines afin 
+d'assurer une évolution sereine. Pour cela, nous avons réalisé le premier jet du 
+diagramme des classes afin de visualiser nos classes de départ et avons commencé 
+à réfléchir à leur composition et structure. Nous avons également organisé notre 
+espace sur GitLab en mettant en place les classes et en nous familiarisant avec 
+les commandes Git, explorant ainsi les possibilités de travail collaboratif.
+
+De plus, nous avons travaillé sur la mise en page de la prise en main en Swing 
+et avons mené une réflexion approfondie sur l'élaboration du plateau de jeu.
+Par la suite, nous avons également évalué les compétences de chacun afin de 
+constituer des groupes de travail et de déterminer les tâches que chaque 
+personne se sentait capable d'accomplir pendant le projet.
+
+
+SEMAINE 2:
