@@ -6,14 +6,17 @@ import java.awt.Graphics;
 
 public class plateau extends JPanel{
 
-    public manager m = new manager();
+    public manager m ;
     
-    public plateau() {
+    public plateau(player p) {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
+        m = new manager(p, this);
+        this.addKeyListener(m); 
     }
     
     public void update() {
+        m.handleKeyPress();
         m.update();
         repaint();
     }
@@ -21,7 +24,7 @@ public class plateau extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
-        g.fillOval(m.p.x, m.p.y, m.p.size, m.p.size);
+        g.fillOval(m.player.x, m.player.y, m.player.size, m.player.size);
     }
     
 

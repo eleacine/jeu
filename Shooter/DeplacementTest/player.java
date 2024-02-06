@@ -4,6 +4,7 @@ public class player {
     
     public int x, y;
     public int xSpeed, ySpeed;
+    public int maxSpeed = 2;
     public int size = 20;
 
     public player() {
@@ -12,4 +13,5 @@ public class player {
         xSpeed = 0;
         ySpeed = 0;
     }
+
 }
