@@ -60,6 +60,7 @@ public class WelcomePage extends JFrame {
         formPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title = new JLabel("Entrez votre pseudo :");
+        title.setSize(new Dimension(350, 100));
         title.setForeground(Color.WHITE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
