@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import Shooter.model.Player;
 
@@ -42,8 +43,8 @@ public class WelcomePage extends JFrame {
         init();
         Font PunkFont = loadPunkFont();
 
-        JLabel welcome = new JLabel("Welcome to Shooter !!!");
-        welcome.setFont(PunkFont.deriveFont(Font.BOLD, 30));
+        JLabel welcome = new JLabel(" Shooter");
+        welcome.setFont(PunkFont.deriveFont(Font.BOLD, 60));
         welcome.setForeground(Color.WHITE);
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -129,16 +130,21 @@ public class WelcomePage extends JFrame {
     }
 
 
+
 private Font loadPunkFont() {
     try {
-        File fontFile = new File("Shooter\\image\\punk.ttf");
-        return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
+        InputStream fontStream = getClass().getResourceAsStream("../image/punk.ttf");
+        if (fontStream == null) {
+            throw new FileNotFoundException("Fichier de police introuvable.");
+        }
+        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(14f);
     } catch (Exception e) {
         e.printStackTrace();
         // En cas d'erreur, utilisez la police par défaut
         return new Font("SansSerif", Font.PLAIN, 14);
     }
 }
+
 
 
 
