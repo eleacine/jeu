@@ -16,6 +16,7 @@ public class plateau extends JPanel{
     }
     
     public void update() {
+        repaint();
         m.handleKeyPress();
         m.update();
         repaint();

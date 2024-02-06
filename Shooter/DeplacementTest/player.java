@@ -4,8 +4,8 @@ public class player {
     
     public int x, y;
     public int xSpeed, ySpeed;
-    public int maxSpeed = 2;
-    public int size = 20;
+    public int maxSpeed = 10;
+    public int size = 40;
 
     public player() {
         x = 600;
