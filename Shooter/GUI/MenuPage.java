@@ -1,6 +1,8 @@
 package Shooter.GUI;
 
 import java.awt.*;
+import java.net.URL;
+
 import javax.swing.*;
 
 import Shooter.model.Player;
@@ -14,17 +16,35 @@ public class MenuPage extends JFrame {
     public MenuPage(Player player) {
         this.player = player;
 
- 
         JPanel mainPanel = new JPanel(new GridBagLayout()) {
-        
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon background = new ImageIcon("image/cible.png"); 
-                Image image = background.getImage();
-                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+                URL imageUrl = getClass().getResource("../image/cible.png");
+                System.out.println("URL de l'image : " + (imageUrl != null ? imageUrl.toExternalForm() : "null"));
+        
+                ImageIcon originalImage = new ImageIcon(imageUrl);
+                int newWidth = getWidth() - 150;
+                int newHeight = getHeight() - 150;
+                Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+                ImageIcon backgroundImage = new ImageIcon(resizedImage);
+        
+                // Calculer la position pour centrer l'image
+                int x = (getWidth() - newWidth) / 2;
+                int y = (getHeight() - newHeight) / 2;
+        
+                g.drawImage(backgroundImage.getImage(), x, y, newWidth, newHeight, this);
+            }
+        
+            {
+                setBackground(Color.BLACK);  // Définir la couleur de fond noire dans l'initialiseur d'instance
             }
         };
+        
+        
+        
+        
     
         mainPanel.setBackground(Color.BLACK);
         GridBagConstraints gbc = new GridBagConstraints();

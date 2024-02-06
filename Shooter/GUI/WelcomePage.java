@@ -131,7 +131,7 @@ public class WelcomePage extends JFrame {
 
 private Font loadPunkFont() {
     try {
-        File fontFile = new File("image/punk.ttf");
+        File fontFile = new File("../image/punk.ttf");
         return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
     } catch (Exception e) {
         e.printStackTrace();

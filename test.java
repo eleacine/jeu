@@ -1,6 +1,10 @@
-public class test {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+
+
+public class test  extends JFrame {
+    
         // je croie qu'on a trouver une solutionnnnnnnnn
         // test 50
         // hello marylouuu
@@ -21,8 +25,44 @@ public class test {
         // je suis d'accord
         //ehh calme toi 
         // test fusion pour la 5e fois 
-        
 
+
+
+    public test(){
+        // Charger l'image de fond depuis les ressources du projet
+        URL imageUrl = getClass().getResource("Shooter/GUI/image/cible.png");
+        System.out.println("URL de l'image : " + (imageUrl != null ? imageUrl.toExternalForm() : "null"));
+                 ImageIcon backgroundImage = new ImageIcon(imageUrl);
+
+        // Créer un JLabel avec l'image de fond
+        JLabel backgroundLabel = new JLabel(backgroundImage);
+        backgroundLabel.setLayout(new BorderLayout());
+
+        // Ajouter un JLabel pour le texte "Hello, World!"
+        JLabel helloLabel = new JLabel("Hello, World!");
+        helloLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        helloLabel.setForeground(Color.WHITE);
+        helloLabel.setHorizontalAlignment(JLabel.CENTER);
+        helloLabel.setVerticalAlignment(JLabel.CENTER);
+
+        // Ajouter le JLabel du texte au JLabel de l'image de fond
+        backgroundLabel.add(helloLabel);
+
+        // Ajouter le JLabel de l'image de fond à la JFrame
+        add(backgroundLabel);
+
+        // Configurer la JFrame
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new test());
+    }
 }
+
+
+    
