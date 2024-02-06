@@ -22,7 +22,7 @@ public class MenuPage extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 URL imageUrl = getClass().getResource("../image/cible.png");
-                System.out.println("URL de l'image : " + (imageUrl != null ? imageUrl.toExternalForm() : "null"));
+                // System.out.println("URL de l'image : " + (imageUrl != null ? imageUrl.toExternalForm() : "null"));
         
                 ImageIcon originalImage = new ImageIcon(imageUrl);
                 int newWidth = getWidth() - 150;
@@ -41,9 +41,6 @@ public class MenuPage extends JFrame {
                 setBackground(Color.BLACK);  // Définir la couleur de fond noire dans l'initialiseur d'instance
             }
         };
-        
-        
-        
         
     
         mainPanel.setBackground(Color.BLACK);
