@@ -1,6 +1,8 @@
 package Shooter.GUI;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.swing.*;
@@ -15,7 +17,7 @@ public class MenuPage extends JFrame {
     private JFrame frame;
     public MenuPage(Player player) {
         this.player = player;
-
+        Font PunkFont = loadPunkFont();
         JPanel mainPanel = new JPanel(new GridBagLayout()) {
 
             @Override
@@ -30,7 +32,7 @@ public class MenuPage extends JFrame {
                 Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
                 ImageIcon backgroundImage = new ImageIcon(resizedImage);
         
-                // Calculer la position pour centrer l'image
+                //  position pour centrer l'image
                 int x = (getWidth() - newWidth) / 2;
                 int y = (getHeight() - newHeight) / 2;
         
@@ -38,7 +40,7 @@ public class MenuPage extends JFrame {
             }
         
             {
-                setBackground(Color.BLACK);  // Définir la couleur de fond noire dans l'initialiseur d'instance
+                setBackground(Color.BLACK);  
             }
         };
         
@@ -50,7 +52,7 @@ public class MenuPage extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("MENU");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        titleLabel.setFont(PunkFont.deriveFont(Font.BOLD, 60));
         titleLabel.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -86,6 +88,21 @@ public class MenuPage extends JFrame {
         setResizable(false);
         setVisible(true);
     }
+
+
+private Font loadPunkFont() {
+    try {
+        InputStream fontStream = getClass().getResourceAsStream("../image/punk.ttf");
+        if (fontStream == null) {
+            throw new FileNotFoundException("Fichier de police introuvable.");
+        }
+        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(14f);
+    } catch (Exception e) {
+        e.printStackTrace();
+        // En cas d'erreur, utilisez la police par défaut
+        return new Font("SansSerif", Font.PLAIN, 14);
+    }
+}
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
