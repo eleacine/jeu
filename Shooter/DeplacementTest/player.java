@@ -1,21 +1,3 @@
-// package Shooter.DeplacementTest;
-
-// public class Player {
-    
-//     public int x, y;
-//     public int xSpeed, ySpeed;
-//     public int size = 35;
-//     public int maxSpeed = 4;
-
-//     public Player() {
-//         x = 600;
-//         y = 400;
-//         xSpeed = 0;
-//         ySpeed = 0;
-//     }
-
-// }
-
 package Shooter.DeplacementTest;
 
 public class Player {
@@ -32,7 +14,7 @@ public class Player {
         y = 400;
         xSpeed = 0;
         ySpeed = 0;
-        direction = 0; // Initialiser la direction à zéro (vers la droite)
+        direction = -10; // Initialiser la direction à zéro (vers la droite)
     }
 }
 
