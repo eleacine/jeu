@@ -3,16 +3,16 @@ package Shooter.DeplacementTest;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
-public class Manager extends KeyAdapter {
+public class manager extends KeyAdapter {
 
-    public Plateau plateau;
-    public Player player;
+    public plateau plateau;
+    public player player;
     private boolean upPressed;
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
 
-    public Manager(Player player, Plateau plateau) {
+    public manager(player player, plateau plateau) {
         this.player = player;
         this.plateau = plateau;
     }

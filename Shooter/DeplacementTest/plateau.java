@@ -7,14 +7,14 @@ import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import javax.swing.JPanel;
 
-public class Plateau extends JPanel {
+public class plateau extends JPanel {
 
-    public Manager m;
+    public manager m;
 
-    public Plateau(Player p) {
+    public plateau(player p) {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
-        m = new Manager(p, this);
+        m = new manager(p, this);
         this.addKeyListener(m);
     }
 
@@ -30,7 +30,11 @@ public class Plateau extends JPanel {
         g.setColor(Color.WHITE);
 
         // Dessiner le cercle
-        // g.fillOval(m.player.x, m.player.y, m.player.size, m.player.size);
+        int circleSize = 20;
+         g.fillOval(m.player.x, m.player.y, m.player.size, m.player.size);
+
+        
+        
 
         // Dessiner le triangle isocèle
         int triangleSize = 35;
@@ -49,6 +53,7 @@ public class Plateau extends JPanel {
         at.rotate(m.player.direction); // rotation du triangle
         g2d.setTransform(at); //applique la transformation
         g2d.fill(trianglePolygon); // dessine le triangle
+
         // g2d.setTransform(new AffineTransform()); // Reset the transform
 
     }
