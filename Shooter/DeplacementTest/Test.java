@@ -10,9 +10,9 @@ public class Test extends JFrame {
     }
 
     public Test() {
-        Player player = new Player();
-        Plateau plateau = new Plateau(player);
-        Manager manager = new Manager(player, plateau);
+        player player = new player();
+        plateau plateau = new plateau(player);
+        manager manager = new manager(player, plateau);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

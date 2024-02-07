@@ -63,14 +63,14 @@ import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import javax.swing.JPanel;
 
-public class Plateau extends JPanel {
+public class plateau extends JPanel {
 
-    public Manager m;
+    public manager m;
 
-    public Plateau(Player p) {
+    public plateau(player p) {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
-        m = new Manager(p, this);
+        m = new manager(p, this);
         this.addKeyListener(m);
     }
 
