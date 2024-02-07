@@ -7,7 +7,7 @@ import java.net.URL;
 
 import javax.swing.*;
 
-import Shooter.model.Player;
+import Shooter.Model.Player;
 
 
 public class MenuPage extends JFrame {

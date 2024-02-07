@@ -1,6 +1,9 @@
 package Shooter.GUI;
 
 import javax.swing.*;
+
+import Shooter.Model.Player;
+
 import java.awt.*;
 
 import java.awt.event.ActionEvent;
@@ -9,8 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
-import Shooter.model.Player;
 
 public class WelcomePage extends JFrame {
 

@@ -1,4 +1,4 @@
-package Shooter.model;
+package Shooter.Model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
