@@ -1,4 +1,4 @@
-package Shooter.model;
+package Shooter.Model;
 
 public abstract class Enemy {
     private int sante;

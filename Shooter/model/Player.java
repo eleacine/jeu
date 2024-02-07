@@ -1,4 +1,4 @@
-package Shooter.model;
+package Shooter.Model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,10 +12,14 @@ public class Player {
     private int santé;      //faudrait lui donner une valeur par défaut 
     private LinkedList<Armes> listeArmes;
 
+    private int x;
+    private int y;
+
     public Player(String pseudo) {
         this.pseudo = pseudo;
     }
 
+    // récupérer une éventuelle sauvegarde
     public static Player loadPlayer() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Game\\sauvegarde.ser"))) {
             return (Player) ois.readObject();

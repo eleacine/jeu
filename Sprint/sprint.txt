@@ -1,1 +1,46 @@
 Feuille de sprint:
+
+SEMAINE 1
+
+-diagramme des classes; premier brouillon de l’architecture des classes; avec 
+interface methodes. savoir comment elle comunique
+-guitlab→ gaufre dessus un dossier avec un rapport semaine par semaine ET LES 
+SPRINT ce qu’on veut faire chaque semaine
+-rapport ce qu’on a fait chaque semaine
+-feuille de sprint
+-test swing avec un hello world et une image
+-bash (majoori)
+-+++makefile sys pour faire tourner des script
+-regarder git quelque chose de fonctionnel
+-créer toures les classes principales (leo)
+
+
+SEMAINE 2 (initiation du jeu, et des personnages)
+-Finir les pageGUI
+-Créer le plateau de jeu
+-Placer les personnages (sur l’interface graphique ce sera modélisé sous formes 
+de cercles)
+
+
+SEMAINE 3 (base simple du jeu)
+-Déplacement des personnage(avec les traces de pas)
+-Faire le menu d’armes
+-Attaques (gérer les projectiles les  et le dégâts)
+
+
+SEMAINE 4 (gestion des niveaux)
+-Faire les WIN et OVER
+-plateau de niveau
+-Gestion du déblocage des niveaux suivants
+-gestion des ennemis par niveau
+-gestion du déblocage des armes par niveau
+
+
+SEMAINE 5 (gestion des plus)
+-Faire une sauvegarde
+-Gestion de l’argent
+
+
+SEMAINE 6
+-vérification de la base
+-regarder des améliorations possiblement dans les temps

@@ -1,6 +1,9 @@
 package Shooter.GUI;
 
 import javax.swing.*;
+
+import Shooter.Model.Player;
+
 import java.awt.*;
 
 import java.awt.event.ActionEvent;
@@ -8,8 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import Shooter.model.Player;
+import java.io.InputStream;
 
 public class WelcomePage extends JFrame {
 
@@ -42,8 +44,8 @@ public class WelcomePage extends JFrame {
         init();
         Font PunkFont = loadPunkFont();
 
-        JLabel welcome = new JLabel("Welcome to Shooter !!!");
-        welcome.setFont(PunkFont.deriveFont(Font.BOLD, 30));
+        JLabel welcome = new JLabel(" Shooter");
+        welcome.setFont(PunkFont.deriveFont(Font.BOLD, 60));
         welcome.setForeground(Color.WHITE);
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -59,6 +61,7 @@ public class WelcomePage extends JFrame {
         formPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title = new JLabel("Entrez votre pseudo :");
+        title.setSize(new Dimension(350, 100));
         title.setForeground(Color.WHITE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -129,16 +132,21 @@ public class WelcomePage extends JFrame {
     }
 
 
+
 private Font loadPunkFont() {
     try {
-        File fontFile = new File("image/punk.ttf");
-        return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
+        InputStream fontStream = getClass().getResourceAsStream("../image/punk.ttf");
+        if (fontStream == null) {
+            throw new FileNotFoundException("Fichier de police introuvable.");
+        }
+        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(14f);
     } catch (Exception e) {
         e.printStackTrace();
         // En cas d'erreur, utilisez la police par défaut
         return new Font("SansSerif", Font.PLAIN, 14);
     }
 }
+
 
 
 
