@@ -2,7 +2,7 @@ package Shooter.GUI;
 
 import javax.swing.*;
 
-import Shooter.Model.Player;
+import Shooter.model.Player;
 
 import java.awt.*;
 

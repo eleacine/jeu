@@ -1,4 +1,4 @@
-package Shooter.Model;
+package Shooter.model;
 
 public class Case {
     private boolean IsObstacle;
