@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.LinkedList;
 
-public class Player {
+public class Player extends Personnage{
 
     private String pseudo;
     private int level = 1;  //1 par défaut

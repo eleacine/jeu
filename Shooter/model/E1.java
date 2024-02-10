@@ -1,5 +1,9 @@
 package Shooter.model;
 
 public class E1 extends Enemy {
-    //un sous type de enemy 
+    public E1(){
+        this.sante=10;
+        this.id=1;
+        this.power=5;
+    }
 }
