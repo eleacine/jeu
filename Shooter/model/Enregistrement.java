@@ -3,6 +3,7 @@ package Shooter.model;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -12,8 +13,7 @@ public class Enregistrement {
     public static BufferedImage getSpriteAtlas() {
 
 		BufferedImage img = null;
-		InputStream fichier = Enregistrement.class.getClassLoader().getResourceAsStream("trois_carres.png");
-
+		URL fichier = Enregistrement.class.getClassLoader().getResource("../image/trois_carres.png");
 		try {
 			img = ImageIO.read(fichier);
 		} catch (IOException e) {
