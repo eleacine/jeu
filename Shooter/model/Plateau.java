@@ -1,4 +1,4 @@
-package Shooter.Model;
+package Shooter.model;
 
 public class Plateau {
     //implémentation à voire 

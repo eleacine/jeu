@@ -2,7 +2,7 @@ package Shooter.GUI;
 
 import javax.swing.*;
 
-import Shooter.Model.Player;
+import Shooter.model.Player;
 
 import java.awt.*;
 
@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class WelcomePage extends JFrame {
-
+/*
     private Player player;
     private JLabel title;
     private JTextField textField;
@@ -157,5 +157,5 @@ private Font loadPunkFont() {
     // public static void main(String[] args) {
     //     new WelcomePage();
     //     new WelcomePage("Shooter");
-    // }
+    // }*/
 }

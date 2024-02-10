@@ -30,7 +30,6 @@ public class Test extends JFrame {
         // System.out.println(getWidth() + " " + getHeight());
         System.out.println(game.p.getWidth() + " " + game.p.getHeight());
         this.setVisible(true);
-        game.start();
 
 
     }

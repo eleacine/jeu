@@ -1,44 +1,55 @@
 package Shooter.DeplacementTest;
 
+
 public class Player extends Personnage {
     
+    public int x, y;
+    public int xSpeed, ySpeed;
+    public int size = 35;
     public double direction; // Ajout de la propriété direction
     public double rotationSpeed = Math.PI / 200; // Vitesse de rotation en radians par seconde
+    public int maxSpeed = 5;
 
     public Player() {
-        maxSpeed = 1;
-        size = 35;
-        x = 600;
-        y = 400;
+        
+        x=600;
+        y=600;
+       // x = getWidth() / 2;
+       /// y = getHeight() / 2;
         xSpeed = 0;
         ySpeed = 0;
         direction = 0; // Initialiser la direction à zéro (vers la droite)
+        sante = 100;
     }
 
-    public boolean detectCollision() {
-        if (x < 0 || x >= 1850 || y < 0 || y >= 1050) {
-            return true;
-        }
-        return false;
-    }
+	public boolean detectCollision(float newX, float newY, int newSize){
+		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY){
+			return true;
+		}
+		return false;
+	}
 
 //------------- Getters et setters ---------------------------
-    public double getDirection() {
-        return direction;
-    }
+  public double getDirection() {
+      return direction;
+  }
 
-    public void setDirection(double direction) {
-        this.direction = direction;
-    }
+  public void setDirection(double direction) {
+      this.direction = direction;
+  }
 
-    public double getRotationSpeed() {
-        return rotationSpeed;
-    }
+  public double getRotationSpeed() {
+      return rotationSpeed;
+  }
 
-    public void setRotationSpeed(double rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
+  public void setRotationSpeed(double rotationSpeed) {
+      this.rotationSpeed = rotationSpeed;
+  }
 
 
 }
+
+
+
+
 
