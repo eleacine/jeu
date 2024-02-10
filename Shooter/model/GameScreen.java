@@ -16,64 +16,37 @@ public class GameScreen extends JPanel {
 	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
 	public GameScreen(BufferedImage img) {
-		/*this.img = img;
-
-		loadSprites();*/
-
+		this.img = img;
+		loadSprites();
 		random = new Random();
 	}
-
+	
+	//permet de couper l'image trois_carrees en 3 carres séparé, principe coordonnees
 	private void loadSprites() {
 
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
-				sprites.add(img.getSubimage(x * 50, y * 50, 50, 50));
+			for (int x = 0; x < 3; x++) {
+				sprites.add(img.getSubimage(50 * x, 0, 50, 50));
 			}
-		}
+		
 
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-        g.setColor(Color.red);
-        //g.fillRect(0,0,50,50);
-
-
-//		g.drawImage(sprites.get(8), 0, 0, null);
-
-//		g.drawImage(img.getSubimage(32 * 9, 32, 32, 32), 0, 0, null);
-
-		for (int x = 0; x < 30; x++) {
-            g.setColor(getRndColor());
-            g.fillRect(x*50,0,50,50);
-        }
+        
+		//nombre de carreaux sur l'ecran 18 dans la longeueur et 30 dans la largeur pour dimension 1500*900
+	
         for (int y = 0; y < 18; y++) {
             for (int x = 0; x < 30; x++) {
-                g.setColor(getRndColor());
-                g.fillRect(x*50,y*50,50,50);
-            }
-
-            
+				g.drawImage(sprites.get(getRndInt()), x * 50, y * 50, null);
+				//c'est comme des coordonnées en position (0,0)sur l'ecran il aura un carreau vert en (14,20) un rouge
+			}
         }
-			//for (int x = 0; x < 30; x++) {
-				//g.drawImage(sprites.get(getRndInt()), x * 50, y * 50, null);
-                
-			//}
 		
 	}
-
+	//génére des couleurs au hasard a partir de l'image
 	private int getRndInt() {
-		return random.nextInt(200);
-	}
-
-    //génére des couleurs au hasard
-	private Color getRndColor() {
-		int r = random.nextInt(256);
-		int g = random.nextInt(256);
-		int b = random.nextInt(256);
-
-		return new Color(r, g, b);
-
+		return random.nextInt(3);
 	}
 
 }
