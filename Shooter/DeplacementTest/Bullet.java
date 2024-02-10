@@ -13,7 +13,7 @@ public class Bullet {
     public float differenceY;  // Composante de mouvement en y
     
 
-    private int degats = 50;  // Degats du projectile
+    private int degats;  // Degats du projectile
     private float slowdownFactor = 5f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
 
     // Constructeur de la classe Bullet
@@ -23,13 +23,23 @@ public class Bullet {
     public Bullet(int xCor, int yCor, int destX, int destY, boolean collision) {
         this.xCor = xCor;
         this.yCor = yCor;
+        this.degats = 50;
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
 
     public Bullet(int xCor, int yCor, float angle) {
         this.xCor = xCor;
         this.yCor = yCor;
+        this.degats = 50;
         calculateDifferences(angle);  // Calcul des composantes de mouvement en fonction de l'angle
+    }
+
+    // pour les ennemis pour l'instant
+    public Bullet(int xCor, int yCor, int destX, int destY, boolean collision, int degats) {
+        this.xCor = xCor;
+        this.yCor = yCor;
+        this.degats = degats;
+        calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
 
     // Calcule les composantes de mouvement en fonction de la destination
@@ -60,8 +70,26 @@ public class Bullet {
         this.yCor += differenceY;  // Met à jour la coordonnée y en fonction de la composante de mouvement en y
     }
 
+    public boolean isOutOfBounds(int width, int height) {
+        return xCor < 0 || xCor > width || yCor < 0 || yCor > height;
+    }
+
     public int getDegat (){
         return this.degats;
     }
+
+    public float getX(){
+        return this.xCor;
+    }
+
+    public float getY(){
+        return this.yCor;
+    }
+
+    public int getSize(){
+        return this.size;
+    }
+
+    
 }
 

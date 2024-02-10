@@ -19,7 +19,6 @@ public class Manager extends KeyAdapter {
     private boolean spacePressed;
     private boolean spacePressedPrev;
 
-    public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
     public Manager(Player player, Plateau plateau) {
         this.player = player;
@@ -105,7 +104,6 @@ public class Manager extends KeyAdapter {
             spacePressed = true;
         }
 
-        // plateau.update();
     }
 
     @Override
@@ -138,21 +136,10 @@ public class Manager extends KeyAdapter {
             Bullet b = new Bullet(player.x + 25, player.y, (float) player.direction);
             // faire une animation du joueur pour simuler le tir
 
-            bullets.add(b);
+            plateau.projectilesManager.getPlayerBullets().add(b);
         }
     }
 
-    public void updateBullets() {
-        Iterator<Bullet> bulletIterator = bullets.iterator();
-        while (bulletIterator.hasNext()) {
-            Bullet bullet = bulletIterator.next();
 
-            // Check if the bullet is out of bounds
-            if (bullet.xCor <= 50 || bullet.xCor >= 1850 || bullet.yCor <= 50 || bullet.yCor >= 1000) {
-                bullet.size = 0;
-                bulletIterator.remove(); // Remove the bullet from the list
-            }
-        }
-    }
 
 }

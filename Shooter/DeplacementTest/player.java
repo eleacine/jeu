@@ -3,7 +3,7 @@ package Shooter.DeplacementTest;
 public class Player extends Personnage {
     
     public double direction; // Ajout de la propriété direction
-    public double rotationSpeed = Math.PI / 100; // Vitesse de rotation en radians par seconde
+    public double rotationSpeed = Math.PI / 200; // Vitesse de rotation en radians par seconde
 
     public Player() {
         maxSpeed = 1;

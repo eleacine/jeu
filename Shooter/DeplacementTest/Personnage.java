@@ -8,12 +8,12 @@ public class Personnage {
     public int maxSpeed;
     public int sante; // deux foncitons infligerDegats et soigner
 
-    public boolean detectCollision() {
-        if (x < 0 || x >= 1850 || y < 0 || y >= 1050) {
-            return true;
-        }
-        return false;
-    }
+	public boolean detectCollision(float newX, float newY, int newSize){
+		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY){
+			return true;
+		}
+		return false;
+	}
 
     // ------------- Getters et setters ---------------------------
     public int getX() {

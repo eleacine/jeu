@@ -1,0 +1,14 @@
+
+barre de vie pour les ennemis
+affichage d'infos sur le plateau
+
+faire une vitesse pour les balles + portee (rebond ???)
+cas de balles qui traverse, ralentir, infliger moins de degats
+
+
+Ennemis 
+ 1- ennemis statique qui tire sur le joueur 
+ 2- ennemis qui suit le joueur/ tire (cadence ralentit/portee)
+
+ 
+ 3- ronde predefinit pour l'ennemis et si joueur entre dans la zone (repéré) -> 2
