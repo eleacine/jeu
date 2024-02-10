@@ -11,7 +11,7 @@ import Shooter.model.Player;
 
 
 public class MenuPage extends JFrame {
-
+/* 
     private CardLayout cardLayout;
     private Player player;
     private JFrame frame;
@@ -116,7 +116,7 @@ private Font loadPunkFont() {
                 }
             });
         });
-    }
+    }*/
     
 
 }
