@@ -1,74 +1,110 @@
 package Shooter.DeplacementTest;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
-import javax.swing.BorderFactory;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-
 public class Plateau extends JPanel {
 
-    public Manager m;
-    public Player p;
+    public Manager manager;
+    public EnnemiManager ennemiManager;
+    public ProjectilesManager projectilesManager;
 
     public Plateau(Player p) {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
-        this.p = p;
-        m = new Manager(p, this);
-        this.addKeyListener(m);
-         // Définir la taille préférée du plateau pour occuper toute la zone de dessin de la fenêtre
-         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-         this.setPreferredSize(screenSize);
-         this.setMaximumSize(screenSize);
-      //   this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
-
-         System.out.println("screensize :" + screenSize);
+        manager = new Manager(p, this);
+        ennemiManager = new EnnemiManager(p, this);
+        projectilesManager = new ProjectilesManager(p, this);
+        this.addKeyListener(manager);
     }
 
     public void update() {
-        m.handleKeyPress();
-        m.update();
+        manager.handleKeyPress();
+        ennemiManager.update();
+        ennemiManager.suppEnnemi();
+        manager.update();
+       
+        projectilesManager.hitEnnemi();
+        projectilesManager.hitPlayer();
+        projectilesManager.suppBulletPlayer();
+        projectilesManager.suppBulletEnnemi();
+       
+
         repaint();
     }
 
 
-
-    @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
 
-        // Image du joueur jtest
-        URL imageUrl = getClass().getResource("j_test.png");
-        ImageIcon originalImage = new ImageIcon(imageUrl);
-        int newWidth = getWidth() - 880;
-        int newHeight = getHeight() - 80;
-        Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        ImageIcon joueurImage = new ImageIcon(resizedImage);
+        // // Dessiner le joueur
+        // URL imageUrl = getClass().getResource("j_test.png");
+        // ImageIcon originalImage = new ImageIcon(imageUrl);
+        // int newWidth = getWidth() - 800;
+        // int newHeight = getHeight() - 80;
+        // Image resizedImage = originalImage.getImage().getScaledInstance(newWidth,
+        // newHeight, Image.SCALE_SMOOTH);
+        // ImageIcon joueurImage = new ImageIcon(resizedImage);
 
-        double x = (getWidth() - joueurImage.getIconWidth()) / 2 + p.x;
-        double y = (getHeight() - joueurImage.getIconHeight()) / 2 + p.y;
-        
+        // double x = (getWidth() - joueurImage.getIconWidth()) / 2 + m.player.x;
+        // double y = (getHeight() - joueurImage.getIconHeight()) / 2 + m.player.y;
+
+        // Graphics2D g2d = (Graphics2D) g;
+
+        // AffineTransform at = AffineTransform.getTranslateInstance(x -
+        // joueurImage.getIconWidth() / 2, y - joueurImage.getIconHeight() / 2);
+        // at.rotate(m.player.direction, joueurImage.getIconWidth() / 2,
+        // joueurImage.getIconHeight() / 2);
+
+        // g2d.setTransform(at);
+
+        // g2d.drawImage(joueurImage.getImage(), 0, 0, newWidth, newHeight, this);
+        // g2d.setTransform(new AffineTransform());
+
+        // Dessiner le triangle isocèle
+        int triangleSize = 35;
+        int extendedLength = 5; // Adjust this value to make the tip more noticeable
+
+        int[] triangleX = { 0, -triangleSize / 2, triangleSize / 2, 0 };
+        int[] triangleY = { triangleSize + extendedLength, 0, 0, triangleSize + extendedLength };
+
+        Polygon trianglePolygon = new Polygon(triangleY, triangleX, triangleY.length);
+
+        double triangleXPos = manager.player.x;
+        double triangleYPos = manager.player.y;
 
         Graphics2D g2d = (Graphics2D) g;
+        AffineTransform at = AffineTransform.getTranslateInstance(triangleXPos, triangleYPos);
 
-        
-        AffineTransform at = AffineTransform.getTranslateInstance(x - joueurImage.getIconWidth() / 2, y - joueurImage.getIconHeight() / 2);
-        at.rotate(p.direction, joueurImage.getIconWidth() / 2, joueurImage.getIconHeight() / 2);
+        at.rotate(manager.player.direction); // rotation du triangle
+        g2d.setTransform(at); // applique la transformation
+        g2d.fill(trianglePolygon); // dessine le triangle
+        g2d.setTransform(new AffineTransform()); // Reset the transform
 
-        g2d.setTransform(at);
+        // Dessiner les balles du joueur
+        for (Bullet playerBullet : projectilesManager.getPlayerBullets()) {
+            playerBullet.createBullet(g);
+        }
 
-        g2d.drawImage(joueurImage.getImage(), 0, 0, newWidth, newHeight, this);
-        g2d.setTransform(new AffineTransform());
-     
-        
+        // Dessiner les balles des ennemis
+        for (Bullet enemyBullet : projectilesManager.getEnemyBullets()) {
+            enemyBullet.createBullet(g);
+        }
+
+        // Dessiner les ennemis
+        for (Ennemi ennemi : ennemiManager.ennemis) {
+            g.setColor(Color.RED);
+            g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
+        }
     }
 }
