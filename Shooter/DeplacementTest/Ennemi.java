@@ -12,7 +12,7 @@ public class Ennemi extends Personnage{
 
 
     public Ennemi(int id, int destX, int destY) {
-        this.speed = 1;
+        this.speed = 2;
         this.x = 200;
         this.y = 100;
 		this.sante = 100;
