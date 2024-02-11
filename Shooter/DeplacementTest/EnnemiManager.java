@@ -5,18 +5,18 @@ import java.util.Iterator;
 
 public class EnnemiManager {
 
-    public Manager m;
+    public Manager manager;
     public ArrayList<Ennemi> ennemis;
-    public Plateau p;
+    public Plateau plateau;
     public Player player;
 
     private long lastShotTime;
     private long shootingInterval = 2000; // Période de tir en millisecondes
 
-    public EnnemiManager(Player player, Plateau p) {
+    public EnnemiManager(Player player, Plateau plateau) {
         this.player = player;
-        this.p = p;
-        this.m = p.manager;
+        this.plateau = plateau;
+        this.manager = plateau.manager;
         ennemis = new ArrayList<Ennemi>();
         ennemis.add(new Ennemi(1, 100, 100));
         this.lastShotTime = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class EnnemiManager {
             if (currentTime - lastShotTime > shootingInterval) {
                 // Si le temps écoulé depuis le dernier tir est supérieur à la période de tir
                 Bullet bullet = new Bullet(ennemi.x, ennemi.y, player.x, player.y, false, ennemi.power);
-                m.plateau.projectilesManager.getEnemyBullets().add(bullet);
+                plateau.projectilesManager.getEnemyBullets().add(bullet);
                 lastShotTime = currentTime; // Met à jour le temps du dernier tir
             }
         }

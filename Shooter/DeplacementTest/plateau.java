@@ -1,7 +1,6 @@
 package Shooter.DeplacementTest;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,7 +11,6 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import java.util.Iterator;
 
 public class Plateau extends JPanel {
 
@@ -27,13 +25,6 @@ public class Plateau extends JPanel {
         ennemiManager = new EnnemiManager(p, this);
         projectilesManager = new ProjectilesManager(p, this);
         this.addKeyListener(manager);
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-        System.out.println(screenWidth + " " + screenHeight);
-        this.setSize(screenWidth, screenHeight);
     }
 
     public void update() {

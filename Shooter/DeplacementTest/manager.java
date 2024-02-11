@@ -44,11 +44,16 @@ public class Manager extends KeyAdapter {
             player.xSpeed = 0;
         }
 
+        if (spacePressed && !spacePressedPrev) {
+            shoot();
+        }
+
+        spacePressedPrev = spacePressed;
+
        
     }
 
     
-
     public void moveForward() {
         player.xSpeed = (int) Math.round(player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(player.maxSpeed * Math.sin(player.direction));
@@ -62,25 +67,26 @@ public class Manager extends KeyAdapter {
     }
     
 
+    // public void update() {
+    //     player.x += player.xSpeed;
+    //     player.y += player.ySpeed;
+    //     // System.out.println("x : " + player.x + " y : " + player.y);
+    //     if(player.x>=2043 || player.x<=-360 || player.y>=1379 || player.y<=30){
+    //         player.x -= player.xSpeed;
+    //         player.y -= player.ySpeed;
+    //     }
+    //     /*if(player.x>=plateau.getWidth() || player.x<=0 || player.y>=plateau.getHeight() || player.y<=0){
+    //        player.x -= player.xSpeed;
+    //        player.y -= player.ySpeed;
+    //    } */
+    
+    // }
+    
     public void update() {
         player.x += player.xSpeed;
         player.y += player.ySpeed;
-        System.out.println("x : " + player.x + " y : " + player.y);
-        if(player.x>=2043 || player.x<=-360 || player.y>=1379 || player.y<=30){
-            player.x -= player.xSpeed;
-            player.y -= player.ySpeed;
-        }
-        /*if(player.x>=plateau.getWidth() || player.x<=0 || player.y>=plateau.getHeight() || player.y<=0){
-           player.x -= player.xSpeed;
-           player.y -= player.ySpeed;
-       } */
-    
-        plateau.repaint();
     }
-    
-    
-    
-    
+
 
     public void moveUp() {
         player.ySpeed = -player.maxSpeed;
@@ -92,6 +98,7 @@ public class Manager extends KeyAdapter {
 
     public void stop() {
         player.xSpeed = 0;
+        player.ySpeed = 0;
     }
 
     @Override
@@ -100,10 +107,10 @@ public class Manager extends KeyAdapter {
 
         if (code == KeyEvent.VK_UP || code == KeyEvent.VK_Z) {
             upPressed = true;
-            moveUp();
+            // moveUp();
         } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
             downPressed = true;
-            moveDown();
+            // moveDown();
         } else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_Q) {
             leftPressed = true;
         } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
@@ -142,14 +149,12 @@ public class Manager extends KeyAdapter {
     public void shoot() {
 
         if (spacePressed) {
-
             Bullet b = new Bullet(player.x + 25, player.y, (float) player.direction);
             // faire une animation du joueur pour simuler le tir
-
             plateau.projectilesManager.getPlayerBullets().add(b);
         }
     }
 
 
 
-}
+} 

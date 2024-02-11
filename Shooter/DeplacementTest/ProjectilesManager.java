@@ -50,7 +50,6 @@ public class ProjectilesManager {
         Iterator<Bullet> it = playerbullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
-            System.out.println(p.getWidth() + " " + p.getHeight() );
             if (bullet.isOutOfBounds(p.getWidth()+250, p.getHeight()+200)|| bullet.getSize() == 0) {
                 it.remove();
             }

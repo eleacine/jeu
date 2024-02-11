@@ -74,6 +74,8 @@ public class Bullet {
         return xCor < 0 || xCor > width || yCor < 0 || yCor > height;
     }
 
+ // ----------------- Getters et Setters ---------------------
+
     public int getDegat (){
         return this.degats;
     }

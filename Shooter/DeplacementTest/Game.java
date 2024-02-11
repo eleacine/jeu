@@ -19,6 +19,7 @@ public class Game {
 		m = new Manager(player, p);
 		ennemiManager = new EnnemiManager(player, p);
 		projectilesManager = new ProjectilesManager(player, p);
+		// p.addKeyListener(m);
 	}
 
 	public void start() {
