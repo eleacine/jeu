@@ -1,5 +1,6 @@
 package Shooter.DeplacementTest;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class Game {
@@ -19,6 +20,7 @@ public class Game {
 		m = new Manager(player, p);
 		ennemiManager = new EnnemiManager(player, p);
 		projectilesManager = new ProjectilesManager(player, p);
+		//p.setSize(JFrame.MAXIMIZED_BOTH);
 		// p.addKeyListener(m);
 	}
 

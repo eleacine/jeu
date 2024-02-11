@@ -7,14 +7,14 @@ public class Player extends Personnage {
     public int xSpeed, ySpeed;
     public int size = 35;
     public double direction; // Ajout de la propriété direction
-    public double rotationSpeed = Math.PI / 14; // Vitesse de rotation en radians par seconde
-    public int maxSpeed = 5;
+    public double rotationSpeed = Math.PI / 30; // Vitesse de rotation en radians par seconde
+    public int maxSpeed = 1;
 
 
 
     public Player() {
         
-        x=600;
+        x=1280;
         y=600;
        // x = getWidth() / 2;
        /// y = getHeight() / 2;

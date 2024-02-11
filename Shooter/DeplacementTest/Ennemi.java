@@ -7,6 +7,9 @@ public class Ennemi extends Personnage{
     public int speed;
     public int destX;
     public int destY;
+	public float differenceX;  
+    public float differenceY; 
+
 
     public Ennemi(int id, int destX, int destY) {
         this.speed = 1;
@@ -17,6 +20,11 @@ public class Ennemi extends Personnage{
 		this.size = 55;
     }    
     
+	public void calculateDifferences(float angle) {
+        this.differenceX = (float) Math.cos(angle) * this.speed;
+        this.differenceY = (float) Math.sin(angle) * this.speed;
+    }
+
     public void move(){
 		if (x > destX + 10){
 			x -= speed;

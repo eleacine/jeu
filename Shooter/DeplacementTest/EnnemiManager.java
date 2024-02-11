@@ -12,6 +12,8 @@ public class EnnemiManager {
 
     private long lastShotTime;
     private long shootingInterval = 2000; // Période de tir en millisecondes
+//    private int ennemiSpeed = 2; 
+
 
     public EnnemiManager(Player player, Plateau plateau) {
         this.player = player;
@@ -22,7 +24,7 @@ public class EnnemiManager {
         this.lastShotTime = System.currentTimeMillis();
     }
 
-   
+   /* 
     // a faire en fonction du type d'ennemis ajuster la vitesse de tir
     public void update() {
         for (Ennemi ennemi : ennemis) {
@@ -35,6 +37,29 @@ public class EnnemiManager {
             }
         }
     }
+    */
+    public void update() {
+        for (Ennemi ennemi : ennemis) {
+            float angle = calculateAngle(ennemi.x, ennemi.y, player.x, player.y);
+            ennemi.calculateDifferences(angle);
+            ennemi.x += ennemi.differenceX;
+            ennemi.y += ennemi.differenceY;
+    
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastShotTime > shootingInterval) {
+                Bullet bullet = new Bullet(ennemi.x, ennemi.y, player.x, player.y, false, ennemi.power);
+                plateau.projectilesManager.getEnemyBullets().add(bullet);
+                lastShotTime = currentTime;
+            }
+        }
+    }
+
+    
+    private float calculateAngle(int x1, int y1, int x2, int y2) {
+        return (float) Math.atan2(y2 - y1, x2 - x1);
+    }
+    
+    
 
     public void suppEnnemi (){
         Iterator<Ennemi> it = ennemis.iterator();

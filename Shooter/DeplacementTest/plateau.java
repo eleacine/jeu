@@ -25,7 +25,10 @@ public class Plateau extends JPanel {
         ennemiManager = new EnnemiManager(p, this);
         projectilesManager = new ProjectilesManager(p, this);
         this.addKeyListener(manager);
+    
     }
+
+    
 
     public void update() {
         manager.handleKeyPress();
