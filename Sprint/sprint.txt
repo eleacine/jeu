@@ -21,6 +21,18 @@ SEMAINE 2 (initiation du jeu, et des personnages)
 -Placer les personnages (sur l’interface graphique ce sera modélisé sous formes 
 de cercles)
 
+Leonor:
+*Ce que j'ai fait*
+    - un factory pattern pour les ennemis (version test dans le dossier factory)
+    - une interface PersonnageFactory pour la creation de tous les personnages
+        --> elle est par la suite implémentée dans les factories de chaque type de enemie qui crée l'enemi differament 
+    - un "loader" qui lit un fichier txt pour savoir quel enemi créer pour chaque niveau
+*Recherche et Réfléxion*
+    - je pense que faire une factory pour Player deviens inutile puisque on à que un seul Player
+    - en fonction de l'implementation des armes ça pourait peut-être intéressant de faire un factory 
+    - je pense que ça peut être très intéressant de faire un factory pour la creation du plateau de l'interface graphique
+        --> à voir en fonction de l'implémentation des tuiles
+    - l'utilisation du fichier txt et des factories se fera dans l'initialisation de la partie 
 
 SEMAINE 3 (base simple du jeu)
 -Déplacement des personnage(avec les traces de pas)
