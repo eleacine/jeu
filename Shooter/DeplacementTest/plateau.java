@@ -32,11 +32,12 @@ public class Plateau extends JPanel {
         ennemiManager.update();
         ennemiManager.suppEnnemi();
         manager.update();
-       
+
         projectilesManager.hitEnnemi();
         projectilesManager.hitPlayer();
         projectilesManager.suppBulletPlayer();
         projectilesManager.suppBulletEnnemi();
+
        
 
         repaint();

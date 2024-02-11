@@ -88,24 +88,25 @@ public class Manager extends KeyAdapter {
         player.x += player.xSpeed;
         player.y += player.ySpeed;
 
-        checkPlayerBounds();
+
+        checkPlayerlimits();
     }
 
-    private void checkPlayerBounds() {
-        // Définir les limites de l'écran
+    private void checkPlayerlimits() {
+     
         int minX = 0;
         int minY = 0;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println("screensize :" + screenSize);
-        int maxX = plateau.getWidth();  // Utiliser plateau.getWidth() pour obtenir la largeur de l'écran
+        int maxX = plateau.getWidth(); 
         System.out.println("plateau.getWidth() : " + plateau.getWidth());
-        int maxY = plateau.getHeight(); // Utiliser plateau.getHeight() pour obtenir la hauteur de l'écran
+        int maxY = plateau.getHeight(); 
         System.out.println("plateau.getHeight() : " + plateau.getHeight());
     
-        // Vérifier si le joueur est en dehors des limites de l'écran
+        
         if (player.x < minX) {
             System.out.println("player.x : " + player.x + " minX : " + minX);
-            //recupere screen width
+           
 
             player.x = minX;
         } else if (player.x > maxX*2) {
@@ -121,9 +122,6 @@ public class Manager extends KeyAdapter {
             player.y = maxY*2;
         }
     }
-
-
-
     public void moveUp() {
         player.ySpeed = -player.maxSpeed;
     }

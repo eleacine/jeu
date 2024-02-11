@@ -1,7 +1,7 @@
 package Shooter.model;
 
-public abstract class Enemy {
-    private int sante;
-    private int id;
-    private int power; 
+public abstract class Enemy extends Personnage{
+    protected int sante;
+    protected int id;
+    public int power; 
 }
