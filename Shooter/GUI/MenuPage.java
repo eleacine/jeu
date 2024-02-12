@@ -168,7 +168,7 @@ private Font loadPunkFont() {
 
 	private void importImg() {
 
-		URL is = getClass().getResource("../image/cible.png");
+		URL is = getClass().getResource("trois_carres.png");
         
 
 		try {
