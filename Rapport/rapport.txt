@@ -16,3 +16,23 @@ personne se sentait capable d'accomplir pendant le projet.
 
 
 SEMAINE 2:
+Leonor:
+*Ce que j'ai fait*
+    - un factory pattern pour les ennemis (version test dans le dossier factory)
+    - une interface PersonnageFactory pour la creation de tous les personnages
+        --> elle est par la suite implémentée dans les factories de chaque type de enemie qui crée l'enemi differament 
+    - un "loader" qui lit un fichier txt pour savoir quel enemi créer pour chaque niveau
+*Recherche et Réfléxion*
+    - je pense que faire une factory pour Player deviens inutile puisque on à que un seul Player
+    - en fonction de l'implementation des armes ça pourait peut-être intéressant de faire un factory 
+    - je pense que ça peut être très intéressant de faire un factory pour la creation du plateau de l'interface graphique
+        --> à voir en fonction de l'implémentation des tuiles
+    - l'utilisation du fichier txt et des factories se fera dans l'initialisation de la partie 
+
+Marylou :
+    création du joueur sous forme d'un triangle et d'un ennemi en cercle rouge
+    possibilité de déplacement du joueur avec le clavier mais quelques mise au point à faire notamment au niveau des varitions de vitesse suivant l'axe
+    possibilité de tir de l'ennemi suivant un timer et et de la part du joueur avec la touche espace 
+    les balles tirées entrent en collision avec le joueur ou l'ennemi et infligent des dégats
+    suppression de l'ennemi quand il n'a plus de vie, à faire pour le joueur mais cela va avec le gameOver
+

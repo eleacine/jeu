@@ -97,28 +97,28 @@ public class Manager extends KeyAdapter {
         int minX = 0;
         int minY = 0;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println("screensize :" + screenSize);
+   //     System.out.println("screensize :" + screenSize);
         int maxX = plateau.getWidth(); 
-        System.out.println("plateau.getWidth() : " + plateau.getWidth());
+   //     System.out.println("plateau.getWidth() : " + plateau.getWidth());
         int maxY = plateau.getHeight(); 
-        System.out.println("plateau.getHeight() : " + plateau.getHeight());
+     //   System.out.println("plateau.getHeight() : " + plateau.getHeight());
     
         
         if (player.x < minX) {
-            System.out.println("player.x : " + player.x + " minX : " + minX);
+         //   System.out.println("player.x : " + player.x + " minX : " + minX);
            
 
             player.x = minX;
         } else if (player.x > maxX*2) {
-            System.out.println("player.x : " + player.x + " maxX : " + maxX);
+       //     System.out.println("player.x : " + player.x + " maxX : " + maxX);
             player.x = maxX*2;
         }
     
         if (player.y < minY) {
-            System.out.println("player.y : " + player.y + " minY : " + minY);
+        //    System.out.println("player.y : " + player.y + " minY : " + minY);
             player.y = minY;
         } else if (player.y > maxY*2) {
-            System.out.println("player.y : " + player.y + " maxY : " + maxY);
+        //   System.out.println("player.y : " + player.y + " maxY : " + maxY);
             player.y = maxY*2;
         }
     }
