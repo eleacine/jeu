@@ -17,6 +17,7 @@ public class Plateau extends JPanel {
     public Manager manager;
     public EnnemiManager ennemiManager;
     public ProjectilesManager projectilesManager;
+    public Player player = new Player();
 
     public Plateau(Player p) {
         this.setBackground(Color.BLACK);

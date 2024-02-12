@@ -21,11 +21,12 @@ public class EnnemiManager {
         this.manager = plateau.manager;
         ennemis = new ArrayList<Ennemi>();
         ennemis.add(new Ennemi(1, 100, 100));
+        ennemis.add(new Ennemi(2, 300, 300));
         this.lastShotTime = System.currentTimeMillis();
     }
 
-   /* 
-    // a faire en fonction du type d'ennemis ajuster la vitesse de tir
+   /*
+   // a faire en fonction du type d'ennemis ajuster la vitesse de tir
     public void update() {
         for (Ennemi ennemi : ennemis) {
             long currentTime = System.currentTimeMillis();
@@ -38,9 +39,11 @@ public class EnnemiManager {
         }
     }
     */
+    
+    
     public void update() {
         for (Ennemi ennemi : ennemis) {
-            float angle = calculateAngle(ennemi.x, ennemi.y, player.x, player.y);
+            float angle = calculateAngle(ennemi.x, ennemi.y, player.x, player.y);// pour diriger les deplacements de l'ennemi
             ennemi.calculateDifferences(angle);
             ennemi.x += ennemi.differenceX;
             ennemi.y += ennemi.differenceY;
@@ -53,6 +56,7 @@ public class EnnemiManager {
             }
         }
     }
+    
 
     
     private float calculateAngle(int x1, int y1, int x2, int y2) {
