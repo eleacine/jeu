@@ -36,3 +36,8 @@ Marylou :
     les balles tirées entrent en collision avec le joueur ou l'ennemi et infligent des dégats
     suppression de l'ennemi quand il n'a plus de vie, à faire pour le joueur mais cela va avec le gameOver
 
+Ines :
+   Création d'un joueur en forme d'image qui reste a être implementer 
+   Ajout de bordure sur le plateau afin que le joueur ne puisse pas sortir des limite de l'écran
+   Deplacement de l'ennemi en fonction de l'avancé du joueur (l'ennemi va suivre le joueur)
+
