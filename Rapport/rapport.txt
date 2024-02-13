@@ -41,3 +41,6 @@ Ines :
    Ajout de bordure sur le plateau afin que le joueur ne puisse pas sortir des limite de l'écran
    Deplacement de l'ennemi en fonction de l'avancé du joueur (l'ennemi va suivre le joueur)
 
+Majoori :
+    Creation du bash approximatif
+
