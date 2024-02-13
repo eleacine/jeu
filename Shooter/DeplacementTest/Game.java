@@ -16,13 +16,10 @@ public class Game {
 
 	public Game() {
 		player = new Player();
-		player.setX(1280 / 2);
-        player.setY(800 / 2);
 		p = new Plateau(player);
 		m = new Manager(player, p);
 		ennemiManager = new EnnemiManager(player, p);
 		projectilesManager = new ProjectilesManager(player, p);
-		// p.addKeyListener(m);
 	}
 
 	public void start() {

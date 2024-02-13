@@ -1,8 +1,7 @@
 package Shooter.DeplacementTest;
 
-
 public class Player extends Personnage {
-    
+
     public int x, y;
     public int xSpeed, ySpeed;
     public int size = 35;
@@ -10,47 +9,58 @@ public class Player extends Personnage {
     public double rotationSpeed = Math.PI / 100; // Vitesse de rotation en radians par seconde
     public int maxSpeed = 1;
 
-
-
     public Player() {
-        this.x = 1280 / 2;
+        this.x = 800;
         this.y = 800 / 2;
-       // x = getWidth() / 2;
-       /// y = getHeight() / 2;
+        // x = getWidth() / 2;
+        /// y = getHeight() / 2;
         xSpeed = 0;
         ySpeed = 0;
         direction = 0; // Initialiser la direction à zéro (vers la droite)
         sante = 100;
     }
 
-	public boolean detectCollision(float newX, float newY, int newSize){
-		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY){
-			return true;
-		}
-		return false;
-	}
+    public boolean detectCollision(float newX, float newY, int newSize) {
+        if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY) {
+            return true;
+        }
+        return false;
+    }
 
-//------------- Getters et setters ---------------------------
-  public double getDirection() {
-      return direction;
-  }
+    // ------------- Getters et setters ---------------------------
+    public int getX() {
+        return this.x;
 
-  public void setDirection(double direction) {
-      this.direction = direction;
-  }
+    }
 
-  public double getRotationSpeed() {
-      return rotationSpeed;
-  }
+    public void setX(int x) {
+        this.x = x;
 
-  public void setRotationSpeed(double rotationSpeed) {
-      this.rotationSpeed = rotationSpeed;
-  }
+    }
 
+    public int getY() {
+        return this.y;
+
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public double getDirection() {
+        return direction;
+    }
+
+    public void setDirection(double direction) {
+        this.direction = direction;
+    }
+
+    public double getRotationSpeed() {
+        return rotationSpeed;
+    }
+
+    public void setRotationSpeed(double rotationSpeed) {
+        this.rotationSpeed = rotationSpeed;
+    }
 
 }
-
-
-
-
-

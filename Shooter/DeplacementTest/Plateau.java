@@ -8,7 +8,6 @@ import java.awt.Polygon;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -17,16 +16,23 @@ public class Plateau extends JPanel {
     public Manager manager;
     public EnnemiManager ennemiManager;
     public ProjectilesManager projectilesManager;
-    public Player player = new Player();
+    public Player player;
+    public MyMouseListener mouseListener;
 
     public Plateau(Player p) {
+        this.player = p;    
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         manager = new Manager(p, this);
         ennemiManager = new EnnemiManager(p, this);
         projectilesManager = new ProjectilesManager(p, this);
+        mouseListener = new MyMouseListener(new Crosshair(), projectilesManager, p);
         this.addKeyListener(manager);
-    
+        this.addMouseMotionListener(mouseListener);
+        this.addMouseListener(mouseListener);
+        
+        // System.out.println("player x : " + p.x + " player y : " + p.y);
+        // System.out.println(p);
     }
 
     
@@ -42,7 +48,6 @@ public class Plateau extends JPanel {
         projectilesManager.suppBulletPlayer();
         projectilesManager.suppBulletEnnemi();
 
-       
 
         repaint();
     }
@@ -50,6 +55,7 @@ public class Plateau extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        mouseListener.crosshair.draw(g);
         g.setColor(Color.WHITE);
 
         // // Dessiner le joueur
