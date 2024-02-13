@@ -34,7 +34,7 @@ public class PlayPage extends GameScene implements SceneMethode {
 		for (int y = 0; y < lvl.length; y++) {
 			for (int x = 0; x < lvl[y].length; x++) {
 				int id = lvl[y][x];
-				g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
+				g.drawImage(tileManager.getSprite(id), x * 50, y * 50, null);
 			}
 		}
 

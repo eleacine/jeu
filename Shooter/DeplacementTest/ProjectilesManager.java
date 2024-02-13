@@ -37,10 +37,16 @@ public class ProjectilesManager {
 
     public void hitPlayer() {
         for (Bullet bullet : enemybullets) {
+         //   System.out.println("player size"+player.size);
             if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
                 player.sante -= bullet.getDegat();
-                // System.out.println("Santé restante : " + player.sante);
+                 System.out.println("Santé restante : " + player.sante);
                 bullet.size = 0;
+                if (player.sante <= 0) {
+                    player.size = 0;
+                 //   System.out.println("player size"+player.size);
+
+                }
             }
         }
     }
