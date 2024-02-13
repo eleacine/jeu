@@ -7,7 +7,7 @@ public class Player extends Personnage {
     public int xSpeed, ySpeed;
     public int size = 35;
     public double direction; // Ajout de la propriété direction
-    public double rotationSpeed = Math.PI / 40; // Vitesse de rotation en radians par seconde
+    public double rotationSpeed = Math.PI / 100; // Vitesse de rotation en radians par seconde
     public int maxSpeed = 1;
 
 

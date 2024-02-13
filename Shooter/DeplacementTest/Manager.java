@@ -42,9 +42,10 @@ public class Manager extends KeyAdapter {
             player.direction += player.rotationSpeed;
         }
 
-        if (!leftPressed && !rightPressed) {
-            player.xSpeed = 0;
-        }
+        // if (!leftPressed && !rightPressed) {
+        //     player.xSpeed = 0;
+        //     // si upPressed ou downPressed faire avancer = cause du ralentissement
+        // }
 
         if (spacePressed && !spacePressedPrev) {
             shoot();
@@ -94,32 +95,32 @@ public class Manager extends KeyAdapter {
 
     private void checkPlayerlimits() {
      
-        int minX = 0;
-        int minY = 0;
+        int minX = player.size;
+        int minY = player.size;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println("screensize :" + screenSize);
-        int maxX = plateau.getWidth(); 
-        System.out.println("plateau.getWidth() : " + plateau.getWidth());
-        int maxY = plateau.getHeight(); 
-        System.out.println("plateau.getHeight() : " + plateau.getHeight());
+        // System.out.println("screensize :" + screenSize);
+        int maxX = plateau.getWidth() + 315; 
+        // System.out.println("plateau.getWidth() : " + plateau.getWidth());
+        int maxY = plateau.getHeight() + 150; 
+        // System.out.println("plateau.getHeight() : " + plateau.getHeight());
     
         
         if (player.x < minX) {
-            System.out.println("player.x : " + player.x + " minX : " + minX);
+            // System.out.println("player.x : " + player.x + " minX : " + minX);
            
 
             player.x = minX;
-        } else if (player.x > maxX*2) {
-            System.out.println("player.x : " + player.x + " maxX : " + maxX);
-            player.x = maxX*2;
+        } else if (player.x > maxX) {
+            // System.out.println("player.x : " + player.x + " maxX : " + maxX);
+            player.x = maxX;
         }
     
         if (player.y < minY) {
-            System.out.println("player.y : " + player.y + " minY : " + minY);
+            // System.out.println("player.y : " + player.y + " minY : " + minY);
             player.y = minY;
-        } else if (player.y > maxY*2) {
-            System.out.println("player.y : " + player.y + " maxY : " + maxY);
-            player.y = maxY*2;
+        } else if (player.y > maxY) {
+            // System.out.println("player.y : " + player.y + " maxY : " + maxY);
+            player.y = maxY;
         }
     }
     public void moveUp() {
@@ -141,10 +142,10 @@ public class Manager extends KeyAdapter {
 
         if (code == KeyEvent.VK_UP || code == KeyEvent.VK_Z) {
             upPressed = true;
-            // moveUp();
+            moveUp();
         } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
             downPressed = true;
-            // moveDown();
+            moveDown();
         } else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_Q) {
             leftPressed = true;
         } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {

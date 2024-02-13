@@ -7,7 +7,7 @@ import java.util.List;
 public class TestFactory {
     public static void main(String[] args) {
         EnemyLevelLoader enemyLoader = new EnemyLevelLoader();
-        enemyLoader.loadLevelEnemies("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\EnemiesForLevels.txt");
+        enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
         List<Personnage> enemiesLevel1 = enemyLoader.createEnemiesForLevel(1);
         List<Personnage> enemiesLevel2 = enemyLoader.createEnemiesForLevel(2);
         
