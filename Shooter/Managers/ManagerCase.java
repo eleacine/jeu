@@ -1,8 +1,11 @@
-package Shooter.model;
+package Shooter.Managers;
 
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import Shooter.model.Case;
+import Shooter.model.Enregistrement;
 
 //import Shooter.model.Enregistrement;
 //import Shooter.model.Case;

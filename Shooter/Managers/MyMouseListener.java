@@ -1,9 +1,12 @@
-package Shooter.model;
+package Shooter.Managers;
 
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import Shooter.model.Game;
+import Shooter.model.GameStates;
 
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {

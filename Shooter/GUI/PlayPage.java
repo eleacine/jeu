@@ -1,7 +1,7 @@
 package Shooter.GUI;
 
+import Shooter.Managers.ManagerCase;
 import Shooter.model.Game;
-import Shooter.model.ManagerCase;
 import Shooter.model.MyButton;
 import static Shooter.model.GameStates.*;
 

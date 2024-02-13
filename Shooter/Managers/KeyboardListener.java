@@ -1,4 +1,4 @@
-package Shooter.model;
+package Shooter.Managers;
 
 
 import java.awt.event.KeyEvent;
