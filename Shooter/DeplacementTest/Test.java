@@ -17,10 +17,10 @@ public class Test extends JFrame {
         Game game = new Game();
 
          // Obtenir la taille de l'écran principal
-         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+         //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-         int screenWidth = (int) screenSize.getWidth();
-         int screenHeight = (int) screenSize.getHeight();
+         //int screenWidth = (int) screenSize.getWidth();
+         //int screenHeight = (int) screenSize.getHeight();
 
         // System.out.println(screenWidth + " " + screenHeight);
     
