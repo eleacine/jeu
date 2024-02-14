@@ -31,8 +31,6 @@ public class Plateau extends JPanel {
         this.addMouseMotionListener(mouseListener);
         this.addMouseListener(mouseListener);
         
-        // System.out.println("player x : " + p.x + " player y : " + p.y);
-        // System.out.println(p);
     }
 
     

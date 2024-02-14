@@ -2,18 +2,16 @@ package Shooter.DeplacementTest;
 
 public class Player extends Personnage {
 
-    public int x, y;
     public int xSpeed, ySpeed;
     public int size = 35;
-    public double direction; // Ajout de la propriété direction
+    public double direction; // Ajout de la  direction
     public double rotationSpeed = Math.PI / 100; // Vitesse de rotation en radians par seconde
     public int maxSpeed = 1;
 
     public Player() {
         this.x = 800;
         this.y = 800 / 2;
-        // x = getWidth() / 2;
-        /// y = getHeight() / 2;
+      
         xSpeed = 0;
         ySpeed = 0;
         direction = 0; // Initialiser la direction à zéro (vers la droite)
@@ -28,24 +26,6 @@ public class Player extends Personnage {
     }
 
     // ------------- Getters et setters ---------------------------
-    public int getX() {
-        return this.x;
-
-    }
-
-    public void setX(int x) {
-        this.x = x;
-
-    }
-
-    public int getY() {
-        return this.y;
-
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     public double getDirection() {
         return direction;

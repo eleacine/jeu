@@ -14,7 +14,7 @@ public class Bullet {
     
 
     private int degats;  // Degats du projectile
-    private float slowdownFactor = 5f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
+    private float slowdownFactor = 4f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
 
     // Constructeur de la classe Bullet
     // xCor, yCor : Coordonnées initiales du projectile

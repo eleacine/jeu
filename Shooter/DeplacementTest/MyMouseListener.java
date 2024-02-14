@@ -25,8 +25,8 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            Bullet b = new Bullet(player.getX() + 10, player.getY() + 10, crosshair.xCor + crosshair.cushion,
-                    crosshair.yCor + crosshair.cushion, false);
+            // Bullet b = new Bullet(player.getX() + 10, player.getY() + 10, (float) player.direction);
+            Bullet b = new Bullet(player.getX() + 10, player.getY() + 10, crosshair.xCor + crosshair.cushion, crosshair.yCor + crosshair.cushion, false);
             crosshair.animate();
             projectilesManager.getPlayerBullets().add(b);
         }

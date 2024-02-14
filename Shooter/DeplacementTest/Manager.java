@@ -47,48 +47,30 @@ public class Manager extends KeyAdapter {
         //     // si upPressed ou downPressed faire avancer = cause du ralentissement
         // }
 
-        if (spacePressed && !spacePressedPrev) {
-            shoot();
-        }
+        // if (spacePressed && !spacePressedPrev) {
+        //     shoot();
+        // }
 
-        spacePressedPrev = spacePressed;
-
-       
+        // spacePressedPrev = spacePressed;
     }
 
     
     public void moveForward() {
         player.xSpeed = (int) Math.round(player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(player.maxSpeed * Math.sin(player.direction));
-        update();
+        // update();
     }
     
     public void moveBackward() {
         player.xSpeed = (int) Math.round(-player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(-player.maxSpeed * Math.sin(player.direction));
-        update();
+        // update();
     }
     
-
-    // public void update() {
-    //     player.x += player.xSpeed;
-    //     player.y += player.ySpeed;
-    //     // System.out.println("x : " + player.x + " y : " + player.y);
-    //     if(player.x>=2043 || player.x<=-360 || player.y>=1379 || player.y<=30){
-    //         player.x -= player.xSpeed;
-    //         player.y -= player.ySpeed;
-    //     }
-    //     /*if(player.x>=plateau.getWidth() || player.x<=0 || player.y>=plateau.getHeight() || player.y<=0){
-    //        player.x -= player.xSpeed;
-    //        player.y -= player.ySpeed;
-    //    } */
-    
-    // }
     
     public void update() {
         player.x += player.xSpeed;
         player.y += player.ySpeed;
-
 
         checkPlayerlimits();
     }
@@ -154,9 +136,9 @@ public class Manager extends KeyAdapter {
             rightPressed = true;
         }
 
-        if (code == KeyEvent.VK_SPACE) {
-            spacePressed = true;
-        }
+        // if (code == KeyEvent.VK_SPACE) {
+        //     spacePressed = true;
+        // }
 
     }
 
@@ -176,21 +158,21 @@ public class Manager extends KeyAdapter {
             rightPressed = false;
         }
 
-        if (code == KeyEvent.VK_SPACE) {
-            spacePressed = false;
-        }
+        // if (code == KeyEvent.VK_SPACE) {
+        //     spacePressed = false;
+        // }
     }
 
-    // ------------- Bullet ----------------
+    // // ------------- Bullet ----------------
 
-    public void shoot() {
+    // public void shoot() {
 
-        if (spacePressed) {
-            Bullet b = new Bullet(player.x + 25, player.y, (float) player.direction);
-            // faire une animation du joueur pour simuler le tir
-            plateau.projectilesManager.getPlayerBullets().add(b);
-        }
-    }
+    //     if (spacePressed) {
+    //         Bullet b = new Bullet(player.x + 25, player.y, (float) player.direction);
+    //         // faire une animation du joueur pour simuler le tir
+    //         plateau.projectilesManager.getPlayerBullets().add(b);
+    //     }
+    // }
 
 
 
