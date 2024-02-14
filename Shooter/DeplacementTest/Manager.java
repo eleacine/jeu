@@ -99,10 +99,12 @@ public class Manager extends KeyAdapter {
         int minY = player.size;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // System.out.println("screensize :" + screenSize);
-        int maxX = plateau.getWidth() + 315; 
+        int maxX = plateau.getWidth() + 300; 
         // System.out.println("plateau.getWidth() : " + plateau.getWidth());
+        // System.out.println("maxX : " + maxX);
         int maxY = plateau.getHeight() + 150; 
         // System.out.println("plateau.getHeight() : " + plateau.getHeight());
+        // System.out.println("maxY : " + maxY);
     
         
         if (player.x < minX) {
