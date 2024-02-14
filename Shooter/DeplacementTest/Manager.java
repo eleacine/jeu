@@ -33,18 +33,15 @@ public class Manager extends KeyAdapter {
         if (!upPressed && !downPressed) {
             player.ySpeed = 0;
         }
-
         if (leftPressed) {
             player.direction -= player.rotationSpeed;
         }
-
         if (rightPressed) {
             player.direction += player.rotationSpeed;
         }
-
-        // if (!leftPressed && !rightPressed) {
-        //     player.xSpeed = 0;
-        //     // si upPressed ou downPressed faire avancer = cause du ralentissement
+       //  if (!leftPressed && !rightPressed) {
+         //    player.xSpeed = 0;
+             //si upPressed ou downPressed faire avancer = cause du ralentissement
         // }
 
         // if (spacePressed && !spacePressedPrev) {
@@ -54,7 +51,6 @@ public class Manager extends KeyAdapter {
         // spacePressedPrev = spacePressed;
     }
 
-    
     public void moveForward() {
         player.xSpeed = (int) Math.round(player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(player.maxSpeed * Math.sin(player.direction));
@@ -91,8 +87,6 @@ public class Manager extends KeyAdapter {
         
         if (player.x < minX) {
             // System.out.println("player.x : " + player.x + " minX : " + minX);
-           
-
             player.x = minX;
         } else if (player.x > maxX) {
             // System.out.println("player.x : " + player.x + " maxX : " + maxX);
