@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Shooter.model.Game;
-import static Shooter.model.GameStates.*;
+
 
 
 public class MenuPage extends JPanel {
@@ -50,7 +50,7 @@ public class MenuPage extends JPanel {
     }
 
     private void setPanelSize() {
-		g1.size_screen = new Dimension(1500, 900);
+		g1.size_screen = new Dimension(1440, 840);
 
 		setMinimumSize(g1.size_screen);
 		setPreferredSize(g1.size_screen);

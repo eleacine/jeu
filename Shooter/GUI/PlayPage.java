@@ -2,7 +2,7 @@ package Shooter.GUI;
 
 import Shooter.Managers.ManagerCase;
 import Shooter.model.Game;
-import static Shooter.model.GameStates.*;
+
 
 import java.awt.Graphics;
 
