@@ -21,11 +21,15 @@ public class GameScene extends JPanel {
 
 	 public JButton createButton(String text, String pageName) {//creates buttons and connects them to their page 
         JButton button = new JButton(text);
+      
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CardLayout layout = game.cardLayout;
                 JPanel panel = game.cardPanel;
+                if (pageName.equals("Play")) {
+                    game.begin = true;
+                }
                 layout.show(panel, pageName);
             }
         });

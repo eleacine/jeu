@@ -3,7 +3,7 @@ package Shooter.Managers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
-import Shooter.DeplacementTest.Plateau;
+import Shooter.model.Plateau;
 import Shooter.model.Player;
 
 public class PlayerManager extends KeyAdapter {
@@ -24,9 +24,15 @@ public class PlayerManager extends KeyAdapter {
         this.plateau = plateau;
     }
 
+    public PlayerManager (Player player) {
+        this.player = player;
+    }
+
     public void handleKeyPress() {
+
         if (upPressed) {
             moveForward();
+            // System.out.println("upPressed");
         }
         if (downPressed) {
             moveBackward();
@@ -74,16 +80,19 @@ public class PlayerManager extends KeyAdapter {
      
         int minX = player.size;
         int minY = player.size;
-        // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        // System.out.println("screensize :" + screenSize);
-        int maxX = plateau.getWidth() + 300; 
+
+        // int maxX = plateau.getWidth(); 
+        int maxX = 1440 - player.size;
+
         // System.out.println("plateau.getWidth() : " + plateau.getWidth());
         // System.out.println("maxX : " + maxX);
-        int maxY = plateau.getHeight() + 150; 
+        // int maxY = plateau.getHeight(); 
+
+        int maxY = 840 - player.size;
+
         // System.out.println("plateau.getHeight() : " + plateau.getHeight());
         // System.out.println("maxY : " + maxY);
     
-        
         if (player.x < minX) {
             // System.out.println("player.x : " + player.x + " minX : " + minX);
             player.x = minX;
@@ -100,6 +109,7 @@ public class PlayerManager extends KeyAdapter {
             player.y = maxY;
         }
     }
+
     public void moveUp() {
         player.ySpeed = -player.maxSpeed;
     }
@@ -116,7 +126,7 @@ public class PlayerManager extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-
+        // System.out.println("keyPressed : " + code);
         if (code == KeyEvent.VK_UP || code == KeyEvent.VK_Z) {
             upPressed = true;
             moveUp();

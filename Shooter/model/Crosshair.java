@@ -12,7 +12,7 @@ public class Crosshair {
 	public int size = 30;
 	
 	public void draw(Graphics g){
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.drawOval(xCor, yCor, size, size);
 		g.drawLine(xCor + (size/2), yCor, xCor + (size/2), yCor + size);
 		g.drawLine(xCor, yCor + (size/2), xCor + size, yCor + (size/2));

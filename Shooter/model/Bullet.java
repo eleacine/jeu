@@ -10,7 +10,7 @@ public class Bullet {
     public float differenceX;  // Composante de mouvement en x
     public float differenceY;  // Composante de mouvement en y
     private int degats;
-    private float slowdownFactor = 5f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
+    private float slowdownFactor = 15f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
 
     // Constructeur de la classe Bullet
     // x, y : Coordonnées initiales du projectile
@@ -43,7 +43,7 @@ public class Bullet {
 
     // Dessine le projectile à sa position actuelle
     public void createBullet(Graphics g) {
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.fillOval((int) x, (int) y, size, size);
         this.x += differenceX;  // Met à jour la coordonnée x en fonction de la composante de mouvement en x
         this.y += differenceY;  // Met à jour la coordonnée y en fonction de la composante de mouvement en y

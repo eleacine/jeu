@@ -6,6 +6,7 @@ import Shooter.Managers.EnnemiManager;
 import Shooter.Managers.PlayerManager;
 import Shooter.Managers.ProjectilesManager;
 import Shooter.model.Player;
+import Shooter.DeplacementTest.Plateau;
 
 
 public class Game {

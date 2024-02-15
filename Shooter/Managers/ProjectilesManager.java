@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Shooter.model.Enemy;
-import Shooter.DeplacementTest.Plateau;
+import Shooter.model.Plateau;
 import Shooter.model.Player;
 import Shooter.model.Bullet;
 
@@ -12,15 +12,15 @@ public class ProjectilesManager {
 
     public PlayerManager m;
     public EnnemiManager ennemiManager;
-    public Plateau p;
+    // public Plateau p;
     public Player player;
     public ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
     public ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
 
     public ProjectilesManager(Player player, Plateau p) {
         this.player = player;
-        this.p = p;
-        this.m = p.manager;
+        // this.p = p;
+        this.m = p.playerManager;
         ennemiManager = p.ennemiManager;
     }
 
@@ -32,6 +32,7 @@ public class ProjectilesManager {
                     // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                     bullet.size = 0;
                     if (ennemi.sante <= 0) {
+                        System.err.println("ennemi mort");
                         ennemi.size = 0;
                     }
                 }
@@ -58,7 +59,7 @@ public class ProjectilesManager {
         Iterator<Bullet> it = playerBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
-            if (bullet.isOutOfBounds(p.getWidth()+250, p.getHeight()+200)|| bullet.getSize() == 0) {
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0) {
                 it.remove();
             }
         }       
@@ -69,7 +70,7 @@ public class ProjectilesManager {
         Iterator<Bullet> it = enemyBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
-            if (bullet.isOutOfBounds(p.getWidth()+250, p.getHeight()+200)|| bullet.getSize() == 0) {
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0) {
                 it.remove();
             }
         }
