@@ -31,4 +31,15 @@ public class GameScene extends JPanel {
         });
         return button;
     }
+    public JButton createButtonExit(String text) {//creates buttons and connects them to their page 
+        JButton button = new JButton(text);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Close the entire window and exit the program
+                System.exit(0);
+            }
+        });
+        return button;
+    }
 }

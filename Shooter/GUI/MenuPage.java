@@ -28,8 +28,9 @@ public class MenuPage extends GameScene {
 		importImg();
 		loadSprites();
 		//initButtons();
-        add(createButton("play", "Play"));
-        
+        add(createButton("Play", "Play"));
+        add(createButton("Settings", "Settings"));
+		add(createButtonExit("Quit"));
         
     }
 
