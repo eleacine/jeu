@@ -1,14 +1,7 @@
 package Shooter.DeplacementTest;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Polygon;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.net.URL;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Plateau extends JPanel {
@@ -26,7 +19,7 @@ public class Plateau extends JPanel {
         manager = new Manager(p, this);
         ennemiManager = new EnnemiManager(p, this);
         projectilesManager = new ProjectilesManager(p, this);
-        mouseListener = new MyMouseListener(new Crosshair(), projectilesManager, p);
+        mouseListener = new MyMouseListener(p, new Crosshair(), projectilesManager);
         this.addKeyListener(manager);
         this.addMouseMotionListener(mouseListener);
         this.addMouseListener(mouseListener);
@@ -46,15 +39,17 @@ public class Plateau extends JPanel {
         projectilesManager.suppBulletPlayer();
         projectilesManager.suppBulletEnnemi();
 
-
         repaint();
     }
 
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        mouseListener.crosshair.draw(g);
+        mouseListener.getCrosshair().draw(g);
         g.setColor(Color.WHITE);
+        g.fillOval((int) player.getX()-10, (int) player.getY()-10, player.getSize(), player.getSize());
+
+
 
         // // Dessiner le joueur
         // URL imageUrl = getClass().getResource("j_test.png");
@@ -81,27 +76,30 @@ public class Plateau extends JPanel {
         // g2d.setTransform(new AffineTransform());
 
         // Dessiner le triangle isocèle
-        int triangleSize = 35;
-        int extendedLength = 5; // Adjust this value to make the tip more noticeable
 
-        int[] triangleX = { 0, -triangleSize / 2, triangleSize / 2, 0 };
-        int[] triangleY = { triangleSize + extendedLength, 0, 0, triangleSize + extendedLength };
+        // int triangleSize = 35;
+        // int extendedLength = 5; // Adjust this value to make the tip more noticeable
 
-        Polygon trianglePolygon = new Polygon(triangleY, triangleX, triangleY.length);
+        // int[] triangleX = { 0, -triangleSize / 2, triangleSize / 2, 0 };
+        // int[] triangleY = { triangleSize + extendedLength, extendedLength, extendedLength, triangleSize + extendedLength };
 
-        double triangleXPos = manager.player.x;
-        double triangleYPos = manager.player.y;
+        
 
-        Graphics2D g2d = (Graphics2D) g;
-        AffineTransform at = AffineTransform.getTranslateInstance(triangleXPos, triangleYPos);
+        // Polygon trianglePolygon = new Polygon(triangleY, triangleX, triangleY.length);
 
-        at.rotate(manager.player.direction); // rotation du triangle
-        g2d.setTransform(at); // applique la transformation
-        g2d.fill(trianglePolygon); // dessine le triangle
-        g2d.setTransform(new AffineTransform()); // Reset the transform
+        // double triangleXPos = manager.player.x;
+        // double triangleYPos = manager.player.y;
+
+        // Graphics2D g2d = (Graphics2D) g;
+        // AffineTransform at = AffineTransform.getTranslateInstance(triangleXPos, triangleYPos);
+
+        // at.rotate(manager.player.direction); // rotation du triangle
+        // g2d.setTransform(at); // applique la transformation
+        // g2d.fill(trianglePolygon); // dessine le triangle
+        // g2d.setTransform(new AffineTransform()); // Reset the transform
 
         // Dessiner les balles du joueur
-        for (Bullet playerBullet : projectilesManager.getPlayerBullets()) {
+        for (Bullet playerBullet : projectilesManager.getplayerBullets()) {
             playerBullet.createBullet(g);
         }
 

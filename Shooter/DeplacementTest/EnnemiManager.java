@@ -21,24 +21,9 @@ public class EnnemiManager {
         this.manager = plateau.manager;
         ennemis = new ArrayList<Ennemi>();
         ennemis.add(new Ennemi(1, 100, 100));
-        ennemis.add(new Ennemi(2, 300, 300));
         this.lastShotTime = System.currentTimeMillis();
     }
 
-   /*
-   // a faire en fonction du type d'ennemis ajuster la vitesse de tir
-    public void update() {
-        for (Ennemi ennemi : ennemis) {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - lastShotTime > shootingInterval) {
-                // Si le temps écoulé depuis le dernier tir est supérieur à la période de tir
-                Bullet bullet = new Bullet(ennemi.x, ennemi.y, player.x, player.y, false, ennemi.power);
-                plateau.projectilesManager.getEnemyBullets().add(bullet);
-                lastShotTime = currentTime; // Met à jour le temps du dernier tir
-            }
-        }
-    }
-    */
     
     
     public void update() {
@@ -50,10 +35,18 @@ public class EnnemiManager {
     
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastShotTime > shootingInterval) {
-                Bullet bullet = new Bullet(ennemi.x, ennemi.y, player.x, player.y, false, ennemi.power);
+                Bullet bullet = new Bullet(ennemi.x, ennemi.y, player.x, player.y, ennemi.power);
                 plateau.projectilesManager.getEnemyBullets().add(bullet);
                 lastShotTime = currentTime;
             }
+
+            if (ennemi.detectCollision(player.x, player.y, player.size)) {
+                player.sante -= ennemi.getCollisionPower();
+                ennemi.size = 0;
+                // if (player.sante <= 0) {
+                //     player.size = 0;
+                // }
+            }               
         }
     }
     
@@ -62,14 +55,13 @@ public class EnnemiManager {
     private float calculateAngle(int x1, int y1, int x2, int y2) {
         return (float) Math.atan2(y2 - y1, x2 - x1);
     }
-    
-    
+        
 
     public void suppEnnemi (){
         Iterator<Ennemi> it = ennemis.iterator();
         while (it.hasNext()) {
             Ennemi ennemi = it.next();
-            if (ennemi.sante <= 0) {
+            if (ennemi.getSize() <= 0 || ennemi.sante <= 0) {
                 // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                 it.remove();
             }
