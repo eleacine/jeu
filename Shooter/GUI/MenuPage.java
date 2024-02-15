@@ -14,18 +14,15 @@ import Shooter.model.Game;
 
 
 
-public class MenuPage extends JPanel {
+public class MenuPage extends GameScene {
    
     
 
     private BufferedImage img;
 	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
-    private Game g1;
-
-	public MenuPage(Game game) {
-        
-        g1=game;
+	public MenuPage(Game g1) {
+        super(g1);
 		setPanelSize();
         //super(game);
 		importImg();
@@ -36,25 +33,14 @@ public class MenuPage extends JPanel {
         
     }
 
-    private JButton createButton(String text, String pageName) {//creates buttons and connects them to their page 
-        JButton button = new JButton(text);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout layout = g1.cardLayout;
-                JPanel panel = g1.cardPanel;
-                layout.show(panel, pageName);
-            }
-        });
-        return button;
-    }
+   
 
     private void setPanelSize() {
-		g1.size_screen = new Dimension(1440, 840);
+		game.size_screen = new Dimension(1440, 840);
 
-		setMinimumSize(g1.size_screen);
-		setPreferredSize(g1.size_screen);
-		setMaximumSize(g1.size_screen);
+		setMinimumSize(game.size_screen);
+		setPreferredSize(game.size_screen);
+		setMaximumSize(game.size_screen);
 
 	}
 
