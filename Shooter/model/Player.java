@@ -7,16 +7,14 @@ import java.util.LinkedList;
 
 public class Player extends Personnage{
 
-    private String pseudo;
-    private int level = 1;  //1 par défaut
-    private int santé;      //faudrait lui donner une valeur par défaut 
-    private LinkedList<Armes> listeArmes;
-
-    private int x;
-    private int y;
+    private String pseudo; 
+    
 
     public Player(String pseudo) {
         this.pseudo = pseudo;
+        this.sante=0; 
+        this.x=0;
+        this.y=9;
     }
 
     // récupérer une éventuelle sauvegarde
@@ -42,11 +40,5 @@ public class Player extends Personnage{
         this.pseudo = newPseudo;
     }
 
-    public int getLevel() {
-        return this.level;
-    }
-
-    public void addLevel() {
-        this.level++;
-    }
+   
 }

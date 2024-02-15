@@ -39,6 +39,14 @@ SEMAINE 3 (base simple du jeu)
 -Faire le menu d’armes
 -Attaques (gérer les projectiles les  et le dégâts)
 
+Liste Eleacine, Leonor et Majoori:
+- Faire le Plateau Level Loader qui lit le txt du plateau
+- faire des contructeurs pour l'initialisation de armes
+- faire un cardlayout (je pense) --> fait 
+- changer architecture pour avoir access a Game un peu partout --> fait 
+- diminuer / implementer GameScene.java et ScenceMethode  --> fait (enlevées)
+- faire une fonction qui check les txt dans Enregistrement 
+
 
 SEMAINE 4 (gestion des niveaux)
 -Faire les WIN et OVER

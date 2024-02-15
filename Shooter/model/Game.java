@@ -1,45 +1,69 @@
 package Shooter.model;
-
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
 import Shooter.GUI.SettingsPage;
 
+import java.awt.Graphics;
+
 public class Game extends JFrame implements Runnable {
 
-	private GameScreen gameScreen;
-	private Thread gameThread;
+	//private GameScreen gameScreen; //?
 
+	private Thread gameThread;
+    public Plateau gamePlateau;
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
+    protected List<Personnage> perso_list;
+    protected Armes[] armes_list; 
+    public int level=1;
 
+    public Dimension size_screen;
+    //private MyMouseListener myMouseListener;
+    public CardLayout cardLayout; 
+    public JPanel cardPanel; 
 	// Classes
-	private Render render;
 	private MenuPage menu;
 	private PlayPage playing;
 	private SettingsPage settings;
 
 	public Game() {
-
-		initClasses();
-
+        gamePlateau=new Plateau();
+        cardLayout=new CardLayout();
+        cardPanel=new JPanel(cardLayout);
+        getContentPane().add(cardPanel);
+		createPages();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		add(gameScreen);
+		//add(gameScreen);
 		pack();
 		setVisible(true);
+        
+        size_screen = new Dimension(1440, 840);
+		setMinimumSize(size_screen);
+		setPreferredSize(size_screen);
+		setMaximumSize(size_screen);
+        
+	}
+    
+	private void createPages() {
+		//render = new Render(this); //?
+		//gameScreen = new GameScreen(this); //?
+		cardPanel.add(new MenuPage(this), "Menu");
+        this.playing=new PlayPage(this);
+		cardPanel.add(playing, "Play");
+		cardPanel.add(new SettingsPage(this), "Settings");
+        cardLayout.show(cardPanel, "Menu");
 
 	}
 
-	private void initClasses() {
-		render = new Render(this);
-		gameScreen = new GameScreen(this);
-		menu = new MenuPage(this);
-		playing = new PlayPage(this);
-		settings = new SettingsPage(this);
-
-	}
+    
 
 	private void start() {
 		gameThread = new Thread(this) {
@@ -56,8 +80,7 @@ public class Game extends JFrame implements Runnable {
 	public static void main(String[] args) {
 
 		Game game = new Game();
-		game.gameScreen.initInputs();
-		game.start();
+		game.setVisible(true);
 
 	}
 
@@ -104,10 +127,7 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
-	// Getters and setters
-	public Render getRender() {
-		return render;
-	}
+
 
 	public MenuPage getMenu() {
 		return menu;
@@ -120,5 +140,13 @@ public class Game extends JFrame implements Runnable {
 	public SettingsPage getSettings() {
 		return settings;
 	}
+
+	public int getLevel() {
+        return this.level;
+    }
+
+    public void addLevel() {
+        this.level++;
+    }
 
 }
