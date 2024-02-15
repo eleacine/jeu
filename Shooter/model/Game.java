@@ -42,7 +42,6 @@ public class Game extends JFrame implements Runnable {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		//add(gameScreen);
-		pack();
 		setVisible(true);
         
         size_screen = new Dimension(1440, 840);

@@ -1,11 +1,16 @@
-package Shooter.DeplacementTest;
+package Shooter.Managers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Shooter.model.Enemy;
+import Shooter.DeplacementTest.Plateau;
+import Shooter.model.Player;
+import Shooter.model.Bullet;
+
 public class ProjectilesManager {
 
-    public Manager m;
+    public PlayerManager m;
     public EnnemiManager ennemiManager;
     public Plateau p;
     public Player player;
@@ -21,7 +26,7 @@ public class ProjectilesManager {
 
     public void hitEnnemi() {
         for (Bullet bullet : playerBullets) {
-            for (Ennemi ennemi : ennemiManager.ennemis) {
+            for (Enemy ennemi : ennemiManager.ennemis) {
                 if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
                     ennemi.sante -= bullet.getDegats();
                     // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
@@ -41,9 +46,9 @@ public class ProjectilesManager {
             if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
                 player.sante -= bullet.getDegats();
                 bullet.size = 0;
-                if (player.sante <= 0) {
-                    player.size = 0;
-                }
+                // if (player.sante <= 0) {
+                //     player.size = 0;
+                // }
             }
         }
     }

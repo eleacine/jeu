@@ -1,9 +1,12 @@
-package Shooter.DeplacementTest;
+package Shooter.Managers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
-public class Manager extends KeyAdapter {
+import Shooter.DeplacementTest.Plateau;
+import Shooter.model.Player;
+
+public class PlayerManager extends KeyAdapter {
 
     public Plateau plateau;
     public Player player;
@@ -16,7 +19,7 @@ public class Manager extends KeyAdapter {
     private boolean spacePressedPrev;
 
 
-    public Manager(Player player, Plateau plateau) {
+    public PlayerManager(Player player, Plateau plateau) {
         this.player = player;
         this.plateau = plateau;
     }

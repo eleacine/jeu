@@ -1,4 +1,4 @@
-package Shooter.DeplacementTest;
+package Shooter.model;
 import java.awt.Color;
 import java.awt.Graphics;
 

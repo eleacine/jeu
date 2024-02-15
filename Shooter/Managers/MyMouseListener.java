@@ -1,7 +1,11 @@
-package Shooter.DeplacementTest;
+package Shooter.Managers;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import Shooter.model.Player;
+import Shooter.model.Bullet;
+import Shooter.model.Crosshair;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {
 

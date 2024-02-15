@@ -2,9 +2,15 @@ package Shooter.DeplacementTest;
 
 import javax.swing.SwingUtilities;
 
+import Shooter.Managers.EnnemiManager;
+import Shooter.Managers.PlayerManager;
+import Shooter.Managers.ProjectilesManager;
+import Shooter.model.Player;
+
+
 public class Game {
 
-	public Manager m;
+	public PlayerManager m;
 	public ProjectilesManager projectilesManager;
 	public EnnemiManager ennemiManager;
 	public Plateau p;
@@ -14,9 +20,9 @@ public class Game {
 	private final double UPS_SET = 60.0;
 
 	public Game() {
-		player = new Player();
+		this.player = new Player("test");
 		p = new Plateau(player);
-		m = new Manager(player, p);
+		m = new PlayerManager(player, p);
 		ennemiManager = new EnnemiManager(player, p);
 		projectilesManager = new ProjectilesManager(player, p);
 	}
