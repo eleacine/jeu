@@ -9,11 +9,8 @@ public class Player extends Personnage{
 
     private String pseudo;
     private int level = 1;  //1 par défaut
-    private int santé;      //faudrait lui donner une valeur par défaut 
     private LinkedList<Armes> listeArmes;
 
-    private int x;
-    private int y;
 
     public Player(String pseudo) {
         this.pseudo = pseudo;

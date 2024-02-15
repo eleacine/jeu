@@ -1,8 +1,6 @@
 package Shooter.DeplacementTest;
 
 import java.awt.event.KeyEvent;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 
 public class Manager extends KeyAdapter {
@@ -54,13 +52,11 @@ public class Manager extends KeyAdapter {
     public void moveForward() {
         player.xSpeed = (int) Math.round(player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(player.maxSpeed * Math.sin(player.direction));
-        // update();
     }
     
     public void moveBackward() {
         player.xSpeed = (int) Math.round(-player.maxSpeed * Math.cos(player.direction));
         player.ySpeed = (int) Math.round(-player.maxSpeed * Math.sin(player.direction));
-        // update();
     }
     
     
@@ -75,7 +71,7 @@ public class Manager extends KeyAdapter {
      
         int minX = player.size;
         int minY = player.size;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // System.out.println("screensize :" + screenSize);
         int maxX = plateau.getWidth() + 300; 
         // System.out.println("plateau.getWidth() : " + plateau.getWidth());

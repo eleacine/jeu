@@ -1,6 +1,5 @@
 package Shooter.DeplacementTest;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class Game {
@@ -38,7 +37,7 @@ public class Game {
 			if (System.nanoTime() - lastFrame >= timePerFrame) {
 				SwingUtilities.invokeLater(() -> {
 					p.update();
-					// p.repaint();
+					p.repaint();
 				});
 
 				lastFrame = System.nanoTime();

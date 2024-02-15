@@ -9,8 +9,8 @@ public class ProjectilesManager {
     public EnnemiManager ennemiManager;
     public Plateau p;
     public Player player;
-    public ArrayList<Bullet> enemybullets = new ArrayList<Bullet>();
-    public ArrayList<Bullet> playerbullets = new ArrayList<Bullet>();
+    public ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
+    public ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
 
     public ProjectilesManager(Player player, Plateau p) {
         this.player = player;
@@ -20,10 +20,10 @@ public class ProjectilesManager {
     }
 
     public void hitEnnemi() {
-        for (Bullet bullet : playerbullets) {
+        for (Bullet bullet : playerBullets) {
             for (Ennemi ennemi : ennemiManager.ennemis) {
                 if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
-                    ennemi.sante -= bullet.getDegat();
+                    ennemi.sante -= bullet.getDegats();
                     // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                     bullet.size = 0;
                     if (ennemi.sante <= 0) {
@@ -36,16 +36,13 @@ public class ProjectilesManager {
     }
 
     public void hitPlayer() {
-        for (Bullet bullet : enemybullets) {
+        for (Bullet bullet : enemyBullets) {
          //   System.out.println("player size"+player.size);
             if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
-                player.sante -= bullet.getDegat();
-                //  System.out.println("Santé restante : " + player.sante);
+                player.sante -= bullet.getDegats();
                 bullet.size = 0;
                 if (player.sante <= 0) {
                     player.size = 0;
-                 //   System.out.println("player size"+player.size);
-
                 }
             }
         }
@@ -53,7 +50,7 @@ public class ProjectilesManager {
 
     public void suppBulletPlayer() {
         // Supprimer les projectiles hors des limites
-        Iterator<Bullet> it = playerbullets.iterator();
+        Iterator<Bullet> it = playerBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
             if (bullet.isOutOfBounds(p.getWidth()+250, p.getHeight()+200)|| bullet.getSize() == 0) {
@@ -64,7 +61,7 @@ public class ProjectilesManager {
 
     public void suppBulletEnnemi() {
         // Supprimer les projectiles hors des limites
-        Iterator<Bullet> it = enemybullets.iterator();
+        Iterator<Bullet> it = enemyBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
             if (bullet.isOutOfBounds(p.getWidth()+250, p.getHeight()+200)|| bullet.getSize() == 0) {
@@ -72,14 +69,22 @@ public class ProjectilesManager {
             }
         }
     }
-    
 
-    public ArrayList<Bullet> getEnemyBullets() {
-        return enemybullets;
+    public void addBulletPlayer(Bullet b) {
+        playerBullets.add(b);
     }
 
-    public ArrayList<Bullet> getPlayerBullets() {
-        return playerbullets;
+    public void addBulletEnemy(Bullet b) {
+        enemyBullets.add(b);
+    }
+
+
+    public ArrayList<Bullet> getEnemyBullets() {
+        return enemyBullets;
+    }
+
+    public ArrayList<Bullet> getplayerBullets() {
+        return playerBullets;
     }
     
 }
