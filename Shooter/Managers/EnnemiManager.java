@@ -46,6 +46,8 @@ public class EnnemiManager {
         }
     }
 
+    
+
     public void suppEnnemi() {
         Iterator<Enemy> it = ennemis.iterator();
         while (it.hasNext()) {

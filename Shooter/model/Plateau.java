@@ -101,6 +101,7 @@ public class Plateau extends JPanel {
             g.setColor(Color.BLUE);
             g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
             drawDetectionRadius(g, ennemi);
+            ennemi.drawBarVie(g);
         }
     }
 
