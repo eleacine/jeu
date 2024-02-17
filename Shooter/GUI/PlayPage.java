@@ -23,7 +23,7 @@ public class PlayPage extends GameScene {
 
 	public void paintComponent(Graphics g) { // permet de visualiser ou creer les graphics
 		super.paintComponents(g);
-		this.game.gamePlateau.render_plateau(g); // ancien render
+		this.game.gamePlateau.render_plateau(g); // ancien render pour gamePlateau
 		this.game.gamePlateau.paintComponent(g);
 	
 		

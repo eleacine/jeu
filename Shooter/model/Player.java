@@ -9,7 +9,7 @@ public class Player extends Personnage{
     private String pseudo;
 
     public int size = 45;
-	public int x = 1200;
+	public int x = 1000;
 	public int y = 500;
 	public int xSpeed = 0;
 	public int ySpeed = 0;
@@ -44,6 +44,7 @@ public class Player extends Personnage{
         }
         return false;
     }
+    
 
 
 

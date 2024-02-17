@@ -44,3 +44,29 @@ Ines :
 Majoori :
     Creation du bash approximatif
 
+Eléacine :
+    création de la base du plateau de jeu a partir d'un tableau d'image, sur la base des sprites,modelisation des cases
+    possibilite de navigation entre les differentes pages grace au Render.java.
+    creation de classes annexes pour differencier les fonctions et faire des classes qui généralise des outils utiliser fréquement
+    
+
+
+
+
+SEMAINE 3:
+
+Eléacine:
+    -Réflexion sur la manière d'optimiser le code réalisé la semaine précédente (en collaboration avec Leonor et Majoori):
+        -> Remplacement de Render par CardLayout pour la navigation entre les pages.
+        -> Nombreux changements dans l'utilisation des JPanel et JFrame.
+        -> Tentative de faire de "game" la base de données centrale.
+        -> Par conséquent, le code était initialement étalé, avec de nombreuses classes OUTILS ; nous l'avons rendu plus compact pour l'optimiser.
+        -> Objectif de rendre le code compréhensible par tous et de le préparer à une fusion avec la version indépendante de Marylou et Ines.
+
+    -Réflexion sur les différentes possibilités d'obstacles, essais et tests pour anticiper les prochaines étapes liées aux armes et aux obstacles:
+        -> Ajout d'une fonction pour modifier la couleur de la case lorsque le joueur se trouve dessus.
+        -> Implémentation d'une fonction pour déplacer le joueur sur une nouvelle case en cas de piège.
+            (Cela pourrait être utile pour une case puits ou, après une explosion, si la case actuelle n'est pas franchissable, déplacer le joueur sur une case adjacente par défaut).
+        -> Mise en place d'une fonction moins esthétique, mais empêchant le joueur de se déplacer sur les cases blanches.
+
+    -Amélioration de l'utilisation des cases dans le tableau pour faciliter son utilisation dans les semaines à venir.

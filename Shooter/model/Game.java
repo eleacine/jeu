@@ -48,7 +48,7 @@ public class Game extends JFrame implements Runnable {
 
 		// A MODIFIER POUR PLUS TARD ------------------------------------------------------------
 		Plateau test = new Plateau();
-
+		
 		playerManager = new PlayerManager(player);
 		projectilesManager = new ProjectilesManager(player, test);
 		myMouseListener = new MyMouseListener(player, new Crosshair(), projectilesManager);

@@ -55,6 +55,12 @@ SEMAINE 4 (gestion des niveaux)
 -gestion des ennemis par niveau
 -gestion du déblocage des armes par niveau
 
+Eleacine: 
+- dévelloper notre base d'image pour mieux modéliser les Attaques
+-travailler sur les obstacles 
+-finir les niveaux
+-les armes sont a avancé(le nombre , leurs effets)
+
 
 SEMAINE 5 (gestion des plus)
 -Faire une sauvegarde

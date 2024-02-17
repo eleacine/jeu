@@ -25,16 +25,11 @@ public class MenuPage extends GameScene {
         super(g1);
 		setPanelSize();
         //super(game);
-		importImg();
-		loadSprites();
-		//initButtons();
-        add(createButton("Play", "Play"));
-        add(createButton("Settings", "Settings"));
-		add(createButtonExit("Quit"));
-        
+		//importImg();
+		//loadSprites();
+		initButtons();
     }
 
-   
 
     private void setPanelSize() {
 		game.size_screen = new Dimension(1440, 840);
@@ -46,19 +41,14 @@ public class MenuPage extends GameScene {
 	}
 
 	private void initButtons() {
-
-		int w = 150;
-		int h = w / 3;
-		int x = 640 / 2 - w / 2;
-		int y = 150;
-		int yOffset = 100;
-        JButton button = new JButton("Click Me!");
-		
+		add(createButton("Play", "Play"));
+        add(createButton("Settings", "Settings"));
+		add(createButtonExit("Quit"));	
 	}
 
 
 
-
+//vérifier inutile
 	private void importImg() {
 
 		URL is = getClass().getResource("../image/cible.png");
