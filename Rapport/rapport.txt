@@ -70,3 +70,16 @@ Eléacine:
         -> Mise en place d'une fonction moins esthétique, mais empêchant le joueur de se déplacer sur les cases blanches.
 
     -Amélioration de l'utilisation des cases dans le tableau pour faciliter son utilisation dans les semaines à venir.
+
+Leonor:
+*Ce que j'ai fait*
+    - un loader qui lit un txt en fonction du niveau et crée le tableau qui le modelise
+    - reorganisation de l'architecture des classes avec Eleacine et Majoori
+        --> organisation des pages avec un CardLayout
+        --> suppression des classes non-nécessaires
+        --> implémentation des données principales dans Game 
+        --> enregistrement local du graphic du plateau
+*Recherche et Réfléxion*
+    - decider de l'implementation des armes pour creer la liste d'armes qui sera dans Game
+    - faudrait mettre au claire l'utilisation des Graphics dans l'ensemble du jeu pour avoir un reinitialisation plus simple
+    - il faut faire un point sur le code entier avec le groupe entier pour chercher des bouts de code qui pourraient poser problème ou se contredire plus tards
