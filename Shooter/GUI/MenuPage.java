@@ -1,15 +1,11 @@
 package Shooter.GUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import Shooter.model.Game;
 
 

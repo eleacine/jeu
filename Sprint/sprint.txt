@@ -35,9 +35,12 @@ Leonor:
     - l'utilisation du fichier txt et des factories se fera dans l'initialisation de la partie 
 
 SEMAINE 3 (base simple du jeu)
+Marylou et Inès : 
 -Déplacement des personnage(avec les traces de pas)
 -Faire le menu d’armes
 -Attaques (gérer les projectiles les  et le dégâts)
+-Comportements des ennemis 
+-prise en charge des obstacles du plateau ?
 
 Liste Eleacine, Leonor et Majoori:
 - Faire le Plateau Level Loader qui lit le txt du plateau

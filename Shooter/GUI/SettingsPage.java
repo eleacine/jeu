@@ -1,7 +1,5 @@
 package Shooter.GUI;
 
-import javax.swing.JPanel;
-
 import Shooter.model.Game;
 
 

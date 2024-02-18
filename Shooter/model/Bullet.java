@@ -23,6 +23,14 @@ public class Bullet {
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
 
+    public Bullet(int x, int y, int destX, int destY, int degats, float slowdownFactor) {
+        this.x = x;
+        this.y = y;
+        this.degats = degats;
+        this.slowdownFactor = slowdownFactor;
+        calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
+    }
+
     // Calcule les composantes de mouvement en fonction de la destination
     private void calculateMovement(int destX, int destY) {
         float angle = calculateAngle(destX, destY);  // Calcul de l'angle entre la position actuelle et la destination

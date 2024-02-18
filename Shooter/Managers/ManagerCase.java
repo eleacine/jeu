@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import Shooter.model.Case;
 import Shooter.model.Enregistrement;
 
-//import Shooter.model.Enregistrement;
-//import Shooter.model.Case;
 
 public class ManagerCase {
 

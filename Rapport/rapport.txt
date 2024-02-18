@@ -44,3 +44,10 @@ Ines :
 Majoori :
     Creation du bash approximatif
 
+
+Semaine 3 :
+Marylou :
+    remplacement du système de tir avec la souris 
+    fusion des versions entre plateau et déplacement du joueur
+    début de comportements basiques pour les ennemis (détection du joueur et tir + suivi du joueur si dans la zone de reconnaissance)
+
