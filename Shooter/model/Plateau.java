@@ -9,8 +9,8 @@ import Shooter.factory.PlateauLevelLoader;
 
 
 public class Plateau extends JPanel {
-    protected int[][] level_tab;
-    protected ManagerCase  tile_manager;
+    public int[][] level_tab;
+    public ManagerCase  tile_manager;
     public Graphics plateau_graphic; //on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier dans le update
     public PlayerManager playerManager;
     public EnnemiManager ennemiManager;

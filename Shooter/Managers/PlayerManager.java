@@ -74,6 +74,7 @@ public class PlayerManager extends KeyAdapter {
         player.y += player.ySpeed;
 
         checkPlayerlimits();
+        checkObstacle();
     }
 
     private void checkPlayerlimits() {
@@ -107,6 +108,27 @@ public class PlayerManager extends KeyAdapter {
         } else if (player.y > maxY) {
             // System.out.println("player.y : " + player.y + " maxY : " + maxY);
             player.y = maxY;
+        }
+    }
+
+
+    public void checkObstacle() {
+        int currentXIndex = (int) (player.getX() / 50);
+        int currentYIndex = (int) (player.getY() / 50);
+
+        int tileType = plateau.level_tab[currentYIndex][currentXIndex];
+
+        switch (tileType) {
+            case 2: // Example: If the tile is of type 1, block the player's movement
+                player.x = currentXIndex * 50;
+                player.y = currentYIndex * 50;
+                break;
+            case 1:
+                player.setMaxSpeed(1);
+                break;
+            case 0:
+                player.setMaxSpeed(2);
+                break;
         }
     }
 

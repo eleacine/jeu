@@ -59,6 +59,7 @@ public class Game extends JFrame implements Runnable {
 		this.addMouseListener(myMouseListener);
 		this.setFocusable(true);
 		this.gamePlateau = new Plateau(player, playerManager, myMouseListener, projectilesManager);
+		this.playerManager.plateau = gamePlateau;
 		this.projectilesManager.ennemiManager = gamePlateau.ennemiManager;
 		// ----------------------------------------------------------------------------------------
 

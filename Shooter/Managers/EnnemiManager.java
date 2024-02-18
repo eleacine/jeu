@@ -53,7 +53,7 @@ public class EnnemiManager {
         while (it.hasNext()) {
             Enemy ennemi = it.next();
             if (ennemi.getSize() <= 0 || ennemi.sante <= 0) {
-                System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
+                // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                 it.remove();
             }
         }

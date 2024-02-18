@@ -45,22 +45,20 @@ Majoori :
     Creation du bash approximatif
 
 
-Semaine 3 :
-Marylou :
-    remplacement du système de tir avec la souris 
-    fusion des versions entre plateau et déplacement du joueur
-    début de comportements basiques pour les ennemis (détection du joueur et tir + suivi du joueur si dans la zone de reconnaissance)
-
 Eléacine :
     création de la base du plateau de jeu a partir d'un tableau d'image, sur la base des sprites,modelisation des cases
     possibilite de navigation entre les differentes pages grace au Render.java.
     creation de classes annexes pour differencier les fonctions et faire des classes qui généralise des outils utiliser fréquement
-    
 
 
+Semaine 3 :
 
+Marylou :
+    remplacement du système de tir avec la souris 
+    fusion des versions entre plateau et déplacement du joueur
+    début de comportements basiques pour les ennemis (détection du joueur et tir + suivi du joueur si dans la zone de reconnaissance)
+    début de la gestion des obstacles sur le plateau (ralentissement si case blanche, blocage en rouge pas encore au point )
 
-SEMAINE 3:
 
 Eléacine:
     -Réflexion sur la manière d'optimiser le code réalisé la semaine précédente (en collaboration avec Leonor et Majoori):
