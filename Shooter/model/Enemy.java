@@ -2,6 +2,7 @@ package Shooter.model;
 
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import Shooter.Managers.ProjectilesManager;
 
@@ -18,6 +19,9 @@ public class Enemy extends Personnage {
 	public int frequency;
 	private long lastShotTime;
 	public int detectionRadius; // Rayon de détection du joueur
+	public int tailleBar = 40;
+	public int vieTotal = 100;
+	public double direction; //direction pour ajouter le hallo de vision
 
 	public Color color;
 
@@ -175,6 +179,22 @@ public class Enemy extends Personnage {
 
 	public int getDetectionRadius() {
 		return detectionRadius;
+	}
+
+
+	public float getDurerVie() {
+        return this.sante / (float) this.vieTotal;
+    }
+
+
+    private int getTailleBar(Enemy e) {
+        return (int) (this.tailleBar * e.getDurerVie());
+    }
+
+
+	public void drawBarVie(Graphics g) {
+		g.setColor(Color.GREEN);
+		g.fillRect((int) this.getX() - (getTailleBar(this) / 2), (int) this.getY() - 10, getTailleBar(this), 7);
 	}
 
 }

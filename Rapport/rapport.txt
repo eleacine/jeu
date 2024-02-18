@@ -51,3 +51,42 @@ Marylou :
     fusion des versions entre plateau et déplacement du joueur
     début de comportements basiques pour les ennemis (détection du joueur et tir + suivi du joueur si dans la zone de reconnaissance)
 
+Eléacine :
+    création de la base du plateau de jeu a partir d'un tableau d'image, sur la base des sprites,modelisation des cases
+    possibilite de navigation entre les differentes pages grace au Render.java.
+    creation de classes annexes pour differencier les fonctions et faire des classes qui généralise des outils utiliser fréquement
+    
+
+
+
+
+SEMAINE 3:
+
+Eléacine:
+    -Réflexion sur la manière d'optimiser le code réalisé la semaine précédente (en collaboration avec Leonor et Majoori):
+        -> Remplacement de Render par CardLayout pour la navigation entre les pages.
+        -> Nombreux changements dans l'utilisation des JPanel et JFrame.
+        -> Tentative de faire de "game" la base de données centrale.
+        -> Par conséquent, le code était initialement étalé, avec de nombreuses classes OUTILS ; nous l'avons rendu plus compact pour l'optimiser.
+        -> Objectif de rendre le code compréhensible par tous et de le préparer à une fusion avec la version indépendante de Marylou et Ines.
+
+    -Réflexion sur les différentes possibilités d'obstacles, essais et tests pour anticiper les prochaines étapes liées aux armes et aux obstacles:
+        -> Ajout d'une fonction pour modifier la couleur de la case lorsque le joueur se trouve dessus.
+        -> Implémentation d'une fonction pour déplacer le joueur sur une nouvelle case en cas de piège.
+            (Cela pourrait être utile pour une case puits ou, après une explosion, si la case actuelle n'est pas franchissable, déplacer le joueur sur une case adjacente par défaut).
+        -> Mise en place d'une fonction moins esthétique, mais empêchant le joueur de se déplacer sur les cases blanches.
+
+    -Amélioration de l'utilisation des cases dans le tableau pour faciliter son utilisation dans les semaines à venir.
+
+Leonor:
+*Ce que j'ai fait*
+    - un loader qui lit un txt en fonction du niveau et crée le tableau qui le modelise
+    - reorganisation de l'architecture des classes avec Eleacine et Majoori
+        --> organisation des pages avec un CardLayout
+        --> suppression des classes non-nécessaires
+        --> implémentation des données principales dans Game 
+        --> enregistrement local du graphic du plateau
+*Recherche et Réfléxion*
+    - decider de l'implementation des armes pour creer la liste d'armes qui sera dans Game
+    - faudrait mettre au claire l'utilisation des Graphics dans l'ensemble du jeu pour avoir un reinitialisation plus simple
+    - il faut faire un point sur le code entier avec le groupe entier pour chercher des bouts de code qui pourraient poser problème ou se contredire plus tards

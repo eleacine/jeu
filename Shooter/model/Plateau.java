@@ -4,23 +4,24 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.Ellipse2D;
 
-import Shooter.GUI.LevelsPage;
 import Shooter.Managers.*;
+import Shooter.factory.PlateauLevelLoader;
+
 
 public class Plateau extends JPanel {
     protected int[][] level_tab;
-    protected ManagerCase tile_manager;
-    public Graphics plateau_graphic; // on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier
-                                     // dans le update
+    protected ManagerCase  tile_manager;
+    public Graphics plateau_graphic; //on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier dans le update
     public PlayerManager playerManager;
     public EnnemiManager ennemiManager;
     public ProjectilesManager projectilesManager;
     public Player player;
     public MyMouseListener mouseListener;
+    public Plateau(){
+        //this.level_tab=LevelsPage.getLevelData();
+        //this.level_tab=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 1);
+        tile_manager=new ManagerCase();
 
-    public Plateau() {
-
-        // this.level_tab = LevelsPage.getLevelData();
         // this.player = new Player(null);
 
         // tile_manager = new ManagerCase();
@@ -33,12 +34,12 @@ public class Plateau extends JPanel {
         // this.addKeyListener(playerManager);
         // this.addMouseMotionListener(mouseListener);
         // this.addMouseListener(mouseListener);
-
     }
 
     public Plateau(Player player, PlayerManager playerManager, MyMouseListener mouseListener,
             ProjectilesManager projectilesManager) {
-        this.level_tab = LevelsPage.getLevelData();
+        //this.level_tab = LevelsPage.getLevelData();
+        this.level_tab=PlateauLevelLoader.loadPlayingBoard("Shooter\\factory\\PlateauLevels.txt", 0);
         this.player = player;
 
         tile_manager = new ManagerCase();
@@ -63,22 +64,68 @@ public class Plateau extends JPanel {
         plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 50, y * 50, null);
     }
 
+
     public void update() {
         playerManager.handleKeyPress();
         ennemiManager.update();
         ennemiManager.suppEnnemi();
+        playerManager.update();// a commenter si utilisation du test suivant
+
+        // !!!! POSITION IMPORTANTE
+        // fonction test pour bloquer le joueur pour pas aller sur les parties blanches 
+        /* 
+        int currentXIndex = (int) (player.getX() / 50);
+        int currentYIndex = (int) (player.getY() / 50);
+
+        // MET A JOUR LA POSITION
         playerManager.update();
+
+        // CALCULE LA PROCHAINE POSITION
+            int nextXIndex = (int) (player.getX() / 50);
+            int nextYIndex = (int) (player.getY() / 50);
+
+        // VERIFIE SI LA CASE EST EGALE A BLANC ET CHANGE
+            if (level_tab[nextYIndex][nextXIndex] == 1) {
+                // If yes, revert back to the previous position
+                player.setX(currentXIndex * 50);
+                player.setY(currentYIndex * 50);
+            }*/
 
         projectilesManager.hitEnnemi();
         projectilesManager.hitPlayer();
         projectilesManager.suppBulletPlayer();
         projectilesManager.suppBulletEnnemi();
 
+        //FONCTION TEST OBSTACLES
+
+        int playerXIndex = (int) (player.getX() / 50);
+        int playerYIndex = (int) (player.getY() / 50);
+
+        // IDEE D OBSTACLE A FAIRE POUR JOUEUR EN FONCTION DES CASES
+        // PERMET DE CHANGER LA COULEUR DE LA CASE A LA POSITION OU SE TROUVE LE JOUEUR
+        /* 
+        if (level_tab[playerYIndex][playerXIndex] == 1) {
+        
+            level_tab[playerYIndex][playerXIndex] = 2;
+        
+        }*/
+        //PERMET D ENVOYER LE JOUEUR VERS UNE AUTRE POSITION
+        // MISE EN SITUATION
+        // imaginons on fait une case puit si il tombe dessus il reviens a un autre endroit
+        /* 
+        if (level_tab[playerYIndex][playerXIndex] == 1) {
+            player.setX(0);
+            player.setY(0);
+        }*/
+    
+
+        
         repaint();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //update_pleateau(0,0,0); laisser pour Eléacine
         mouseListener.getCrosshair().draw(g);
         g.setColor(Color.DARK_GRAY);
         g.fillOval((int) player.getX(), (int) player.getY(), player.getSize(),
@@ -101,6 +148,7 @@ public class Plateau extends JPanel {
             g.setColor(Color.BLUE);
             g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
             drawDetectionRadius(g, ennemi);
+            ennemi.drawBarVie(g);
         }
     }
 
