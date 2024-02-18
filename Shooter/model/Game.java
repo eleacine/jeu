@@ -14,6 +14,7 @@ import Shooter.Managers.EnnemiManager;
 import Shooter.Managers.MyMouseListener;
 import Shooter.Managers.PlayerManager;
 import Shooter.Managers.ProjectilesManager;
+import Shooter.factory.PlateauLevelLoader;
 
 // import java.awt.Graphics;
 
@@ -58,7 +59,6 @@ public class Game extends JFrame implements Runnable {
 		this.addMouseListener(myMouseListener);
 		this.setFocusable(true);
 		this.gamePlateau = new Plateau(player, playerManager, myMouseListener, projectilesManager);
-
 		this.projectilesManager.ennemiManager = gamePlateau.ennemiManager;
 		// ----------------------------------------------------------------------------------------
 

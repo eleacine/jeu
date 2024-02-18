@@ -7,7 +7,6 @@ public class PlateauLevelLoader{
 
     public static int[][] loadPlayingBoard(String filePath, int level) {
         int[][] currentBoard = null;
-
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int line_level = -1;
@@ -29,6 +28,7 @@ public class PlateauLevelLoader{
                 }
             }
         } catch (IOException e) {
+            //System.out.println("error");
             e.printStackTrace();
         }
         return currentBoard;
@@ -58,7 +58,7 @@ public class PlateauLevelLoader{
     
 
     public static void main(String[] args) {
-        String filePath = "C:\\\\Users\\\\Leono\\\\OneDrive\\\\Documentos\\\\UNI\\\\CS\\\\M\\\\jeu\\\\Shooter\\\\factory\\\\PlateauLevels.txt";
+       /*String filePath = "C:\\\\Users\\\\Leono\\\\OneDrive\\\\Documentos\\\\UNI\\\\CS\\\\M\\\\jeu\\\\Shooter\\\\factory\\\\PlateauLevels.txt";
         int targetLevel = 1; // Set the desired level
 
         int[][] playingBoard = loadPlayingBoard(filePath, targetLevel);
@@ -70,6 +70,6 @@ public class PlateauLevelLoader{
                 System.out.print(cell + " ");
             }
             System.out.println();
-        }
-    }
+        }*/ 
+    } 
 }

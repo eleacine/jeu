@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.Ellipse2D;
 
-import Shooter.GUI.LevelsPage;
 import Shooter.Managers.*;
 import Shooter.factory.PlateauLevelLoader;
 
@@ -20,7 +19,7 @@ public class Plateau extends JPanel {
     public MyMouseListener mouseListener;
     public Plateau(){
         //this.level_tab=LevelsPage.getLevelData();
-        this.level_tab=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 1);
+        //this.level_tab=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 1);
         tile_manager=new ManagerCase();
 
         // this.player = new Player(null);
@@ -39,7 +38,8 @@ public class Plateau extends JPanel {
 
     public Plateau(Player player, PlayerManager playerManager, MyMouseListener mouseListener,
             ProjectilesManager projectilesManager) {
-        this.level_tab = LevelsPage.getLevelData();
+        //this.level_tab = LevelsPage.getLevelData();
+        this.level_tab=PlateauLevelLoader.loadPlayingBoard("Shooter\\factory\\PlateauLevels.txt", 0);
         this.player = player;
 
         tile_manager = new ManagerCase();

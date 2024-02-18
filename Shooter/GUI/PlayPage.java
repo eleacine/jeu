@@ -17,7 +17,8 @@ public class PlayPage extends GameScene  {
 
 	public PlayPage(Game game) {
 		super(game);
-		lvl=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 2);
+		this.game=game; 
+		//this.lvl=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 2);
 		//lvl = LevelsPage.getLevelData();
 		tileManager = new ManagerCase();
 		add(createButton("Menu", "Menu"));
