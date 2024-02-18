@@ -8,12 +8,14 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class EnemyLevelLoader {
     private Map<Integer, List<PersonnageFactory>> levelEnemyFactories;
+    private int level;
+    
 
-    public EnemyLevelLoader() {
+    public EnemyLevelLoader(int level) {
         levelEnemyFactories = new HashMap<>();
+        this.level=level; 
     }
 
     public void loadLevelEnemies(String filePath) { //filepath du document txt avec les infos de chq niveau
@@ -22,10 +24,12 @@ public class EnemyLevelLoader {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(":");
                 if (parts.length == 2) { //au cas oú on fait une erreur de syntaxe dans le txt 
-                    int level = Integer.parseInt(parts[0].trim());
-                    String[] enemyTypes = parts[1].split(",");
-                    List<PersonnageFactory> factories = createFactoriesForEnemyTypes(enemyTypes);
-                    levelEnemyFactories.put(level, factories);
+                    int read_level = Integer.parseInt(parts[0].trim());
+                    if(read_level==level){ //lit que la partie du txt qui corresponds au niveau
+                        String[] enemyTypes = parts[1].split(",");
+                        List<PersonnageFactory> factories = createFactoriesForEnemyTypes(enemyTypes);
+                        levelEnemyFactories.put(level, factories);
+                    }
                 }
             }
         } catch (IOException e) {

@@ -6,21 +6,23 @@ import java.awt.geom.Ellipse2D;
 
 import Shooter.GUI.LevelsPage;
 import Shooter.Managers.*;
+import Shooter.factory.PlateauLevelLoader;
+
 
 public class Plateau extends JPanel {
     protected int[][] level_tab;
-    protected ManagerCase tile_manager;
-    public Graphics plateau_graphic; // on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier
-                                     // dans le update
+    protected ManagerCase  tile_manager;
+    public Graphics plateau_graphic; //on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier dans le update
     public PlayerManager playerManager;
     public EnnemiManager ennemiManager;
     public ProjectilesManager projectilesManager;
     public Player player;
     public MyMouseListener mouseListener;
+    public Plateau(){
+        //this.level_tab=LevelsPage.getLevelData();
+        this.level_tab=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 1);
+        tile_manager=new ManagerCase();
 
-    public Plateau() {
-
-        // this.level_tab = LevelsPage.getLevelData();
         // this.player = new Player(null);
 
         // tile_manager = new ManagerCase();
@@ -33,7 +35,6 @@ public class Plateau extends JPanel {
         // this.addKeyListener(playerManager);
         // this.addMouseMotionListener(mouseListener);
         // this.addMouseListener(mouseListener);
-
     }
 
     public Plateau(Player player, PlayerManager playerManager, MyMouseListener mouseListener,
