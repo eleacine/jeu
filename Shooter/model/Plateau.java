@@ -39,7 +39,8 @@ public class Plateau extends JPanel {
     public Plateau(Player player, PlayerManager playerManager, MyMouseListener mouseListener,
             ProjectilesManager projectilesManager) {
         //this.level_tab = LevelsPage.getLevelData();
-        this.level_tab=PlateauLevelLoader.loadPlayingBoard("Shooter\\factory\\PlateauLevels.txt", 0);
+        //this.level_tab=PlateauLevelLoader.loadPlayingBoard("/Users/eleacinehusson/Desktop/jeu/Shooter/factory/PlateauLevels.txt", 0);
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
         this.player = player;
 
         tile_manager = new ManagerCase();
