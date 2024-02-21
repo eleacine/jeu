@@ -10,19 +10,12 @@ import javax.swing.SwingUtilities;
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
 import Shooter.GUI.SettingsPage;
-import Shooter.Managers.EnnemiManager;
-import Shooter.Managers.MyMouseListener;
-import Shooter.Managers.PlayerManager;
-import Shooter.Managers.ProjectilesManager;
-import Shooter.factory.PlateauLevelLoader;
+import Shooter.Managers.GameManager;
 
-// import java.awt.Graphics;
 
 public class Game extends JFrame implements Runnable {
 
-	// private GameScreen gameScreen; //?
-
-	// private Thread gameThread;
+	
 	public Plateau gamePlateau;
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
@@ -31,7 +24,6 @@ public class Game extends JFrame implements Runnable {
 	public int level = 1;
 
 	public Dimension size_screen;
-	// private MyMouseListener myMouseListener;
 	public CardLayout cardLayout;
 	public JPanel cardPanel;
 	// Classes
@@ -40,27 +32,25 @@ public class Game extends JFrame implements Runnable {
 	private SettingsPage settings;
 
 	public boolean begin = false;
-	public PlayerManager playerManager;
-	public ProjectilesManager projectilesManager;
-	public MyMouseListener myMouseListener;
+
+
+	public GameManager gameManager;
+	
 
 	public Game() {
 		Player player = new Player(null);
 
-		// A MODIFIER POUR PLUS TARD ------------------------------------------------------------
-		Plateau test = new Plateau();
-		
-		playerManager = new PlayerManager(player);
-		projectilesManager = new ProjectilesManager(player, test);
-		myMouseListener = new MyMouseListener(player, new Crosshair(), projectilesManager);
+		// A MODIFIER POUR PLUS TARD -----------------------------------------------------------
 
-		this.addKeyListener(playerManager);
-		this.addMouseMotionListener(myMouseListener);
-		this.addMouseListener(myMouseListener);
-		this.setFocusable(true);
-		this.gamePlateau = new Plateau(player, playerManager, myMouseListener, projectilesManager);
-		this.playerManager.plateau = gamePlateau;
-		this.projectilesManager.ennemiManager = gamePlateau.ennemiManager;
+		this.gamePlateau = new Plateau();
+		this.gameManager = new GameManager(gamePlateau, player);
+		this.gamePlateau.gameManager = gameManager;
+
+		this.addKeyListener(gameManager.getPlayerManager());
+		setFocusable(true);
+		this.addMouseMotionListener(gameManager.getMyMouseListener());
+		this.addMouseListener(gameManager.getMyMouseListener());
+
 		// ----------------------------------------------------------------------------------------
 
 		cardLayout = new CardLayout();
@@ -74,14 +64,12 @@ public class Game extends JFrame implements Runnable {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		// add(gameScreen);
 		setVisible(true);
 
 	}
 
 	private void createPages() {
-		// render = new Render(this); //?
-		// gameScreen = new GameScreen(this); //?
+
 		cardPanel.add(new MenuPage(this), "Menu");
 		this.playing = new PlayPage(this);
 		cardPanel.add(playing, "Play");
@@ -90,18 +78,8 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
-	// private void start() {
-	// gameThread = new Thread(this) {
-	// };
-
-	// gameThread.start();
-	// }
 
 	private void updateGame() {
-
-		// System.out.println("Game Updated!");
-		// gamePlateau.update();
-		// gamePlateau.repaint();
 
 	}
 
@@ -137,29 +115,13 @@ public class Game extends JFrame implements Runnable {
 				lastFrame = now;
 				frames++;
 
-				// if (begin) {
-				// 	SwingUtilities.invokeLater(() -> {
-				// 		// System.out.println("Updating");
-				// 		// p.update();
-				// 		// p.repaint();
-				// 		this.gamePlateau.update();
-				// 		this.gamePlateau.repaint();
-				// 	});
-				// }
-
-				playerManager.handleKeyPress();
-
 			}
 
 			// Update
 			if (now - lastUpdate >= timePerUpdate) {
-				updateGame();
 				if (begin) {
 					SwingUtilities.invokeLater(() -> {
-						// System.out.println("Updating");
-						// p.update();
-						// p.repaint();
-						this.gamePlateau.update();
+						this.gameManager.update();
 						this.gamePlateau.repaint();
 					});
 				}

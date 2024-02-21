@@ -3,12 +3,11 @@ package Shooter.Managers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
-import Shooter.model.Plateau;
 import Shooter.model.Player;
 
 public class PlayerManager extends KeyAdapter {
 
-    public Plateau plateau;
+    public GameManager gameManager;
     public Player player;
     private boolean upPressed;
     private boolean downPressed;
@@ -18,21 +17,15 @@ public class PlayerManager extends KeyAdapter {
     private boolean spacePressed;
     private boolean spacePressedPrev;
 
-
-    public PlayerManager(Player player, Plateau plateau) {
-        this.player = player;
-        this.plateau = plateau;
-    }
-
-    public PlayerManager (Player player) {
-        this.player = player;
+    public PlayerManager (GameManager gameManager){
+        this.gameManager = gameManager;
+        this.player = gameManager.getPlayer();
     }
 
     public void handleKeyPress() {
 
         if (upPressed) {
             moveForward();
-            // System.out.println("upPressed");
         }
         if (downPressed) {
             moveBackward();
@@ -70,11 +63,13 @@ public class PlayerManager extends KeyAdapter {
     
     
     public void update() {
+        checkPlayerlimits();
+        checkObstacle();
+
         player.x += player.xSpeed;
         player.y += player.ySpeed;
 
-        checkPlayerlimits();
-        checkObstacle();
+      
     }
 
     private void checkPlayerlimits() {
@@ -82,31 +77,19 @@ public class PlayerManager extends KeyAdapter {
         int minX = player.size;
         int minY = player.size;
 
-        // int maxX = plateau.getWidth(); 
         int maxX = 1440 - player.size;
 
-        // System.out.println("plateau.getWidth() : " + plateau.getWidth());
-        // System.out.println("maxX : " + maxX);
-        // int maxY = plateau.getHeight(); 
-
         int maxY = 840 - player.size;
-
-        // System.out.println("plateau.getHeight() : " + plateau.getHeight());
-        // System.out.println("maxY : " + maxY);
     
         if (player.x < minX) {
-            // System.out.println("player.x : " + player.x + " minX : " + minX);
             player.x = minX;
         } else if (player.x > maxX) {
-            // System.out.println("player.x : " + player.x + " maxX : " + maxX);
             player.x = maxX;
         }
     
         if (player.y < minY) {
-            // System.out.println("player.y : " + player.y + " minY : " + minY);
             player.y = minY;
         } else if (player.y > maxY) {
-            // System.out.println("player.y : " + player.y + " maxY : " + maxY);
             player.y = maxY;
         }
     }
@@ -115,13 +98,12 @@ public class PlayerManager extends KeyAdapter {
     public void checkObstacle() {
         int currentXIndex = (int) (player.getX() / 50);
         int currentYIndex = (int) (player.getY() / 50);
-
-        int tileType = plateau.level_tab[currentYIndex][currentXIndex];
-
+    
+        int tileType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+    
         switch (tileType) {
-            case 2: // Example: If the tile is of type 1, block the player's movement
-                player.x = currentXIndex * 50;
-                player.y = currentYIndex * 50;
+            case 2: 
+                blockMovementTowardsObstacle(currentXIndex, currentYIndex);
                 break;
             case 1:
                 player.setMaxSpeed(1);
@@ -129,8 +111,38 @@ public class PlayerManager extends KeyAdapter {
             case 0:
                 player.setMaxSpeed(2);
                 break;
+            default:
+                break;
         }
     }
+    
+    private void blockMovementTowardsObstacle(int currentXIndex, int currentYIndex) {
+
+        double obstacleDirection = Math.atan2(player.y - (currentYIndex * 50), player.x - (currentXIndex * 50));
+    
+        // Calculate the distance between the player and the obstacle
+        double distanceToObstacle = Math.sqrt(Math.pow(player.x - currentXIndex * 50, 2) + Math.pow(player.y - currentYIndex * 50, 2));
+    
+        // Define the size of the tiles in your game
+        int tileSize = 50;
+    
+        // Define a minimum distance to maintain from the obstacle
+        double minDistanceToObstacle = player.size * 1.5; // Adjust this value as needed
+    
+        // If the player is too close to the obstacle, adjust their position
+        if (distanceToObstacle < minDistanceToObstacle) {
+            // Calculate the adjusted position to maintain the minimum distance
+            int adjustedX = (int) (currentXIndex * tileSize + Math.cos(obstacleDirection) * minDistanceToObstacle);
+            int adjustedY = (int) (currentYIndex * tileSize + Math.sin(obstacleDirection) * minDistanceToObstacle);
+    
+            // Update the player's position
+            player.x = adjustedX;
+            player.y = adjustedY;
+        }
+    }
+    
+    
+    
 
     public void moveUp() {
         player.ySpeed = -player.maxSpeed;

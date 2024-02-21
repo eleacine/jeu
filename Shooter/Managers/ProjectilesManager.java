@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Shooter.model.Enemy;
-import Shooter.model.Plateau;
 import Shooter.model.Player;
 import Shooter.model.Bullet;
 
@@ -12,16 +11,17 @@ public class ProjectilesManager {
 
     public PlayerManager m;
     public EnnemiManager ennemiManager;
-    // public Plateau p;
     public Player player;
     public ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
     public ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
+    public GameManager gameManager;
 
-    public ProjectilesManager(Player player, Plateau p) {
+    
+    public ProjectilesManager(Player player, GameManager gameManager ) {
         this.player = player;
-        // this.p = p;
-        this.m = p.playerManager;
-        ennemiManager = p.ennemiManager;
+        this.gameManager = gameManager;
+        this.m = gameManager.getPlayerManager();
+        this.ennemiManager = gameManager.getEnnemiManager();
     }
 
     public void hitEnnemi() {
@@ -32,7 +32,7 @@ public class ProjectilesManager {
                     // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                     bullet.size = 0;
                     if (ennemi.sante <= 0) {
-                        System.err.println("ennemi mort");
+                        // System.err.println("ennemi mort");
                         ennemi.size = 0;
                     }
                 }

@@ -1,28 +1,17 @@
 package Shooter.GUI;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
+
 import Shooter.model.Game;
 
 
 
 public class MenuPage extends GameScene {
    
-    
 
-    private BufferedImage img;
-	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
 	public MenuPage(Game g1) {
         super(g1);
 		setPanelSize();
-        //super(game);
-		//importImg();
-		//loadSprites();
 		initButtons();
     }
 
@@ -44,26 +33,7 @@ public class MenuPage extends GameScene {
 
 
 
-//vérifier inutile
-	private void importImg() {
 
-		URL is = getClass().getResource("../image/cible.png");
-        
-
-		try {
-			img = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private void loadSprites() {
-        for (int x = 0; x < 3; x++) {
-            sprites.add(img.getSubimage(50 * x, 0, 50, 50));
-        }
-
-	}
 
 	
 
