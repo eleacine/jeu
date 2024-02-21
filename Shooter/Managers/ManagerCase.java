@@ -10,7 +10,7 @@ import Shooter.model.Enregistrement;
 
 public class ManagerCase {
 
-	public Case MARCHE, OBSTACLE, INTERDIT;
+	public Case MARCHE, OBSTACLE, INTERDIT, MINE;
 	private BufferedImage atlas;
 	public ArrayList<Case> cases = new ArrayList<>();
 
@@ -26,6 +26,7 @@ public class ManagerCase {
 		cases.add(MARCHE = new Case(getSprite(0, 0)));
 		cases.add(OBSTACLE = new Case(getSprite(1, 0)));
 		cases.add(INTERDIT = new Case(getSprite(2, 0)));
+		// cases.add(MINE = new Case(getSprite(3, 0)));
 
 	}
 

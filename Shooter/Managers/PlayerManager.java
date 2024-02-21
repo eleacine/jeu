@@ -14,7 +14,6 @@ public class PlayerManager extends KeyAdapter {
     private boolean leftPressed;
     private boolean rightPressed;
 
-
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;
         this.player = gameManager.getPlayer();
@@ -97,7 +96,7 @@ public class PlayerManager extends KeyAdapter {
 
         switch (tileType) {
             case 2:
-                blockMovementTowardsObstacle(currentXIndex, currentYIndex);
+                blockObstacle(currentXIndex, currentYIndex);
                 break;
             case 1:
                 player.setMaxSpeed(1);
@@ -110,29 +109,23 @@ public class PlayerManager extends KeyAdapter {
         }
     }
 
-    private void blockMovementTowardsObstacle(int currentXIndex, int currentYIndex) {
+    private void blockObstacle(int currentXIndex, int currentYIndex) {
+        int x = (int) player.getX();
+        int y = (int) player.getY();
 
-        double obstacleDirection = Math.atan2(player.y - (currentYIndex * 50), player.x - (currentXIndex * 50));
+        int xSpeed = player.xSpeed;
+        int ySpeed = player.ySpeed;
 
-        // Calculate the distance between the player and the obstacle
-        double distanceToObstacle = Math
-                .sqrt(Math.pow(player.x - currentXIndex * 50, 2) + Math.pow(player.y - currentYIndex * 50, 2));
+        if (xSpeed > 0) {
+            player.x = currentXIndex * 50 - player.size;
+        } else if (xSpeed < 0) {
+            player.x = (currentXIndex + 1) * 50;
+        }
 
-        // Define the size of the tiles in your game
-        int tileSize = 50;
-
-        // Define a minimum distance to maintain from the obstacle
-        double minDistanceToObstacle = player.size * 1.5; // Adjust this value as needed
-
-        // If the player is too close to the obstacle, adjust their position
-        if (distanceToObstacle < minDistanceToObstacle) {
-            // Calculate the adjusted position to maintain the minimum distance
-            int adjustedX = (int) (currentXIndex * tileSize + Math.cos(obstacleDirection) * minDistanceToObstacle);
-            int adjustedY = (int) (currentYIndex * tileSize + Math.sin(obstacleDirection) * minDistanceToObstacle);
-
-            // Update the player's position
-            player.x = adjustedX;
-            player.y = adjustedY;
+        if (ySpeed > 0) {
+            player.y = currentYIndex * 50 - player.size;
+        } else if (ySpeed < 0) {
+            player.y = (currentYIndex + 1) * 50;
         }
     }
 
@@ -188,7 +181,6 @@ public class PlayerManager extends KeyAdapter {
             rightPressed = false;
         }
 
-   
     }
 
     // // ------------- Bullet ----------------

@@ -93,3 +93,9 @@ Ines
 
 Ajout de barre de vie
 Creation d'un test (testEG) pour ajouter un nouvel ennemi gradien qui aurait un deplacement particulier et des que le joueur entre dans la vision perepherique de l'enemi il se fera attaquer (c'est encore une version de base)
+
+Semaine 4 :
+
+Marylou:
+    - création d'un gameManager pour centraliser et gérer tous les managers ensemble et eviter d'avoir cela dans le plateau
+    - aide pour la création et le changement des armes 

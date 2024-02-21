@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import Shooter.model.Enemy;
 import Shooter.model.Player;
+import Shooter.model.A3;
 import Shooter.model.Bullet;
 
 public class ProjectilesManager {
@@ -75,6 +76,49 @@ public class ProjectilesManager {
             }
         }
     }
+
+    public void hitMine (){
+        for (A3 mine : gameManager.getGamePlateau().pieges){
+            if (player.detectCollision(mine.x, mine.y, mine.dimension)){
+                System.out.println(player.sante);
+                player.sante -= mine.power;
+                System.out.println(player.sante);
+                mine.dimension = 0;
+            }
+
+            if (ennemiManager.ennemis.size() > 0){
+                for (Enemy ennemi : ennemiManager.ennemis){
+                    if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
+                        ennemi.sante -= mine.power;
+                        mine.dimension = 0;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    public void suppMine(){
+        Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
+        while (it.hasNext()) {
+            A3 mine = it.next();
+            if (mine.dimension == 0) {
+                it.remove();
+            }
+        }
+    }
+
+    public void update() {
+        hitEnnemi();
+        hitPlayer();
+        suppBulletPlayer();
+        suppBulletEnnemi();
+        hitMine();
+        suppMine();
+    }
+
+
 
     public void addBulletPlayer(Bullet b) {
         playerBullets.add(b);

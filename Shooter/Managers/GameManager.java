@@ -22,7 +22,7 @@ public class GameManager {
         this.ennemiManager = new EnnemiManager(this);
         this.projectilesManager = new ProjectilesManager(player, this);
         this.myMouseListener = new MyMouseListener(player, new Crosshair(), projectilesManager, this);
-        this.managerArmes = new ManagerArmes(player);
+        this.managerArmes = new ManagerArmes(this);
 
     }
 
@@ -32,10 +32,7 @@ public class GameManager {
         ennemiManager.suppEnnemi();
         playerManager.update();
 
-        projectilesManager.hitEnnemi();
-        projectilesManager.hitPlayer();
-        projectilesManager.suppBulletPlayer();
-        projectilesManager.suppBulletEnnemi();
+        projectilesManager.update();
     }
 
     public Plateau getGamePlateau() {

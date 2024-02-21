@@ -3,6 +3,7 @@ package Shooter.model;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 import Shooter.Managers.*;
 import Shooter.factory.PlateauLevelLoader;
@@ -12,6 +13,8 @@ public class Plateau extends JPanel {
     public int[][] level_tab;
     public ManagerCase  tile_manager;
     public Graphics plateau_graphic; //on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier dans le update
+
+    public ArrayList<A3> pieges = new ArrayList<A3>();
 
     public GameManager gameManager;
 
@@ -36,7 +39,6 @@ public class Plateau extends JPanel {
     }
 
          
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         gameManager.getMyMouseListener().getCrosshair().draw(g);
@@ -60,6 +62,11 @@ public class Plateau extends JPanel {
             g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
             drawDetectionRadius(g, ennemi);
             ennemi.drawBarVie(g);
+        }
+
+        // Dessiner les pièges
+        for (A3 piege : pieges) {
+            piege.draw(piege.x, piege.y, g);
         }
     }
 

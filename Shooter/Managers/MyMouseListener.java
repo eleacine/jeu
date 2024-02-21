@@ -1,9 +1,11 @@
 package Shooter.Managers;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import Shooter.model.Player;
+import Shooter.model.A3;
 import Shooter.model.Bullet;
 import Shooter.model.Crosshair;
 
@@ -32,9 +34,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 projectilesManager.addBulletPlayer(b);
             } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
                 player.armes.get(player.currentArme).shoot();
+                A3 mine = new A3(crosshair.xCor, crosshair.yCor);
+                gameManager.getGamePlateau().pieges.add(mine);
         
             }else{
-                player.armes.get(player.currentArme).besoinRecharge();
+                // player.armes.get(player.currentArme).besoinRecharge();
+
             }
    
         }

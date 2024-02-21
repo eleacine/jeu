@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import Shooter.model.Armes;
 import Shooter.model.Player;
+import Shooter.model.A3;
 
 public class ManagerArmes {
     //contient fonctions pour les actions de Armes
     // public ArrayList<Armes> armes = new ArrayList<Armes>();
     public Player player;
+    public GameManager gameManager;
 
-    public ManagerArmes(Player player){
+    public ManagerArmes( GameManager gameManager){
         //ajouter les armes
-        this.player = player;
+        this.gameManager = gameManager;
+        this.player = gameManager.getPlayer();
        
     }
 
@@ -25,14 +28,15 @@ public class ManagerArmes {
         }
     }
 
+
+
+
+    public void rechargeArme(){
+        //recharger l'arme
+    }
+
+
+ 
     
-
-    // public void addArme(Armes arme){
-    //     armes.add(arme);
-    // }
-
-    // public ArrayList<Armes> getArmes(){
-    //     return armes;
-    // }
     
 }
