@@ -28,10 +28,11 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             if (player.armes.get(player.currentArme).type && player.armes.get(player.currentArme).munition > 0) {
                 player.armes.get(player.currentArme).shoot();
                 Bullet b = new Bullet(player.getX(), player.getY(), crosshair.xCor + crosshair.cushion,
-                        crosshair.yCor + crosshair.cushion, player.armes.get(player.currentArme).power);
+                        crosshair.yCor + crosshair.cushion, player.armes.get(player.currentArme).power, player.armes.get(player.currentArme).color);
                 projectilesManager.addBulletPlayer(b);
-                System.out.println(player.currentArme);
-
+            } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
+                player.armes.get(player.currentArme).shoot();
+        
             }
    
         }
