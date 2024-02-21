@@ -88,3 +88,8 @@ Leonor:
     - decider de l'implementation des armes pour creer la liste d'armes qui sera dans Game
     - faudrait mettre au claire l'utilisation des Graphics dans l'ensemble du jeu pour avoir un reinitialisation plus simple
     - il faut faire un point sur le code entier avec le groupe entier pour chercher des bouts de code qui pourraient poser problème ou se contredire plus tards
+
+Ines
+
+Ajout de barre de vie
+Creation d'un test (testEG) pour ajouter un nouvel ennemi gradien qui aurait un deplacement particulier et des que le joueur entre dans la vision perepherique de l'enemi il se fera attaquer (c'est encore une version de base)
