@@ -6,13 +6,13 @@ import Shooter.model.Player;
 
 public class GameManager {
 
-    private Plateau gamePlateau;
-    private Player player;
-    private PlayerManager playerManager;
-    private ProjectilesManager projectilesManager;
-    private MyMouseListener myMouseListener;
-    private EnnemiManager ennemiManager;
-    public ManagerArmes managerArmes;
+    protected Plateau gamePlateau;
+    protected Player player;
+    protected PlayerManager playerManager;
+    protected ProjectilesManager projectilesManager;
+    protected MyMouseListener myMouseListener;
+    protected EnnemiManager ennemiManager;
+    protected ManagerArmes managerArmes;
 
     public GameManager(Plateau gamePlateau, Player player) {
         
@@ -34,6 +34,8 @@ public class GameManager {
 
         projectilesManager.update();
     }
+
+    // ----------------- Getters et setters ---------------------------
 
     public Plateau getGamePlateau() {
         return gamePlateau;

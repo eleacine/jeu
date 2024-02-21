@@ -1,5 +1,5 @@
 package Shooter.Managers;
-import java.awt.Graphics;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -27,18 +27,21 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
 
-            if (player.armes.get(player.currentArme).type && player.armes.get(player.currentArme).munition > 0) {
-                player.armes.get(player.currentArme).shoot();
-                Bullet b = new Bullet(player.getX(), player.getY(), crosshair.xCor + crosshair.cushion,
-                        crosshair.yCor + crosshair.cushion, player.armes.get(player.currentArme).power, player.armes.get(player.currentArme).color);
+            // si l'arme est de type tir
+            if (player.getArmes().get(player.getCurrentArme()).type && player.getArmes().get(player.getCurrentArme()).munition > 0) {
+                player.getArmes().get(player.getCurrentArme()).shoot();
+                Bullet b = new Bullet(player.getX(), player.getY(), crosshair.getX() + crosshair.getCushion(),
+                        crosshair.getY() + crosshair.getCushion(), player.getArmes().get(player.getCurrentArme()).power, player.getArmes().get(player.getCurrentArme()).color);
                 projectilesManager.addBulletPlayer(b);
-            } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
-                player.armes.get(player.currentArme).shoot();
-                A3 mine = new A3(crosshair.xCor, crosshair.yCor);
+            
+            //  si l'arme est de type piege / mine / grenade
+            } else if (player.getArmes().get(player.getCurrentArme()).munition > 0 && !player.getArmes().get(player.getCurrentArme()).type) {
+                player.getArmes().get(player.getCurrentArme()).shoot();
+                A3 mine = new A3(crosshair.getX(), crosshair.getY());
                 gameManager.getGamePlateau().pieges.add(mine);
         
             }else{
-                // player.armes.get(player.currentArme).besoinRecharge();
+                // player.getArmes().get(player.getCurrentArme()).besoinRecharge();
 
             }
    
@@ -47,15 +50,14 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        crosshair.xCor = e.getX() - 23;
-        crosshair.yCor = e.getY() - 46;
+        crosshair.setX(e.getX() - 23);
+        crosshair.setY(e.getY() - 46);
         mousePressed(e);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        crosshair.xCor = e.getX() - 23;
-        crosshair.yCor = e.getY() - 46;
+
         mousePressed(e);
     }
 

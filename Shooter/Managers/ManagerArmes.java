@@ -1,10 +1,6 @@
 package Shooter.Managers;
 
-import java.util.ArrayList;
-
-import Shooter.model.Armes;
 import Shooter.model.Player;
-import Shooter.model.A3;
 
 public class ManagerArmes {
     //contient fonctions pour les actions de Armes
@@ -21,10 +17,10 @@ public class ManagerArmes {
 
     public void changeArme(){
         //changer l'arme
-        if (player.currentArme == player.armes.size() -1){
-            player.currentArme = 0;
+        if (player.getCurrentArme() == player.getArmes().size() -1){
+            player.setCurrentArme(0);
         } else {
-            player.currentArme += 1;
+            player.setCurrentArme(player.getCurrentArme() + 1);
         }
     }
 

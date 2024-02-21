@@ -1,18 +1,18 @@
 package Shooter.GUI;
 
-import Shooter.Managers.ManagerCase;
+// import Shooter.Managers.ManagerCase;
 
 import Shooter.model.Game;
 
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
-import Shooter.factory.*;
+// import javax.swing.JPanel;
+// import Shooter.factory.*;
 public class PlayPage extends GameScene  {
     //page principale oú se déroule le jeu, contient la représentation graphique du plateau
     
-	private int[][] lvl;
-	private ManagerCase tileManager;
+	// private int[][] lvl;
+	// private ManagerCase tileManager;
 	public Game game; 
 
 	public PlayPage(Game game) {
@@ -20,7 +20,7 @@ public class PlayPage extends GameScene  {
 		this.game=game; 
 		//this.lvl=PlateauLevelLoader.loadPlayingBoard("C:\\Users\\Leono\\OneDrive\\Documentos\\UNI\\CS\\M\\jeu\\Shooter\\factory\\PlateauLevels.txt", 2);
 		//lvl = LevelsPage.getLevelData();
-		tileManager = new ManagerCase();
+		// tileManager = new ManagerCase();
 		add(createButton("Menu", "Menu"));
 	}
 

@@ -46,13 +46,6 @@ public class Plateau extends JPanel {
         g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(), gameManager.getPlayer().getSize(),
         gameManager.getPlayer().getSize());
 
-        /* 
-        for (Armes arme : gameManager.getPlayer().armes) {
-            g.fillOval(gameManager.getPlayer().x, gameManager.getPlayer().y, arme.distance, arme.distance);
-            //drawDetectionRadius(g, arme);
-            //ennemi.drawBarVie(g);
-        }*/
-
         // Dessiner les balles du joueur
         for (Bullet playerBullet : gameManager.getProjectilesManager().getplayerBullets()) {
             playerBullet.createBullet(g);
@@ -64,7 +57,7 @@ public class Plateau extends JPanel {
         }
 
         // Dessiner les ennemis
-        for (Enemy ennemi : gameManager.getEnnemiManager().ennemis) {
+        for (Enemy ennemi : gameManager.getEnnemiManager().getEnnemis()) {
             g.setColor(Color.BLUE);
             g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
             drawDetectionRadius(g, ennemi);

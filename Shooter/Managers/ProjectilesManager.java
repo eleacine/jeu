@@ -10,12 +10,12 @@ import Shooter.model.Bullet;
 
 public class ProjectilesManager {
 
-    public PlayerManager m;
-    public EnnemiManager ennemiManager;
-    public Player player;
-    public ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
-    public ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
-    public GameManager gameManager;
+    protected PlayerManager m;
+    protected EnnemiManager ennemiManager;
+    protected Player player;
+    protected ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
+    protected ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
+    protected GameManager gameManager;
 
     
     public ProjectilesManager(Player player, GameManager gameManager ) {
@@ -29,12 +29,10 @@ public class ProjectilesManager {
         for (Bullet bullet : playerBullets) {
             for (Enemy ennemi : ennemiManager.ennemis) {
                 if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
-                    ennemi.sante -= bullet.getDegats();
-                    // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
+                    ennemi.infligerDegats(bullet.getDegats());
                     bullet.size = 0;
-                    if (ennemi.sante <= 0) {
-                        // System.err.println("ennemi mort");
-                        ennemi.size = 0;
+                    if (ennemi.getSante() <= 0) {
+                        ennemi.setSize(0);
                     }
                 }
             }
@@ -46,7 +44,8 @@ public class ProjectilesManager {
         for (Bullet bullet : enemyBullets) {
          //   System.out.println("player size"+player.size);
             if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
-                player.sante -= bullet.getDegats();
+                // player.sante -= bullet.getDegats();
+                player.infligerDegats(bullet.getDegats());
                 bullet.size = 0;
                 // if (player.sante <= 0) {
                 //     player.size = 0;
@@ -80,16 +79,14 @@ public class ProjectilesManager {
     public void hitMine (){
         for (A3 mine : gameManager.getGamePlateau().pieges){
             if (player.detectCollision(mine.x, mine.y, mine.dimension)){
-                System.out.println(player.sante);
-                player.sante -= mine.power;
-                System.out.println(player.sante);
+                player.infligerDegats(mine.power);
                 mine.dimension = 0;
             }
 
             if (ennemiManager.ennemis.size() > 0){
                 for (Enemy ennemi : ennemiManager.ennemis){
                     if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
-                        ennemi.sante -= mine.power;
+                        ennemi.infligerDegats(mine.power);
                         mine.dimension = 0;
                     }
                 }

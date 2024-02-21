@@ -7,31 +7,21 @@ import java.util.ArrayList;
 
 public class Player extends Personnage{
 
-    private String pseudo;
-
-    public int size = 45;
-	public int x = 1000;
-	public int y = 500;
-	public int xSpeed = 0;
-	public int ySpeed = 0;
-	public int maxSpeed = 2;
-	public int health = 500;
-
-	public double direction = 0;
-	public double rotationSpeed = Math.PI / 100; 
-
-    public ArrayList<Armes> armes = new ArrayList<Armes>();
-
-    public int currentArme;
+    protected String pseudo;
+	protected double direction = 0;
+	protected double rotationSpeed = Math.PI / 100; 
+    protected ArrayList<Armes> armes = new ArrayList<Armes>();
+    protected int currentArme;
+    
     
 
     public Player(String pseudo) {
+        super(1000, 500, 0, 0, 45, 2, 200);
         this.pseudo = pseudo;
         
         this.armes.add(new A1());
         this.armes.add(new A2());
         this.armes.add(new A3());
-        // System.out.println(armes.size());
         currentArme = 0;
     }
 
@@ -84,63 +74,20 @@ public class Player extends Personnage{
         this.rotationSpeed = rotationSpeed;
     }
 
-    public int getX (){
-        return this.x;
+    public ArrayList<Armes> getArmes() {
+        return armes;
     }
 
-    public int getY(){
-        return this.y;
+    public void setArmes(ArrayList<Armes> armes) {
+        this.armes = armes;
     }
 
-    public int getSize() {
-        return size;
+    public int getCurrentArme() {
+        return currentArme;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setCurrentArme(int currentArme) {
+        this.currentArme = currentArme;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getxSpeed() {
-        return xSpeed;
-    }
-
-    public void setxSpeed(int xSpeed) {
-        this.xSpeed = xSpeed;
-    }
-
-    public int getySpeed() {
-        return ySpeed;
-    }
-
-    public void setySpeed(int ySpeed) {
-        this.ySpeed = ySpeed;
-    }
-
-    public int getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void setMaxSpeed(int maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    
-
-   
 }

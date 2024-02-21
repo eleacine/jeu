@@ -11,17 +11,18 @@ import Shooter.model.Game;
 public class GameScene extends JPanel {
     public Game game;
 
-	public GameScene(Game game) {
-		this.game = game;
-	}
+    public GameScene(Game game) {
+        this.game = game;
+    }
 
-	public Game getGame() {
-		return game;
-	}
+    public Game getGame() {
+        return game;
+    }
 
-	 public JButton createButton(String text, String pageName) {//creates buttons and connects them to their page 
+    // creates buttons and connects them to their page
+    public JButton createButton(String text, String pageName) {
         JButton button = new JButton(text);
-      
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,7 +36,9 @@ public class GameScene extends JPanel {
         });
         return button;
     }
-    public JButton createButtonExit(String text) {//creates buttons and connects them to their page 
+
+    // creates a button to exit the game
+    public JButton createButtonExit(String text) {
         JButton button = new JButton(text);
         button.addActionListener(new ActionListener() {
             @Override

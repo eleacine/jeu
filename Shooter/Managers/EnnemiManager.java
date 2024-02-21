@@ -10,9 +10,8 @@ import Shooter.model.EnemyMedium;
 
 public class EnnemiManager {
 
-    public ArrayList<Enemy> ennemis;
-
-    public GameManager gameManager;
+    protected ArrayList<Enemy> ennemis;
+    protected GameManager gameManager;
 
     public EnnemiManager(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -31,9 +30,11 @@ public class EnnemiManager {
                 }
                 // ennemi.shootBehavior(player, plateau.projectilesManager);
 
-                if (ennemi.detectCollision(gameManager.getPlayer().x, gameManager.getPlayer().y, gameManager.getPlayer().size)) {
-                    gameManager.getPlayer().sante -= ennemi.getCollisionPower();
-                    ennemi.size = 0;
+                if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(), gameManager.getPlayer().getSize())) {
+                    // gameManager.getPlayer().getSante() -= ennemi.getCollisionPower();
+                    gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
+                    // ennemi.size = 0;
+
                     // if (player.sante <= 0) {
                     // player.size = 0;
                     // }
@@ -48,11 +49,31 @@ public class EnnemiManager {
         Iterator<Enemy> it = ennemis.iterator();
         while (it.hasNext()) {
             Enemy ennemi = it.next();
-            if (ennemi.getSize() <= 0 || ennemi.sante <= 0) {
+            if (ennemi.getSize() <= 0 || ennemi.getSante() <= 0) {
                 // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
                 it.remove();
             }
         }
+    }
+
+
+
+//  ---------------- Getters et setters ---------------------------
+
+    public ArrayList<Enemy> getEnnemis() {
+        return ennemis;
+    }
+
+    public void setEnnemis(ArrayList<Enemy> ennemis) {
+        this.ennemis = ennemis;
+    }
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
+    public void setGameManager(GameManager gameManager) {
+        this.gameManager = gameManager;
     }
 
 }

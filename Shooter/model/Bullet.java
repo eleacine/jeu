@@ -24,19 +24,10 @@ public class Bullet {
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
 
-    public Bullet(int x, int y, int destX, int destY, int degats, float slowdownFactor) {
-        this.x = x;
-        this.y = y;
-        this.degats = degats;
-        this.slowdownFactor = slowdownFactor;
-        calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
-    }
-
     public Bullet(int x, int y, int destX, int destY, int degats, Color color) {
         this.x = x;
         this.y = y;
         this.degats = degats;
-        this.slowdownFactor = slowdownFactor;
         this.color = color;
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
