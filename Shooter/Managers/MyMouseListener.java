@@ -33,6 +33,8 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
                 player.armes.get(player.currentArme).shoot();
         
+            }else{
+                player.armes.get(player.currentArme).besoinRecharge();
             }
    
         }

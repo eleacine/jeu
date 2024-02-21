@@ -25,6 +25,8 @@ public class ManagerArmes {
         }
     }
 
+    
+
     // public void addArme(Armes arme){
     //     armes.add(arme);
     // }
