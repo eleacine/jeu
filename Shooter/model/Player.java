@@ -27,7 +27,9 @@ public class Player extends Personnage{
 
     public Player(String pseudo) {
         this.pseudo = pseudo;
+        
         this.armes.add(new A1());
+        this.armes.add(new A2());
         this.armes.add(new A3());
         // System.out.println(armes.size());
         currentArme = 0;

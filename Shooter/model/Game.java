@@ -39,6 +39,7 @@ public class Game extends JFrame implements Runnable {
 
 	public Game() {
 		Player player = new Player(null);
+		System.out.println(player.sante);
 
 		// A MODIFIER POUR PLUS TARD -----------------------------------------------------------
 

@@ -20,12 +20,6 @@ public class A3 extends Armes {
         this.y = y;
     }
 
-    @Override
-    public void pose() {
-        System.out.println("");
-        
-
-    }
 
     public void draw (int x, int y, Graphics g){
         g.setColor(this.color);

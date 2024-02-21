@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Armes {
     public int power;
@@ -11,6 +13,16 @@ public abstract class Armes {
     public int recharge;
     public Color color;
     public int dureeRecharge;
+
+    public Armes(int power, boolean type, int munition, Color color) {
+        this.power = power;
+        this.type = type;
+        this.munition = munition;
+        //this.distance=distance;
+        //this.recharge=munition;
+        this.color = color;
+    }
+
 
     public Armes(int power, boolean type, int munition, Color color,int dureeRecharge,int distance) {
         this.power = power;
@@ -62,24 +74,6 @@ public abstract class Armes {
         }
     }
 
-    public void tirerSurPersonne(Enemy cible) {
-        // Vérifier si la personne cible est dans la portée de tir
-        if (calculerDistance(cible) <= this.distance) {
-            // Effectuer l'action de tir (peut être personnalisée en fonction de l'arme)
-            shoot();
-        } else {
-            System.out.println("La cible est hors de portée.");
-        }
-    }
-
-    // Méthode pour calculer la distance entre l'arme et une personne
-    public double calculerDistance(Enemy personne) {
-        // Logique pour calculer la distance, à adapter en fonction de votre modèle
-        // Cette méthode suppose que la classe Personne a des attributs x et y représentant les coordonnées
-        double deltaX = personne.getX() - this.getX();
-        double deltaY = personne.getY() - this.getY();
-        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    }
 
     
 

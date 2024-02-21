@@ -46,6 +46,13 @@ public class Plateau extends JPanel {
         g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(), gameManager.getPlayer().getSize(),
         gameManager.getPlayer().getSize());
 
+        /* 
+        for (Armes arme : gameManager.getPlayer().armes) {
+            g.fillOval(gameManager.getPlayer().x, gameManager.getPlayer().y, arme.distance, arme.distance);
+            //drawDetectionRadius(g, arme);
+            //ennemi.drawBarVie(g);
+        }*/
+
         // Dessiner les balles du joueur
         for (Bullet playerBullet : gameManager.getProjectilesManager().getplayerBullets()) {
             playerBullet.createBullet(g);
@@ -68,10 +75,14 @@ public class Plateau extends JPanel {
         for (A3 piege : pieges) {
             piege.draw(piege.x, piege.y, g);
         }
+        //print arme et nombre munitions
+        g.setColor(Color.BLACK);
+        g.fillRect(1350,1,100,100);
+        
     }
 
     private void drawDetectionRadius(Graphics g, Enemy ennemi) {
-        if (ennemi instanceof EnemyMedium) {
+        //if (ennemi instanceof EnemyMedium) {
             // Convertir le centre de l'ennemi et le rayon de détection en coordonnées
             // d'écran
             int centerX = (int) ennemi.x;
@@ -94,7 +105,7 @@ public class Plateau extends JPanel {
                     2 * radius);
             g2d.fill(detectionCircle);
             g2d.dispose();
-        }
+        //}
     }
 
 }
