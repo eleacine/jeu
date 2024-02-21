@@ -119,6 +119,7 @@ public class Game extends JFrame implements Runnable {
 
 			// Update
 			if (now - lastUpdate >= timePerUpdate) {
+				// play est cliqué = début du jeu
 				if (begin) {
 					SwingUtilities.invokeLater(() -> {
 						this.gameManager.update();

@@ -12,6 +12,7 @@ public class GameManager {
     private ProjectilesManager projectilesManager;
     private MyMouseListener myMouseListener;
     private EnnemiManager ennemiManager;
+    public ManagerArmes managerArmes;
 
     public GameManager(Plateau gamePlateau, Player player) {
         
@@ -20,7 +21,8 @@ public class GameManager {
         this.playerManager = new PlayerManager(this);
         this.ennemiManager = new EnnemiManager(this);
         this.projectilesManager = new ProjectilesManager(player, this);
-        this.myMouseListener = new MyMouseListener(player, new Crosshair(), projectilesManager);
+        this.myMouseListener = new MyMouseListener(player, new Crosshair(), projectilesManager, this);
+        this.managerArmes = new ManagerArmes(player);
 
     }
 

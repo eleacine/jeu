@@ -48,6 +48,10 @@ public class PlayerManager extends KeyAdapter {
         //     shoot();
         // }
 
+        if (spacePressed) {
+            gameManager.managerArmes.changeArme();
+        }
+
         // spacePressedPrev = spacePressed;
     }
 
@@ -173,9 +177,9 @@ public class PlayerManager extends KeyAdapter {
             rightPressed = true;
         }
 
-        // if (code == KeyEvent.VK_SPACE) {
-        //     spacePressed = true;
-        // }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+        }
 
     }
 
@@ -195,9 +199,9 @@ public class PlayerManager extends KeyAdapter {
             rightPressed = false;
         }
 
-        // if (code == KeyEvent.VK_SPACE) {
-        //     spacePressed = false;
-        // }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
+        }
     }
 
     // // ------------- Bullet ----------------

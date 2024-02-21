@@ -3,6 +3,7 @@ package Shooter.model;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class Player extends Personnage{
 
@@ -18,10 +19,18 @@ public class Player extends Personnage{
 
 	public double direction = 0;
 	public double rotationSpeed = Math.PI / 100; 
+
+    public ArrayList<Armes> armes = new ArrayList<Armes>();
+
+    public int currentArme;
     
 
     public Player(String pseudo) {
         this.pseudo = pseudo;
+        this.armes.add(new A1());
+        this.armes.add(new A2());
+        // System.out.println(armes.size());
+        currentArme = 0;
     }
 
     // récupérer une éventuelle sauvegarde

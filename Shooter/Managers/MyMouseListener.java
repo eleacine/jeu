@@ -12,19 +12,28 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     private Player player;
     private Crosshair crosshair;
     private ProjectilesManager projectilesManager;
+    public GameManager gameManager;
 
-    public MyMouseListener(Player player, Crosshair crosshair, ProjectilesManager projectilesManager) {
+    public MyMouseListener(Player player, Crosshair crosshair, ProjectilesManager projectilesManager, GameManager gameManager) {
         this.player = player;
         this.crosshair = crosshair;
         this.projectilesManager = projectilesManager;
+        this.gameManager = gameManager;
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            Bullet b = new Bullet(player.getX(), player.getY(), crosshair.xCor + crosshair.cushion,
-                    crosshair.yCor + crosshair.cushion, 25);
-            projectilesManager.addBulletPlayer(b);
+
+            if (player.armes.get(player.currentArme).type && player.armes.get(player.currentArme).munition > 0) {
+                player.armes.get(player.currentArme).shoot();
+                Bullet b = new Bullet(player.getX(), player.getY(), crosshair.xCor + crosshair.cushion,
+                        crosshair.yCor + crosshair.cushion, player.armes.get(player.currentArme).power);
+                projectilesManager.addBulletPlayer(b);
+                System.out.println(player.currentArme);
+
+            }
+   
         }
     }
 
