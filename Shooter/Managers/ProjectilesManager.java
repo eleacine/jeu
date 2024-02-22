@@ -28,7 +28,7 @@ public class ProjectilesManager {
     public void hitEnnemi() {
         for (Bullet bullet : playerBullets) {
             for (Enemy ennemi : ennemiManager.ennemis) {
-                if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
+                if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize()) && bullet.getSize() != 0){
                     ennemi.infligerDegats(bullet.getDegats());
                     bullet.size = 0;
                     if (ennemi.getSante() <= 0) {
@@ -43,7 +43,7 @@ public class ProjectilesManager {
     public void hitPlayer() {
         for (Bullet bullet : enemyBullets) {
          //   System.out.println("player size"+player.size);
-            if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
+            if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize()) && bullet.getSize() != 0){
                 // player.sante -= bullet.getDegats();
                 player.infligerDegats(bullet.getDegats());
                 bullet.size = 0;
@@ -61,7 +61,7 @@ public class ProjectilesManager {
             Bullet bullet = it.next();
             int currentArme = player.getCurrentArme();
             
-            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>m.getPlayer().getArmes().get(currentArme).distance) {
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).distance) {
                 it.remove();
             }
         }       
@@ -109,10 +109,10 @@ public class ProjectilesManager {
     }
 
     public void update() {
-        hitEnnemi();
-        hitPlayer();
         suppBulletPlayer();
         suppBulletEnnemi();
+        hitEnnemi();
+        hitPlayer();
         hitMine();
         suppMine();
     }

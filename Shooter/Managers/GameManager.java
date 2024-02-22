@@ -31,8 +31,12 @@ public class GameManager {
         ennemiManager.update();
         ennemiManager.suppEnnemi();
         playerManager.update();
-
         projectilesManager.update();
+    }
+
+    public void reset (){
+        player.reset();
+        
     }
 
     // ----------------- Getters et setters ---------------------------

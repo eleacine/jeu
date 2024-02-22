@@ -34,12 +34,12 @@ public class Bullet {
     }
 
     private void updateDistanceTraveled() {
-        float distanceSquared = differenceX * differenceX + differenceY * differenceY;
+        // float distanceSquared = differenceX * differenceX + differenceY * differenceY;
+        float diffX = differenceX * differenceX ;
+        float diffY = differenceY * differenceY ;
+        float distanceSquared = diffX + diffY + 3 * size;
         distanceTraveled += Math.sqrt(distanceSquared);
     }
-
-
-
 
     // Calcule les composantes de mouvement en fonction de la destination
     private void calculateMovement(int destX, int destY) {
@@ -61,11 +61,11 @@ public class Bullet {
 
     // Dessine le projectile à sa position actuelle
     public void createBullet(Graphics g) {
+        updateDistanceTraveled();
         g.setColor(this.color);
         g.fillOval((int) x, (int) y, size, size);
         this.x += differenceX;  // Met à jour la coordonnée x en fonction de la composante de mouvement en x
         this.y += differenceY;  // Met à jour la coordonnée y en fonction de la composante de mouvement en y
-        updateDistanceTraveled();
     }
 
     public boolean isOutOfBounds (int width, int height){

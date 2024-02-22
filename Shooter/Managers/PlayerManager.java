@@ -120,23 +120,23 @@ public class PlayerManager extends KeyAdapter {
     }
 
     private void blockObstacle(int currentXIndex, int currentYIndex) {
-        // int getX() = (int) player.getX();
-        // int getY() = (int) player.getY();
+        int x = (int) player.getX();
+        int y = (int) player.getY();
+        int size = player.getSize();
+        int xSpeed = player.getXSpeed();
+        int ySpeed = player.getYSpeed();
 
-        // int xSpeed = player.xSpeed;
-        // int ySpeed = player.ySpeed;
+        if (xSpeed > 0) {
+            player.setX((currentXIndex * 50) - size);
+        } else if (xSpeed < 0) {
+            player.setX((currentXIndex * 50) + 50);
+        }
 
-        // if (xSpeed > 0) {
-        // player.getX() = currentXIndex * 50 - player.getSize();
-        // } else if (xSpeed < 0) {
-        // player.getX() = (currentXIndex + 1) * 50;
-        // }
-
-        // if (ySpeed > 0) {
-        // player.getY() = currentYIndex * 50 - player.getSize();
-        // } else if (ySpeed < 0) {
-        // player.getY() = (currentYIndex + 1) * 50;
-        // }
+        if (ySpeed > 0) {
+            player.setY((currentYIndex * 50) - size);
+        } else if (ySpeed < 0) {
+            player.setY((currentYIndex * 50) + 50);
+        }
     }
 
     public void moveUp() {

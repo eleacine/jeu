@@ -148,6 +148,7 @@ public class Game extends JFrame implements Runnable {
 	public void isGameOver() {
 		if (gameManager.getPlayer().getSante() <= 0) {
 			begin = false;
+			gameManager.reset();
 			cardLayout.show(cardPanel, "GameOver");
 
 		}

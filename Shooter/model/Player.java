@@ -46,6 +46,14 @@ public class Player extends Personnage{
         return false;
     }
     
+    public void reset() {
+        this.x = 1000;
+        this.y = 500;
+        this.direction = 0;
+        this.sante = 200;
+        this.currentArme = 0;
+        
+    }
 
 
 
