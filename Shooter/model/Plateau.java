@@ -70,21 +70,21 @@ public class Plateau extends JPanel {
         for (A3 piege : pieges) {
             piege.draw(piege.x, piege.y, g);
         }
-        for(A4 grenade : grenade){
+        for (A4 grenade : grenade) {
             grenade.draw(grenade.x, grenade.y, g);
         }
-        //print arme et nombre munitions
+        // print arme et nombre munitions
         Player player = gameManager.getPlayerManager().getPlayer();
         int currentArme = player.currentArme;
         Armes armeCourante = player.armes.get(currentArme);
 
         g.setColor(Color.BLACK);
-        g.fillRect(1350, 1, 100, 100);
+        g.fillRect(1300, 1, 125, 100);
         g.setColor(Color.WHITE);
 
         if (currentArme >= 0 && currentArme < player.armes.size()) {
-            g.drawString("type:" + armeCourante.nom, 1350, 30);
-            g.drawString("munitions:" + armeCourante.munition, 1350, 50);
+            g.drawString("type:" + armeCourante.nom, 1325, 30);
+            g.drawString("munitions:" + armeCourante.munition, 1325, 50);
         }
         g.setColor(armeCourante.color);
         int centerX = (int) (player.getX() + player.getSize() / 2 - armeCourante.distance * 2 / 2);
@@ -120,6 +120,11 @@ public class Plateau extends JPanel {
         g2d.fill(detectionCircle);
         g2d.dispose();
         // }
+    }
+
+    public void reset (){
+        pieges.clear();
+        grenade.clear();
     }
 
 }

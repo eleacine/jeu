@@ -91,13 +91,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     gameManager.getGamePlateau().grenade.add(grenade);
                     grenade.activateGrenade();
                 }
-            } // else{
-              // player.armes.get(player.currentArme).besoinRecharge();
-
+            } else {
+                player.getArmes().get(player.getCurrentArme()).besoinRecharge();
+            }
         }
 
     }
-    
 
     @Override
     public void mouseMoved(MouseEvent e) {
