@@ -10,7 +10,7 @@ import Shooter.model.Enregistrement;
 
 public class ManagerCase {
 
-	public Case MARCHE, OBSTACLE, INTERDIT, MINE;
+	public Case MARCHE, OBSTACLE, INTERDIT, MINE, GRENADE;
 	private BufferedImage atlas;
 	public ArrayList<Case> cases = new ArrayList<>();
 

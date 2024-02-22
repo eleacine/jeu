@@ -15,6 +15,7 @@ public class Plateau extends JPanel {
                                      // dans le update
 
     public ArrayList<A3> pieges = new ArrayList<A3>();
+    public ArrayList<A4> grenade = new ArrayList<A4>();
 
     public GameManager gameManager;
 
@@ -69,7 +70,10 @@ public class Plateau extends JPanel {
         for (A3 piege : pieges) {
             piege.draw(piege.x, piege.y, g);
         }
-        // print arme et nombre munitions
+        for(A4 grenade : grenade){
+            grenade.draw(grenade.x, grenade.y, g);
+        }
+        //print arme et nombre munitions
         Player player = gameManager.getPlayerManager().getPlayer();
         int currentArme = player.currentArme;
         Armes armeCourante = player.armes.get(currentArme);
