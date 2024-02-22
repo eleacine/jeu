@@ -13,7 +13,6 @@ public abstract class Armes {
     public int dureeRecharge; // durée de la recharge
 
     public Color color;
-    public int dureeRecharge;
     public String nom;
 
     public Armes(String nom,int power, boolean type, int munition, Color color) {

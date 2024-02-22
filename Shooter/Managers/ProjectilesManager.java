@@ -59,9 +59,9 @@ public class ProjectilesManager {
         Iterator<Bullet> it = playerBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
-            int currentArme = player.currentArme;
+            int currentArme = player.getCurrentArme();
             
-            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>m.getPlayer().armes.get(currentArme).distance) {
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>m.getPlayer().getArmes().get(currentArme).distance) {
                 it.remove();
             }
         }       
