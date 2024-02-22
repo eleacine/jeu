@@ -1,21 +1,27 @@
 package Shooter.Managers;
 
+import java.util.List;
+
 import Shooter.model.Crosshair;
 import Shooter.model.Plateau;
 import Shooter.model.Player;
+import Shooter.model.Game;
+import Shooter.model.Personnage;
 
 public class GameManager {
 
-    protected Plateau gamePlateau;
-    protected Player player;
-    protected PlayerManager playerManager;
-    protected ProjectilesManager projectilesManager;
-    protected MyMouseListener myMouseListener;
-    protected EnnemiManager ennemiManager;
-    protected ManagerArmes managerArmes;
+    private Plateau gamePlateau;
+    private Player player;
+    private PlayerManager playerManager;
+    private ProjectilesManager projectilesManager;
+    private MyMouseListener myMouseListener;
+    private EnnemiManager ennemiManager;
+    public ManagerArmes managerArmes;
+    protected Game game;
 
-    public GameManager(Plateau gamePlateau, Player player) {
+    public GameManager(Game g, Plateau gamePlateau, Player player) {
         
+        this.game=g;
         this.gamePlateau = gamePlateau;
         this.player = player;
         this.playerManager = new PlayerManager(this);
@@ -83,6 +89,10 @@ public class GameManager {
 
     public EnnemiManager getEnnemiManager() {
         return ennemiManager;
+    }
+
+    public List<Personnage> getPersoList(){
+        return game.getPersoList();
     }
 
     public void setEnnemiManager(EnnemiManager ennemiManager) {

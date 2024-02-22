@@ -56,11 +56,14 @@ public class Plateau extends JPanel {
         }
 
         // Dessiner les ennemis
-        for (Enemy ennemi : gameManager.getEnnemiManager().getEnnemis()) {
-            g.setColor(Color.BLUE);
-            g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
-            drawDetectionRadius(g, ennemi);
-            ennemi.drawBarVie(g);
+        for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()) {
+            if(perso instanceof Enemy){
+                 Enemy ennemi=(Enemy)perso;
+                g.setColor(Color.BLUE);
+                g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
+                drawDetectionRadius(g, ennemi);
+                ennemi.drawBarVie(g);
+            }
         }
 
         // Dessiner les pièges

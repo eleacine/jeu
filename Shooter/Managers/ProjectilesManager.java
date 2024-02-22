@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Shooter.model.Enemy;
+import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.A3;
 import Shooter.model.Bullet;
@@ -27,12 +28,17 @@ public class ProjectilesManager {
 
     public void hitEnnemi() {
         for (Bullet bullet : playerBullets) {
-            for (Enemy ennemi : ennemiManager.ennemis) {
-                if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize()) && bullet.getSize() != 0){
-                    ennemi.infligerDegats(bullet.getDegats());
-                    bullet.size = 0;
-                    if (ennemi.getSante() <= 0) {
-                        ennemi.setSize(0);
+            for (Personnage perso : ennemiManager.getPerso_list()) {
+                if(perso instanceof Enemy){
+                    Enemy ennemi=(Enemy)perso;
+                    if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
+                        ennemi.infligerDegats(bullet.getDegats());
+                        // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
+                        bullet.size = 0;
+                        if (ennemi.getSante() <= 0) {
+                            // System.err.println("ennemi mort");
+                            ennemi.setSize(0);
+                        }
                     }
                 }
             }
@@ -85,11 +91,14 @@ public class ProjectilesManager {
                 mine.dimension = 0;
             }
 
-            if (ennemiManager.ennemis.size() > 0){
-                for (Enemy ennemi : ennemiManager.ennemis){
-                    if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
-                        ennemi.infligerDegats(mine.power);
-                        mine.dimension = 0;
+            if (ennemiManager.getPerso_list().size() > 1){
+                for (Personnage perso : ennemiManager.getPerso_list()){
+                    if(perso instanceof Enemy){
+                        Enemy ennemi=(Enemy)perso;
+                        if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
+                            ennemi.infligerDegats(mine.power);
+                            mine.dimension = 0;
+                        }
                     }
                 }
             }

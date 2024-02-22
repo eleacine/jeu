@@ -1,15 +1,15 @@
-// package Shooter.factory;
+package Shooter.factory;
 
-// import Shooter.model.*;
+import Shooter.model.*;
 
-// import java.util.List;
+import java.util.List;
 
-// public class TestFactory {
-//     public static void main(String[] args) {
-//         EnemyLevelLoader enemyLoader = new EnemyLevelLoader(2);
-//         enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
-//         List<Personnage> enemiesLevel1 = enemyLoader.createEnemiesForLevel(1);
-//         List<Personnage> enemiesLevel2 = enemyLoader.createEnemiesForLevel(2);
+public class TestFactory {
+    public static void main(String[] args) {
+        EnemyLevelLoader enemyLoader = new EnemyLevelLoader(2);
+        enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
+        List<Personnage> enemiesLevel1 = enemyLoader.createEnemiesForLevel();
+        List<Personnage> enemiesLevel2 = enemyLoader.createEnemiesForLevel();
         
 //         //Affichage du test 
 //         for(Personnage enemy1 : enemiesLevel1){
@@ -34,5 +34,5 @@
 //         }
 
        
-//     }
-// }
+     }
+ }
