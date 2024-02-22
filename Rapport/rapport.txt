@@ -99,3 +99,6 @@ Semaine 4 :
 Marylou:
     - création d'un gameManager pour centraliser et gérer tous les managers ensemble et eviter d'avoir cela dans le plateau
     - aide pour la création et le changement des armes 
+    - début du gameOverPage basique -> faire le systeme pour rejouer
+    - "nettoyage du jeu" -> mettre les attributs en protected, créer et utilsier les getters et setters
+    - mise au point de la classe personnage pour bien englober ennemy et player 

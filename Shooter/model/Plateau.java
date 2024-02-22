@@ -41,7 +41,6 @@ public class Plateau extends JPanel {
          
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        gameManager.getMyMouseListener().getCrosshair().draw(g);
         g.setColor(Color.DARK_GRAY);
         g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(), gameManager.getPlayer().getSize(),
         gameManager.getPlayer().getSize());
@@ -71,6 +70,9 @@ public class Plateau extends JPanel {
         //print arme et nombre munitions
         g.setColor(Color.BLACK);
         g.fillRect(1350,1,100,100);
+
+        gameManager.getMyMouseListener().getCrosshair().draw(g);
+
         
     }
 
