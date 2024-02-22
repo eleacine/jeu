@@ -2,15 +2,18 @@ package Shooter.model;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import Shooter.GUI.GameOverPage;
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
 import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
+import Shooter.factory.EnemyLevelLoader;
 
 
 public class Game extends JFrame implements Runnable {
@@ -20,7 +23,6 @@ public class Game extends JFrame implements Runnable {
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
 	protected List<Personnage> perso_list;
-	protected Armes[] armes_list;
 	public int level = 1;
 
 	public Dimension size_screen;
@@ -38,22 +40,28 @@ public class Game extends JFrame implements Runnable {
 	
 
 	public Game() {
+		
+
+		//load des personnages 
+		this.perso_list=new ArrayList<>();
 		Player player = new Player(null);
-		System.out.println(player.sante);
-
-		// A MODIFIER POUR PLUS TARD -----------------------------------------------------------
-
+		this.perso_list.add(player);
+		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
+		enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
+		this.perso_list = enemyLoader.createEnemiesForLevel();
+		
+		//initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
-		this.gameManager = new GameManager(gamePlateau, player);
+		this.gameManager = new GameManager(this, gamePlateau, player);
 		this.gamePlateau.gameManager = gameManager;
 
+		//initialisation des listeners
 		this.addKeyListener(gameManager.getPlayerManager());
 		setFocusable(true);
 		this.addMouseMotionListener(gameManager.getMyMouseListener());
 		this.addMouseListener(gameManager.getMyMouseListener());
 
-		// ----------------------------------------------------------------------------------------
-
+		//initialisation du card layout 
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		getContentPane().add(cardPanel);
@@ -75,7 +83,9 @@ public class Game extends JFrame implements Runnable {
 		this.playing = new PlayPage(this);
 		cardPanel.add(playing, "Play");
 		cardPanel.add(new SettingsPage(this), "Settings");
+		cardPanel.add(new GameOverPage(this), "GameOver");
 		cardLayout.show(cardPanel, "Menu");
+
 
 	}
 
@@ -125,6 +135,7 @@ public class Game extends JFrame implements Runnable {
 					SwingUtilities.invokeLater(() -> {
 						this.gameManager.update();
 						this.gamePlateau.repaint();
+						isGameOver();
 					});
 				}
 				lastUpdate = now;
@@ -142,6 +153,14 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
+	public void isGameOver() {
+		if (gameManager.getPlayer().getSante() <= 0) {
+			begin = false;
+			cardLayout.show(cardPanel, "GameOver");
+
+		}
+	}
+
 	public MenuPage getMenu() {
 		return menu;
 	}
@@ -156,6 +175,10 @@ public class Game extends JFrame implements Runnable {
 
 	public int getLevel() {
 		return this.level;
+	}
+
+	public List<Personnage> getPersoList(){
+		return this.perso_list;
 	}
 
 	public void addLevel() {

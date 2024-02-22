@@ -11,7 +11,6 @@ public class Enemy extends Personnage {
 	public int id;
 	public int power = 10; // faire des dégats de collision et de tir
 	public int collisionPower = 50;
-	public int speed;
 	public int destX;
 	public int destY;
 	public float differenceX;
@@ -25,23 +24,17 @@ public class Enemy extends Personnage {
 
 	public Color color;
 
-
-	// public Ennemi(int id, int destX, int destY) {
-	// 	this.speed = 2;
-	// 	this.sante = 100;
-	// 	this.id = id;
-	// 	this.size = 55;
-	// }
+	public Enemy(int x, int y, int size, int sante, int id, int maxSpeed, int power, int collisionPower, int frequency, int detectionRadius, Color color) {
+		super(x, y, size, sante, maxSpeed);
+		this.id = id;
+		this.power = power;
+		this.collisionPower = collisionPower;
+		this.frequency = frequency;
+		this.detectionRadius = detectionRadius;
+		this.color = color;
+	}
 
 	public void updateBehavior(Player player) {
-        // Implémentez le comportement spécifique pour cet ennemi
-        // Par exemple, suivi simple du joueur
-
-
-        // float angle = calculateAngle(x, y, player.x, player.y);
-        // calculateDifferences(angle);
-        // x += differenceX;
-        // y += differenceY;
 
     }
 
@@ -61,22 +54,22 @@ public class Enemy extends Personnage {
     }
 
 	public void calculateDifferences(float angle) {
-		this.differenceX = (float) Math.cos(angle) * this.speed;
-		this.differenceY = (float) Math.sin(angle) * this.speed;
+		this.differenceX = (float) Math.cos(angle) * this.maxSpeed;
+		this.differenceY = (float) Math.sin(angle) * this.maxSpeed;
 	}
 
 	public void move() {
 		if (x > destX + 10) {
-			x -= speed;
+			x -= maxSpeed;
 		}
 		if (x < destX + 10) {
-			x += speed;
+			x += maxSpeed;
 		}
 		if (y > destY + 10) {
-			y -= speed;
+			y -= maxSpeed;
 		}
 		if (y < destY + 10) {
-			y += speed;
+			y += maxSpeed;
 		}
 	}
 
@@ -126,11 +119,11 @@ public class Enemy extends Personnage {
 	}
 
 	public int getSpeed() {
-		return speed;
+		return maxSpeed;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
 	}
 
 	public int getDestX() {

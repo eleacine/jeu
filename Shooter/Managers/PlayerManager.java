@@ -8,8 +8,8 @@ import Shooter.model.Player;
 
 public class PlayerManager extends KeyAdapter {
 
-    public GameManager gameManager;
-    public Player player;
+    protected GameManager gameManager;
+    protected Player player;
     private boolean upPressed;
     private boolean downPressed;
     private boolean leftPressed;
@@ -29,13 +29,13 @@ public class PlayerManager extends KeyAdapter {
             moveBackward();
         }
         if (!upPressed && !downPressed) {
-            player.ySpeed = 0;
+            player.setYSpeed(0);
         }
         if (leftPressed) {
-            player.direction -= player.rotationSpeed;
+            player.setDirection(player.getDirection() - player.getRotationSpeed());
         }
         if (rightPressed) {
-            player.direction += player.rotationSpeed;
+            player.setDirection(player.getDirection() + player.getRotationSpeed());
         }
         // if (!leftPressed && !rightPressed) {
         // player.xSpeed = 0;
@@ -49,43 +49,53 @@ public class PlayerManager extends KeyAdapter {
     }
 
     public void moveForward() {
-        player.xSpeed = (int) Math.round(player.maxSpeed * Math.cos(player.direction));
-        player.ySpeed = (int) Math.round(player.maxSpeed * Math.sin(player.direction));
+        int xSpeed = (int) Math.round(player.getMaxSpeed() * Math.cos(player.getDirection()));
+        int ySpeed = (int) Math.round(player.getMaxSpeed() * Math.sin(player.getDirection()));
+        player.setXSpeed(xSpeed);
+        player.setYSpeed(ySpeed);
     }
 
     public void moveBackward() {
-        player.xSpeed = (int) Math.round(-player.maxSpeed * Math.cos(player.direction));
-        player.ySpeed = (int) Math.round(-player.maxSpeed * Math.sin(player.direction));
+
+        int xSpeed = (int) Math.round(-player.getMaxSpeed() * Math.cos(player.getDirection()));
+        int ySpeed = (int) Math.round(-player.getMaxSpeed() * Math.sin(player.getDirection()));
+        player.setXSpeed(xSpeed);
+        player.setYSpeed(ySpeed);
     }
 
     public void update() {
         checkPlayerlimits();
         checkObstacle();
 
-        player.x += player.xSpeed;
-        player.y += player.ySpeed;
+        player.setX(player.getX() + player.getXSpeed());
+        player.setY(player.getY() + player.getYSpeed());
 
     }
 
     private void checkPlayerlimits() {
 
-        int minX = player.size;
-        int minY = player.size;
+        int minX = player.getSize();
+        int minY = player.getSize();
 
-        int maxX = 1440 - player.size;
+        int maxX = 1440 - player.getSize();
 
-        int maxY = 840 - player.size;
+        int maxY = 840 - player.getSize();
 
-        if (player.x < minX) {
-            player.x = minX;
-        } else if (player.x > maxX) {
-            player.x = maxX;
+        if (player.getX() < minX) {
+
+            player.setX(minX);
+
+        } else if (player.getX() > maxX) {
+
+            player.setX(maxX);
         }
 
-        if (player.y < minY) {
-            player.y = minY;
-        } else if (player.y > maxY) {
-            player.y = maxY;
+        if (player.getY() < minY) {
+
+            player.setY(minY);
+        } else if (player.getY() > maxY) {
+
+            player.setY(maxY);
         }
     }
 
@@ -111,36 +121,36 @@ public class PlayerManager extends KeyAdapter {
     }
 
     private void blockObstacle(int currentXIndex, int currentYIndex) {
-        int x = (int) player.getX();
-        int y = (int) player.getY();
+        // int getX() = (int) player.getX();
+        // int getY() = (int) player.getY();
 
-        int xSpeed = player.xSpeed;
-        int ySpeed = player.ySpeed;
+        // int xSpeed = player.xSpeed;
+        // int ySpeed = player.ySpeed;
 
-        if (xSpeed > 0) {
-            player.x = currentXIndex * 50 - player.size;
-        } else if (xSpeed < 0) {
-            player.x = (currentXIndex + 1) * 50;
-        }
+        // if (xSpeed > 0) {
+        // player.getX() = currentXIndex * 50 - player.getSize();
+        // } else if (xSpeed < 0) {
+        // player.getX() = (currentXIndex + 1) * 50;
+        // }
 
-        if (ySpeed > 0) {
-            player.y = currentYIndex * 50 - player.size;
-        } else if (ySpeed < 0) {
-            player.y = (currentYIndex + 1) * 50;
-        }
+        // if (ySpeed > 0) {
+        // player.getY() = currentYIndex * 50 - player.getSize();
+        // } else if (ySpeed < 0) {
+        // player.getY() = (currentYIndex + 1) * 50;
+        // }
     }
 
     public void moveUp() {
-        player.ySpeed = -player.maxSpeed;
+        player.setYSpeed(player.getYSpeed() - player.getMaxSpeed());
     }
 
     public void moveDown() {
-        player.ySpeed = player.maxSpeed;
+        player.setYSpeed(player.getYSpeed() + player.getMaxSpeed());
     }
 
     public void stop() {
-        player.xSpeed = 0;
-        player.ySpeed = 0;
+        player.setXSpeed(0);
+        player.setYSpeed(0);
     }
 
     @Override
@@ -190,10 +200,14 @@ public class PlayerManager extends KeyAdapter {
     // public void shoot() {
 
     // if (spacePressed) {
-    // Bullet b = new Bullet(player.x + 25, player.y, (float) player.direction);
+    // Bullet b = new Bullet(player.getX() + 25, player.getY(), (float)
+    // player.direction);
     // // faire une animation du joueur pour simuler le tir
     // plateau.projectilesManager.getPlayerBullets().add(b);
     // }
     // }
 
+    public Player getPlayer(){
+        return this.player;
+    }
 }

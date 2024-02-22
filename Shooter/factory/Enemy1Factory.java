@@ -4,6 +4,6 @@ import Shooter.model.*;
 public class Enemy1Factory implements PersonnageFactory {
     @Override
     public Personnage createPersonnage(){
-        return new E1();
+        return new EnemyBasique();
     } 
 }

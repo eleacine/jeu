@@ -1,5 +1,5 @@
 package Shooter.Managers;
-import java.awt.Graphics;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -63,10 +63,11 @@ public void mousePressed(MouseEvent e) {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
 
-            if (player.armes.get(player.currentArme).type && player.armes.get(player.currentArme).munition > 0) {
-                player.armes.get(player.currentArme).shoot();
-                Bullet b = new Bullet(player.getX(), player.getY(), crosshair.xCor + crosshair.cushion,
-                        crosshair.yCor + crosshair.cushion, player.armes.get(player.currentArme).power, player.armes.get(player.currentArme).color);
+            // si l'arme est de type tir
+            if (player.getArmes().get(player.getCurrentArme()).type && player.getArmes().get(player.getCurrentArme()).munition > 0) {
+                player.getArmes().get(player.getCurrentArme()).shoot();
+                Bullet b = new Bullet(player.getX(), player.getY(), crosshair.getX() + crosshair.getCushion(),
+                        crosshair.getY() + crosshair.getCushion(), player.getArmes().get(player.getCurrentArme()).power, player.getArmes().get(player.getCurrentArme()).color);
                 projectilesManager.addBulletPlayer(b);
             } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
                 if (player.armes.get(player.currentArme)instanceof A3) {
@@ -89,15 +90,14 @@ public void mousePressed(MouseEvent e) {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        crosshair.xCor = e.getX() - 23;
-        crosshair.yCor = e.getY() - 46;
+        crosshair.setX(e.getX() - 23);
+        crosshair.setY(e.getY() - 46);
         mousePressed(e);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        crosshair.xCor = e.getX() - 23;
-        crosshair.yCor = e.getY() - 46;
+
         mousePressed(e);
     }
 

@@ -42,17 +42,9 @@ public class Plateau extends JPanel {
          
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        gameManager.getMyMouseListener().getCrosshair().draw(g);
         g.setColor(Color.DARK_GRAY);
         g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(), gameManager.getPlayer().getSize(),
         gameManager.getPlayer().getSize());
-
-        /* 
-        for (Armes arme : gameManager.getPlayer().armes) {
-            g.fillOval(gameManager.getPlayer().x, gameManager.getPlayer().y, arme.distance, arme.distance);
-            //drawDetectionRadius(g, arme);
-            //ennemi.drawBarVie(g);
-        }*/
 
         // Dessiner les balles du joueur
         for (Bullet playerBullet : gameManager.getProjectilesManager().getplayerBullets()) {
@@ -65,11 +57,14 @@ public class Plateau extends JPanel {
         }
 
         // Dessiner les ennemis
-        for (Enemy ennemi : gameManager.getEnnemiManager().ennemis) {
-            g.setColor(Color.BLUE);
-            g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
-            drawDetectionRadius(g, ennemi);
-            ennemi.drawBarVie(g);
+        for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()) {
+            if(perso instanceof Enemy){
+                 Enemy ennemi=(Enemy)perso;
+                g.setColor(Color.BLUE);
+                g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
+                drawDetectionRadius(g, ennemi);
+                ennemi.drawBarVie(g);
+            }
         }
 
         // Dessiner les pièges
@@ -80,8 +75,25 @@ public class Plateau extends JPanel {
             grenade.draw(grenade.x, grenade.y, g);
         }
         //print arme et nombre munitions
+        Player player = gameManager.getPlayerManager().getPlayer();
+        int currentArme = player.currentArme;
+        Armes armeCourante = player.armes.get(currentArme);
+
         g.setColor(Color.BLACK);
         g.fillRect(1350,1,100,100);
+        g.setColor(Color.WHITE);
+
+        if (currentArme >= 0 && currentArme < player.armes.size()) {
+            g.drawString("type:" + armeCourante.nom, 1350, 30);
+            g.drawString("munitions:" + armeCourante.munition, 1350, 50);
+        }
+        g.setColor(armeCourante.color);
+        int centerX = (int) (player.getX() + player.getSize() / 2 - armeCourante.distance*2 / 2);
+        int centerY = (int) (player.getY() + player.getSize() / 2 - armeCourante.distance*2 / 2);
+        g.drawOval(centerX, centerY, armeCourante.distance*2, armeCourante.distance*2);        
+
+        gameManager.getMyMouseListener().getCrosshair().draw(g);
+
         
     }
 

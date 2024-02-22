@@ -3,11 +3,30 @@ package Shooter.model;
 
 public class Personnage {
 
-    public int x, y;
-    public int xSpeed, ySpeed;
-    public int size;
-    public int maxSpeed;
-    public int sante; // deux foncitons infligerDegats et soigner
+    protected int x, y;
+    protected int xSpeed, ySpeed;
+    protected int size;
+    protected int maxSpeed;
+    protected int sante; // deux foncitons infligerDegats et soigner
+
+    public Personnage(int x, int y, int xSpeed, int ySpeed, int size, int maxSpeed, int sante) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        this.size = size;
+        this.maxSpeed = maxSpeed;
+        this.sante = sante;
+    }
+
+
+    public Personnage (int x, int y, int size, int sante, int maxSpeed){
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.sante = sante;
+        this.maxSpeed = maxSpeed;
+    }
 
 	public boolean detectCollision(float newX, float newY, int newSize){
 		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY){
@@ -33,19 +52,19 @@ public class Personnage {
         this.y = y;
     }
 
-    public int getxSpeed() {
+    public int getXSpeed() {
         return xSpeed;
     }
 
-    public void setxSpeed(int xSpeed) {
+    public void setXSpeed(int xSpeed) {
         this.xSpeed = xSpeed;
     }
 
-    public int getySpeed() {
+    public int getYSpeed() {
         return ySpeed;
     }
 
-    public void setySpeed(int ySpeed) {
+    public void setYSpeed(int ySpeed) {
         this.ySpeed = ySpeed;
     }
 
