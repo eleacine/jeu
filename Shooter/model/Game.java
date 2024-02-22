@@ -12,6 +12,7 @@ import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
 import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
+import Shooter.factory.EnemyLevelLoader;
 
 
 public class Game extends JFrame implements Runnable {
@@ -21,7 +22,6 @@ public class Game extends JFrame implements Runnable {
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
 	protected List<Personnage> perso_list;
-	protected Armes[] armes_list;
 	public int level = 1;
 
 	public Dimension size_screen;
@@ -39,21 +39,27 @@ public class Game extends JFrame implements Runnable {
 	
 
 	public Game() {
+		
+
+		//load des personnages 
 		Player player = new Player(null);
-
-		// A MODIFIER POUR PLUS TARD -----------------------------------------------------------
-
+		this.perso_list.add(player);
+		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
+		enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
+		this.perso_list = enemyLoader.createEnemiesForLevel();
+		
+		//initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
-		this.gameManager = new GameManager(gamePlateau, player);
+		this.gameManager = new GameManager(this, gamePlateau, player);
 		this.gamePlateau.gameManager = gameManager;
 
+		//initialisation des listeners
 		this.addKeyListener(gameManager.getPlayerManager());
 		setFocusable(true);
 		this.addMouseMotionListener(gameManager.getMyMouseListener());
 		this.addMouseListener(gameManager.getMyMouseListener());
 
-		// ----------------------------------------------------------------------------------------
-
+		//initialisation du card layout 
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		getContentPane().add(cardPanel);
@@ -167,6 +173,10 @@ public class Game extends JFrame implements Runnable {
 
 	public int getLevel() {
 		return this.level;
+	}
+
+	public List<Personnage> getPersoList(){
+		return this.perso_list;
 	}
 
 	public void addLevel() {

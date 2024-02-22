@@ -37,7 +37,7 @@ public class EnemyLevelLoader {
         }
     }
 
-    public List<Personnage> createEnemiesForLevel(int level) {
+    public List<Personnage> createEnemiesForLevel() {
         List<PersonnageFactory> factories = levelEnemyFactories.get(level);
         List<Personnage> enemies = new ArrayList<>();
     
