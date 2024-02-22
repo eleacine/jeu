@@ -41,7 +41,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 gameManager.getGamePlateau().pieges.add(mine);
         
             }else{
-                // player.getArmes().get(player.getCurrentArme()).besoinRecharge();
+                player.getArmes().get(player.getCurrentArme()).besoinRecharge();
 
             }
    

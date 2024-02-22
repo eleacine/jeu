@@ -99,3 +99,9 @@ Semaine 4 :
 Marylou:
     - création d'un gameManager pour centraliser et gérer tous les managers ensemble et eviter d'avoir cela dans le plateau
     - aide pour la création et le changement des armes 
+
+Eléacine:
+    - création des armes avec munitions avec Marylou
+    - visualisation du changement d'armes avec la création d'un encadrer d'écrivant l'arme sélectionner par le joueur et le nombre de munitions
+    - creation d'une temporalite pour la recharge des armes
+    - creation d'une limite de distance pour les munitions des armes
