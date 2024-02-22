@@ -15,11 +15,11 @@ public class A4 extends Armes {
     private Timer explosionTimer;
 
     public A4() {
-        super(50, false, 5, Color.GRAY);
+        super("grenade",50, false, 5, Color.GRAY);
     }
 
     public A4(int x, int y) {
-        super(50, false, 5, Color.GRAY);
+        super("grenade",50, false, 5, Color.GRAY);
         this.x = x;
         this.y = y;
         setupExplosionTimer();

@@ -69,14 +69,15 @@ public void mousePressed(MouseEvent e) {
                 Bullet b = new Bullet(player.getX(), player.getY(), crosshair.getX() + crosshair.getCushion(),
                         crosshair.getY() + crosshair.getCushion(), player.getArmes().get(player.getCurrentArme()).power, player.getArmes().get(player.getCurrentArme()).color);
                 projectilesManager.addBulletPlayer(b);
-            } else if (player.armes.get(player.currentArme).munition > 0 && !player.armes.get(player.currentArme).type) {
-                if (player.armes.get(player.currentArme)instanceof A3) {
-                player.armes.get(player.currentArme).shoot();
-                A3 mine = new A3(crosshair.xCor, crosshair.yCor);
+            } else if (player.getArmes().get(player.getCurrentArme()).munition > 0 && !player.getArmes().get(player.getCurrentArme()).type) {
+                if (player.getArmes().get(player.getCurrentArme())instanceof A3) {
+                player.getArmes().get(player.getCurrentArme()).shoot();
+                A3 mine = new A3(crosshair.getX(), crosshair.getY());
+
                 gameManager.getGamePlateau().pieges.add(mine);
-                }else if (player.armes.get(player.currentArme)instanceof A4) {
-                    player.armes.get(player.currentArme).shoot();
-                    A4 grenade = new A4(crosshair.xCor, crosshair.yCor);
+                }else if (player.getArmes().get(player.getCurrentArme())instanceof A4) {
+                    player.getArmes().get(player.getCurrentArme()).shoot();
+                    A4 grenade = new A4(crosshair.getX(), crosshair.getY());
                     gameManager.getGamePlateau().grenade.add(grenade);     
                     grenade.activateGrenade(); 
                 }
