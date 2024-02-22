@@ -2,7 +2,10 @@ package Shooter.model;
 
 import java.awt.*;
 import javax.swing.*;
+
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Shooter.Managers.*;
@@ -40,10 +43,15 @@ public class Plateau extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.DARK_GRAY);
-        g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(),
-                gameManager.getPlayer().getSize(),
-                gameManager.getPlayer().getSize());
+        // g.setColor(Color.DARK_GRAY);
+        // g.fillOval((int) gameManager.getPlayer().getX(), (int)
+        // gameManager.getPlayer().getY(),
+        // gameManager.getPlayer().getSize(),
+        // gameManager.getPlayer().getSize());
+
+        // Create a new Graphics2D object for gameManager.getPlayer()
+        Graphics2D gPlayer = (Graphics2D) g.create();
+        drawPlayerMovement(gPlayer);
 
         // Dessiner les balles du joueur
         for (Bullet playerBullet : gameManager.getProjectilesManager().getplayerBullets()) {
@@ -74,25 +82,45 @@ public class Plateau extends JPanel {
             grenade.draw(grenade.x, grenade.y, g);
         }
         // print arme et nombre munitions
-        Player player = gameManager.getPlayerManager().getPlayer();
-        int currentArme = player.currentArme;
-        Armes armeCourante = player.armes.get(currentArme);
+        int currentArme = gameManager.getPlayer().currentArme;
+        Armes armeCourante = gameManager.getPlayer().armes.get(currentArme);
 
         g.setColor(Color.BLACK);
         g.fillRect(1300, 1, 125, 100);
         g.setColor(Color.WHITE);
 
-        if (currentArme >= 0 && currentArme < player.armes.size()) {
+        if (currentArme >= 0 && currentArme < gameManager.getPlayer().armes.size()) {
             g.drawString("type:" + armeCourante.nom, 1325, 30);
             g.drawString("munitions:" + armeCourante.munition, 1325, 50);
         }
         g.setColor(armeCourante.color);
-        int centerX = (int) (player.getX() + player.getSize() / 2 - armeCourante.distance * 2 / 2);
-        int centerY = (int) (player.getY() + player.getSize() / 2 - armeCourante.distance * 2 / 2);
+        int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
+        int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
         g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
         gameManager.getMyMouseListener().getCrosshair().draw(g);
 
+    }
+
+    private void drawPlayerMovement(Graphics2D g) {
+        URL imageUrl = getClass().getResource("j_test.png");
+        ImageIcon originalImage = new ImageIcon(imageUrl);
+
+        double scale = 5;
+        int newWidth = (int) (gameManager.getPlayer().getSize() * scale);
+        int newHeight = (int) (gameManager.getPlayer().getSize() * scale);
+
+        Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        ImageIcon joueurImage = new ImageIcon(resizedImage);
+
+        double x = gameManager.getPlayer().getX();
+        double y = gameManager.getPlayer().getY();
+
+        AffineTransform at = new AffineTransform();
+        at.translate(x - newWidth / 2, y - newHeight / 2);
+        at.rotate(gameManager.getPlayer().getDirection(), newWidth / 2, newHeight / 2);
+
+        g.drawImage(joueurImage.getImage(), at, this);
     }
 
     private void drawDetectionRadius(Graphics g, Enemy ennemi) {
@@ -122,7 +150,7 @@ public class Plateau extends JPanel {
         // }
     }
 
-    public void reset (){
+    public void reset() {
         pieges.clear();
         grenade.clear();
     }
