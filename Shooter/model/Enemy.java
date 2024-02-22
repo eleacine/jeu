@@ -3,6 +3,7 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 import Shooter.Managers.ProjectilesManager;
 
@@ -22,9 +23,22 @@ public class Enemy extends Personnage {
 	public int vieTotal = 100;
 	public double direction; //direction pour ajouter le hallo de vision
 
+
 	public Color color;
 
-	public Enemy(int x, int y, int size, int sante, int id, int maxSpeed, int power, int collisionPower, int frequency, int detectionRadius, Color color) {
+	public Enemy(int size, int sante, int id, int maxSpeed, int power, int collisionPower, int frequency, int detectionRadius, Color color) {
+		super(size, sante, maxSpeed);
+		this.x = new Random().nextInt(1400);
+		this.y = new Random().nextInt(800);
+		this.id = id;
+		this.power = power;
+		this.collisionPower = collisionPower;
+		this.frequency = frequency;
+		this.detectionRadius = detectionRadius;
+		this.color = color;
+	}
+
+	public Enemy (int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower, int frequency, int detectionRadius, Color color){
 		super(x, y, size, sante, maxSpeed);
 		this.id = id;
 		this.power = power;

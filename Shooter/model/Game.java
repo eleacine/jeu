@@ -15,10 +15,8 @@ import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
 import Shooter.factory.EnemyLevelLoader;
 
-
 public class Game extends JFrame implements Runnable {
 
-	
 	public Plateau gamePlateau;
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
@@ -35,33 +33,30 @@ public class Game extends JFrame implements Runnable {
 
 	public boolean begin = false;
 
-
 	public GameManager gameManager;
-	
 
 	public Game() {
-		
 
-		//load des personnages 
-		this.perso_list=new ArrayList<>();
+		// load des personnages
+		this.perso_list = new ArrayList<>();
 		Player player = new Player(null);
 		this.perso_list.add(player);
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
-		enemyLoader.loadLevelEnemies("Shooter\\factory\\EnemiesForLevels.txt");
+		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
-		
-		//initialisation du plateau et du game Manager
+
+		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
 		this.gameManager = new GameManager(this, gamePlateau, player);
 		this.gamePlateau.gameManager = gameManager;
 
-		//initialisation des listeners
+		// initialisation des listeners
 		this.addKeyListener(gameManager.getPlayerManager());
 		setFocusable(true);
 		this.addMouseMotionListener(gameManager.getMyMouseListener());
 		this.addMouseListener(gameManager.getMyMouseListener());
 
-		//initialisation du card layout 
+		// initialisation du card layout
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		getContentPane().add(cardPanel);
@@ -86,9 +81,7 @@ public class Game extends JFrame implements Runnable {
 		cardPanel.add(new GameOverPage(this), "GameOver");
 		cardLayout.show(cardPanel, "Menu");
 
-
 	}
-
 
 	private void updateGame() {
 
@@ -155,11 +148,41 @@ public class Game extends JFrame implements Runnable {
 
 	public void isGameOver() {
 		if (gameManager.getPlayer().getSante() <= 0) {
+			reset();
 			begin = false;
-			gameManager.reset();
+
 			cardLayout.show(cardPanel, "GameOver");
 
 		}
+	}
+
+	public void reset() {
+		gameManager.reset();
+		clearArrayList();
+	}
+
+	private void clearArrayList() {
+		List<Personnage> tmp = new ArrayList<>();
+		tmp.add(perso_list.get(0));
+		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
+		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
+	
+		// System.out.println(tmp.size());
+		// tmp = enemyLoader.createEnemiesForLevel();
+				tmp.addAll(enemyLoader.createEnemiesForLevel());
+		// System.out.println(tmp.size());
+
+		// Vérifier si le premier élément est une instance de Player avant la conversion
+		if (!perso_list.isEmpty()) {
+
+			// Vider la liste
+			perso_list.clear();
+			this.perso_list = tmp;
+			// System.out.println(perso_list.size());
+		}
+
+		gameManager.getEnnemiManager().perso_list = perso_list;
+
 	}
 
 	public MenuPage getMenu() {
@@ -178,7 +201,7 @@ public class Game extends JFrame implements Runnable {
 		return this.level;
 	}
 
-	public List<Personnage> getPersoList(){
+	public List<Personnage> getPersoList() {
 		return this.perso_list;
 	}
 

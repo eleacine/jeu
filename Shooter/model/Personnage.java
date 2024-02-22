@@ -20,6 +20,12 @@ public class Personnage {
     }
 
 
+    public Personnage  (int size, int sante, int maxSpeed){
+        this.size = size;
+        this.sante = sante;
+        this.maxSpeed = maxSpeed;
+    }
+
     public Personnage (int x, int y, int size, int sante, int maxSpeed){
         this.x = x;
         this.y = y;
