@@ -91,11 +91,14 @@ public class ProjectilesManager {
                 mine.dimension = 0;
             }
 
-            if (ennemiManager.ennemis.size() > 0){
-                for (Enemy ennemi : ennemiManager.ennemis){
-                    if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
-                        ennemi.infligerDegats(mine.power);
-                        mine.dimension = 0;
+            if (ennemiManager.getPerso_list().size() > 1){
+                for (Personnage perso : ennemiManager.getPerso_list()){
+                    if(perso instanceof Enemy){
+                        Enemy ennemi=(Enemy)perso;
+                        if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
+                            ennemi.infligerDegats(mine.power);
+                            mine.dimension = 0;
+                        }
                     }
                 }
             }

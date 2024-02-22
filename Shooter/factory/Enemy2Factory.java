@@ -1,5 +1,5 @@
-// package Shooter.factory;
-// import Shooter.model.*;
+package Shooter.factory;
+import Shooter.model.*;
 
 public class Enemy2Factory implements PersonnageFactory {
     @Override

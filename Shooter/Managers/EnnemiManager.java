@@ -31,7 +31,7 @@ public class EnnemiManager {
                     }
                     // ennemi.shootBehavior(player, plateau.projectilesManager);
 
-                if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(), gameManager.getPlayer().getSize())) {
+                    if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(), gameManager.getPlayer().getSize())) {
                     // gameManager.getPlayer().getSante() -= ennemi.getCollisionPower();
                     gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
                     // ennemi.size = 0;
@@ -39,9 +39,10 @@ public class EnnemiManager {
                     // if (player.sante <= 0) {
                     // player.size = 0;
                     // }
+                    }
                 }
             }
-        }}
+        }
     }
 
     

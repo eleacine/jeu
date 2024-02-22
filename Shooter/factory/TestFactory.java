@@ -1,8 +1,8 @@
-// package Shooter.factory;
+package Shooter.factory;
 
-// import Shooter.model.*;
+import Shooter.model.*;
 
-// import java.util.List;
+import java.util.List;
 
 public class TestFactory {
     public static void main(String[] args) {
@@ -34,5 +34,5 @@ public class TestFactory {
 //         }
 
        
-//     }
-// }
+     }
+ }

@@ -2,6 +2,7 @@ package Shooter.model;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,6 +43,7 @@ public class Game extends JFrame implements Runnable {
 		
 
 		//load des personnages 
+		this.perso_list=new ArrayList<>();
 		Player player = new Player(null);
 		this.perso_list.add(player);
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
