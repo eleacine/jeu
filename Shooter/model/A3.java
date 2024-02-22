@@ -6,9 +6,9 @@ import java.awt.Graphics;
 // Mine => explose si un personnage passe dessus
 public class A3 extends Armes {
 
-    public int x;
-    public int y;
-    public int dimension = 40;
+    protected int x;
+    protected int y;
+    protected int dimension = 40;
     
     public A3() {
         super("Mine",50, false, 5, Color.ORANGE);
@@ -24,6 +24,30 @@ public class A3 extends Armes {
     public void draw (int x, int y, Graphics g){
         g.setColor(this.color);
         g.fillOval(x, y, dimension, dimension);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
     }
     
 }

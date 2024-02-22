@@ -7,7 +7,6 @@ import Shooter.model.Enemy;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.A3;
-import Shooter.model.A4;
 import Shooter.model.Bullet;
 
 public class ProjectilesManager {
@@ -68,7 +67,7 @@ public class ProjectilesManager {
             Bullet bullet = it.next();
             int currentArme = player.getCurrentArme();
             
-            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).distance) {
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).getDistance()) {
                 it.remove();
             }
         }       
@@ -87,18 +86,20 @@ public class ProjectilesManager {
 
     public void hitMine (){
         for (A3 mine : gameManager.getGamePlateau().pieges){
-            if (player.detectCollision(mine.x, mine.y, mine.dimension)){
-                player.infligerDegats(mine.power);
-                mine.dimension = 0;
+            if (player.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+                player.infligerDegats(mine.getPower());
+                // mine.dimension = 0;
+                mine.setDimension(0);
             }
 
             if (ennemiManager.getPerso_list().size() > 1){
                 for (Personnage perso : ennemiManager.getPerso_list()){
                     if(perso instanceof Enemy){
                         Enemy ennemi=(Enemy)perso;
-                        if (ennemi.detectCollision(mine.x, mine.y, mine.dimension)){
-                            ennemi.infligerDegats(mine.power);
-                            mine.dimension = 0;
+                        if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+                            ennemi.infligerDegats(mine.getPower());
+                            // mine.dimension = 0;
+                            mine.setDimension(0);
                         }
                     }
                 }
@@ -112,7 +113,7 @@ public class ProjectilesManager {
         Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
         while (it.hasNext()) {
             A3 mine = it.next();
-            if (mine.dimension == 0) {
+            if (mine.getDimension() == 0) {
                 it.remove();
             }
         }
