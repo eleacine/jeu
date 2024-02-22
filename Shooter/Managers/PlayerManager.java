@@ -3,6 +3,7 @@ package Shooter.Managers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
+import Shooter.model.A4;
 import Shooter.model.Player;
 
 public class PlayerManager extends KeyAdapter {
@@ -160,6 +161,7 @@ public class PlayerManager extends KeyAdapter {
 
         if (code == KeyEvent.VK_SPACE) {
             gameManager.managerArmes.changeArme();
+   
 
         }
 

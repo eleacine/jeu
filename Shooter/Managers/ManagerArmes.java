@@ -23,8 +23,10 @@ public class ManagerArmes {
         //changer l'arme
         if (player.currentArme == player.armes.size() -1){
             player.currentArme = 0;
+            System.out.println("currentArme = " + player.currentArme);
         } else {
             player.currentArme += 1;
+            System.out.println("currentArme = " + player.currentArme);
         }
     }
 

@@ -15,6 +15,7 @@ public class Plateau extends JPanel {
     public Graphics plateau_graphic; //on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier dans le update
 
     public ArrayList<A3> pieges = new ArrayList<A3>();
+    public ArrayList<A4> grenade = new ArrayList<A4>();
 
     public GameManager gameManager;
 
@@ -74,6 +75,9 @@ public class Plateau extends JPanel {
         // Dessiner les pièges
         for (A3 piege : pieges) {
             piege.draw(piege.x, piege.y, g);
+        }
+        for(A4 grenade : grenade){
+            grenade.draw(grenade.x, grenade.y, g);
         }
         //print arme et nombre munitions
         g.setColor(Color.BLACK);

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import Shooter.model.Enemy;
 import Shooter.model.Player;
 import Shooter.model.A3;
+import Shooter.model.A4;
 import Shooter.model.Bullet;
 
 public class ProjectilesManager {
