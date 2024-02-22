@@ -13,15 +13,20 @@ public abstract class Armes {
     public int dureeRecharge; // durée de la recharge
 
     public Color color;
+    public int dureeRecharge;
+    public String nom;
 
-    public Armes(int power, boolean type, int munition, Color color) {
+    public Armes(String nom,int power, boolean type, int munition, Color color) {
         this.power = power;
         this.type = type;
         this.munition = munition;
         this.color = color;
+        this.nom=nom;
     }
 
-    public Armes(int power, boolean type, int munition, Color color, int dureeRecharge, int distance) {
+
+    public Armes(String nom,int power, boolean type, int munition, Color color,int dureeRecharge,int distance) {
+        this.nom=nom;
         this.power = power;
         this.type = type;
         this.munition = munition;

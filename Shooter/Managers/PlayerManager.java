@@ -205,4 +205,7 @@ public class PlayerManager extends KeyAdapter {
     // }
     // }
 
+    public Player getPlayer(){
+        return this.player;
+    }
 }

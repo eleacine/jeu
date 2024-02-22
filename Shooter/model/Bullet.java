@@ -12,6 +12,7 @@ public class Bullet {
     private int degats;
     private float slowdownFactor = 15f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
     public Color color;  // Couleur du projectile
+    public float distanceTraveled = 0;
 
     // Constructeur de la classe Bullet
     // x, y : Coordonnées initiales du projectile
@@ -31,6 +32,12 @@ public class Bullet {
         this.color = color;
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
     }
+
+    private void updateDistanceTraveled() {
+        float distanceSquared = differenceX * differenceX + differenceY * differenceY;
+        distanceTraveled += Math.sqrt(distanceSquared);
+    }
+
 
 
 
@@ -58,6 +65,7 @@ public class Bullet {
         g.fillOval((int) x, (int) y, size, size);
         this.x += differenceX;  // Met à jour la coordonnée x en fonction de la composante de mouvement en x
         this.y += differenceY;  // Met à jour la coordonnée y en fonction de la composante de mouvement en y
+        updateDistanceTraveled();
     }
 
     public boolean isOutOfBounds (int width, int height){
@@ -117,6 +125,9 @@ public class Bullet {
 
     public void setSlowdownFactor(float slowdownFactor) {
         this.slowdownFactor = slowdownFactor;
+    }
+    public float getDistanceTraveled() {
+        return distanceTraveled;
     }
 
     // 

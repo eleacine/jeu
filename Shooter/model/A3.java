@@ -11,11 +11,11 @@ public class A3 extends Armes {
     public int dimension = 40;
     
     public A3() {
-        super(50, false, 5, Color.ORANGE);
+        super("Mine",50, false, 5, Color.ORANGE);
     }
 
     public A3(int x, int y) {
-        super(50, false, 5, Color.ORANGE);
+        super("Mine",50, false, 5, Color.ORANGE);
         this.x = x;
         this.y = y;
     }

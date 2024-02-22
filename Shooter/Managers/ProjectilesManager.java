@@ -53,13 +53,15 @@ public class ProjectilesManager {
             }
         }
     }
-
+    
     public void suppBulletPlayer() {
         // Supprimer les projectiles hors des limites
         Iterator<Bullet> it = playerBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
-            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0) {
+            int currentArme = player.currentArme;
+            
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>m.getPlayer().armes.get(currentArme).distance) {
                 it.remove();
             }
         }       
