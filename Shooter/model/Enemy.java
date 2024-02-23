@@ -48,6 +48,15 @@ public class Enemy extends Personnage {
 		this.color = color;
 	}
 
+	public Enemy (int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower, int detectionRadius, Color color){
+		super(x, y, size, sante, maxSpeed);
+		this.id = id;
+		this.power = power;
+		this.collisionPower = collisionPower;
+		this.detectionRadius = detectionRadius;
+		this.color = color;
+	}
+
 	public void updateBehavior(Player player) {
 
     }

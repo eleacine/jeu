@@ -44,6 +44,8 @@ public class Game extends JFrame implements Runnable {
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
+		
+		perso_list.add(new Gardien());
 
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
