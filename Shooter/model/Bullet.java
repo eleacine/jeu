@@ -2,6 +2,7 @@ package Shooter.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
+
 public class Bullet {
 
     public int size = 10;  // Taille du projectile

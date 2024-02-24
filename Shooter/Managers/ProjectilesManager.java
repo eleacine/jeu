@@ -66,10 +66,11 @@ public class ProjectilesManager {
         while (it.hasNext()) {
             Bullet bullet = it.next();
             int currentArme = player.getCurrentArme();
-            
+
             if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).getDistance()) {
                 it.remove();
             }
+            checkAndUpdateCase(bullet);
         }       
     }
 
@@ -128,6 +129,23 @@ public class ProjectilesManager {
         suppMine();
     }
 
+    // Vérifie et met à jour la case si le projectile est sur une case de type 2 (obstacle)
+    private void checkAndUpdateCase(Bullet bullet) {
+        int currentXIndex = (int) (bullet.getX() / 50);
+        int currentYIndex = (int) (bullet.getY() / 50);
+
+        if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
+        currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+
+        // Vérifier que detruitMur est vrai avant de mettre à jour la case
+        if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == 2 && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
+
+            // La case est de type 2 (obstacle), la changer en type 1 (marche)
+            gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = 0;
+        }
+    }
+}
+        
 
 
     public void addBulletPlayer(Bullet b) {

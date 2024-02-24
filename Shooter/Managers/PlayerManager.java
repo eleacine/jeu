@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
+import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
@@ -13,7 +14,6 @@ public class PlayerManager extends KeyAdapter {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
-    private static final double BUFFER_DISTANCE = 30.0;
 
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -99,9 +99,15 @@ public class PlayerManager extends KeyAdapter {
         }
     }
 
+    
+
+    /**
+    * Vérifie la présence d'obstacles autour du joueur et ajuste son comportement en conséquence.
+    */
     public void checkObstacle() {
+        // Obtenir les indices actuels du joueur sur le plateau de jeu
         int currentXIndex = (int) (player.getX() / 50);
-        int currentYIndex = (int) (player.getY() / 50);
+    int currentYIndex = (int) (player.getY() / 50);
 
         // Check obstacles in front, behind, right, left, and diagonally
         int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
@@ -111,19 +117,22 @@ public class PlayerManager extends KeyAdapter {
             int adjacentX = currentXIndex + xOffsets[i];
             int adjacentY = currentYIndex + yOffsets[i];
 
+                // Vérifier s'il y a un obstacle à la position adjacente
             if (isObstacle(adjacentX, adjacentY)) {
-                // There's an obstacle, change player direction to opposite
-                stop(); // Stop checking once an obstacle is found
+                    // Il y a un obstacle, changer la direction du joueur à l'opposé
+                    stop(); // Arrêter la vérification dès qu'un obstacle est trouvé
             }
-        }
-
+            }
+    
+        // Obtenir le type de la case sur laquelle se trouve actuellement le joueur
         int tileType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
 
+        // Ajuster la vitesse maximale du joueur en fonction du type de case
         switch (tileType) {
-            case 1:
+            case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
                 break;
-            case 0:
+            case ManagerCase.MARCHE:
                 player.setMaxSpeed(2);
                 break;
             default:
@@ -131,36 +140,64 @@ public class PlayerManager extends KeyAdapter {
         }
     }
 
+    /**
+    * Vérifie si la case aux indices spécifiés est un obstacle.
+    * xIndex Indice en x de la case.
+    * yIndex Indice en y de la case.
+    * True si la case est un obstacle, sinon false.
+    */
+
     private boolean isObstacle(int xIndex, int yIndex) {
+        // Vérifier si les indices spécifiés sont dans les limites du plateau de jeu
         if (xIndex >= 0 && yIndex >= 0 &&
-                xIndex < gameManager.getGamePlateau().level_tab[0].length &&
-                yIndex < gameManager.getGamePlateau().level_tab.length) {
-
+            xIndex < gameManager.getGamePlateau().level_tab[0].length &&
+            yIndex < gameManager.getGamePlateau().level_tab.length) {
+    
             int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
-
-            // Check if the tile is an obstacle (type 2)
-            if (tileType == 2) {
-                // Check if the player can continue in the current direction without moving
-                // towards the obstacle
+    
+             // Vérifier si la case est un obstacle (type 2)
+            if (tileType == ManagerCase.INTERDIT) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
-
-                // Calculate the distance between the player's current position and the obstacle
-                double distanceToObstacle = Math
-                        .sqrt(Math.pow(newX - (xIndex * 50), 2) + Math.pow(newY - (yIndex * 50), 2));
-
-                // Check if the player can continue without moving towards the obstacle (e.g.,
-                // with some buffer distance)
-                if (distanceToObstacle > BUFFER_DISTANCE) {
-                    return false; // The player can continue
+    
+               // Vérifier si le joueur peut continuer sans se déplacer vers l'obstacle dans n'importe quelle direction
+                if (!isMovingTowardsObstacle(newX, newY, xIndex * 50, yIndex * 50)) {
+                    return false; // Le joueur peut continuer
                 } else {
-                    return true; // The player is too close to the obstacle, consider it as an obstacle
+                    return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle
                 }
             }
         }
-
-        return false; // Indices out of bounds or the tile is not an obstacle
+    
+        return false; // Si ce n'est pas un obstacle ou n'existe pas
     }
+
+
+    /**
+    * Vérifie si le joueur se déplace en direction d'un obstacle.
+    * newX Nouvelle position en x du joueur.
+    * newY Nouvelle position en y du joueur.
+    * obstacleX Position en x de l'obstacle.
+    * obstacleY Position en y de l'obstacle.
+    * True si le joueur se déplace vers l'obstacle, sinon false.
+    */
+    private boolean isMovingTowardsObstacle(float newX, float newY, float obstacleX, float obstacleY) {
+        // Calculer la distance en x et en y entre le joueur et l'obstacle
+        double playerToObstacleX = obstacleX - newX;
+        double playerToObstacleY = obstacleY - newY;
+
+        // Obtenir les composantes de direction du joueur
+        double playerDirectionX = Math.cos(player.getDirection());
+        double playerDirectionY = Math.sin(player.getDirection());
+
+        // Calculer le produit scalaire (dot product)
+        double dotProduct = playerToObstacleX * playerDirectionX + playerToObstacleY * playerDirectionY;
+
+        // Vérifier si le produit scalaire est négatif, indiquant que le joueur se déplace vers l'obstacle
+        return dotProduct > 0;
+    }
+    
+    
 
     public void moveUp() {
         player.setYSpeed(player.getYSpeed() - player.getMaxSpeed());
