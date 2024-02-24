@@ -58,13 +58,6 @@ public class Player extends Personnage {
         return this.pseudo.equals(playerName);
     }
 
-    public boolean detectCollision(float newX, float newY, int newSize) {
-        if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY) {
-            return true;
-        }
-        return false;
-    }
-
     public void reset() {
         this.x = 1000;
         this.y = 500;

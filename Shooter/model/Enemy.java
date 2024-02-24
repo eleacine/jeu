@@ -10,8 +10,8 @@ import Shooter.Managers.ProjectilesManager;
 public class Enemy extends Personnage {
 
 	public int id;
-	public int power = 10; // faire des dégats de collision et de tir
-	public int collisionPower = 50;
+	public int power; // faire des dégats de collision et de tir
+	public int collisionPower;
 	public int destX;
 	public int destY;
 	public float differenceX;
@@ -21,7 +21,7 @@ public class Enemy extends Personnage {
 	public int detectionRadius; // Rayon de détection du joueur
 	public int tailleBar = 40;
 	public int vieTotal = 100;
-	public double direction; //direction pour ajouter le hallo de vision
+	public double direction; //direction pour ajouter le halo de vision
 
 
 	public Color color;
@@ -108,11 +108,9 @@ public class Enemy extends Personnage {
 		return false;
 	}
 
-	public boolean detectCollision(float newX, float newY, int newSize) {
-		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY) {
-			return true;
-		}
-		return false;
+	public void drawEnemy (Graphics g){
+		g.setColor(this.color);
+		g.fillOval(this.x, this.y, this.size, this.size);
 	}
 
 	// ------------- Getters et setters ---------------------------

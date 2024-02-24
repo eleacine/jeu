@@ -2,14 +2,24 @@ package Shooter.model;
 
 import java.awt.Color;
 
-public class EnemyMedium extends Enemy {
+public class EnemyMedium extends Enemy {  
+
+    /*  peut suivre le joueur 
+     * position x : 550
+     * position y : 100
+     * taille : 50
+     * sante : 100
+     * speed : 2
+     * dégats de tir : 20
+     * dégat de collision : 50
+     * fréq de tir : 1 seconde
+     * radius de détection : 200 px
+     */
 
     public EnemyMedium() {
-        // super(50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
-        super(350, 50, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
+        super(550, 100, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
     }
 
-  
     @Override
     public void updateBehavior(Player player) {
         // Implémentez le comportement spécifique pour cet ennemi
@@ -22,7 +32,5 @@ public class EnemyMedium extends Enemy {
             y += differenceY;
         }
     }
-
-    
 
 }

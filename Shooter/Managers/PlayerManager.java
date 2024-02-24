@@ -53,6 +53,7 @@ public class PlayerManager extends KeyAdapter {
         player.setXSpeed(xSpeed);
         player.setYSpeed(ySpeed);
     }
+    
 
     public void moveBackward() {
 
@@ -120,24 +121,36 @@ public class PlayerManager extends KeyAdapter {
     }
 
     private void blockObstacle(int currentXIndex, int currentYIndex) {
-        int x = (int) player.getX();
-        int y = (int) player.getY();
-        int size = player.getSize();
-        int xSpeed = player.getXSpeed();
-        int ySpeed = player.getYSpeed();
-
-        if (xSpeed > 0) {
-            player.setX((currentXIndex * 50) - size);
-        } else if (xSpeed < 0) {
-            player.setX((currentXIndex * 50) + 50);
-        }
-
-        if (ySpeed > 0) {
-            player.setY((currentYIndex * 50) - size);
-        } else if (ySpeed < 0) {
-            player.setY((currentYIndex * 50) + 50);
+        int tileSize = 50;
+        
+        int obstacleX = currentXIndex * tileSize;
+        int obstacleY = currentYIndex * tileSize;
+        int obstacleSize = tileSize;
+    
+        int playerX = (int) player.getX();
+        int playerY = (int) player.getY();
+        int playerSize = player.getSize();
+        int playerXSpeed = player.getXSpeed();
+        int playerYSpeed = player.getYSpeed();
+    
+        if (playerX + playerSize > obstacleX && playerX < obstacleX + obstacleSize &&
+            playerY + playerSize > obstacleY && playerY < obstacleY + obstacleSize) {
+    
+            // Collision occurred, adjust player position based on movement direction
+            if (playerXSpeed > 0) {
+                player.setX(obstacleX - playerSize);
+            } else if (playerXSpeed < 0) {
+                player.setX(obstacleX + obstacleSize);
+            }
+    
+            if (playerYSpeed > 0) {
+                player.setY(obstacleY - playerSize);
+            } else if (playerYSpeed < 0) {
+                player.setY(obstacleY + obstacleSize);
+            }
         }
     }
+    
 
     public void moveUp() {
         player.setYSpeed(player.getYSpeed() - player.getMaxSpeed());

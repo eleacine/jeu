@@ -67,15 +67,13 @@ public class Plateau extends JPanel {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
 
-                if (ennemi instanceof Gardien){
-                    ((Gardien)ennemi).dessiner(g);
-                    ((Gardien)ennemi).dessinerVision(g);
+                if (ennemi instanceof Gardien) {
+                    ((Gardien) ennemi).dessinerVision(g);
+
                 } else {
-                    g.setColor(Color.BLUE);
-                    g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
                     drawDetectionRadius(g, ennemi);
                 }
-    
+                ennemi.drawEnemy(g);
                 ennemi.drawBarVie(g);
             }
         }
@@ -101,8 +99,10 @@ public class Plateau extends JPanel {
             g.drawString("munitions:" + armeCourante.munition, 1325, 50);
         }
         g.setColor(armeCourante.color);
-        int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
-        int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
+        int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2
+                - armeCourante.distance * 2 / 2);
+        int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2
+                - armeCourante.distance * 2 / 2);
         g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
         // Dessin crosshair
