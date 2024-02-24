@@ -71,7 +71,7 @@ public class Plateau extends JPanel {
             piege.draw(piege.x, piege.y, g);
         }
         for(A4 grenade : grenade){
-            grenade.draw(grenade.x, grenade.y, g);
+            grenade.draw(grenade.x, grenade.y, g,gameManager.getPersoList());
         }
         //print arme et nombre munitions
         Player player = gameManager.getPlayerManager().getPlayer();
