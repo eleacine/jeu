@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
+import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
@@ -130,10 +131,10 @@ public class PlayerManager extends KeyAdapter {
 
         // Ajuster la vitesse maximale du joueur en fonction du type de case
         switch (tileType) {
-            case 1:
+            case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
                 break;
-            case 0:
+            case ManagerCase.MARCHE:
                 player.setMaxSpeed(2);
                 break;
             default:
@@ -157,7 +158,7 @@ public class PlayerManager extends KeyAdapter {
             int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
     
              // Vérifier si la case est un obstacle (type 2)
-            if (tileType == 2) {
+            if (tileType == ManagerCase.INTERDIT) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
     
