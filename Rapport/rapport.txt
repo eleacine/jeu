@@ -111,3 +111,5 @@ Eléacine:
     - visualisation du changement d'armes avec la création d'un encadrer d'écrivant l'arme sélectionner par le joueur et le nombre de munitions
     - creation d'une temporalite pour la recharge des armes
     - creation d'une limite de distance pour les munitions des armes
+    - blocage du joueur en précense de case rouge
+    - A1 est une arme qui permet de détruire les murs qui sont dans la distance de tire

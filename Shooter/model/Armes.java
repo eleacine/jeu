@@ -11,6 +11,7 @@ public abstract class Armes {
     protected int distance; // la distance a laquelle l'arme tire
     protected int recharge; // recharge de l'arme
     protected int dureeRecharge; // durée de la recharge
+    protected boolean detruitMur;
 
     public Color color;
     public String nom;
@@ -24,7 +25,7 @@ public abstract class Armes {
     }
 
 
-    public Armes(String nom,int power, boolean type, int munition, Color color,int dureeRecharge,int distance) {
+    public Armes(String nom,int power, boolean type, int munition, Color color,int dureeRecharge,int distance,boolean detruitMur) {
         this.nom=nom;
         this.power = power;
         this.type = type;
@@ -33,6 +34,7 @@ public abstract class Armes {
         this.recharge = munition;
         this.dureeRecharge = dureeRecharge;
         this.color = color;
+        this.detruitMur=detruitMur;
     }
 
     public void shoot() {
@@ -131,6 +133,14 @@ public abstract class Armes {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public boolean getDetruitMur() {
+        return detruitMur;
+    }
+
+    public void setDetruitMur(boolean detruitMur) {
+        this.detruitMur = detruitMur;
     }
 
 }
