@@ -54,7 +54,6 @@ public class PlayerManager extends KeyAdapter {
         player.setXSpeed(xSpeed);
         player.setYSpeed(ySpeed);
     }
-    
 
     public void moveBackward() {
 
@@ -66,11 +65,10 @@ public class PlayerManager extends KeyAdapter {
 
     public void update() {
         checkPlayerlimits();
-       checkObstacle();
+        checkObstacle();
 
         player.setX(player.getX() + player.getXSpeed());
         player.setY(player.getY() + player.getYSpeed());
-
 
     }
 
@@ -103,21 +101,21 @@ public class PlayerManager extends KeyAdapter {
 
     public void checkObstacle() {
         int currentXIndex = (int) (player.getX() / 50);
-    int currentYIndex = (int) (player.getY() / 50);
+        int currentYIndex = (int) (player.getY() / 50);
 
-    // Check obstacles in front, behind, right, left, and diagonally
-    int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
-    int[] yOffsets = { 1, -1, 0, 0, 1, -1, -1, 1 };
+        // Check obstacles in front, behind, right, left, and diagonally
+        int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
+        int[] yOffsets = { 1, -1, 0, 0, 1, -1, -1, 1 };
 
-    for (int i = 0; i < xOffsets.length; i++) {
-        int adjacentX = currentXIndex + xOffsets[i];
-        int adjacentY = currentYIndex + yOffsets[i];
+        for (int i = 0; i < xOffsets.length; i++) {
+            int adjacentX = currentXIndex + xOffsets[i];
+            int adjacentY = currentYIndex + yOffsets[i];
 
-        if (isObstacle(adjacentX, adjacentY)) {
-            // There's an obstacle, change player direction to opposite
-            stop(); // Stop checking once an obstacle is found
+            if (isObstacle(adjacentX, adjacentY)) {
+                // There's an obstacle, change player direction to opposite
+                stop(); // Stop checking once an obstacle is found
+            }
         }
-    }
 
         int tileType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
 
@@ -135,32 +133,34 @@ public class PlayerManager extends KeyAdapter {
 
     private boolean isObstacle(int xIndex, int yIndex) {
         if (xIndex >= 0 && yIndex >= 0 &&
-        xIndex < gameManager.getGamePlateau().level_tab[0].length &&
-        yIndex < gameManager.getGamePlateau().level_tab.length) {
+                xIndex < gameManager.getGamePlateau().level_tab[0].length &&
+                yIndex < gameManager.getGamePlateau().level_tab.length) {
 
-        int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
+            int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
 
-        // Check if the tile is an obstacle (type 2)
-        if (tileType == 2) {
-            // Check if the player can continue in the current direction without moving towards the obstacle
-            float newX = player.getX() + player.getXSpeed();
-            float newY = player.getY() + player.getYSpeed();
+            // Check if the tile is an obstacle (type 2)
+            if (tileType == 2) {
+                // Check if the player can continue in the current direction without moving
+                // towards the obstacle
+                float newX = player.getX() + player.getXSpeed();
+                float newY = player.getY() + player.getYSpeed();
 
-            // Calculate the distance between the player's current position and the obstacle
-            double distanceToObstacle = Math.sqrt(Math.pow(newX - (xIndex * 50), 2) + Math.pow(newY - (yIndex * 50), 2));
+                // Calculate the distance between the player's current position and the obstacle
+                double distanceToObstacle = Math
+                        .sqrt(Math.pow(newX - (xIndex * 50), 2) + Math.pow(newY - (yIndex * 50), 2));
 
-            // Check if the player can continue without moving towards the obstacle (e.g., with some buffer distance)
-            if (distanceToObstacle > BUFFER_DISTANCE) {
-                return false; // The player can continue
-            } else {
-                return true; // The player is too close to the obstacle, consider it as an obstacle
+                // Check if the player can continue without moving towards the obstacle (e.g.,
+                // with some buffer distance)
+                if (distanceToObstacle > BUFFER_DISTANCE) {
+                    return false; // The player can continue
+                } else {
+                    return true; // The player is too close to the obstacle, consider it as an obstacle
+                }
             }
         }
-    }
 
-    return false; // Indices out of bounds or the tile is not an obstacle
+        return false; // Indices out of bounds or the tile is not an obstacle
     }
-  
 
     public void moveUp() {
         player.setYSpeed(player.getYSpeed() - player.getMaxSpeed());
@@ -227,7 +227,7 @@ public class PlayerManager extends KeyAdapter {
     // }
     // }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return this.player;
     }
 }
