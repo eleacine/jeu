@@ -49,17 +49,12 @@ Liste Eleacine, Leonor et Majoori:
 
 
 SEMAINE 4 (gestion des niveaux)
--Faire les WIN et OVER
--plateau de niveau
--Gestion du déblocage des niveaux suivants
--gestion des ennemis par niveau
--gestion du déblocage des armes par niveau
 
 Eleacine: 
-- dévelloper notre base d'image pour mieux modéliser les Attaques
--travailler sur les obstacles 
--finir les niveaux
--les armes sont a avancé(le nombre , leurs effets)
+- dévelloper notre base d'image pour mieux modéliser les Attaques (pas tout à fait)
+-travailler sur les obstacles (fait) 
+-finir les niveaux(reporté)
+-les armes sont a avancé(le nombre , leurs effets) (fait)
 
 Leonor: 
 - fonctions d'initialement et de reinitialisation des données de base 
@@ -67,6 +62,14 @@ Leonor:
 
 
 SEMAINE 5 
+
+général
+
+-Faire les WIN et OVER
+-plateau de niveau
+-Gestion du déblocage des niveaux suivants
+-gestion des ennemis par niveau
+-gestion du déblocage des armes par niveau
 
 Eléacine:
 - changer la taille du plateau pour un plus grand nombre de cases
