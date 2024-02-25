@@ -107,9 +107,11 @@ Marylou:
     - début d'implémentation du gardien
 
 Eléacine:
-    - création des armes avec munitions avec Marylou
-    - visualisation du changement d'armes avec la création d'un encadrer d'écrivant l'arme sélectionner par le joueur et le nombre de munitions
-    - creation d'une temporalite pour la recharge des armes
-    - creation d'une limite de distance pour les munitions des armes
-    - blocage du joueur en précense de case rouge
-    - A1 est une arme qui permet de détruire les murs qui sont dans la distance de tire
+    
+    -  Création des armes avec munitions avec Marylou.
+    -  Visualisation du changement d'armes avec la création d'un encadré décrivant l'arme sélectionnée par le joueur et le nombre de munitions.
+    -  Création d'une temporisation pour la recharge des armes.
+    -  Création d'une limite de distance pour les munitions des armes.
+    -  Blocage du joueur en présence de cases rouges.
+    -  A1 est une arme qui permet de détruire les murs (cases rouges présentes dans le plateau vert) qui sont dans la distance de tir.
+    -  Test non visible pour augmenter le nombre de cases et ainsi avoir un plateau plus grand.
