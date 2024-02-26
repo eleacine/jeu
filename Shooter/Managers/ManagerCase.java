@@ -10,38 +10,38 @@ import Shooter.model.Enregistrement;
 
 public class ManagerCase {
 
-	public Case MARCHE, OBSTACLE, INTERDIT, MINE, GRENADE;
-	private BufferedImage atlas;
-	public ArrayList<Case> cases = new ArrayList<>();
+	public static final int MARCHE = 0;
+    public static final int OBSTACLE = 1;
+    public static final int INTERDIT = 2;
+    public static final int MINE = 3;
+    public static final int GRENADE = 4;
 
-	public ManagerCase() {
+    private BufferedImage atlas;
+    public ArrayList<Case> cases = new ArrayList<>();
 
-		loadAtalas();
-		creationCase();
+    public ManagerCase() {
+        loadAtlas();
+        createCases();
+    }
 
-	}
+    private void createCases() {
+        cases.add(MARCHE, new Case(getSprite(0, 0)));
+        cases.add(OBSTACLE, new Case(getSprite(1, 0)));
+        cases.add(INTERDIT, new Case(getSprite(2, 0)));
+        // cases.add(MINE, new Case(getSprite(3, 0)));
+        // cases.add(GRENADE, new Case(getSprite(4, 0)));
+    }
 
-	private void creationCase() {
+    private void loadAtlas() {
+        atlas = Enregistrement.getSpriteAtlas();
+    }
 
-		cases.add(MARCHE = new Case(getSprite(0, 0)));
-		cases.add(OBSTACLE = new Case(getSprite(1, 0)));
-		cases.add(INTERDIT = new Case(getSprite(2, 0)));
-		// cases.add(MINE = new Case(getSprite(3, 0)));
+    public BufferedImage getSprite(int id) {
+        return cases.get(id).getSprite();
+    }
 
-	}
-
-	private void loadAtalas() {
-
-		atlas = Enregistrement.getSpriteAtlas();
-
-	}
-
-	public BufferedImage getSprite(int id) {
-		return cases.get(id).getSprite();
-	}
-
-	private BufferedImage getSprite(int xCord, int yCord) {
-		return atlas.getSubimage(xCord * 50, 0, 50, 50);
-	}
+    private BufferedImage getSprite(int xCord, int yCord) {
+        return atlas.getSubimage(xCord * 50, 0, 50, 50);
+    }
 
 }

@@ -16,10 +16,6 @@ SPRINT ce qu’on veut faire chaque semaine
 
 
 SEMAINE 2 (initiation du jeu, et des personnages)
--Finir les pageGUI
--Créer le plateau de jeu
--Placer les personnages (sur l’interface graphique ce sera modélisé sous formes 
-de cercles)
 
 Leonor:
 *Ce que j'ai fait*
@@ -34,7 +30,8 @@ Leonor:
         --> à voir en fonction de l'implémentation des tuiles
     - l'utilisation du fichier txt et des factories se fera dans l'initialisation de la partie 
 
-SEMAINE 3 (base simple du jeu)
+SEMAINE 3 
+
 Marylou et Inès : 
 -Déplacement des personnage(avec les traces de pas)
 -Faire le menu d’armes
@@ -52,26 +49,45 @@ Liste Eleacine, Leonor et Majoori:
 
 
 SEMAINE 4 (gestion des niveaux)
--Faire les WIN et OVER
--plateau de niveau
--Gestion du déblocage des niveaux suivants
--gestion des ennemis par niveau
--gestion du déblocage des armes par niveau
 
 Eleacine: 
-- dévelloper notre base d'image pour mieux modéliser les Attaques
--travailler sur les obstacles 
--finir les niveaux
--les armes sont a avancé(le nombre , leurs effets)
+- dévelloper notre base d'image pour mieux modéliser les Attaques (pas tout à fait)
+-travailler sur les obstacles (fait) 
+-finir les niveaux(reporté)
+-les armes sont a avancé(le nombre , leurs effets) (fait)
 
 Leonor: 
 - fonctions d'initialement et de reinitialisation des données de base 
 
 
 
-SEMAINE 5 (gestion des plus)
--Faire une sauvegarde
--Gestion de l’argent
+SEMAINE 5 
+
+général
+
+-Faire les WIN et OVER
+-plateau de niveau
+-Gestion du déblocage des niveaux suivants
+-gestion des ennemis par niveau
+-gestion du déblocage des armes par niveau
+
+Eléacine:
+- changer la taille du plateau pour un plus grand nombre de cases
+- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables
+- finir les armes 
+- commencer a réfléchir au deblocage d'armes selon les niveaux
+- réflexion autour de la game loop
+
+
+Majoori : 
+-Continuer le mode editing pour ennemi aussi
+
+Marylou :
+- continuer à implémenter l'ennemi gardien
+- réfléchir à de nouveaux ennemis
+- déplacement du joueur qui laisse des traces pouvant être repéré par les ennemis
+- peut-être penser à un mode multijoueur possible (pas sur)
+- réunir les armes A3 et A4
 
 
 SEMAINE 6

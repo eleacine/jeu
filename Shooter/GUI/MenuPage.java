@@ -24,6 +24,7 @@ public class MenuPage extends GameScene {
 	private void initButtons() {
 		add(createButton("Play", "Play"));
 		add(createButton("Settings", "Settings"));
+		add(createButton("Editing", "Editing"));
 		add(createButtonExit("Quit"));
 	}
 

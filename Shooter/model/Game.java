@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import Shooter.GUI.EditingMode;
 import Shooter.GUI.GameOverPage;
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
@@ -44,7 +45,7 @@ public class Game extends JFrame implements Runnable {
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
-		
+
 		perso_list.add(new Gardien());
 
 		// initialisation du plateau et du game Manager
@@ -80,13 +81,16 @@ public class Game extends JFrame implements Runnable {
 		this.playing = new PlayPage(this);
 		cardPanel.add(playing, "Play");
 		cardPanel.add(new SettingsPage(this), "Settings");
+		cardPanel.add(new EditingMode(this), "Editing");
 		cardPanel.add(new GameOverPage(this), "GameOver");
 		cardLayout.show(cardPanel, "Menu");
 
 	}
 
 	private void updateGame() {
-
+		this.gameManager.update();
+		this.gamePlateau.repaint();
+		isGameOver();
 	}
 
 	public static void main(String[] args) {
@@ -107,8 +111,8 @@ public class Game extends JFrame implements Runnable {
 		long lastUpdate = System.nanoTime();
 		long lastTimeCheck = System.currentTimeMillis();
 
-		int frames = 0;
-		int updates = 0;
+		// int frames = 0;
+		// int updates = 0;
 
 		long now;
 
@@ -119,7 +123,7 @@ public class Game extends JFrame implements Runnable {
 			if (now - lastFrame >= timePerFrame) {
 				repaint();
 				lastFrame = now;
-				frames++;
+				// frames++;
 
 			}
 
@@ -128,19 +132,17 @@ public class Game extends JFrame implements Runnable {
 				// play est cliqué = début du jeu
 				if (begin) {
 					SwingUtilities.invokeLater(() -> {
-						this.gameManager.update();
-						this.gamePlateau.repaint();
-						isGameOver();
+						updateGame();
 					});
 				}
 				lastUpdate = now;
-				updates++;
+				// updates++;
 			}
 
 			if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
 				// System.out.println("FPS: " + frames + " | UPS: " + updates);
-				frames = 0;
-				updates = 0;
+				// frames = 0;
+				// updates = 0;
 				lastTimeCheck = System.currentTimeMillis();
 			}
 
