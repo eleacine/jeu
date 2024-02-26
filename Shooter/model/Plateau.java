@@ -23,6 +23,8 @@ public class Plateau extends JPanel {
 
     public Plateau() {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
+        // this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 1);
+
         this.tile_manager = new ManagerCase();
     }
 
