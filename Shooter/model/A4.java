@@ -11,9 +11,9 @@ import java.util.List;
 
 public class A4 extends Armes {
 
-    public int x;
-    public int y;
-    public int dimension = 40;
+    protected int x;
+    protected int y;
+    protected int dimension = 40;
     private boolean isGrenadeActivated = false;
     private Timer appearanceTimer;
     private Timer explosionTimer;

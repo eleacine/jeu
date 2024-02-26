@@ -44,6 +44,8 @@ public class Game extends JFrame implements Runnable {
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
+		
+		perso_list.add(new Gardien());
 
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
@@ -166,11 +168,9 @@ public class Game extends JFrame implements Runnable {
 		tmp.add(perso_list.get(0));
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
-	
-		// System.out.println(tmp.size());
+
 		// tmp = enemyLoader.createEnemiesForLevel();
-				tmp.addAll(enemyLoader.createEnemiesForLevel());
-		// System.out.println(tmp.size());
+		tmp.addAll(enemyLoader.createEnemiesForLevel());
 
 		// Vérifier si le premier élément est une instance de Player avant la conversion
 		if (!perso_list.isEmpty()) {
@@ -178,7 +178,6 @@ public class Game extends JFrame implements Runnable {
 			// Vider la liste
 			perso_list.clear();
 			this.perso_list = tmp;
-			// System.out.println(perso_list.size());
 		}
 
 		gameManager.getEnnemiManager().perso_list = perso_list;

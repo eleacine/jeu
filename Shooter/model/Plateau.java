@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.*;
 import javax.swing.*;
+
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
@@ -40,10 +42,15 @@ public class Plateau extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.DARK_GRAY);
-        g.fillOval((int) gameManager.getPlayer().getX(), (int) gameManager.getPlayer().getY(),
-                gameManager.getPlayer().getSize(),
-                gameManager.getPlayer().getSize());
+        // g.setColor(Color.DARK_GRAY);
+        // g.fillOval((int) gameManager.getPlayer().getX(), (int)
+        // gameManager.getPlayer().getY(),
+        // gameManager.getPlayer().getSize(),
+        // gameManager.getPlayer().getSize());
+
+        // Create a new Graphics2D object for gameManager.getPlayer()
+        Graphics2D gPlayer = (Graphics2D) g.create();
+        drawPlayerMovement(gPlayer);
 
         // Dessiner les balles du joueur
         for (Bullet playerBullet : gameManager.getProjectilesManager().getplayerBullets()) {
@@ -59,9 +66,16 @@ public class Plateau extends JPanel {
         for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()) {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
-                g.setColor(Color.BLUE);
-                g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
-                drawDetectionRadius(g, ennemi);
+
+                if (ennemi instanceof Gardien){
+                    ((Gardien)ennemi).dessiner(g);
+                    ((Gardien)ennemi).dessinerVision(g);
+                } else {
+                    g.setColor(Color.BLUE);
+                    g.fillOval(ennemi.x, ennemi.y, ennemi.getSize(), ennemi.getSize());
+                    drawDetectionRadius(g, ennemi);
+                }
+    
                 ennemi.drawBarVie(g);
             }
         }
@@ -73,26 +87,43 @@ public class Plateau extends JPanel {
         for(A4 grenade : grenade){
             grenade.draw(grenade.x, grenade.y, g,gameManager.getPersoList());
         }
-        //print arme et nombre munitions
-        Player player = gameManager.getPlayerManager().getPlayer();
-        int currentArme = player.currentArme;
-        Armes armeCourante = player.armes.get(currentArme);
+
+        // print arme et nombre munitions
+        int currentArme = gameManager.getPlayer().currentArme;
+        Armes armeCourante = gameManager.getPlayer().armes.get(currentArme);
 
         g.setColor(Color.BLACK);
-        g.fillRect(1350, 1, 100, 100);
-        g.setColor(Color.WHITE);
+        g.fillRect(1300, 1, 125, 100);
 
-        if (currentArme >= 0 && currentArme < player.armes.size()) {
-            g.drawString("type:" + armeCourante.nom, 1350, 30);
-            g.drawString("munitions:" + armeCourante.munition, 1350, 50);
+        g.setColor(Color.WHITE);
+        if (currentArme >= 0 && currentArme < gameManager.getPlayer().armes.size()) {
+            g.drawString("type:" + armeCourante.nom, 1325, 30);
+            g.drawString("munitions:" + armeCourante.munition, 1325, 50);
         }
         g.setColor(armeCourante.color);
-        int centerX = (int) (player.getX() + player.getSize() / 2 - armeCourante.distance * 2 / 2);
-        int centerY = (int) (player.getY() + player.getSize() / 2 - armeCourante.distance * 2 / 2);
+        int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
+        int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2 - armeCourante.distance * 2 / 2);
         g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
+        // Dessin crosshair
         gameManager.getMyMouseListener().getCrosshair().draw(g);
 
+    }
+
+    private void drawPlayerMovement(Graphics2D g) {
+
+        double scale = 5;
+        int newWidth = (int) (gameManager.getPlayer().getSize() * scale);
+        int newHeight = (int) (gameManager.getPlayer().getSize() * scale);
+
+        double x = gameManager.getPlayer().getX();
+        double y = gameManager.getPlayer().getY();
+
+        AffineTransform at = new AffineTransform();
+        at.translate(x - newWidth / 2, y - newHeight / 2);
+        at.rotate(gameManager.getPlayer().getDirection(), newWidth / 2, newHeight / 2);
+
+        g.drawImage(gameManager.getPlayer().getSprite().getImage(), at, this);
     }
 
     private void drawDetectionRadius(Graphics g, Enemy ennemi) {
@@ -120,6 +151,11 @@ public class Plateau extends JPanel {
         g2d.fill(detectionCircle);
         g2d.dispose();
         // }
+    }
+
+    public void reset() {
+        pieges.clear();
+        grenade.clear();
     }
 
 }

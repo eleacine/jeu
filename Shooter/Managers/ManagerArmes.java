@@ -23,16 +23,6 @@ public class ManagerArmes {
             player.setCurrentArme(player.getCurrentArme() + 1);
         }
     }
-
-
-
-
-    public void rechargeArme(){
-        //recharger l'arme
-    }
-
-
- 
-    
+     
     
 }

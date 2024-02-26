@@ -5,7 +5,8 @@ import java.awt.Color;
 public class EnemyMedium extends Enemy {
 
     public EnemyMedium() {
-        super(50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
+        // super(50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
+        super(350, 50, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
     }
 
   

@@ -42,6 +42,7 @@ public class GameManager {
 
     public void reset (){
         player.reset();
+        gamePlateau.reset();
         
     }
 

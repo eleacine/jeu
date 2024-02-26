@@ -5,12 +5,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Armes {
-    public int power;
-    public boolean type; // true pour arme portée à la main et false pour arme de sol
-    public int munition; // nombre de munitons que comporte l'arme
-    public int distance; // la distance a laquelle l'arme tire
-    public int recharge; // recharge de l'arme
-    public int dureeRecharge; // durée de la recharge
+    protected int power;
+    protected boolean type; // true pour arme portée à la main et false pour arme de sol
+    protected int munition; // nombre de munitons que comporte l'arme
+    protected int distance; // la distance a laquelle l'arme tire
+    protected int recharge; // recharge de l'arme
+    protected int dureeRecharge; // durée de la recharge
 
     public Color color;
     public String nom;
@@ -85,7 +85,7 @@ public abstract class Armes {
         this.power = power;
     }
 
-    public boolean isType() {
+    public boolean getType() {
         return type;
     }
 
@@ -132,7 +132,5 @@ public abstract class Armes {
     public void setColor(Color color) {
         this.color = color;
     }
-
-    
 
 }
