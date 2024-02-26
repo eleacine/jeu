@@ -26,6 +26,7 @@ public class Player extends Personnage {
         this.armes.add(new A2());
         this.armes.add(new A3());
         this.armes.add(new A4());
+        this.armes.add(new A5());
         currentArme = 0;
 
         loadSprite();
