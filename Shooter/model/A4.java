@@ -95,8 +95,7 @@ public class A4 extends Armes {
     }
 
     private void deleteGrenade() {
-        //a changer psq elle disparaissent pas encore
-        x = -1;
-        y = -1;
+        isGrenadeActivated = false;
+        this.dimension = 0;
     }
 }
