@@ -91,7 +91,7 @@ Marylou :
 - faire un atribut pour la taille des cases 
 
 Ines :
--pofinement des armes (elles doicent etre fini)
+-pofinement des armes (elles doivent etre finies)
 -travail sur l'implementation des niveaux 
 
 SEMAINE 6
