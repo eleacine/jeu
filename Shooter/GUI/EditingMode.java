@@ -175,7 +175,7 @@ public class EditingMode extends GameScene {
             for (int i = 0; i < level.length; i++) {
                 writer.write("{"); 
                 for (int j = 0; j < level[i].length; j++) {
-                    writer.write(level[i][j]);
+                    writer.write(level[i][j]+"");
                     if(j!=level[i].length-1){
                         writer.write(", ");
                     }
