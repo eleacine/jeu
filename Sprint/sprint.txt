@@ -82,6 +82,13 @@ Eléacine:
 Majoori : 
 -Continuer le mode editing pour ennemi aussi
 
+Marylou :
+- continuer à implémenter l'ennemi gardien
+- réfléchir à de nouveaux ennemis
+- déplacement du joueur qui laisse des traces pouvant être repéré par les ennemis
+- peut-être penser à un mode multijoueur possible (pas sur)
+- réunir les armes A3 et A4
+
 
 SEMAINE 6
 -vérification de la base
