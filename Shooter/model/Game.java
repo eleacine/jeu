@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import Shooter.GUI.EditingMode;
 import Shooter.GUI.GameOverPage;
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
@@ -80,6 +81,7 @@ public class Game extends JFrame implements Runnable {
 		this.playing = new PlayPage(this);
 		cardPanel.add(playing, "Play");
 		cardPanel.add(new SettingsPage(this), "Settings");
+		cardPanel.add(new EditingMode(this), "Editing");
 		cardPanel.add(new GameOverPage(this), "GameOver");
 		cardLayout.show(cardPanel, "Menu");
 

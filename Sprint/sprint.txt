@@ -79,6 +79,10 @@ Eléacine:
 - réflexion autour de la game loop
 
 
+Majoori : 
+-Continuer le mode editing pour ennemi aussi
+
+
 SEMAINE 6
 -vérification de la base
 -regarder des améliorations possiblement dans les temps

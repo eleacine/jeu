@@ -115,3 +115,7 @@ Eléacine:
     -  Blocage du joueur en présence de cases rouges.
     -  A1 est une arme qui permet de détruire les murs (cases rouges présentes dans le plateau vert) qui sont dans la distance de tir.
     -  Test non visible pour augmenter le nombre de cases et ainsi avoir un plateau plus grand.
+
+
+Majoori : 
+    -Création d'un mode Editing pour faciliter la création des niveaux (pas fini)

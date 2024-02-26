@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Shooter.model.Game;
@@ -13,6 +14,7 @@ public class GameScene extends JPanel {
 
     public GameScene(Game game) {
         this.game = game;
+        setBackground(Color.BLACK);
     }
 
     public Game getGame() {
@@ -49,4 +51,6 @@ public class GameScene extends JPanel {
         });
         return button;
     }
+
+    
 }
