@@ -90,6 +90,9 @@ Marylou :
 - réunir les armes A3 et A4
 - faire un atribut pour la taille des cases 
 
+Ines :
+-pofinement des armes (elles doicent etre fini)
+-travail sur l'implementation des niveaux 
 
 SEMAINE 6
 -vérification de la base
