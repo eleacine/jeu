@@ -124,3 +124,6 @@ Ines:
 
 Majoori : 
     -Création d'un mode Editing pour faciliter la création des niveaux (pas fini)
+
+Leonor:
+    - mise en place des factories dans l'initialisation des enemies et plateau 
