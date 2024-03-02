@@ -89,7 +89,7 @@ public class A4 extends Armes {
     private void drawExplosion(int x, int y, Graphics g,  List<Personnage> enemies) {
         Color grayTransparent = new Color(128, 128, 128, 128);
         g.setColor(grayTransparent);
-        g.fillOval(x - 50, y - 50, 150, 150);
+        g.fillOval(x - 40, y - 40, 150, 150);
 
        
         for (Personnage personnage : enemies) {
