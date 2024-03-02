@@ -19,6 +19,7 @@ public class GameOverPage extends GameScene {
     private void drawGameOver() {
         JLabel gameOverLabel = new JLabel("Game Over", SwingConstants.CENTER);
         gameOverLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        gameOverLabel.setForeground(Color.WHITE);
         add(gameOverLabel);
     }
 

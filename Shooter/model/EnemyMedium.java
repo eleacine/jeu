@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 
+import Shooter.Managers.GameManager;
+
 public class EnemyMedium extends Enemy {  
 
     /*  peut suivre le joueur 
@@ -17,7 +19,7 @@ public class EnemyMedium extends Enemy {
      */
 
     public EnemyMedium() {
-        super(550, 100, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
+        super(1250, 200, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
     }
 
     @Override
