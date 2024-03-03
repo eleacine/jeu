@@ -8,21 +8,20 @@ import javax.swing.Timer;
 import java.util.List;
 
 public class A4 extends Armes {
-
-    protected int x;
-    protected int y;
-    protected int dimension = 40;
+    private int x;
+    private int y;
+    private int dimension = 40;
     private boolean isGrenadeActivated = false;
     private Timer appearanceTimer;
     private Timer explosionTimer;
     private Timer disappearanceTimer;
 
     public A4() {
-        super("grenade", 50, false, 5, Color.GRAY);
+        super("grenade", 50, false, 5, Color.GRAY,2000,400,true);
     }
 
     public A4(int x, int y) {
-        super("grenade", 50, false, 5, Color.GRAY);
+        super("grenade", 50, false, 5, Color.GRAY,2000,400,true);
         this.x = x;
         this.y = y;
         setupAppearanceTimer();
@@ -39,6 +38,7 @@ public class A4 extends Armes {
             }
         });
     }
+
 
     private void setupExplosionTimer() {
         explosionTimer = new Timer(2000, new ActionListener() {
@@ -69,19 +69,25 @@ public class A4 extends Armes {
         }
     }
 
-    public void draw(int x, int y, Graphics g, List<Personnage> enemies) {
-        g.setColor(this.color);
-        g.fillOval(x, y, dimension, dimension);
-
-        if (isGrenadeActivated) {
-            drawExplosion(x, y, g, enemies);
+    public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
+        
+        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+    
+        if (!isGrenadeActivated || (isGrenadeActivated && distanceToPlayer <= getDistance())) {
+            g.setColor(this.color);
+            g.fillOval(x, y, dimension, dimension);
+    
+            if (isGrenadeActivated) {
+                drawExplosion(x, y, g, enemies);
+            }
         }
     }
+    
 
     private void drawExplosion(int x, int y, Graphics g,  List<Personnage> enemies) {
         Color grayTransparent = new Color(128, 128, 128, 128);
         g.setColor(grayTransparent);
-        g.fillOval(x - 50, y - 50, 150, 150);
+        g.fillOval(x - 40, y - 40, 150, 150);
 
        
         for (Personnage personnage : enemies) {
@@ -93,8 +99,66 @@ public class A4 extends Armes {
     }
 
     private void deleteGrenade() {
-        //a changer psq elle disparaissent pas encore
-        x = -1;
-        y = -1;
+        isGrenadeActivated = false;
+        this.dimension = 0;
     }
+
+    //-----------------GETTER & SETTER---------------------------
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    public boolean isGrenadeActivated() {
+        return isGrenadeActivated;
+    }
+
+    public void setGrenadeActivated(boolean grenadeActivated) {
+        isGrenadeActivated = grenadeActivated;
+    }
+
+    public Timer getAppearanceTimer() {
+        return appearanceTimer;
+    }
+
+    public void setAppearanceTimer(Timer appearanceTimer) {
+        this.appearanceTimer = appearanceTimer;
+    }
+
+    public Timer getExplosionTimer() {
+        return explosionTimer;
+    }
+
+    public void setExplosionTimer(Timer explosionTimer) {
+        this.explosionTimer = explosionTimer;
+    }
+
+    public Timer getDisappearanceTimer() {
+        return disappearanceTimer;
+    }
+
+    public void setDisappearanceTimer(Timer disappearanceTimer) {
+        this.disappearanceTimer = disappearanceTimer;
+    }
+
+
 }

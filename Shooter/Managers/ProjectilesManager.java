@@ -131,8 +131,8 @@ public class ProjectilesManager {
 
     // Vérifie et met à jour la case si le projectile est sur une case de type 2 (obstacle)
     private void checkAndUpdateCase(Bullet bullet) {
-        int currentXIndex = (int) (bullet.getX() / 50);
-        int currentYIndex = (int) (bullet.getY() / 50);
+        int currentXIndex = (int) (bullet.getX() / 40);
+        int currentYIndex = (int) (bullet.getY() / 40);
 
         if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
         currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {

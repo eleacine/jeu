@@ -47,11 +47,7 @@ public class ManagerCase {
     // }
 
     private BufferedImage getSprite(int xCord, int yCord) {
-        return atlas.getSubimage(xCord * tailleCase, 0, tailleCase, tailleCase);
-    }
-
-    public int getTailleCase() {
-        return tailleCase;
+        return atlas.getSubimage(xCord * 40, 0, 40, 40);
     }
 
 }

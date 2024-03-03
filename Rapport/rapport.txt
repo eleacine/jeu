@@ -116,6 +116,14 @@ Eléacine:
     -  A1 est une arme qui permet de détruire les murs (cases rouges présentes dans le plateau vert) qui sont dans la distance de tir.
     -  Test non visible pour augmenter le nombre de cases et ainsi avoir un plateau plus grand.
 
+Ines:
+    -Creation d'armes au sol tel que des grenade qui inflige des degats au enemis dans son champs d'attaque
+    -ajout d'une limite de pose pour les arme au sol
+    -ajout de degat au mines et au grenade sur les murs (pas totalement fini)
+
 
 Majoori : 
     -Création d'un mode Editing pour faciliter la création des niveaux (pas fini)
+
+Leonor:
+    - mise en place des factories dans l'initialisation des enemies et plateau 

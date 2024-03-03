@@ -106,8 +106,8 @@ public class PlayerManager extends KeyAdapter {
     */
     public void checkObstacle() {
         // Obtenir les indices actuels du joueur sur le plateau de jeu
-        int currentXIndex = (int) (player.getX() / 50);
-    int currentYIndex = (int) (player.getY() / 50);
+        int currentXIndex = (int) (player.getX() / 40);
+    int currentYIndex = (int) (player.getY() / 40);
 
         // Check obstacles in front, behind, right, left, and diagonally
         int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
@@ -161,7 +161,7 @@ public class PlayerManager extends KeyAdapter {
                 float newY = player.getY() + player.getYSpeed();
     
                // Vérifier si le joueur peut continuer sans se déplacer vers l'obstacle dans n'importe quelle direction
-                if (!isMovingTowardsObstacle(newX, newY, xIndex * 50, yIndex * 50)) {
+                if (!isMovingTowardsObstacle(newX, newY, xIndex * 40, yIndex * 40)) {
                     return false; // Le joueur peut continuer
                 } else {
                     return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle

@@ -35,14 +35,14 @@ public class Plateau extends JPanel {
         for (int y = 0; y < level_tab.length; y++) {
             for (int x = 0; x < level_tab[y].length; x++) {
                 int id = level_tab[y][x];
-                g.drawImage(tile_manager.getSprite(id), x * 50, y * 50, null);
+                g.drawImage(tile_manager.getSprite(id), x * 40, y * 40, null);
             }
         }
         this.plateau_graphic = g;
     }
 
     public void update_pleateau(int x, int y, int type_case) {
-        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 50, y * 50, null);
+        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40, null);
     }
 
     // public void render_plateau(Graphics g) {
@@ -103,7 +103,7 @@ public class Plateau extends JPanel {
             piege.draw(piege.x, piege.y, g);
         }
         for(A4 grenade : grenade){
-            grenade.draw(grenade.x, grenade.y, g,gameManager.getPersoList());
+            grenade.draw(g,gameManager.getPersoList(),gameManager.getPlayer().getX(),gameManager.getPlayer().getY());
         }
 
         // print arme et nombre munitions

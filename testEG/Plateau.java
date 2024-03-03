@@ -155,6 +155,6 @@ class Gardien {
 
     public void dessinerVision(Graphics g) {
         g.setColor(new Color(255, 255, 255, 100));
-        g.fillArc(x - 50, y - 50, 130, 130, visionAngle, 30);
+        g.fillArc(x - 40, y - 40, 130, 130, visionAngle, 30);
     }
 }

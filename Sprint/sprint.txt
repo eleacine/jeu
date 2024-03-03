@@ -90,6 +90,17 @@ Marylou :
 - réunir les armes A3 et A4
 - faire un atribut pour la taille des cases 
 
+Ines :
+-pofinement des armes (elles doivent etre finies)
+-travail sur l'implementation des niveaux 
+
+Leonor:
+- changer le constructeur des enem pour qu'ils prennent des coordonnées en argument pour leur emplacement
+- changer les factories pour lire et appliquer ces coordonnées
+- enchainement / déblocage des niveaux et initialisation des éléments correspondants 
+- faire des tests sur les elements graphiques: changer les cases du plateau par des casses "illustrées"
+    
+
 
 SEMAINE 6
 -vérification de la base
