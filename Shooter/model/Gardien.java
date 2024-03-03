@@ -18,8 +18,10 @@ public class Gardien extends Enemy {
 
     private int visionAngle;
 
-    public Gardien() {
-        super(900, 250, 55, 200, 2, 0, 25, 100, 0, Color.MAGENTA);
+    public Gardien(int x, int y) {
+        //x:900
+        //y:250
+        super(x, y, 55, 200, 2, 0, 25, 100, 0, Color.MAGENTA);
         this.visionAngle = 340;
     }
 
