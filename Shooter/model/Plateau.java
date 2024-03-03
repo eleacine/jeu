@@ -20,14 +20,14 @@ public class Plateau extends JPanel {
     public ArrayList<A4> grenade = new ArrayList<A4>();
 
     public GameManager gameManager;
-    private static  int tailleCase;
+    // private static  int tailleCase;
 
     public Plateau() {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
         // this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 1);
 
         this.tile_manager = new ManagerCase();
-        this.tailleCase = tile_manager.getTailleCase();
+        // this.tailleCase = tile_manager.getTailleCase();
 
     }
 
@@ -176,7 +176,7 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel());
     }
 
 }

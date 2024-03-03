@@ -2,7 +2,7 @@ package Shooter.model;
 
 import java.awt.Color;
 
-import Shooter.Managers.GameManager;
+// import Shooter.Managers.GameManager;
 
 public class EnemyMedium extends Enemy {  
 

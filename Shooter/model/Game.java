@@ -16,7 +16,7 @@ import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
 import Shooter.factory.EnemyLevelLoader;
 
-import Shooter.model.E3;
+// import Shooter.model.E3;
 
 public class Game extends JFrame implements Runnable {
 
@@ -24,8 +24,7 @@ public class Game extends JFrame implements Runnable {
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
 	protected List<Personnage> perso_list;
-	// public int level = 1;
-
+	public boolean isRunning = true;
 	public Dimension size_screen;
 	public CardLayout cardLayout;
 	public JPanel cardPanel;
@@ -43,13 +42,15 @@ public class Game extends JFrame implements Runnable {
 		// load des personnages
 		this.perso_list = new ArrayList<>();
 		Player player = new Player(null);
-		this.perso_list.add(player);
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(player.getLevel());
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 
 		perso_list.add(new Gardien());
-		perso_list.add(new E3());
+
+		this.perso_list.add(0, player);
+
+		// perso_list.add(new E3());
 
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
@@ -120,7 +121,9 @@ public class Game extends JFrame implements Runnable {
 
 		long now;
 
-		while (true) {
+		// while (true) {
+		while (isRunning) {
+
 			now = System.nanoTime();
 
 			// Render
@@ -158,7 +161,7 @@ public class Game extends JFrame implements Runnable {
 		if (gameManager.getPlayer().getSante() <= 0) {
 			reset();
 			begin = false;
-
+			
 			cardLayout.show(cardPanel, "GameOver");
 
 		}
@@ -190,19 +193,20 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
-	private void win (){
-		if (perso_list.size() == 0){
-			System.out.println(gameManager.getPlayer().getLevel());
+	private void win() {
+		if (perso_list.size() == 1 && begin) {
+			begin = false;
+			// System.out.println(gameManager.getPlayer().getLevel());
 			nextLevel();
-			System.out.println(gameManager.getPlayer().getLevel());			
+			// System.out.println(gameManager.getPlayer().getLevel());
+			begin = true;
 		}
 	}
 
-	private void nextLevel (){
+	private void nextLevel() {
 		gameManager.getPlayer().setLevel();
 		reset();
 	}
-
 
 	// --------- GETTERS et SETTERS -----------
 	public MenuPage getMenu() {

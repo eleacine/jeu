@@ -45,10 +45,13 @@ public class EnnemiManager {
 
         Iterator<Personnage> it = perso_list.iterator();
 
-        while (it.hasNext()) {
-            Enemy ennemi = (Enemy) it.next();
-            if (ennemi.getSize() <= 0 || ennemi.getSante() <= 0) {
-                it.remove();
+        while (it.hasNext()){
+            Personnage perso = it.next();
+            if (perso instanceof Enemy) {
+                Enemy ennemi = (Enemy) perso;
+                if (ennemi.getSize() <= 0 || ennemi.getSante() <= 0) {
+                    it.remove();
+                }
             }
         }
     }
