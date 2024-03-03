@@ -18,8 +18,10 @@ public class EnemyMedium extends Enemy {
      * radius de détection : 200 px
      */
 
-    public EnemyMedium() {
-        super(1250, 200, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
+    public EnemyMedium(int x, int y) {
+        //x:1250
+        //y:200
+        super(x, y, 50, 100, 2, 2, 20, 50, 1000, 200, new Color(255, 255, 0));
     }
 
     @Override

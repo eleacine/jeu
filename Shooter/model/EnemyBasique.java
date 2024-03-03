@@ -16,9 +16,9 @@ public class EnemyBasique extends Enemy{
      * radius de détection : 500 px
      */
 
-    public EnemyBasique() {
+    public EnemyBasique(int x, int y) {
         // super(50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
-        super(200, 360, 50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
+        super(x, y, 50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
     }
 
     

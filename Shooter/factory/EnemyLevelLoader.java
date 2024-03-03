@@ -3,31 +3,31 @@ import Shooter.model.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class EnemyLevelLoader {
     private Map<Integer, List<PersonnageFactory>> levelEnemyFactories;
     private int level;
-    
 
     public EnemyLevelLoader(int level) {
         levelEnemyFactories = new HashMap<>();
-        this.level=level; 
+        this.level = level;
     }
 
-    public void loadLevelEnemies(String filePath) { //filepath du document txt avec les infos de chq niveau
+    public void loadLevelEnemies(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(":");
-                if (parts.length == 2) { //au cas oú on fait une erreur de syntaxe dans le txt 
+                if (parts.length == 2) {
                     int read_level = Integer.parseInt(parts[0].trim());
-                    if(read_level==level){ //lit que la partie du txt qui corresponds au niveau
-                        String[] enemyTypes = parts[1].split(",");
-                        List<PersonnageFactory> factories = createFactoriesForEnemyTypes(enemyTypes);
+                    if (read_level == level) {
+                        String enemyData = parts[1].trim();
+                        List<PersonnageFactory> factories = createFactoriesForEnemyTypes(enemyData);
                         levelEnemyFactories.put(level, factories);
                     }
                 }
@@ -40,37 +40,47 @@ public class EnemyLevelLoader {
     public List<Personnage> createEnemiesForLevel() {
         List<PersonnageFactory> factories = levelEnemyFactories.get(level);
         List<Personnage> enemies = new ArrayList<>();
-    
+
         if (factories != null) {
-            //System.out.println("Number of factories for level " + level + ": " + factories.size());
             for (PersonnageFactory factory : factories) {
-                Personnage enemy = factory.createPersonnage();
-                //System.out.println("Created enemy: " + enemy);
-                enemies.add(enemy);
+                Entry<Integer, Integer> coordinates = factory.getCoordinates();
+                enemies.add(factory.createPersonnage(coordinates.getKey(), coordinates.getValue()));
             }
         }
-    
+
         return enemies;
     }
-    
 
-    private List<PersonnageFactory> createFactoriesForEnemyTypes(String[] enemyTypes) { //parcoure liste d'enemies
+    private List<PersonnageFactory> createFactoriesForEnemyTypes(String enemyData) {
         List<PersonnageFactory> factories = new ArrayList<>();
 
-        for (String enemyType : enemyTypes) {
-            enemyType = enemyType.trim().replace(" ", "");
-            factories.add(createFactoryForEnemyType(enemyType));
+        String[] enemyList = enemyData.split(";");
+        for (String enemy : enemyList) {
+            String[] typeAndCoordinates = enemy.split(",");
+            if (typeAndCoordinates.length == 3) {
+                String enemyType = typeAndCoordinates[0].trim();
+                String xCoordinate = typeAndCoordinates[1].replaceAll("[^0-9]", "").trim();
+                String yCoordinate = typeAndCoordinates[2].replaceAll("[^0-9]", "").trim();
+
+                factories.add(createFactoryForEnemyType(enemyType, xCoordinate, yCoordinate));
+            } else {
+                System.out.println("Invalid format: " + enemy);
+            }
         }
 
         return factories;
     }
 
-    private PersonnageFactory createFactoryForEnemyType(String enemyType) {//ajoute factory pour l'enemi specifique 
+    private PersonnageFactory createFactoryForEnemyType(String enemyType, String xCoordinate, String yCoordinate) {
+        System.out.println("Enemy Type: " + enemyType);
+        System.out.println("Coordinates: " + xCoordinate + ", " + yCoordinate);
         switch (enemyType) {
-            case "Enemy1":
-                return new Enemy1Factory();
-            case "Enemy2":
-                return new Enemy2Factory();
+            case "Enemy 1":
+                return new Enemy1Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+            case "Enemy 2":
+                return new Enemy2Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+            case "Enemy 3":
+                return new Enemy3Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
             default:
                 throw new IllegalArgumentException("Unknown enemy type: " + enemyType);
         }
