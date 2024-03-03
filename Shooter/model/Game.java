@@ -16,13 +16,15 @@ import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
 import Shooter.factory.EnemyLevelLoader;
 
+import Shooter.model.E3;
+
 public class Game extends JFrame implements Runnable {
 
 	public Plateau gamePlateau;
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
 	protected List<Personnage> perso_list;
-	public int level = 1;
+	// public int level = 1;
 
 	public Dimension size_screen;
 	public CardLayout cardLayout;
@@ -42,7 +44,7 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list = new ArrayList<>();
 		Player player = new Player(null);
 		this.perso_list.add(player);
-		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
+		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(player.getLevel());
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 
@@ -100,6 +102,7 @@ public class Game extends JFrame implements Runnable {
 		this.gameManager.update();
 		this.gamePlateau.repaint();
 		isGameOver();
+		win();
 	}
 
 	public static void main(String[] args) {
@@ -177,7 +180,7 @@ public class Game extends JFrame implements Runnable {
 	private void clearArrayList() {
 		List<Personnage> tmp = new ArrayList<>();
 		tmp.add(perso_list.get(0));
-		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(level);
+		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(gameManager.getPlayer().getLevel());
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 
 		// tmp = enemyLoader.createEnemiesForLevel();
@@ -195,6 +198,21 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
+	private void win (){
+		if (perso_list.size() == 0){
+			System.out.println(gameManager.getPlayer().getLevel());
+			nextLevel();
+			System.out.println(gameManager.getPlayer().getLevel());			
+		}
+	}
+
+	private void nextLevel (){
+		gameManager.getPlayer().setLevel();
+		reset();
+	}
+
+
+	// --------- GETTERS et SETTERS -----------
 	public MenuPage getMenu() {
 		return menu;
 	}
@@ -207,16 +225,8 @@ public class Game extends JFrame implements Runnable {
 		return settings;
 	}
 
-	public int getLevel() {
-		return this.level;
-	}
-
 	public List<Personnage> getPersoList() {
 		return this.perso_list;
-	}
-
-	public void addLevel() {
-		this.level++;
 	}
 
 }

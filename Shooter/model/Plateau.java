@@ -20,12 +20,15 @@ public class Plateau extends JPanel {
     public ArrayList<A4> grenade = new ArrayList<A4>();
 
     public GameManager gameManager;
+    private static  int tailleCase;
 
     public Plateau() {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
         // this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 1);
 
         this.tile_manager = new ManagerCase();
+        this.tailleCase = tile_manager.getTailleCase();
+
     }
 
     public void render_plateau(Graphics g) {
@@ -41,6 +44,21 @@ public class Plateau extends JPanel {
     public void update_pleateau(int x, int y, int type_case) {
         plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40, null);
     }
+
+    // public void render_plateau(Graphics g) {
+    //     for (int y = 0; y < level_tab.length; y++) {
+    //         for (int x = 0; x < level_tab[y].length; x++) {
+    //             int id = level_tab[y][x];
+    //             g.drawImage(tile_manager.getSprite(id), x * tailleCase, y * tailleCase, null);
+    //         }
+    //     }
+    //     this.plateau_graphic = g;
+    // }
+
+    // public void update_pleateau(int x, int y, int type_case) {
+    //     plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * tailleCase, y * tailleCase, null);
+    // }
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -158,6 +176,7 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
     }
 
 }
