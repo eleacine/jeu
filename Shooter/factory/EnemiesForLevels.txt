@@ -1,2 +1,2 @@
 1:Enemy 1, Enemy 2 
-2:Enemy 1, Enemy 2
+2:Enemy 2

@@ -16,6 +16,8 @@ public class ManagerCase {
     public static final int MINE = 3;
     public static final int GRENADE = 4;
 
+    protected static final int tailleCase = 50;
+
     private BufferedImage atlas;
     public ArrayList<Case> cases = new ArrayList<>();
 
@@ -40,8 +42,16 @@ public class ManagerCase {
         return cases.get(id).getSprite();
     }
 
+    // private BufferedImage getSprite(int xCord, int yCord) {
+    //     return atlas.getSubimage(xCord * 50, 0, 50, 50);
+    // }
+
     private BufferedImage getSprite(int xCord, int yCord) {
-        return atlas.getSubimage(xCord * 50, 0, 50, 50);
+        return atlas.getSubimage(xCord * tailleCase, 0, tailleCase, tailleCase);
+    }
+
+    public int getTailleCase() {
+        return tailleCase;
     }
 
 }

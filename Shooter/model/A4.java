@@ -2,10 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
-//import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.Timer;
 import java.util.List;
 

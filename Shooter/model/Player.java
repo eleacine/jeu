@@ -16,6 +16,7 @@ public class Player extends Personnage {
     protected ArrayList<Armes> armes = new ArrayList<Armes>();
     protected int currentArme;
 
+    protected int level = 1;
     protected ImageIcon sprite;
 
     public Player(String pseudo) {
@@ -115,6 +116,14 @@ public class Player extends Personnage {
 
     public void setSprite(ImageIcon sprite) {
         this.sprite = sprite;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel() {
+        this.level++;
     }
 
 }
