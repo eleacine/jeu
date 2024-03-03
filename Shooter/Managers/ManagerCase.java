@@ -50,4 +50,8 @@ public class ManagerCase {
         return atlas.getSubimage(xCord * 40, 0, 40, 40);
     }
 
+    public int getTailleCase() {
+        return tailleCase;
+    }
+
 }
