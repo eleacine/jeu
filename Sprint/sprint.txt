@@ -112,3 +112,8 @@ Eléacine
 - commencer a réfléchir au deblocage d'armes selon les niveaux
 - réflexion autour de la game loop
 
+Marylou :
+- finir les armes
+- finir les ennemis 
+- ajouter des éléments pour le joueur (traces de pas)
+- peut-être du son 
