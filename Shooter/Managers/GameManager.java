@@ -43,7 +43,7 @@ public class GameManager {
     public void reset (){
         player.reset();
         gamePlateau.reset();
-        
+        managerArmes.recharge();
     }
 
     // ----------------- Getters et setters ---------------------------

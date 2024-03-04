@@ -77,6 +77,10 @@ public abstract class Armes {
         }
     }
 
+    public void reinitialiser() {
+        this.munition = this.recharge;
+    }
+
     // ---------- Getters & Setters ----------
 
     public int getPower() {

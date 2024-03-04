@@ -137,3 +137,7 @@ Eléacine :
 
 Marylou :
     - mise en place du changement de niveau si niveau gagné
+    - recharge des armes si niveau passé
+    - win page très simple
+    - quelques effets sonores basiques (tir et arme vide)
+    

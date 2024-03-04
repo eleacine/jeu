@@ -10,13 +10,13 @@ import javax.swing.SwingUtilities;
 
 import Shooter.GUI.EditingMode;
 import Shooter.GUI.GameOverPage;
+import Shooter.GUI.WinPage;
 import Shooter.GUI.MenuPage;
 import Shooter.GUI.PlayPage;
 import Shooter.GUI.SettingsPage;
 import Shooter.Managers.GameManager;
 import Shooter.factory.EnemyLevelLoader;
 
-// import Shooter.model.E3;
 
 public class Game extends JFrame implements Runnable {
 
@@ -24,7 +24,6 @@ public class Game extends JFrame implements Runnable {
 	private final double FPS_SET = 120.0;
 	private final double UPS_SET = 60.0;
 	protected List<Personnage> perso_list;
-	public boolean isRunning = true;
 	public Dimension size_screen;
 	public CardLayout cardLayout;
 	public JPanel cardPanel;
@@ -33,9 +32,14 @@ public class Game extends JFrame implements Runnable {
 	private PlayPage playing;
 	private SettingsPage settings;
 
+	public boolean isRunning = true;
 	public boolean begin = false;
 
+	public int nbLevel = 2;
+
 	public GameManager gameManager;
+
+	protected SoundPlayer soundPlayer = new SoundPlayer();
 
 	public Game() {
 
@@ -51,16 +55,16 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list.add(0, player);
 
 		// perso_list.add(new E3());
-		//perso_list.add(new Gardien());
+		// perso_list.add(new Gardien());
 
-		//print enemy list to check
+		// print enemy list to check
 		System.out.println("Enemy List:");
-    	for (Personnage enemy : perso_list) {
-        System.out.println("Type: " + enemy.getClass().getSimpleName());
-        System.out.println("Coordinates: (" + enemy.getX() + ", " + enemy.getY() + ")");
-        System.out.println("---");
-    	}
-    	System.out.println("Total Enemies: " + perso_list.size());
+		for (Personnage enemy : perso_list) {
+			System.out.println("Type: " + enemy.getClass().getSimpleName());
+			System.out.println("Coordinates: (" + enemy.getX() + ", " + enemy.getY() + ")");
+			System.out.println("---");
+		}
+		System.out.println("Total Enemies: " + perso_list.size());
 
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
@@ -97,13 +101,14 @@ public class Game extends JFrame implements Runnable {
 		cardPanel.add(new SettingsPage(this), "Settings");
 		cardPanel.add(new EditingMode(this), "Editing");
 		cardPanel.add(new GameOverPage(this), "GameOver");
+		cardPanel.add(new WinPage(this), "Win");
 		cardLayout.show(cardPanel, "Menu");
 
 	}
 
 	private void updateGame() {
-		this.gameManager.update();
 		this.gamePlateau.repaint();
+		this.gameManager.update();
 		isGameOver();
 		win();
 	}
@@ -130,6 +135,8 @@ public class Game extends JFrame implements Runnable {
 		// int updates = 0;
 
 		long now;
+
+		soundPlayer.playSound("Shooter/res/geometryDash.wav");
 
 		// while (true) {
 		while (isRunning) {
@@ -171,7 +178,6 @@ public class Game extends JFrame implements Runnable {
 		if (gameManager.getPlayer().getSante() <= 0) {
 			reset();
 			begin = false;
-			
 			cardLayout.show(cardPanel, "GameOver");
 
 		}
@@ -206,10 +212,16 @@ public class Game extends JFrame implements Runnable {
 	private void win() {
 		if (perso_list.size() == 1 && begin) {
 			begin = false;
-			// System.out.println(gameManager.getPlayer().getLevel());
-			nextLevel();
-			// System.out.println(gameManager.getPlayer().getLevel());
-			begin = true;
+
+			Player player = (Player) perso_list.get(0);
+			if (player.getLevel() == nbLevel) {
+				cardLayout.show(cardPanel, "Win");
+			} else {
+				// System.out.println(gameManager.getPlayer().getLevel());
+				nextLevel();
+				// System.out.println(gameManager.getPlayer().getLevel());
+				begin = true;
+			}
 		}
 	}
 

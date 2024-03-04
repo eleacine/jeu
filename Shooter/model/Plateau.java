@@ -62,11 +62,6 @@ public class Plateau extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // g.setColor(Color.DARK_GRAY);
-        // g.fillOval((int) gameManager.getPlayer().getX(), (int)
-        // gameManager.getPlayer().getY(),
-        // gameManager.getPlayer().getSize(),
-        // gameManager.getPlayer().getSize());
 
         // Create a new Graphics2D object for gameManager.getPlayer()
         Graphics2D gPlayer = (Graphics2D) g.create();
