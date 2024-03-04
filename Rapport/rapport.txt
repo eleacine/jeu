@@ -137,3 +137,7 @@ Eléacine :
 
 Marylou :
     - mise en place du changement de niveau si niveau gagné
+
+Leonor:
+    - changement des txt des Enemy pour ajouter les coordonnées manuelement 
+    - changement des constructeurs des Enemy pour prendre des coordonnées  
