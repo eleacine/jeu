@@ -126,4 +126,11 @@ Majoori :
     -Création d'un mode Editing pour faciliter la création des niveaux (pas fini)
 
 Leonor:
-    - mise en place des factories dans l'initialisation des enemies et plateau 
+    - mise en place des factories dans l'initialisation des enemies et plateau
+    
+    
+Semaine 5:
+
+Eléacine :
+    - changement du nombre de cases pour le plateau 
+    - essayer de bloquer les ennemis s'ils vont en direction des cases rouges mais echec
