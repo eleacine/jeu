@@ -105,3 +105,10 @@ Leonor:
 SEMAINE 6
 -vérification de la base
 -regarder des améliorations possiblement dans les temps
+
+Eléacine 
+- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables
+- finir les armes 
+- commencer a réfléchir au deblocage d'armes selon les niveaux
+- réflexion autour de la game loop
+
