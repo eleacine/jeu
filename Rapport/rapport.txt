@@ -141,3 +141,7 @@ Marylou :
     - win page très simple
     - quelques effets sonores basiques (tir et arme vide)
     
+
+Leonor:
+    - changement des txt des Enemy pour ajouter les coordonnées manuelement 
+    - changement des constructeurs des Enemy pour prendre des coordonnées  
