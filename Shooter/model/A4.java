@@ -9,19 +9,16 @@ import javax.swing.Timer;
 import Shooter.Managers.GameManager;
 
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class A4 extends Armes {
     private int x;
     private int y;
     private int dimension = 40;
     private boolean isGrenadeActivated = false;
-    private Timer appearanceTimer;
     private Timer explosionTimer;
-    private Timer disappearanceTimer;
-    private long disappearanceDelay = 1000;  
-    private long explosionTime;
+    private long explosionDelay = 2000;  // Délai d'explosion
     public GameManager gameManager;
+
     public A4() {
         super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
     }
@@ -30,15 +27,9 @@ public class A4 extends Armes {
         super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
         this.x = x;
         this.y = y;
-        setupAppearanceTimer();
+        setupExplosionTimer();  
     }
-
-    private void setupAppearanceTimer() {
-        System.out.println("dans setupAppearanceTimer");
-        explosionTime = System.currentTimeMillis() + 900;  // Set the explosion time 900 milliseconds in the future
-        isGrenadeActivated = true;
-    }
-
+    
     public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
         double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
 
@@ -50,62 +41,34 @@ public class A4 extends Armes {
             } else {
                 System.out.println("en dehors de la zone");
             }
-
-            // Vérifie si le temps d'explosion est écoulé
-            if (System.currentTimeMillis() >= explosionTime) {
-                deleteGrenade();
-            }
         }
     }
 
-
-
-  private void setupExplosionTimer() {
-        System.out.println("dans setupExplosionTimer");
-        explosionTimer = new Timer(2000, new ActionListener() {
+    private void setupExplosionTimer() {
+        explosionTimer = new Timer((int) explosionDelay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isGrenadeActivated = false;
                 explosionTimer.stop();
-                setupDisappearanceTimer();
-                disappearanceTimer.start();
-            }
-        });
-    }
- 
-    private void setupDisappearanceTimer() {
-        System.out.println("dans setupDisapearanceTimer");
-        disappearanceTimer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                disappearanceTimer.stop();
-                
                 deleteGrenade();
             }
         });
     }
+
     public void activateGrenade() {
-        System.out.println("dans activateGrenade");
-      //  double distanceToPlayer = Math.sqrt(Math.pow(gameManager.getPlayer().getX() - x, 2) + Math.pow(gameManager.getPlayer().getY() - y, 2));
-        
-        if (!isGrenadeActivated ) {
-            appearanceTimer.start();
-            this.shoot(); // Décrémentez le nombre de munitions uniquement si la grenade peut être placée
+        if (!isGrenadeActivated && getMunition() > 0) {
+            isGrenadeActivated = true;
+            setupExplosionTimer();
+            explosionTimer.start();
+            shoot();
         }
     }
-    
-   
-    
-    
-    
 
-    private void drawExplosion(int x, int y, Graphics g,  List<Personnage> enemies) {
-        System.out.println("dans drawExplosion");
+    private void drawExplosion(int x, int y, Graphics g, List<Personnage> enemies) {
         Color grayTransparent = new Color(128, 128, 128, 128);
         g.setColor(grayTransparent);
         g.fillOval(x - 40, y - 40, 150, 150);
 
-       
         for (Personnage personnage : enemies) {
             double distance = Math.sqrt(Math.pow(personnage.x - x, 2) + Math.pow(personnage.y - y, 2));
             if (distance <= 75) {
@@ -114,8 +77,7 @@ public class A4 extends Armes {
         }
     }
 
-    private void deleteGrenade() {
-        System.out.println("dans deleteGrenade");
+    public void deleteGrenade() {
         isGrenadeActivated = false;
         this.dimension = 0;
     }
@@ -153,14 +115,6 @@ public class A4 extends Armes {
         isGrenadeActivated = grenadeActivated;
     }
 
-    public Timer getAppearanceTimer() {
-        return appearanceTimer;
-    }
-
-    public void setAppearanceTimer(Timer appearanceTimer) {
-        this.appearanceTimer = appearanceTimer;
-    }
-
     public Timer getExplosionTimer() {
         return explosionTimer;
     }
@@ -168,14 +122,4 @@ public class A4 extends Armes {
     public void setExplosionTimer(Timer explosionTimer) {
         this.explosionTimer = explosionTimer;
     }
-
-    public Timer getDisappearanceTimer() {
-        return disappearanceTimer;
-    }
-
-    public void setDisappearanceTimer(Timer disappearanceTimer) {
-        this.disappearanceTimer = disappearanceTimer;
-    }
-
-
 }

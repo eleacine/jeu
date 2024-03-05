@@ -44,6 +44,7 @@ public abstract class Armes {
         }
     }
 
+
     public void besoinRecharge() {
         if (this.munition == 0) {
             // Définir la durée du timer en millisecondes

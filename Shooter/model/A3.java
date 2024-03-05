@@ -33,6 +33,7 @@ public class A3 extends Armes {
         if (distanceToPlayer <= getDistance()) {
             g.setColor(this.color);
             g.fillOval(x, y, dimension, dimension);
+            shoot();
         } else {
             deleteMine();
         }
