@@ -112,3 +112,5 @@ Eléacine
 - commencer a réfléchir au deblocage d'armes selon les niveaux
 - réflexion autour de la game loop
 
+Ines :
+- Finition des armes et des ennemis

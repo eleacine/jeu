@@ -5,7 +5,11 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+
+import Shooter.Managers.GameManager;
+
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class A4 extends Armes {
     private int x;
@@ -15,32 +19,49 @@ public class A4 extends Armes {
     private Timer appearanceTimer;
     private Timer explosionTimer;
     private Timer disappearanceTimer;
-
+    private long disappearanceDelay = 1000;  
+    private long explosionTime;
+    public GameManager gameManager;
     public A4() {
-        super("grenade", 50, false, 5, Color.GRAY,2000,400,true);
+        super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
     }
 
     public A4(int x, int y) {
-        super("grenade", 50, false, 5, Color.GRAY,2000,400,true);
+        super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
         this.x = x;
         this.y = y;
         setupAppearanceTimer();
     }
 
     private void setupAppearanceTimer() {
-        appearanceTimer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isGrenadeActivated = true;
-                appearanceTimer.stop();
-                setupExplosionTimer();
-                explosionTimer.start();
+        System.out.println("dans setupAppearanceTimer");
+        explosionTime = System.currentTimeMillis() + 900;  // Set the explosion time 900 milliseconds in the future
+        isGrenadeActivated = true;
+    }
+
+    public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
+        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+
+        if (isGrenadeActivated) {
+            if (distanceToPlayer <= getDistance()) {
+                g.setColor(this.color);
+                g.fillOval(x, y, dimension, dimension);
+                drawExplosion(x, y, g, enemies);
+            } else {
+                System.out.println("en dehors de la zone");
             }
-        });
+
+            // Vérifie si le temps d'explosion est écoulé
+            if (System.currentTimeMillis() >= explosionTime) {
+                deleteGrenade();
+            }
+        }
     }
 
 
-    private void setupExplosionTimer() {
+
+  private void setupExplosionTimer() {
+        System.out.println("dans setupExplosionTimer");
         explosionTimer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,8 +72,9 @@ public class A4 extends Armes {
             }
         });
     }
-
+ 
     private void setupDisappearanceTimer() {
+        System.out.println("dans setupDisapearanceTimer");
         disappearanceTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,29 +84,23 @@ public class A4 extends Armes {
             }
         });
     }
-
     public void activateGrenade() {
-        if (!isGrenadeActivated) {
-            appearanceTimer.start();
-        }
-    }
-
-    public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
+        System.out.println("dans activateGrenade");
+      //  double distanceToPlayer = Math.sqrt(Math.pow(gameManager.getPlayer().getX() - x, 2) + Math.pow(gameManager.getPlayer().getY() - y, 2));
         
-        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
-    
-        if (!isGrenadeActivated || (isGrenadeActivated && distanceToPlayer <= getDistance())) {
-            g.setColor(this.color);
-            g.fillOval(x, y, dimension, dimension);
-    
-            if (isGrenadeActivated) {
-                drawExplosion(x, y, g, enemies);
-            }
+        if (!isGrenadeActivated ) {
+            appearanceTimer.start();
+            this.shoot(); // Décrémentez le nombre de munitions uniquement si la grenade peut être placée
         }
     }
+    
+   
+    
+    
     
 
     private void drawExplosion(int x, int y, Graphics g,  List<Personnage> enemies) {
+        System.out.println("dans drawExplosion");
         Color grayTransparent = new Color(128, 128, 128, 128);
         g.setColor(grayTransparent);
         g.fillOval(x - 40, y - 40, 150, 150);
@@ -99,6 +115,7 @@ public class A4 extends Armes {
     }
 
     private void deleteGrenade() {
+        System.out.println("dans deleteGrenade");
         isGrenadeActivated = false;
         this.dimension = 0;
     }

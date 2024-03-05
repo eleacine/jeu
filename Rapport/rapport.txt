@@ -134,3 +134,6 @@ Semaine 5:
 Eléacine :
     - changement du nombre de cases pour le plateau 
     - essayer de bloquer les ennemis s'ils vont en direction des cases rouges mais echec
+
+Ines :
+    - Finition des armes

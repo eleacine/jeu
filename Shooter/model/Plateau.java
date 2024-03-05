@@ -100,7 +100,7 @@ public class Plateau extends JPanel {
 
         // Dessiner les pièges
         for (A3 piege : pieges) {
-            piege.draw(piege.x, piege.y, g);
+            piege.draw(g,gameManager.getPlayer().getX(),gameManager.getPlayer().getY());
         }
         for(A4 grenade : grenade){
             grenade.draw(g,gameManager.getPersoList(),gameManager.getPlayer().getX(),gameManager.getPlayer().getY());
