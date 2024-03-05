@@ -148,3 +148,5 @@ Leonor:
 
 Ines :
     - Finition des armes
+Majoori :
+    - essayer d'avancer dans le mode edition
