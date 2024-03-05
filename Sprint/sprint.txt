@@ -112,5 +112,14 @@ Eléacine
 - commencer a réfléchir au deblocage d'armes selon les niveaux
 - réflexion autour de la game loop
 
+Marylou :
+- finir les armes
+- finir les ennemis 
+- ajouter des éléments pour le joueur (traces de pas)
+- peut-être du son 
+
+Leonor:
+- faire des tests sur les elements graphiques: changer les cases du plateau par des casses "illustrées"
+- commencer à faire les éléments d'interface utilisateur (settings, menu, règles...)
 Ines :
 - Finition des armes et des ennemis

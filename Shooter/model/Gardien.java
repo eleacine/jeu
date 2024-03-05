@@ -17,18 +17,26 @@ public class Gardien extends Enemy {
      */
 
     private int visionAngle;
+    private boolean playerDetected;
+    private int startLocationX;
+    private int direction; // 1 pour droite, -1 pour gauche
 
-    public Gardien(int x, int y) {
-        //x:900
-        //y:250
-        super(x, y, 55, 200, 2, 0, 25, 100, 0, Color.MAGENTA);
+    public Gardien(int x, int y) {    
+        super(x, y, 55, 200, 1, 0, 25, 100, 0, Color.MAGENTA);
         this.visionAngle = 340;
+        this.playerDetected = false;
+        this.startLocationX = x;
+        this.direction = 1; // Commence à se déplacer vers la droite
     }
 
+ 
     public void deplacer() {
-        x += 2;
-        if (x > 1000) {
-            x = -30;
+        x += direction * maxSpeed; // La vitesse est ajustée ici (1 pour un mouvement lent)
+        
+        if (x > startLocationX + 350) {
+            direction = -1; // Change de direction lorsqu'il atteint la limite de droite
+        } else if (x < startLocationX) {
+            direction = 1; // Change de direction lorsqu'il atteint la limite de gauche
         }
     }
 
@@ -53,6 +61,42 @@ public class Gardien extends Enemy {
 
     public void dessinerVision(Graphics g) {
         g.setColor(new Color(255, 255, 255, 100));
-        g.fillArc(x - 40, y - 40, 130, 130, visionAngle, 30);
+        g.fillArc(x - 75, y - 75 , 200, 200, visionAngle, 65);
+    }
+
+    private boolean isPlayerInVisionAngle(double angleToPlayer) {
+        double startAngle = visionAngle - 15;
+        double endAngle = visionAngle + 15;
+    
+        if (startAngle < 0) {
+            startAngle += 360;
+        }
+    
+        if (angleToPlayer < 0) {
+            angleToPlayer += 360;
+        }
+    
+        // Vérifier si l'angle du joueur est dans la plage du faisceau balayant
+        if (angleToPlayer >= startAngle && angleToPlayer <= endAngle) {
+            return true;
+        }
+    
+        return false;
+    }
+
+    
+    @Override
+    public void updateBehavior(Player player) {
+        if (!isPlayerDetected(player) && playerDetected == false) {
+            deplacer();
+            deplacerVision(player);
+
+            // Logique de détection du joueur
+            if (isPlayerInVisionAngle(calculateAngle(x, y, player.x, player.y))) {
+                playerDetected = true;
+            }
+        } else {
+            suivreJoueur(player);
+        }
     }
 }

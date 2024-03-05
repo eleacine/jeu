@@ -1,5 +1,6 @@
 package Shooter.Managers;
 
+import Shooter.model.Armes;
 import Shooter.model.Player;
 
 public class ManagerArmes {
@@ -23,6 +24,13 @@ public class ManagerArmes {
             player.setCurrentArme(player.getCurrentArme() + 1);
         }
     }
-     
+
+    public void recharge(){
+        //recharger les armes
+        for (Armes arme : player.getArmes()) {
+            arme.reinitialiser();
+            
+        }
+    }
     
 }

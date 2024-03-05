@@ -57,9 +57,7 @@ public class Enemy extends Personnage {
 		this.color = color;
 	}
 
-	public void updateBehavior(Player player) {
-
-    }
+	public void updateBehavior(Player player) {}
 
     public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
         // Implémentez la logique de tir spécifique pour cet ennemi
