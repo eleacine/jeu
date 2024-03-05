@@ -123,3 +123,8 @@ Leonor:
 - commencer à faire les éléments d'interface utilisateur (settings, menu, règles...)
 Ines :
 - Finition des armes et des ennemis
+
+Majoori : 
+-avancer dans le mode edition
+-réfléchir à implémenter une "sortie"
+-modifier le plateau
