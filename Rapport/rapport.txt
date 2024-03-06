@@ -150,3 +150,9 @@ Ines :
     - Finition des armes
 Majoori :
     - essayer d'avancer dans le mode edition
+
+Semaine 6 :
+
+Marylou :
+    - active/desactive musique dans setting
+    
