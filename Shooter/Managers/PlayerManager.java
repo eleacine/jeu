@@ -60,6 +60,23 @@ public class PlayerManager extends KeyAdapter {
         player.setYSpeed(ySpeed);
     }
 
+    public void moveUp() {
+        player.setYSpeed(player.getMaxSpeed() * -1);
+    }
+
+    public void moveDown() {
+        player.setYSpeed(player.getMaxSpeed());
+    }
+
+    public void moveLeft() {
+        player.setXSpeed(player.getMaxSpeed() * -1);
+    }
+
+    public void moveRight() {
+        player.setXSpeed(player.getMaxSpeed());
+    }
+
+
     public void update() {
         checkPlayerlimits();
         checkObstacle();
@@ -194,22 +211,7 @@ public class PlayerManager extends KeyAdapter {
         return dotProduct > 0;
     }
 
-    public void moveUp() {
-        player.setYSpeed(player.getYSpeed() - player.getMaxSpeed());
-    }
-
-    public void moveDown() {
-        player.setYSpeed(player.getYSpeed() + player.getMaxSpeed());
-    }
-
-    public void moveLeft() {
-        player.setXSpeed(player.getXSpeed() - player.getMaxSpeed());
-    }
-
-    public void moveRight() {
-        player.setXSpeed(player.getXSpeed() + player.getMaxSpeed());
-    }
-
+    
     public void stop() {
         player.setXSpeed(0);
         player.setYSpeed(0);
