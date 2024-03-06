@@ -155,4 +155,5 @@ Semaine 6 :
 
 Marylou :
     - active/desactive musique dans setting
+    - déplacement du joueur 
     
