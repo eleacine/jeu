@@ -100,6 +100,9 @@ public class GameManager {
         this.ennemiManager = ennemiManager;
     }
 
+    public boolean getSound () {
+        return game.getSound();
+    }
 
     
 

@@ -130,6 +130,4 @@ public class Bullet {
     public float getDistanceTraveled() {
         return distanceTraveled;
     }
-
-    // 
 }

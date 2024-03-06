@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import Shooter.model.Enemy;
-
 import Shooter.model.Personnage;
 
 public class EnnemiManager {

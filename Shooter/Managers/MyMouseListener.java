@@ -46,7 +46,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                         player.getArmes().get(player.getCurrentArme()).getPower(),
                         player.getArmes().get(player.getCurrentArme()).color);
                 projectilesManager.addBulletPlayer(b);
-                soundPlayer.playSound("Shooter/res/tir_sound.wav");
+
+                if (soundPlayer != null && gameManager.getSound()) {
+                    soundPlayer.playSound("Shooter/res/tir_sound.wav");
+                }
 
             } else if (player.getArmes().get(player.getCurrentArme()).getMunition() > 0
                     && !player.getArmes().get(player.getCurrentArme()).getType()) {
@@ -63,7 +66,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 }
             } else {
                 player.getArmes().get(player.getCurrentArme()).besoinRecharge();
-                soundPlayer.playSound("Shooter/res/arme_vide.wav");
+
+                if (soundPlayer != null && gameManager.getSound()){
+                    soundPlayer.playSound("Shooter/res/arme_vide.wav");
+                }
             }
         }
     }

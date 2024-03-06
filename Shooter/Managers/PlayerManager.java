@@ -14,6 +14,7 @@ public class PlayerManager extends KeyAdapter {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
+    
 
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -23,28 +24,24 @@ public class PlayerManager extends KeyAdapter {
     public void handleKeyPress() {
 
         if (upPressed) {
-            moveForward();
+            // moveForward();
+            moveUp();
         }
         if (downPressed) {
-            moveBackward();
+            // moveBackward();
+            moveDown();
         }
         if (!upPressed && !downPressed) {
             player.setYSpeed(0);
         }
         if (leftPressed) {
-            player.setDirection(player.getDirection() - player.getRotationSpeed());
+            // player.setDirection(player.getDirection() - player.getRotationSpeed());
+            moveLeft();
         }
         if (rightPressed) {
-            player.setDirection(player.getDirection() + player.getRotationSpeed());
+            // player.setDirection(player.getDirection() + player.getRotationSpeed());
+            moveRight();
         }
-        // if (!leftPressed && !rightPressed) {
-        // player.xSpeed = 0;
-        // si upPressed ou downPressed faire avancer = cause du ralentissement
-        // }
-
-        // if (spacePressed && !spacePressedPrev) {
-        // shoot();
-        // }
 
     }
 
@@ -205,6 +202,14 @@ public class PlayerManager extends KeyAdapter {
         player.setYSpeed(player.getYSpeed() + player.getMaxSpeed());
     }
 
+    public void moveLeft() {
+        player.setXSpeed(player.getXSpeed() - player.getMaxSpeed());
+    }
+
+    public void moveRight() {
+        player.setXSpeed(player.getXSpeed() + player.getMaxSpeed());
+    }
+
     public void stop() {
         player.setXSpeed(0);
         player.setYSpeed(0);
@@ -216,10 +221,8 @@ public class PlayerManager extends KeyAdapter {
         // System.out.println("keyPressed : " + code);
         if (code == KeyEvent.VK_UP || code == KeyEvent.VK_Z) {
             upPressed = true;
-            moveUp();
         } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
             downPressed = true;
-            moveDown();
         } else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_Q) {
             leftPressed = true;
         } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
@@ -244,8 +247,10 @@ public class PlayerManager extends KeyAdapter {
             stop();
         } else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_Q) {
             leftPressed = false;
+            stop();
         } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
             rightPressed = false;
+            stop();
         }
 
     }

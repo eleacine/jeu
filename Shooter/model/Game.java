@@ -39,7 +39,7 @@ public class Game extends JFrame implements Runnable {
 
 	public GameManager gameManager;
 
-	protected SoundPlayer soundPlayer = new SoundPlayer();
+	protected boolean soundEnabled = true;
 
 	public Game() {
 
@@ -136,15 +136,17 @@ public class Game extends JFrame implements Runnable {
 
 		long now;
 
-		soundPlayer.playSound("Shooter/res/geometryDash.wav");
+
 
 		// while (true) {
 		while (isRunning) {
+
 
 			now = System.nanoTime();
 
 			// Render
 			if (now - lastFrame >= timePerFrame) {
+
 				repaint();
 				lastFrame = now;
 				// frames++;
@@ -230,6 +232,10 @@ public class Game extends JFrame implements Runnable {
 		reset();
 	}
 
+	public void updateSound(boolean soundEnabled) {
+		this.soundEnabled = soundEnabled;
+	}
+
 	// --------- GETTERS et SETTERS -----------
 	public MenuPage getMenu() {
 		return menu;
@@ -245,6 +251,10 @@ public class Game extends JFrame implements Runnable {
 
 	public List<Personnage> getPersoList() {
 		return this.perso_list;
+	}
+
+	public boolean getSound () {
+		return soundEnabled;
 	}
 
 }
