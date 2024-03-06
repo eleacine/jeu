@@ -145,3 +145,8 @@ Marylou :
 Leonor:
     - changement des txt des Enemy pour ajouter les coordonnées manuelement 
     - changement des constructeurs des Enemy pour prendre des coordonnées  
+
+Ines :
+    - Finition des armes
+Majoori :
+    - essayer d'avancer dans le mode edition

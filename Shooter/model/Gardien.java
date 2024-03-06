@@ -84,19 +84,21 @@ public class Gardien extends Enemy {
         return false;
     }
 
-    
+ 
     @Override
     public void updateBehavior(Player player) {
         if (!isPlayerDetected(player) && playerDetected == false) {
             deplacer();
             deplacerVision(player);
-
-            // Logique de détection du joueur
-            if (isPlayerInVisionAngle(calculateAngle(x, y, player.x, player.y))) {
+    
+            double angleToPlayer = calculateAngle(x, y, player.x, player.y);
+    
+            if (isPlayerInVisionAngle(angleToPlayer)) {
                 playerDetected = true;
             }
         } else {
             suivreJoueur(player);
         }
     }
+    
 }
