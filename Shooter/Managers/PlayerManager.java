@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
-// import Shooter.Managers.ManagerCase;
+import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
@@ -142,10 +142,20 @@ public class PlayerManager extends KeyAdapter {
 
         // Ajuster la vitesse maximale du joueur en fonction du type de case
         switch (tileType) {
-            case ManagerCase.OBSTACLE:
+            //OBSTACLE RALENTISSEUR EAU
+            case ManagerCase.EAU_BAS:
+            case ManagerCase.EAU_HAUT:
+            case ManagerCase.EAU_GAUCHE:
+            case ManagerCase.EAU_DROIT:
+            case ManagerCase.EAU_COIN_DROITE_BAS:
+            case ManagerCase.EAU_COIN_DROITE_HAUT:
+            case ManagerCase.EAU_COIN_GAUCHE_BAS:
+            case ManagerCase.EAU_COIN_GAUCHE_HAUT:
+            case ManagerCase.EAU_MILIEU:
                 player.setMaxSpeed(1);
                 break;
-            case ManagerCase.MARCHE:
+            //MARCHE NORMAL POUR LE JOUEUR
+            case ManagerCase.SOL:
                 player.setMaxSpeed(2);
                 break;
             default:
@@ -169,7 +179,7 @@ public class PlayerManager extends KeyAdapter {
             int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
 
             // Vérifier si la case est un obstacle (type 2)
-            if (tileType == ManagerCase.INTERDIT) {
+            if (tileType == ManagerCase.MUR_BAS ||tileType == ManagerCase.MUR_HAUT ||tileType == ManagerCase.MUR_DROIT ||tileType == ManagerCase.MUR_GAUCHE ||tileType == ManagerCase.MUR_COIN ||tileType == ManagerCase.MUR_MILIEU||tileType == ManagerCase.MUR_C_BAS||tileType == ManagerCase.MUR_C_HAUT||tileType == ManagerCase.MUR_C_DROIT||tileType == ManagerCase.MUR_C_GAUCHE) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 

@@ -13,7 +13,7 @@ public class Enregistrement {
     public static BufferedImage getSpriteAtlas() {
 
 		BufferedImage img = null;
-		URL fichier = Enregistrement.class.getClassLoader().getResource("Shooter/model/trois_carres.png");
+		URL fichier = Enregistrement.class.getClassLoader().getResource("Shooter/model/image_combinee.png");
 		try {
 			img = ImageIO.read(fichier);
 		} catch (IOException e) {
