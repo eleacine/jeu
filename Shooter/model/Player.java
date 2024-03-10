@@ -20,7 +20,7 @@ public class Player extends Personnage {
     protected ImageIcon sprite;
 
     public Player(String pseudo) {
-        super(1000, 500, 0, 0, 45, 2, 200);
+        super(1000, 500, 0, 0, 45, 2, 1000);
         this.pseudo = pseudo;
 
         this.armes.add(new A1());

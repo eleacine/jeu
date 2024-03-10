@@ -54,8 +54,7 @@ public class Game extends JFrame implements Runnable {
 
 		this.perso_list.add(0, player);
 
-		// perso_list.add(new E3());
-		// perso_list.add(new Gardien());
+		perso_list.add(new EnemyIA(850, 150));
 
 		// print enemy list to check
 		System.out.println("Enemy List:");
