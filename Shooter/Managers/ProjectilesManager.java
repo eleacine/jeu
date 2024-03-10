@@ -138,10 +138,10 @@ public class ProjectilesManager {
         currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
 
         // Vérifier que detruitMur est vrai avant de mettre à jour la case
-        if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == 2 && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
+        if ((gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_BAS||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_HAUT||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_DROIT||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_GAUCHE) && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
 
             // La case est de type 2 (obstacle), la changer en type 1 (marche)
-            gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = 0;
+            gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = ManagerCase.SOL;
         }
     }
 }
