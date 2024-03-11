@@ -107,7 +107,7 @@ SEMAINE 6
 -regarder des améliorations possiblement dans les temps
 
 Eléacine 
-- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables
+- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables(en cours)
 - finir les armes 
 - commencer a réfléchir au deblocage d'armes selon les niveaux
 - réflexion autour de la game loop
@@ -128,3 +128,21 @@ Majoori :
 -avancer dans le mode edition
 -réfléchir à implémenter une "sortie"
 -modifier le plateau
+
+SEMAINE 7
+
+Eléacine:
+-design les armes comme les grenades et mines
+-design les munitions 
+-design explosions
+-design objet bloquant table et armoire 
+-et chaque fois faire en sorte que les munitions et mures soit adapter a l'effet escompter
+
+Marylou:
+- terminer l'ennemi avec IA pour qu'il prenne en compte les obstacles
+- faire en sorte qu'on puisse rejouer une fois tous les niveaux terminés
+
+Leonor: 
+- reprendre les IA avec Marylou et les implementer pour chaque ennemi si elles fonctionnent
+- rejoindre les cases dans des sous types (Free, Mur, Ralentissement, Obstacles, Block) --> pour faciliter et organiser le code
+- commencer à faire les éléments d'interface utilisateur (settings, menu, règles...)
