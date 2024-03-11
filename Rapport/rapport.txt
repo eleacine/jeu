@@ -157,3 +157,8 @@ Marylou :
     - active/desactive musique dans setting
     - déplacement du joueur 
     
+Eléacine:
+    -travailler sur le design des cases 
+    -implementer les nouveaux design
+    -travailler sur le nouveau bloquage du joueur, pas réussie il faut pointer vers une nouvelle direction pour continuer
+    -réfléchir au design du mouvement du joueur
