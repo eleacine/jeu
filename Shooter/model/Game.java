@@ -35,7 +35,7 @@ public class Game extends JFrame implements Runnable {
 	public boolean isRunning = true;
 	public boolean begin = false;
 
-	public int nbLevel = 2;
+	public int nbLevel = 3;
 
 	public GameManager gameManager;
 

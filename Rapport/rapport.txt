@@ -156,6 +156,8 @@ Semaine 6 :
 Marylou :
     - active/desactive musique dans setting
     - déplacement du joueur 
+    - ennemiIA pas super fonctionnel, evite à moitié les obstacles
+    - passer les niveaux plus lentement
     
 Eléacine:
     -travailler sur le design des cases 
