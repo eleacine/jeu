@@ -26,45 +26,50 @@ public class EnemyIA extends Enemy {
 
     @Override
     public void updateBehavior(Player player) {
-        moveEnemyTowardsPlayer(player.x, player.y);
+        // moveEnemyTowardsPlayer(player.x, player.y);
     }
 
-    private void moveEnemyTowardsPlayer(int playerX, int playerY) {
+    public void moveEnemyTowardsPlayer(int playerX, int playerY, int[][] map) {
         int deltaX = (this.x < playerX) ? 1 : ((this.x > playerX) ? -1 : 0);
         int deltaY = (this.y < playerY) ? 1 : ((this.y > playerY) ? -1 : 0);
 
         int newX = this.x + deltaX;
         int newY = this.y + deltaY;
 
-        if (isValidMove(newX, newY)) {
+        if (isValidMove(newX, newY, map)) {
             this.x = newX;
             this.y = newY;
         } else {
             // Si la case suivante est un mur, l'ennemi doit choisir une direction alternative
-            int[] alternativeDirection = chooseAlternativeDirection(deltaX, deltaY);
-            newX = this.x + alternativeDirection[0];
-            newY = this.y + alternativeDirection[1];
+            int[] alternativeDirection = chooseAlternativeDirection(deltaX, deltaY, map);
+            newX = this.x + alternativeDirection[1];
+            newY = this.y + alternativeDirection[0];
 
-            if (isValidMove(newX, newY)) {
+            if (isValidMove(newX, newY, map)) {
                 this.x = newX;
                 this.y = newY;
             }
         }
     }
 
-    private int[] chooseAlternativeDirection(int deltaX, int deltaY) {
+    private int[] chooseAlternativeDirection(int deltaX, int deltaY, int[][] map) {
         // Choisir une direction alternative pour contourner le mur
+        int newX = deltaX / 40;
+        int newY = deltaY / 40;
         if (deltaX != 0) {
             // Si le déplacement horizontal, essayer de se déplacer verticalement
-            return new int[]{0, (deltaY < 0) ? 1 : -1};
+            return new int[]{0, (deltaY < 0 || map[newY + 1][newX +1] != 7) ? 1 : -1};
         } else {
             // Si le déplacement vertical, essayer de se déplacer horizontalement
-            return new int[]{(deltaX < 0) ? 1 : -1, 0};
+            return new int[]{(deltaX < 0 || map[newY + 1][newX +1] != 7 ) ? 1 : -1, 0};
         }
     }
 
-    private boolean isValidMove(int x, int y) {
-        return x >= 0 && x < 1500 && y >= 0 && y < 800;
+    private boolean isValidMove(int x, int y, int[][] map) {
+        int xMap = x / 40;
+        int yMap = y / 40;
+        // System.out.println(map[yMap][xMap]);
+        return x >= 0 && x < 1500 && y >= 0 && y < 800 && map[yMap + 1][xMap + 1] != 7;
     }
 
 }

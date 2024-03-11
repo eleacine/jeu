@@ -159,4 +159,31 @@ public class Plateau extends JPanel {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel());
     }
 
+
+    // --------- GETTERS et SETTERS -----------
+
+    public int[][] getLevel_tab() {
+        return level_tab;
+    }
+
+    public ManagerCase getTile_manager() {
+        return tile_manager;
+    }
+
+    public Graphics getPlateau_graphic() {
+        return plateau_graphic;
+    }
+
+    public ArrayList<A3> getPieges() {
+        return pieges;
+    }
+
+    public ArrayList<A4> getGrenade() {
+        return grenade;
+    }
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
 }

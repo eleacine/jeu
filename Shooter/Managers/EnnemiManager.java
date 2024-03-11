@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Shooter.model.Enemy;
+import Shooter.model.EnemyIA;
 import Shooter.model.Personnage;
 
 public class EnnemiManager {
@@ -21,7 +22,10 @@ public class EnnemiManager {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
                 if (ennemi.getSize() >= 0) {
-                    ennemi.updateBehavior(gameManager.getPlayer());
+               if (ennemi instanceof EnemyIA) {
+                 EnemyIA ennemiIA = (EnemyIA) ennemi;
+                 ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(), gameManager.getGamePlateau().getLevel_tab());
+               } else {     ennemi.updateBehavior(gameManager.getPlayer());
                     if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
                         ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
                     }
@@ -34,7 +38,7 @@ public class EnnemiManager {
                         // if (player.sante <= 0) {
                         // player.size = 0;
                         // }
-                    }
+                    }}
                 }
             }
         }
