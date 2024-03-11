@@ -162,3 +162,11 @@ Eléacine:
     -implementer les nouveaux design
     -travailler sur le nouveau bloquage du joueur, pas réussie il faut pointer vers une nouvelle direction pour continuer
     -réfléchir au design du mouvement du joueur
+
+Leonor (pas de push catte semaine car toutes mes tentatives ont échoué º_º )
+    - test (échoué) d'IA d'enemi avec backtrack pour calculer le parcours le plus court sur le tableau de cases --> 1e essais: pb de backtrack (pas le chemin le plus court)
+                                                                                                                --> 2e essais: pb de queue (si le joueur bouge, les cases déjà visitées s'effassent)
+    - test (échoué) d'IA d'enemi avec backtrack pour calculer le parcours le plus court avec les coordonnées de l'ennemi et du joueur   --> pb d'appel (dès que le joueur bouge ça fait n'importe quoi)
+                                                                                                                                        --> le chemin le plus court n'est pas modifié en fonction du mouvement du joueur, mais est complètement re-calculé à partir du la position de l'ennemi. Soit, si joueur bouge un peu tout le temps, alors ennemi l'atteint jamais...
+    - test (échoué) d'IA d'enemi avec backtrack pour calculer le parcours le plus court 
+    ***à cause des differents types de cases peut-être A* algorithm est plus adapté?***
