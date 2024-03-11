@@ -107,7 +107,7 @@ SEMAINE 6
 -regarder des améliorations possiblement dans les temps
 
 Eléacine 
-- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables
+- améliorer le blocage du joueur en précense de cases, pour qu'il bloque dans des directions plus agréables(en cours)
 - finir les armes 
 - commencer a réfléchir au deblocage d'armes selon les niveaux
 - réflexion autour de la game loop
@@ -132,10 +132,11 @@ Majoori :
 SEMAINE 7
 
 Eléacine:
--travailler sur le design des cases 
--implementer les nouveaux design
--travailler sur le nouveau bloquage du joueur, pas réussie il faut pointer vers une nouvelle direction pour continuer
--réfléchir au design du mouvement du joueur
+-design les armes comme les grenades et mines
+-design les munitions 
+-design explosions
+-design objet bloquant table et armoire 
+-et chaque fois faire en sorte que les munitions et mures soit adapter a l'effet escompter
 
 Marylou:
 - terminer l'ennemi avec IA pour qu'il prenne en compte les obstacles
