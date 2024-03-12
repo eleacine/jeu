@@ -153,3 +153,8 @@ Leonor:
 - rejoindre les cases dans des sous types (Free, Mur, Ralentissement, Obstacles, Block) --> pour faciliter et organiser le code
 - commencer à faire les éléments d'interface utilisateur (settings, menu, règles...)
 
+Majoori ; 
+-apparaitre correctement le plateau
+-mode edition ennemie
+-page campagne et level personnalisé
+
