@@ -74,10 +74,6 @@ public class ManagerCase {
         return cases.get(id).getSprite();
     }
 
-    // private BufferedImage getSprite(int xCord, int yCord) {
-    //     return atlas.getSubimage(xCord * 50, 0, 50, 50);
-    // }
-
     private BufferedImage getSprite(int xCord, int yCord) {
         int subImageWidth = 40; // Largeur de la sous-image
         int subImageHeight = 40; // Hauteur de la sous-image

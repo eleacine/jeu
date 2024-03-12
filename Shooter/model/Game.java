@@ -35,7 +35,7 @@ public class Game extends JFrame implements Runnable {
 	public boolean isRunning = true;
 	public boolean begin = false;
 
-	public int nbLevel = 2;
+	public int nbLevel = 3;
 
 	public GameManager gameManager;
 
@@ -54,7 +54,7 @@ public class Game extends JFrame implements Runnable {
 
 		this.perso_list.add(0, player);
 
-		perso_list.add(new EnemyIA(850, 150));
+		perso_list.add(new EnemyIA(1000, 150));
 
 		// print enemy list to check
 		System.out.println("Enemy List:");
