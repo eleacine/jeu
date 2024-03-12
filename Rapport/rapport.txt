@@ -177,3 +177,7 @@ Leonor (pas de push catte semaine car toutes mes tentatives ont échoué º_º )
     - test (échoué) d'IA d'enemi avec backtrack pour calculer le parcours le plus court 
     ***à cause des differents types de cases peut-être A* algorithm est plus adapté?***
 
+Majoori :  -mode editing
+    - ajout de barre pour choisir level
+    - recuperer le nombre de level cree dans plateau.txt
+    - faire apparaitre le plateau correctement(echoue)
