@@ -23,7 +23,14 @@ public class PlayPage extends GameScene  {
 		// tileManager = new ManagerCase();
 		add(createButton("Menu", "Menu"));
 	}
-
+/* 
+	public void loadNextLevel() {
+        int currentLevel = game.getCurrentLevel();
+        LevelTransitionAnimation.playTransitionAnimation(); 
+        game.loadNextLevel(); 
+        repaint(); 
+    }
+*/
 	public void paintComponent(Graphics g) { // permet de visualiser ou creer les graphics
 		super.paintComponents(g);
 		this.game.gamePlateau.render_plateau(g); // ancien render pour gamePlateau

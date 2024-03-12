@@ -141,3 +141,8 @@ Eléacine:
 Marylou:
 - terminer l'ennemi avec IA pour qu'il prenne en compte les obstacles
 - faire en sorte qu'on puisse rejouer une fois tous les niveaux terminés
+
+Ines:
+-Ajout d'une transition entre niveau
+-Regler les problemes dans les armes (Lorsquon se deplace et que l'arme
+ au sol sort de la distance maximal elle disparait)

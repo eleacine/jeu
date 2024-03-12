@@ -162,3 +162,7 @@ Eléacine:
     -implementer les nouveaux design
     -travailler sur le nouveau bloquage du joueur, pas réussie il faut pointer vers une nouvelle direction pour continuer
     -réfléchir au design du mouvement du joueur
+
+Ines
+    -Debut d'implementation d'une classe qui gére les transition de niveaux
+    -Essai pour regler les probleme d'arme (L'arme de disparait plus masi elle suit le joueur ...)

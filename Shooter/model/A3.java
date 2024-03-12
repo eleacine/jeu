@@ -25,19 +25,28 @@ public class A3 extends Armes {
     }
 
 
-
-
-    public void draw(Graphics g, int playerX, int playerY) {
-        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
-        
-        if (distanceToPlayer <= getDistance()) {
-            g.setColor(this.color);
-            g.fillOval(x, y, dimension, dimension);
-            shoot();
-        } else {
-            deleteMine();
+    
+        public void draw(Graphics g, int playerX, int playerY) {
+            double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+    
+            if (distanceToPlayer <= getDistance()) {
+                g.setColor(this.color);
+                g.fillOval(x, y, dimension, dimension);
+                shoot();
+            } else {
+                // Ajuster la position de la mine en fonction de la distance par rapport au joueur
+                double angleToPlayer = Math.atan2(playerY - y, playerX - x);
+                x = playerX - (int) (Math.cos(angleToPlayer) * getDistance());
+                y = playerY - (int) (Math.sin(angleToPlayer) * getDistance());
+                
+                // Dessiner la mine à la nouvelle position
+                g.setColor(this.color);
+                g.fillOval(x, y, dimension, dimension);
+                shoot();
+            }
         }
-    }
+    
+    
 
     public void deleteMine() {
         this.x = -100;
