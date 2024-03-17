@@ -10,32 +10,22 @@ import Shooter.model.Enregistrement;
 
 public class ManagerCase {
 
+    public Case SOL_CASE, HERBE, MUR_HAUT ,MUR_BAS , MUR_GAUCHE,MUR_DROIT 
+    , MUR_COIN , MUR_MILIEU , MUR_C_BAS , MUR_C_HAUT , MUR_C_GAUCHE , MUR_C_DROIT 
+    , EAU_BAS ,EAU_HAUT, EAU_GAUCHE , EAU_DROIT , EAU_COIN_DROITE_HAUT, EAU_COIN_GAUCHE_BAS ,EAU_COIN_GAUCHE_HAUT ,EAU_COIN_DROITE_BAS , EAU_MILIEU ;
+
+    public static final int SOL = 0;
+	public static final int MUR = 1;
+	public static final int OBSTACLE = 2;
 	
     protected static final int tailleCase = 40;
-    public static final int SOL = 0;
-    public static final int HERBE = 1;
-    public static final int MUR_HAUT = 2;
-    public static final int MUR_BAS = 3;
-    public static final int MUR_GAUCHE = 4;
-    public static final int MUR_DROIT = 5;
-    public static final int MUR_COIN = 6;
-    public static final int MUR_MILIEU = 7;
-    public static final int MUR_C_BAS = 8;
-    public static final int MUR_C_HAUT = 9;
-    public static final int MUR_C_GAUCHE = 10;
-    public static final int MUR_C_DROIT = 11;
-    public static final int EAU_BAS = 12;
-    public static final int EAU_HAUT = 13;
-    public static final int EAU_GAUCHE = 14;
-    public static final int EAU_DROIT = 15;
-    public static final int EAU_COIN_DROITE_HAUT = 16;
-    public static final int EAU_COIN_GAUCHE_BAS = 17;
-    public static final int EAU_COIN_GAUCHE_HAUT = 18;
-    public static final int EAU_COIN_DROITE_BAS = 19;
-    public static final int EAU_MILIEU = 20;
+    
 
     private BufferedImage atlas;
     public ArrayList<Case> cases = new ArrayList<>();
+
+    public ArrayList<Case> mur = new ArrayList<>();
+    public ArrayList<Case> obstacle = new ArrayList<>();
 
     public ManagerCase() {
         loadAtlas();
@@ -43,27 +33,33 @@ public class ManagerCase {
     }
 
     private void createCases() {
-        cases.add(SOL, new Case(getSprite(0, 0)));
-        cases.add(HERBE, new Case(getSprite(1, 0)));
-        cases.add(MUR_HAUT, new Case(getSprite(2, 0)));
-        cases.add(MUR_BAS, new Case(getSprite(3, 0)));
-        cases.add(MUR_GAUCHE, new Case(getSprite(4, 0)));
-        cases.add(MUR_DROIT, new Case(getSprite(5, 0)));
-        cases.add(MUR_COIN, new Case(getSprite(6, 0)));
-        cases.add(MUR_MILIEU, new Case(getSprite(0, 1)));
-        cases.add(MUR_C_BAS, new Case(getSprite(1, 1)));
-        cases.add(MUR_C_HAUT, new Case(getSprite(2, 1)));
-        cases.add(MUR_C_GAUCHE, new Case(getSprite(3, 1)));
-        cases.add(MUR_C_DROIT, new Case(getSprite(4, 1)));
-        cases.add(EAU_BAS, new Case(getSprite(5, 1)));
-        cases.add(EAU_HAUT, new Case(getSprite(6, 1)));
-        cases.add(EAU_GAUCHE, new Case(getSprite(0, 2)));
-        cases.add(EAU_DROIT, new Case(getSprite(1, 2)));
-        cases.add(EAU_COIN_DROITE_HAUT, new Case(getSprite(2, 2)));
-        cases.add(EAU_COIN_GAUCHE_BAS, new Case(getSprite(3, 2)));
-        cases.add(EAU_COIN_GAUCHE_HAUT, new Case(getSprite(4, 2)));
-        cases.add(EAU_COIN_DROITE_BAS, new Case(getSprite(5, 2)));
-        cases.add(EAU_MILIEU, new Case(getSprite(6, 2)));
+        int id=0;
+        cases.add(SOL_CASE= new Case(getSprite(0, 0),id,SOL));
+        cases.add(HERBE=new Case(getSprite(1, 0),id++,SOL));
+
+        mur.add(MUR_HAUT= new Case(getSprite(2, 0),id++,MUR));
+        mur.add(MUR_BAS= new Case(getSprite(3, 0),id++,MUR));
+        mur.add(MUR_GAUCHE= new Case(getSprite(4, 0),id++,MUR));
+        mur.add(MUR_DROIT= new Case(getSprite(5, 0),id++,MUR));
+        mur.add(MUR_COIN= new Case(getSprite(6, 0),id++,MUR));
+        mur.add(MUR_MILIEU= new Case(getSprite(0, 1),id++,MUR));
+        mur.add(MUR_C_BAS= new Case(getSprite(1, 1),id++,MUR));
+        mur.add(MUR_C_HAUT= new Case(getSprite(2, 1),id++,MUR));
+        mur.add(MUR_C_GAUCHE=new Case(getSprite(3, 1),id++,MUR));
+        mur.add(MUR_C_DROIT= new Case(getSprite(4, 1),id++,MUR));
+
+        obstacle.add(EAU_BAS= new Case(getSprite(5, 1),id++,OBSTACLE));
+        obstacle.add(EAU_HAUT= new Case(getSprite(6, 1),id++,OBSTACLE));
+        obstacle.add(EAU_GAUCHE= new Case(getSprite(0, 2),id++,OBSTACLE));
+        obstacle.add(EAU_DROIT= new Case(getSprite(1, 2),id++,OBSTACLE));
+        obstacle.add(EAU_COIN_DROITE_HAUT= new Case(getSprite(2, 2),id++,OBSTACLE));
+        obstacle.add(EAU_COIN_GAUCHE_BAS= new Case(getSprite(3, 2),id++,OBSTACLE));
+        obstacle.add(EAU_COIN_GAUCHE_HAUT= new Case(getSprite(4, 2),id++,OBSTACLE));
+        obstacle.add(EAU_COIN_DROITE_BAS= new Case(getSprite(5, 2),id++,OBSTACLE));
+        obstacle.add(EAU_MILIEU= new Case(getSprite(6, 2),id++,OBSTACLE));
+
+        cases.addAll(mur);
+        cases.addAll(obstacle);
     }
 
     private void loadAtlas() {

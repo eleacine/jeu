@@ -136,16 +136,7 @@ public class ProjectilesManager {
             currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
     
             // Vérifiez si la munition est sur une case murale
-            if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_BAS ||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_HAUT ||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_DROIT ||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_GAUCHE ||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_MILIEU ||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_COIN || 
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_BAS||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_HAUT||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_DROIT||
-                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_GAUCHE) {
+            if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR) {
                 // Marquez la munition comme détruite
                 bullet.setSize(0);
             }
@@ -170,7 +161,7 @@ public class ProjectilesManager {
         currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
 
         // Vérifier que detruitMur est vrai avant de mettre à jour la case
-        if ((gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_BAS||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_HAUT||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_DROIT||gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_GAUCHE) && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
+        if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
 
             // La case est de type 2 (obstacle), la changer en type 1 (marche)
             gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = ManagerCase.SOL;
