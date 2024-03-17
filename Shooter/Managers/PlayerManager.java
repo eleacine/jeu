@@ -117,7 +117,7 @@ public class PlayerManager extends KeyAdapter {
     public void checkObstacle() {
         // Obtenir les indices actuels du joueur sur le plateau de jeu
          
-        int currentXIndex = (int) (player.getX() / 40)+ (int) Math.signum(player.getXSpeed());
+        int currentXIndex = (int) (player.getX() / 40) + (int) Math.signum(player.getXSpeed());
         int currentYIndex = (int) (player.getY() / 40)+ (int) Math.signum(player.getYSpeed());        
 
             // Vérifier la case devant le joueur

@@ -181,3 +181,10 @@ Majoori :  -mode editing
     - ajout de barre pour choisir level
     - recuperer le nombre de level cree dans plateau.txt
     - faire apparaitre le plateau correctement(echoue)
+
+
+Semaine 7:
+
+Marylou :
+    - ennemi IA qui commence a avoir un comportement 
+    - debut d'un ennemi IA qui bouge jusqu'a tirer sur le joueur 
