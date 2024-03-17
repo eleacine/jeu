@@ -53,7 +53,6 @@ public class EnemyIA extends Enemy {
     }
 
     private int[] chooseAlternativeDirection(int deltaX, int deltaY, int[][] map) {
-        // Choisir une direction alternative pour contourner le mur
         int newX = deltaX / 40;
         int newY = deltaY / 40;
         if (deltaX != 0) {

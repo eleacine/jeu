@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
-import Shooter.Managers.ManagerCase;
+// import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
