@@ -177,7 +177,7 @@ public class PlayerManager extends KeyAdapter {
 
                 // Vérifier si le joueur peut continuer sans se déplacer vers l'obstacle dans
                 // n'importe quelle direction
-                if (!isMovingTowardsObstacle(newX, newY, xIndex, yIndex)) {
+                if (!isMovingTowardsObstacle(newX, newY, xIndex*30, yIndex*30)) {
                     return false; // Le joueur peut continuer
                 } else {
                     return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle
