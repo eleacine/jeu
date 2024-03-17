@@ -171,7 +171,7 @@ public class PlayerManager extends KeyAdapter {
             int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
             int casetype = ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
-            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT|| casetype == ManagerCase.BLOQUE) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 
