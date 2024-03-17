@@ -123,8 +123,8 @@ public class PlayerManager extends KeyAdapter {
         
         int currentXIndex = (int) (player.getX() / 40);
         int currentYIndex = (int) (player.getY() / 40);
-
         // Check obstacles in front, behind, right, left, and diagonally
+        
         int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
         int[] yOffsets = { 1, -1, 0, 0, 1, -1, -1, 1 };
 
@@ -138,6 +138,17 @@ public class PlayerManager extends KeyAdapter {
                 stop(); // Arrêter la vérification dès qu'un obstacle est trouvé
             }
         }
+        /* 
+            // Vérifier la case devant le joueur
+        int nextXIndex = currentXIndex + (int) Math.signum(player.getXSpeed());
+        int nextYIndex = currentYIndex + (int) Math.signum(player.getYSpeed());
+
+        // Vérifier s'il y a un obstacle à la position adjacente
+        if (isObstacle(nextXIndex, nextYIndex)) {
+            // Il y a un obstacle devant le joueur, bloquer le mouvement
+            stop();
+        }
+        */
 
         // Obtenir le type de la case sur laquelle se trouve actuellement le joueur
         int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
@@ -186,8 +197,8 @@ public class PlayerManager extends KeyAdapter {
                 }
             }
         }
-
         return false; // Si ce n'est pas un obstacle ou n'existe pas
+       
     }
 
     /**
