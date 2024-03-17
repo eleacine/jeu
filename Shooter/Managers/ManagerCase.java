@@ -16,13 +16,14 @@ public class ManagerCase {
 
     public static final int SOL = 0;
 	public static final int MUR = 1;
-	public static final int OBSTACLE = 2;
-	
+    public static final int MUR_CASSANT = 2;
+	public static final int OBSTACLE = 3;
+	public static final int DECOR =4;
     protected static final int tailleCase = 40;
     
 
     private BufferedImage atlas;
-    public ArrayList<Case> cases = new ArrayList<>();
+    public static ArrayList<Case> cases = new ArrayList<>();
 
     public ArrayList<Case> mur = new ArrayList<>();
     public ArrayList<Case> obstacle = new ArrayList<>();
@@ -34,7 +35,7 @@ public class ManagerCase {
 
     private void createCases() {
         int id=0;
-        cases.add(SOL_CASE= new Case(getSprite(0, 0),id,SOL));
+        cases.add(SOL_CASE= new Case(getSprite(0, 0),id++,SOL));
         cases.add(HERBE=new Case(getSprite(1, 0),id++,SOL));
 
         mur.add(MUR_HAUT= new Case(getSprite(2, 0),id++,MUR));
@@ -42,11 +43,12 @@ public class ManagerCase {
         mur.add(MUR_GAUCHE= new Case(getSprite(4, 0),id++,MUR));
         mur.add(MUR_DROIT= new Case(getSprite(5, 0),id++,MUR));
         mur.add(MUR_COIN= new Case(getSprite(6, 0),id++,MUR));
-        mur.add(MUR_MILIEU= new Case(getSprite(0, 1),id++,MUR));
-        mur.add(MUR_C_BAS= new Case(getSprite(1, 1),id++,MUR));
-        mur.add(MUR_C_HAUT= new Case(getSprite(2, 1),id++,MUR));
-        mur.add(MUR_C_GAUCHE=new Case(getSprite(3, 1),id++,MUR));
-        mur.add(MUR_C_DROIT= new Case(getSprite(4, 1),id++,MUR));
+        mur.add(MUR_MILIEU= new Case(getSprite(0, 1),id++,1));
+        
+        mur.add(MUR_C_BAS= new Case(getSprite(1, 1),id++,MUR_CASSANT));
+        mur.add(MUR_C_HAUT= new Case(getSprite(2, 1),id++,MUR_CASSANT));
+        mur.add(MUR_C_GAUCHE=new Case(getSprite(3, 1),id++,MUR_CASSANT));
+        mur.add(MUR_C_DROIT= new Case(getSprite(4, 1),id++,MUR_CASSANT));
 
         obstacle.add(EAU_BAS= new Case(getSprite(5, 1),id++,OBSTACLE));
         obstacle.add(EAU_HAUT= new Case(getSprite(6, 1),id++,OBSTACLE));
@@ -97,6 +99,16 @@ public class ManagerCase {
 
     public int getTailleCase() {
         return tailleCase;
+    }
+    public static int getCaseType(int id){
+        for (Case c : cases) {
+            if (c.getId() == id) {
+                return c.getType();
+            }
+        }
+        // Si aucun identifiant correspondant n'est trouvé, vous pouvez choisir de renvoyer une valeur par défaut ou lancer une exception selon vos besoins.
+        System.err.println("Erreur : Aucune case trouvée avec l'identifiant " + id);
+        return -1; // Remplacez ceci par la valeur par défaut ou la logique appropriée.
     }
 
 }

@@ -134,9 +134,11 @@ public class ProjectilesManager {
     
         if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
             currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
-    
+
+            int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+            int casetype=ManagerCase.getCaseType(caseID);
             // Vérifiez si la munition est sur une case murale
-            if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR) {
+            if (casetype == ManagerCase.MUR) {
                 // Marquez la munition comme détruite
                 bullet.setSize(0);
             }
@@ -161,7 +163,10 @@ public class ProjectilesManager {
         currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
 
         // Vérifier que detruitMur est vrai avant de mettre à jour la case
-        if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
+        int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+        int casetype=ManagerCase.getCaseType(caseID);
+
+        if (casetype == ManagerCase.MUR_CASSANT && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
 
             // La case est de type 2 (obstacle), la changer en type 1 (marche)
             gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = ManagerCase.SOL;
