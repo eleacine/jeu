@@ -1,26 +1,11 @@
 package Shooter.model;
 
 import java.awt.Color;
+import Shooter.Managers.ManagerCase;
 
-// import Shooter.Managers.GameManager;
-
-public class EnemyIA extends Enemy {  
-
-    /*  peut suivre le joueur 
-     * position x : 550
-     * position y : 100
-     * taille : 50
-     * sante : 100
-     * speed : 2
-     * dégats de tir : 20
-     * dégat de collision : 50
-     * fréq de tir : 1 seconde
-     * radius de détection : 200 px
-     */
+public class EnemyIA extends Enemy {
 
     public EnemyIA(int x, int y) {
-        //x:1250
-        //y:200
         super(x, y, 50, 100, 1, 2, 20, 50, 350, 200, new Color(255, 0, 255));
     }
 
@@ -40,10 +25,9 @@ public class EnemyIA extends Enemy {
             this.x = newX;
             this.y = newY;
         } else {
-            // Si la case suivante est un mur, l'ennemi doit choisir une direction alternative
             int[] alternativeDirection = chooseAlternativeDirection(deltaX, deltaY, map);
-            newX = this.x + alternativeDirection[1];
-            newY = this.y + alternativeDirection[0];
+            newX = this.x + alternativeDirection[0];
+            newY = this.y + alternativeDirection[1];
 
             if (isValidMove(newX, newY, map)) {
                 this.x = newX;
@@ -53,22 +37,24 @@ public class EnemyIA extends Enemy {
     }
 
     private int[] chooseAlternativeDirection(int deltaX, int deltaY, int[][] map) {
-        int newX = deltaX / 40;
-        int newY = deltaY / 40;
-        if (deltaX != 0) {
-            // Si le déplacement horizontal, essayer de se déplacer verticalement
-            return new int[]{0, (deltaY < 0 || map[newY + 1][newX +1] != 7) ? 1 : -1};
-        } else {
-            // Si le déplacement vertical, essayer de se déplacer horizontalement
-            return new int[]{(deltaX < 0 || map[newY + 1][newX +1] != 7 ) ? 1 : -1, 0};
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // Droite, Bas, Gauche, Haut
+        
+        for (int[] dir : directions) {
+            int newX = this.x / 40 + dir[0];
+            int newY = this.y / 40 + dir[1];
+            
+            if (isValidMove(newX * 40, newY * 40, map)) {
+                return dir; // Retourner la direction valide trouvée
+            }
         }
+        
+        return new int[]{0, 0}; // Aucune direction valide trouvée, rester immobile
     }
 
     private boolean isValidMove(int x, int y, int[][] map) {
         int xMap = x / 40;
         int yMap = y / 40;
-        // System.out.println(map[yMap][xMap]);
-        return x >= 0 && x < 1500 && y >= 0 && y < 800 && map[yMap + 1][xMap + 1] != 7;
+        return x >= 0 && x < 1500 && y >= 0 && y < 800 && ManagerCase.getCaseType(map[yMap][xMap]) != ManagerCase.MUR;
     }
-
 }
+

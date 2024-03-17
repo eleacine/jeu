@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
-// import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
@@ -14,13 +13,11 @@ public class PlayerManager extends KeyAdapter {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
-    
 
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;
         this.player = gameManager.getPlayer();
     }
-    
 
     public void handleKeyPress() {
 
@@ -77,13 +74,12 @@ public class PlayerManager extends KeyAdapter {
         player.setXSpeed(player.getMaxSpeed());
     }
 
-
     public void update() {
         checkPlayerlimits();
         checkObstacle(); // Passez la direction au contrôle des obstacles
 
-    player.setX(player.getX() + player.getXSpeed());
-    player.setY(player.getY() + player.getYSpeed());
+        player.setX(player.getX() + player.getXSpeed());
+        player.setY(player.getY() + player.getYSpeed());
 
     }
 
@@ -120,7 +116,7 @@ public class PlayerManager extends KeyAdapter {
      */
     public void checkObstacle() {
         // Obtenir les indices actuels du joueur sur le plateau de jeu
-        
+
         int currentXIndex = (int) (player.getX() / 40);
         int currentYIndex = (int) (player.getY() / 40);
 
@@ -141,14 +137,14 @@ public class PlayerManager extends KeyAdapter {
 
         // Obtenir le type de la case sur laquelle se trouve actuellement le joueur
         int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-        int casetype=ManagerCase.getCaseType(caseID);
+        int casetype = ManagerCase.getCaseType(caseID);
         // Ajuster la vitesse maximale du joueur en fonction du type de case
         switch (casetype) {
-            //OBSTACLE RALENTISSEUR EAU
+            // OBSTACLE RALENTISSEUR EAU
             case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
                 break;
-            //MARCHE NORMAL POUR LE JOUEUR
+            // MARCHE NORMAL POUR LE JOUEUR
             case ManagerCase.SOL:
                 player.setMaxSpeed(2);
                 break;
@@ -171,7 +167,7 @@ public class PlayerManager extends KeyAdapter {
                 yIndex < gameManager.getGamePlateau().level_tab.length) {
 
             int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
-            int casetype=ManagerCase.getCaseType(caseID);
+            int casetype = ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
             if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
                 float newX = player.getX() + player.getXSpeed();
@@ -215,7 +211,6 @@ public class PlayerManager extends KeyAdapter {
         return dotProduct > 0;
     }
 
-    
     public void stop() {
         player.setXSpeed(0);
         player.setYSpeed(0);

@@ -50,7 +50,6 @@ public class Game extends JFrame implements Runnable {
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 
-		// perso_list.add(new Gardien());
 
 		this.perso_list.add(0, player);
 

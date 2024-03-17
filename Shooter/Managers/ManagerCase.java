@@ -100,6 +100,7 @@ public class ManagerCase {
     public int getTailleCase() {
         return tailleCase;
     }
+    
     public static int getCaseType(int id){
         for (Case c : cases) {
             if (c.getId() == id) {
