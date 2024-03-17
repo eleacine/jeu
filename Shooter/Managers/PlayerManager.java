@@ -79,10 +79,10 @@ public class PlayerManager extends KeyAdapter {
 
     public void update() {
         checkPlayerlimits();
-        checkObstacle();
+        checkObstacle(); // Passez la direction au contrôle des obstacles
 
-        player.setX(player.getX() + player.getXSpeed());
-        player.setY(player.getY() + player.getYSpeed());
+    player.setX(player.getX() + player.getXSpeed());
+    player.setY(player.getY() + player.getYSpeed());
 
     }
 
@@ -119,6 +119,7 @@ public class PlayerManager extends KeyAdapter {
      */
     public void checkObstacle() {
         // Obtenir les indices actuels du joueur sur le plateau de jeu
+        
         int currentXIndex = (int) (player.getX() / 40);
         int currentYIndex = (int) (player.getY() / 40);
 

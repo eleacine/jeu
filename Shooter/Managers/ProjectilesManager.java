@@ -67,6 +67,9 @@ public class ProjectilesManager {
             Bullet bullet = it.next();
             int currentArme = player.getCurrentArme();
 
+            // Vérifiez la collision avec le mur
+            checkAndDestroyBulletOnWall(bullet);
+
             if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).getDistance()) {
                 it.remove();
             }
@@ -79,9 +82,12 @@ public class ProjectilesManager {
         Iterator<Bullet> it = enemyBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
+             // Vérifiez la collision avec le mur
+            
             if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0) {
                 it.remove();
             }
+            
         }
     }
 
@@ -108,6 +114,8 @@ public class ProjectilesManager {
         }
     }
 
+    
+
 
 
     public void suppMine(){
@@ -116,6 +124,30 @@ public class ProjectilesManager {
             A3 mine = it.next();
             if (mine.getDimension() == 0) {
                 it.remove();
+            }
+        }
+    }
+
+    private void checkAndDestroyBulletOnWall(Bullet bullet) {
+        int currentXIndex = (int) (bullet.getX() / 40);
+        int currentYIndex = (int) (bullet.getY() / 40);
+    
+        if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
+            currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+    
+            // Vérifiez si la munition est sur une case murale
+            if (gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_BAS ||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_HAUT ||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_DROIT ||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_GAUCHE ||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_MILIEU ||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_COIN || 
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_BAS||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_HAUT||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_DROIT||
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] == ManagerCase.MUR_C_GAUCHE) {
+                // Marquez la munition comme détruite
+                bullet.setSize(0);
             }
         }
     }
