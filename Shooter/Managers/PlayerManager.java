@@ -20,6 +20,7 @@ public class PlayerManager extends KeyAdapter {
         this.gameManager = gameManager;
         this.player = gameManager.getPlayer();
     }
+    
 
     public void handleKeyPress() {
 
@@ -139,10 +140,10 @@ public class PlayerManager extends KeyAdapter {
         }
 
         // Obtenir le type de la case sur laquelle se trouve actuellement le joueur
-        int tileType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-
+        int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+        int casetype=ManagerCase.getCaseType(caseID);
         // Ajuster la vitesse maximale du joueur en fonction du type de case
-        switch (tileType) {
+        switch (casetype) {
             //OBSTACLE RALENTISSEUR EAU
             case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
@@ -169,10 +170,10 @@ public class PlayerManager extends KeyAdapter {
                 xIndex < gameManager.getGamePlateau().level_tab[0].length &&
                 yIndex < gameManager.getGamePlateau().level_tab.length) {
 
-            int tileType = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
-
+            int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
+            int casetype=ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
-            if (tileType == ManagerCase.MUR) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 
