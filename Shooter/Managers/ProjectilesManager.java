@@ -145,8 +145,7 @@ public class ProjectilesManager {
         }
     }
 }
-        
-
+   
 
     public void addBulletPlayer(Bullet b) {
         playerBullets.add(b);
