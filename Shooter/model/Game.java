@@ -55,7 +55,7 @@ public class Game extends JFrame implements Runnable {
 
 		this.perso_list.add(0, player);
 
-		perso_list.add(new EnemyIA(1000, 150));
+		//perso_list.add(new EnemyIA(1000, 150));
 
 		// print enemy list to check
 		System.out.println("Enemy List:");
@@ -192,6 +192,7 @@ public class Game extends JFrame implements Runnable {
 	private void clearArrayList() {
 		List<Personnage> tmp = new ArrayList<>();
 		tmp.add(perso_list.get(0));
+		System.out.println("Level being created after clear:"+gameManager.getPlayer().getLevel());
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(gameManager.getPlayer().getLevel());
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 
@@ -230,8 +231,10 @@ public class Game extends JFrame implements Runnable {
 	}
 
 	private void nextLevel() {
-		gameManager.getPlayer().setLevel();
+		System.out.println("I'm being called: nextLEvel");
 		reset();
+		gameManager.getPlayer().setLevel();
+		
 	}
 
 	private void showBlackScreenForDelay(int delay) {
@@ -264,6 +267,10 @@ public class Game extends JFrame implements Runnable {
 	// --------- GETTERS et SETTERS -----------
 	public MenuPage getMenu() {
 		return menu;
+	}
+
+	public boolean isBegin(){
+		return begin;
 	}
 
 	public PlayPage getPlaying() {
