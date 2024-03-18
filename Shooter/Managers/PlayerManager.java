@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import Shooter.model.Player;
-// import Shooter.Managers.ManagerCase;
 
 public class PlayerManager extends KeyAdapter {
 
@@ -14,13 +13,11 @@ public class PlayerManager extends KeyAdapter {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
-    
 
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;
         this.player = gameManager.getPlayer();
     }
-    
 
     public void handleKeyPress() {
 
@@ -77,13 +74,12 @@ public class PlayerManager extends KeyAdapter {
         player.setXSpeed(player.getMaxSpeed());
     }
 
-
     public void update() {
         checkPlayerlimits();
         checkObstacle(); // Passez la direction au contrôle des obstacles
 
-    player.setX(player.getX() + player.getXSpeed());
-    player.setY(player.getY() + player.getYSpeed());
+        player.setX(player.getX() + player.getXSpeed());
+        player.setY(player.getY() + player.getYSpeed());
 
     }
 
@@ -120,35 +116,37 @@ public class PlayerManager extends KeyAdapter {
      */
     public void checkObstacle() {
         // Obtenir les indices actuels du joueur sur le plateau de jeu
-        
-        int currentXIndex = (int) (player.getX() / 40);
-        int currentYIndex = (int) (player.getY() / 40);
+         
+        int currentXIndex = (int) (player.getX() / 40) + (int) Math.signum(player.getXSpeed());
+        int currentYIndex = (int) (player.getY() / 40)+ (int) Math.signum(player.getYSpeed());        
 
-        // Check obstacles in front, behind, right, left, and diagonally
+            // Vérifier la case devant le joueur
+        //int nextXIndex = currentXIndex + (int) Math.signum(player.getXSpeed());
+        //int nextYIndex = currentYIndex + (int) Math.signum(player.getYSpeed());
+
         int[] xOffsets = { 0, 0, 1, -1, 1, -1, 1, -1 };
         int[] yOffsets = { 1, -1, 0, 0, 1, -1, -1, 1 };
 
         for (int i = 0; i < xOffsets.length; i++) {
-            int adjacentX = currentXIndex + xOffsets[i];
-            int adjacentY = currentYIndex + yOffsets[i];
-
-            // Vérifier s'il y a un obstacle à la position adjacente
+        // Vérifier s'il y a un obstacle à la position adjacente
+        int adjacentX = currentXIndex + xOffsets[i];
+        int adjacentY = currentYIndex + yOffsets[i];
             if (isObstacle(adjacentX, adjacentY)) {
-                // Il y a un obstacle, changer la direction du joueur à l'opposé
-                stop(); // Arrêter la vérification dès qu'un obstacle est trouvé
+            // Il y a un obstacle devant le joueur, bloquer le mouvement
+                stop();
             }
         }
 
         // Obtenir le type de la case sur laquelle se trouve actuellement le joueur
         int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-        int casetype=ManagerCase.getCaseType(caseID);
+        int casetype = ManagerCase.getCaseType(caseID);
         // Ajuster la vitesse maximale du joueur en fonction du type de case
         switch (casetype) {
-            //OBSTACLE RALENTISSEUR EAU
+            // OBSTACLE RALENTISSEUR EAU
             case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
                 break;
-            //MARCHE NORMAL POUR LE JOUEUR
+            // MARCHE NORMAL POUR LE JOUEUR
             case ManagerCase.SOL:
                 player.setMaxSpeed(2);
                 break;
@@ -171,23 +169,23 @@ public class PlayerManager extends KeyAdapter {
                 yIndex < gameManager.getGamePlateau().level_tab.length) {
 
             int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
-            int casetype=ManagerCase.getCaseType(caseID);
+            int casetype = ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
-            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT|| casetype == ManagerCase.BLOQUE) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 
                 // Vérifier si le joueur peut continuer sans se déplacer vers l'obstacle dans
                 // n'importe quelle direction
-                if (!isMovingTowardsObstacle(newX, newY, xIndex * 40, yIndex * 40)) {
+                if (!isMovingTowardsObstacle(newX, newY, xIndex*30, yIndex*30)) {
                     return false; // Le joueur peut continuer
                 } else {
                     return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle
                 }
             }
         }
-
         return false; // Si ce n'est pas un obstacle ou n'existe pas
+       
     }
 
     /**
@@ -212,10 +210,9 @@ public class PlayerManager extends KeyAdapter {
 
         // Vérifier si le produit scalaire est négatif, indiquant que le joueur se
         // déplace vers l'obstacle
-        return dotProduct > 0;
+        return dotProduct < 0;
     }
 
-    
     public void stop() {
         player.setXSpeed(0);
         player.setYSpeed(0);

@@ -158,3 +158,10 @@ Majoori ;
 -mode edition ennemie
 -page campagne et level personnalisé
 
+
+Semaine 8:
+
+Marylou :
+    - finir les ennemis 
+    - reprendre le code pour tous les ennemis 
+

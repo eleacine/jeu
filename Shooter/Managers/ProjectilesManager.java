@@ -138,7 +138,7 @@ public class ProjectilesManager {
             int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
             int casetype=ManagerCase.getCaseType(caseID);
             // Vérifiez si la munition est sur une case murale
-            if (casetype == ManagerCase.MUR) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
                 // Marquez la munition comme détruite
                 bullet.setSize(0);
             }
