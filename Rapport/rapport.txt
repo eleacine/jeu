@@ -207,3 +207,7 @@ Eléacine:
 Majoori :  Edition
     - Plateau s'affiche correctement et on peut selectionner des anciens levels
     - ajouter le mode pour modifier les levels déjà crées (en cours)
+
+Leonor:
+    - reinitialisation de la partie quand on quitte le jeu
+    - bon enchainement des niveaux 

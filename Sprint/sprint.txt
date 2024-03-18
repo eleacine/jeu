@@ -165,3 +165,8 @@ Marylou :
     - finir les ennemis 
     - reprendre le code pour tous les ennemis 
 
+Leonor: 
+- faire les éléments d'interface utilisateur
+- creer la separation entre jeu avec niveaux prédefinis et niveaux crées 
+- clarifier affichage des armes en haut à gauche, ajouter vies 
+
