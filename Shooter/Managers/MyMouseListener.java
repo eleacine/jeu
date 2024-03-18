@@ -63,11 +63,11 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     int caseType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
                     System.out.println("caseType: " + caseType);
                         System.out.println("1");
-                    if (
+                    if /*(
                         caseType==ManagerCase.MUR_COIN || caseType==ManagerCase.MUR_MILIEU || caseType==ManagerCase.MUR_HAUT ||
                         caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
                         caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
-                        caseType==ManagerCase.MUR_C_GAUCHE) {
+                        caseType==ManagerCase.MUR_C_GAUCHE)*/ (caseType==ManagerCase.MUR|| caseType==ManagerCase.MUR_CASSANT) {
                         System.out.println("Impossible de placer la grenade sur un mur.");
                     } 
                 else {
@@ -94,11 +94,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 int caseType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
                 System.out.println("caseType: " + caseType);
                     System.out.println("1");
-                if (
+                if/*  (
                     caseType==ManagerCase.MUR_COIN || caseType==ManagerCase.MUR_MILIEU || caseType==ManagerCase.MUR_HAUT ||
                     caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
                     caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
-                    caseType==ManagerCase.MUR_C_GAUCHE) {
+                    caseType==ManagerCase.MUR_C_GAUCHE) */
+                    (caseType==ManagerCase.MUR|| caseType==ManagerCase.MUR_CASSANT){
                     System.out.println("Impossible de placer la grenade sur un mur.");
                 } 
             else {
