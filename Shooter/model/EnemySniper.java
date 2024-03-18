@@ -3,9 +3,9 @@ package Shooter.model;
 import java.awt.Color;
 import Shooter.Managers.ManagerCase;
 
-public class EnemyIA extends Enemy {
+public class EnemySniper extends Enemy {
 
-    public EnemyIA(int x, int y) {
+    public EnemySniper(int x, int y) {
         super(x, y, 50, 100, 1, 2, 20, 50, 350, 200, new Color(255, 0, 255));
     }
 
@@ -56,6 +56,10 @@ public class EnemyIA extends Enemy {
         int yMap = y / 40;
         
         return x >= 0 && x < 1500 && y >= 0 && y < 800 && ManagerCase.getCaseType(map[yMap][xMap]) != ManagerCase.MUR;
+    }
+
+    private boolean isPlayerInRange(Player player) {
+        return Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2)) < 300;
     }
 }
 

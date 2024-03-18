@@ -1,7 +1,9 @@
 package Shooter.model;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -50,7 +52,6 @@ public class Game extends JFrame implements Runnable {
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 
-		// perso_list.add(new Gardien());
 
 		this.perso_list.add(0, player);
 
@@ -180,7 +181,6 @@ public class Game extends JFrame implements Runnable {
 			reset();
 			begin = false;
 			cardLayout.show(cardPanel, "GameOver");
-
 		}
 	}
 
@@ -216,8 +216,11 @@ public class Game extends JFrame implements Runnable {
 
 			Player player = (Player) perso_list.get(0);
 			if (player.getLevel() == nbLevel) {
+				
 				cardLayout.show(cardPanel, "Win");
 			} else {
+				// Afficher la page noire pendant un court laps de temps
+                showBlackScreenForDelay(1000); // Durée en millisecondes, ajustez si nécessaire
 				// System.out.println(gameManager.getPlayer().getLevel());
 				nextLevel();
 				// System.out.println(gameManager.getPlayer().getLevel());
@@ -230,6 +233,29 @@ public class Game extends JFrame implements Runnable {
 		gameManager.getPlayer().setLevel();
 		reset();
 	}
+
+	private void showBlackScreenForDelay(int delay) {
+        JFrame blackFrame = new JFrame();
+        blackFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        blackFrame.setUndecorated(true); // Supprime les bordures de la fenêtre
+        blackFrame.setBackground(Color.BLACK);
+        blackFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        blackFrame.setLocationRelativeTo(null); // Centre la fenêtre sur l'écran
+        blackFrame.setAlwaysOnTop(true); // Garde la fenêtre au-dessus de toutes les autres
+
+        // Affichage de la fenêtre noire
+        blackFrame.setVisible(true);
+
+        // Attente pendant le délai spécifié
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Fermeture de la fenêtre noire
+        blackFrame.dispose();
+    }
 
 	public void updateSound(boolean soundEnabled) {
 		this.soundEnabled = soundEnabled;

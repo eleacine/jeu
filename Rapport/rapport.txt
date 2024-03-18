@@ -181,3 +181,29 @@ Majoori :  -mode editing
     - ajout de barre pour choisir level
     - recuperer le nombre de level cree dans plateau.txt
     - faire apparaitre le plateau correctement(echoue)
+
+
+Semaine 7:
+
+Marylou :
+    - ennemi IA qui commence a avoir un comportement 
+    - debut d'un ennemi IA qui bouge jusqu'a tirer sur le joueur 
+
+Eléacine:
+    -optimisation de la récupération des cases en les reunissant en sous catégorie
+    -blocage du joueur, il a était repenser car depuis le changement des directions cela ne marcher plus. 
+    Maintenant le joueur est bloqué de partout, pendant un moment je n'ai pas réussie à la bloquer si ce n'etait pas dans sa direction.
+    Il ne reste plus a gérer la distance de blocage,qui est pour l'instant incomprise. 
+    HYPOTHESE SUR LA SOURCE DU PROBLEME ( xIndex et yIndex dans playerManager fonction isObstacle):
+    if (!isMovingTowardsObstacle(newX, newY, xIndex*30, yIndex*30)) {
+                    return false; // Le joueur peut continuer
+                } else {
+                    return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle
+                }
+    -les munitions des armes ne peuvent pas passer les mures (normal et cassant) et tuer les ennemis qui se trouve derriere par consequent.
+    Neanmoins les munitions passe les obstacles bas tel que la table
+    -ajout d'une page de transitions entre les niveaux pour laisser un temps 
+    
+Majoori :  Edition
+    - Plateau s'affiche correctement et on peut selectionner des anciens levels
+    - ajouter le mode pour modifier les levels déjà crées (en cours)

@@ -2,6 +2,8 @@ package Shooter.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
+// import Shooter.Managers.ManagerCase;
+
 
 public class Bullet {
 

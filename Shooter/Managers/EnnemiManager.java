@@ -22,23 +22,26 @@ public class EnnemiManager {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
                 if (ennemi.getSize() >= 0) {
-               if (ennemi instanceof EnemyIA) {
-                 EnemyIA ennemiIA = (EnemyIA) ennemi;
-                 ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(), gameManager.getGamePlateau().getLevel_tab());
-               } else {     ennemi.updateBehavior(gameManager.getPlayer());
-                    if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
-                        ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                    if (ennemi instanceof EnemyIA) {
+                        EnemyIA ennemiIA = (EnemyIA) ennemi;
+                        ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
+                                gameManager.getGamePlateau().getLevel_tab());
+                    } else {
+                        ennemi.updateBehavior(gameManager.getPlayer());
+                        if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
+                            ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                        }
+
+                        if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
+                                gameManager.getPlayer().getSize())) {
+                            gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
+                            // ennemi.size = 0;
+
+                            // if (player.sante <= 0) {
+                            // player.size = 0;
+                            // }
+                        }
                     }
-
-                    if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
-                            gameManager.getPlayer().getSize())) {
-                        gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
-                        // ennemi.size = 0;
-
-                        // if (player.sante <= 0) {
-                        // player.size = 0;
-                        // }
-                    }}
                 }
             }
         }
@@ -48,7 +51,7 @@ public class EnnemiManager {
 
         Iterator<Personnage> it = perso_list.iterator();
 
-        while (it.hasNext()){
+        while (it.hasNext()) {
             Personnage perso = it.next();
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
