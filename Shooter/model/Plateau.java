@@ -156,7 +156,8 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel());
+        System.out.println("Level given in reset function in plateau "+gameManager.getPlayer().getLevel());
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel()-1);
     }
 
 

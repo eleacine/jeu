@@ -33,6 +33,9 @@ public class GameScene extends JPanel {
                 if (pageName.equals("Play")) {
                     game.begin = true;
                 }
+                else if(pageName.equals( "Menu") && game.isBegin()){
+                    game.reset();
+                }
                 layout.show(panel, pageName);
             }
         });
