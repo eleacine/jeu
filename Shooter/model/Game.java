@@ -180,7 +180,6 @@ public class Game extends JFrame implements Runnable {
 			reset();
 			begin = false;
 			cardLayout.show(cardPanel, "GameOver");
-
 		}
 	}
 
