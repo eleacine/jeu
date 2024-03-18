@@ -53,43 +53,87 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
             }else if (player.getArmes().get(player.getCurrentArme()).getMunition() > 0
             && !player.getArmes().get(player.getCurrentArme()).getType()) {
-        if (player.getArmes().get(player.getCurrentArme()) instanceof A3) {
-         //   player.getArmes().get(player.getCurrentArme()).shoot();
-            A3 mine = new A3(crosshair.getX(), crosshair.getY());
+            if (player.getArmes().get(player.getCurrentArme()) instanceof A3) {
+                int currentXIndex = (int) (crosshair.getX() / 40);
+                int currentYIndex = (int) (crosshair.getY() / 40);
+    
+                if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
+                    currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+                    
+                    int caseType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+                    System.out.println("caseType: " + caseType);
+                        System.out.println("1");
+                    if (
+                        caseType==ManagerCase.MUR_COIN || caseType==ManagerCase.MUR_MILIEU || caseType==ManagerCase.MUR_HAUT ||
+                        caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
+                        caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
+                        caseType==ManagerCase.MUR_C_GAUCHE) {
+                        System.out.println("Impossible de placer la grenade sur un mur.");
+                    } 
+                else {
+                //   player.getArmes().get(player.getCurrentArme()).shoot();
+             A3 mine = new A3(crosshair.getX(), crosshair.getY());
 
-            // Vérifie si la distance jusqu'au joueur est inférieure ou égale à la distance de l'arme
-            double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - mine.getX(), 2) + Math.pow(player.getY() - mine.getY(), 2));
-            if (distanceToPlayer <= mine.getDistance()) {
-                gameManager.getGamePlateau().pieges.add(mine);
-                player.getArmes().get(player.getCurrentArme()).shoot();
-            } else {
-                System.out.println("Impossible de placer la mine en dehors de la distance.");
-                mine.deleteMine(); // Supprimer la mine
-            }
-
-        } else if (player.getArmes().get(player.getCurrentArme()) instanceof A4) {
-          //  player.getArmes().get(player.getCurrentArme()).shoot();
-            A4 grenade = new A4(crosshair.getX(), crosshair.getY());
-
-            // Vérifie la distance 
-            double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - grenade.getX(), 2) + Math.pow(player.getY() - grenade.getY(), 2));
-            if (distanceToPlayer <= grenade.getDistance()) {
-                gameManager.getGamePlateau().grenade.add(grenade);
-                grenade.activateGrenade();
-                player.getArmes().get(player.getCurrentArme()).shoot();
-            } else {
-                System.out.println("Impossible de placer la grenade en dehors de la distance.");
-              //  grenade.deleteGrenade(); // Supprimer la grenade
-            }
+                // Vérifie si la distance jusqu'au joueur est inférieure ou égale à la distance de l'arme
+                double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - mine.getX(), 2) + Math.pow(player.getY() - mine.getY(), 2));
+                if (distanceToPlayer <= mine.getDistance()) {
+                    gameManager.getGamePlateau().pieges.add(mine);
+                    player.getArmes().get(player.getCurrentArme()).shoot();
+                } else {
+                    System.out.println("Impossible de placer la mine en dehors de la distance.");
+                // mine.deleteMine(); // Supprimer la mine
+                }}
         }
-    }  else {
+       }else if (player.getArmes().get(player.getCurrentArme()) instanceof A4) {
+            int currentXIndex = (int) (crosshair.getX() / 40);
+            int currentYIndex = (int) (crosshair.getY() / 40);
+
+            if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
+                currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+                
+                int caseType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+                System.out.println("caseType: " + caseType);
+                    System.out.println("1");
+                if (
+                    caseType==ManagerCase.MUR_COIN || caseType==ManagerCase.MUR_MILIEU || caseType==ManagerCase.MUR_HAUT ||
+                    caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
+                    caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
+                    caseType==ManagerCase.MUR_C_GAUCHE) {
+                    System.out.println("Impossible de placer la grenade sur un mur.");
+                } 
+            else {
+                    System.out.println("3");
+            A4 grenade = new A4(crosshair.getX(), crosshair.getY());
+              //  if (!grenade.getIsPlaced()) {
+                    double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - grenade.getX(), 2) + Math.pow(player.getY() - grenade.getY(), 2));
+                 //   if (distanceToPlayer <= grenade.getDistance()) {
+                        System.out.println("ici");
+                        gameManager.getGamePlateau().grenade.add(grenade);
+                        grenade.activateGrenade();
+                        grenade.setPlaced(true); // Marquer la grenade comme placée
+                        player.getArmes().get(player.getCurrentArme()).shoot();
+            //        } else {
+                        System.out.println("ahh non ici ");
+                        System.out.println("Impossible de placer la grenade en dehors de la distance.");
+                 //   }
+                
+         //   }
+            
+        }
+                }
+            System.out.println("4");
+    }
+        
+            else {
                 player.getArmes().get(player.getCurrentArme()).besoinRecharge();
 
                 if (soundPlayer != null && gameManager.getSound()){
                     soundPlayer.playSound("Shooter/res/arme_vide.wav");
                 }
             }
+        
         }
+            }
     }
 
     @Override
@@ -124,4 +168,5 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     public Crosshair getCrosshair() {
         return this.crosshair;
     }
+    
 }
