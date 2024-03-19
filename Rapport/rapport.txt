@@ -211,3 +211,6 @@ Majoori :  Edition
 Leonor:
     - reinitialisation de la partie quand on quitte le jeu
     - bon enchainement des niveaux 
+
+Ines:
+    -Amelioration du fonctionnement des armes (elle ne disparaissent plus et on ne peut pas les placer sur des nur)
