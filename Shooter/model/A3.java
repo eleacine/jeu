@@ -29,14 +29,14 @@ public class A3 extends Armes {
 
     
         public void draw(Graphics g, int playerX, int playerY) {
-            System.out.println("draw mine");
+            // System.out.println("draw mine");
             double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
-            if (distanceToPlayer <= getDistance()) {
+          //  if (distanceToPlayer <= getDistance()) {
                 g.setColor(this.color);
                 g.fillOval(x, y, dimension, dimension);
                 shoot();
-            } else {
+          //  } else {
                 /* 
                 double angleToPlayer = Math.atan2(playerY - y, playerX - x);
                 x = playerX - (int) (Math.cos(angleToPlayer) * getDistance());
@@ -48,7 +48,7 @@ public class A3 extends Armes {
                 shoot();
                 */
             }
-        }
+       // }
     
 
 

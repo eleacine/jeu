@@ -56,20 +56,17 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             if (player.getArmes().get(player.getCurrentArme()) instanceof A3) {
                 int currentXIndex = (int) (crosshair.getX() / 40);
                 int currentYIndex = (int) (crosshair.getY() / 40);
-    
+            System.out.println("currentXIndex: " + currentXIndex);
+            System.out.println("currentYIndex: " + currentYIndex);
+
                 if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
                     currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
                     
                     int caseType = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-                    System.out.println("caseType: " + caseType);
-                        System.out.println("1");
-                    if /*(
-                        caseType==ManagerCase.MUR_COIN || caseType==ManagerCase.MUR_MILIEU || caseType==ManagerCase.MUR_HAUT ||
-                        caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
-                        caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
-                        caseType==ManagerCase.MUR_C_GAUCHE)*/ (caseType==ManagerCase.MUR|| caseType==ManagerCase.MUR_CASSANT) {
-                        System.out.println("Impossible de placer la grenade sur un mur.");
-                    } 
+                    System.out.println("casetype:"+ caseType);
+                    if (caseType == 8|| caseType == 7) {
+                        System.out.println("Impossible de placer la mine sur un mur.");
+                    }
                 else {
                 //   player.getArmes().get(player.getCurrentArme()).shoot();
              A3 mine = new A3(crosshair.getX(), crosshair.getY());
@@ -99,22 +96,21 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     caseType==ManagerCase.MUR_BAS || caseType==ManagerCase.MUR_GAUCHE || caseType==ManagerCase.MUR_DROIT||
                     caseType==ManagerCase.MUR_C_BAS || caseType==ManagerCase.MUR_C_HAUT || caseType==ManagerCase.MUR_C_DROIT || 
                     caseType==ManagerCase.MUR_C_GAUCHE) */
-                    (caseType==ManagerCase.MUR|| caseType==ManagerCase.MUR_CASSANT){
+                    (caseType == 8|| caseType == 7){
                     System.out.println("Impossible de placer la grenade sur un mur.");
                 } 
             else {
+           
                     System.out.println("3");
             A4 grenade = new A4(crosshair.getX(), crosshair.getY());
-              //  if (!grenade.getIsPlaced()) {
                     double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - grenade.getX(), 2) + Math.pow(player.getY() - grenade.getY(), 2));
-                 //   if (distanceToPlayer <= grenade.getDistance()) {
+                   if (distanceToPlayer <= grenade.getDistance()) {
                         System.out.println("ici");
                         gameManager.getGamePlateau().grenade.add(grenade);
                         grenade.activateGrenade();
-                        grenade.setPlaced(true); // Marquer la grenade comme placée
                         player.getArmes().get(player.getCurrentArme()).shoot();
-            //        } else {
-                        System.out.println("ahh non ici ");
+                  } else {
+                       
                         System.out.println("Impossible de placer la grenade en dehors de la distance.");
                  //   }
                 
@@ -122,7 +118,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             
         }
                 }
-            System.out.println("4");
     }
         
             else {
@@ -132,9 +127,9 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     soundPlayer.playSound("Shooter/res/arme_vide.wav");
                 }
             }
-        
         }
-            }
+    }
+}
     }
 
     @Override

@@ -32,13 +32,13 @@ public class A4 extends Armes {
     
     public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
       //  System.out.println("draw grenade");
-        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+      //  double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
         if (isGrenadeActivated) {
-            if (distanceToPlayer <= getDistance()) {
+        //    if (distanceToPlayer <= getDistance()) {
                 g.setColor(this.color);
                 g.fillOval(x, y, dimension, dimension);
-              //  drawExplosion(x, y, g, enemies);
+                drawExplosion(x, y, g, enemies);
             } else {
                 // Ajuster la position de la grenade en fonction de la distance par rapport au joueur
                // double angleToPlayer = Math.atan2(playerY - y, playerX - x);
@@ -46,7 +46,7 @@ public class A4 extends Armes {
                // y = playerY - (int) (Math.sin(angleToPlayer) * getDistance());
             }
         }
-    }
+   // }
     
     
 
