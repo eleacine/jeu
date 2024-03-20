@@ -18,7 +18,7 @@ public class A4 extends Armes {
     private Timer explosionTimer;
     private long explosionDelay = 2000;  // Délai d'explosion
     public GameManager gameManager;
-
+    private boolean isPlaced = false;
     public A4() {
         super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
     }
@@ -31,10 +31,11 @@ public class A4 extends Armes {
     }
     
     public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
-        double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+      //  System.out.println("draw grenade");
+      //  double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
         if (isGrenadeActivated) {
-            if (distanceToPlayer <= getDistance()) {
+        //    if (distanceToPlayer <= getDistance()) {
                 g.setColor(this.color);
                 g.fillOval(x, y, dimension, dimension);
                 drawExplosion(x, y, g, enemies);
@@ -45,48 +46,53 @@ public class A4 extends Armes {
                // y = playerY - (int) (Math.sin(angleToPlayer) * getDistance());
             }
         }
-    }
+   // }
     
     
 
     private void setupExplosionTimer() {
+        System.out.println("setupExplosionTimer");
         explosionTimer = new Timer((int) explosionDelay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isGrenadeActivated = false;
                 explosionTimer.stop();
-                deleteGrenade();
+               // deleteGrenade();
             }
         });
     }
 
     public void activateGrenade() {
+        System.out.println("activateGrenade");
         if (!isGrenadeActivated && getMunition() > 0) {
             isGrenadeActivated = true;
-            setupExplosionTimer();
+         //   setupExplosionTimer();
             explosionTimer.start();
             shoot();
         }
     }
 
     private void drawExplosion(int x, int y, Graphics g, List<Personnage> enemies) {
+      //  System.out.println("drawExplosion");
         Color grayTransparent = new Color(128, 128, 128, 128);
         g.setColor(grayTransparent);
         g.fillOval(x - 40, y - 40, 150, 150);
 
         for (Personnage personnage : enemies) {
+            System.out.println("verif de distance");
             double distance = Math.sqrt(Math.pow(personnage.x - x, 2) + Math.pow(personnage.y - y, 2));
             if (distance <= 75) {
                 personnage.infligerDegats(10);
             }
         }
     }
-
+/* 
     public void deleteGrenade() {
+        System.out.println("deleteGrenade");
         isGrenadeActivated = false;
         this.dimension = 0;
     }
-
+*/
     //-----------------GETTER & SETTER---------------------------
     public int getX() {
         return x;
@@ -126,5 +132,13 @@ public class A4 extends Armes {
 
     public void setExplosionTimer(Timer explosionTimer) {
         this.explosionTimer = explosionTimer;
+    }
+
+    public boolean getIsPlaced() {
+        return isPlaced;
+    }
+
+    public void setPlaced(boolean isPlaced) {
+        this.isPlaced = isPlaced;
     }
 }

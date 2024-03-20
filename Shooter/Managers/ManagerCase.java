@@ -10,15 +10,15 @@ import Shooter.model.Enregistrement;
 
 public class ManagerCase {
 
-    public Case SOL_CASE, HERBE, MUR_HAUT ,MUR_BAS , MUR_GAUCHE,MUR_DROIT 
-    , MUR_COIN , MUR_MILIEU , MUR_C_BAS , MUR_C_HAUT , MUR_C_GAUCHE , MUR_C_DROIT 
-    , EAU_BAS ,EAU_HAUT, EAU_GAUCHE , EAU_DROIT , EAU_COIN_DROITE_HAUT, EAU_COIN_GAUCHE_BAS ,EAU_COIN_GAUCHE_HAUT ,EAU_COIN_DROITE_BAS , EAU_MILIEU ;
+    public Case SOL_CASE, HERBE, MUR_HAUT ,MUR_BAS , MUR_GAUCHE,MUR_DROIT, MUR_COIN , MUR_MILIEU , MUR_C_BAS , MUR_C_HAUT , MUR_C_GAUCHE , MUR_C_DROIT 
+    , EAU_BAS ,EAU_HAUT, EAU_GAUCHE , EAU_DROIT , EAU_COIN_DROITE_HAUT, EAU_COIN_GAUCHE_BAS ,EAU_COIN_GAUCHE_HAUT ,EAU_COIN_DROITE_BAS , EAU_MILIEU, TABLE;
 
     public static final int SOL = 0;
 	public static final int MUR = 1;
     public static final int MUR_CASSANT = 2;
 	public static final int OBSTACLE = 3;
-	public static final int DECOR =4;
+    public static final int BLOQUE = 4;
+	public static final int DECOR =5;
     protected static final int tailleCase = 40;
     
 
@@ -59,6 +59,8 @@ public class ManagerCase {
         obstacle.add(EAU_COIN_GAUCHE_HAUT= new Case(getSprite(4, 2),id++,OBSTACLE));
         obstacle.add(EAU_COIN_DROITE_BAS= new Case(getSprite(5, 2),id++,OBSTACLE));
         obstacle.add(EAU_MILIEU= new Case(getSprite(6, 2),id++,OBSTACLE));
+
+        obstacle.add(TABLE= new Case(getSprite(0, 3),id++,BLOQUE));
 
         cases.addAll(mur);
         cases.addAll(obstacle);

@@ -171,13 +171,13 @@ public class PlayerManager extends KeyAdapter {
             int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
             int casetype = ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
-            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT|| casetype == ManagerCase.BLOQUE) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 
                 // Vérifier si le joueur peut continuer sans se déplacer vers l'obstacle dans
                 // n'importe quelle direction
-                if (!isMovingTowardsObstacle(newX, newY, xIndex, yIndex)) {
+                if (!isMovingTowardsObstacle(newX, newY, xIndex*30, yIndex*30)) {
                     return false; // Le joueur peut continuer
                 } else {
                     return true; // Le joueur est trop proche de l'obstacle, considérez-le comme un obstacle

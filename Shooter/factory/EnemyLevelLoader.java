@@ -81,6 +81,8 @@ public class EnemyLevelLoader {
                 return new Enemy2Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
             case "Enemy 3":
                 return new Enemy3Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+            case "Enemy 4":
+                return new Enemy4Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
             default:
                 throw new IllegalArgumentException("Unknown enemy type: " + enemyType);
         }
