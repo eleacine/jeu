@@ -86,7 +86,7 @@ public class Gardien extends Enemy {
 
  
     @Override
-    public void updateBehavior(Player player) {
+    public void updateBehavior(Player player, int[][] map) {
         if (!isPlayerDetected(player) && playerDetected == false) {
             deplacer();
             deplacerVision(player);

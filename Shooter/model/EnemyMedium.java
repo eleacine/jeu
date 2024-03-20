@@ -25,7 +25,7 @@ public class EnemyMedium extends Enemy {
     }
 
     @Override
-    public void updateBehavior(Player player) {
+    public void updateBehavior(Player player, int[][] map) {
         // Implémentez le comportement spécifique pour cet ennemi
         // Par exemple, suivi simple du joueur si détecté
         if (isPlayerDetected(player)) {

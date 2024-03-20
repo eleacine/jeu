@@ -20,7 +20,7 @@ public class E3 extends Enemy {
 
     // Méthode de mise à jour du comportement
     @Override
-    public void updateBehavior(Player player) {
+    public void updateBehavior(Player player, int[][] map) {
         if (isPlayerDetected(player)) {
             playerDetected = true;
 

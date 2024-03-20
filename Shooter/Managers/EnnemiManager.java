@@ -5,6 +5,7 @@ import java.util.List;
 
 import Shooter.model.Enemy;
 import Shooter.model.EnemyIA;
+import Shooter.model.EnemySniper;
 import Shooter.model.Personnage;
 
 public class EnnemiManager {
@@ -22,29 +23,28 @@ public class EnnemiManager {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
                 if (ennemi.getSize() >= 0) {
+
+                    // arranger ca
                     if (ennemi instanceof EnemyIA) {
                         EnemyIA ennemiIA = (EnemyIA) ennemi;
-                        ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
-                                gameManager.getGamePlateau().getLevel_tab());
-                    } else {
-                        ennemi.updateBehavior(gameManager.getPlayer());
-                        if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
-                            ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
-                        }
+                        // ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
+                        //         gameManager.getGamePlateau().getLevel_tab());
+                        // ennemiIA.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().getLevel_tab());
+                        ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
+            
 
-                        if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
-                                gameManager.getPlayer().getSize())) {
-                            gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
-                            // ennemi.size = 0;
+                    } else if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
+                        ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                    }
 
-                            // if (player.sante <= 0) {
-                            // player.size = 0;
-                            // }
-                        }
+                    if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
+                            gameManager.getPlayer().getSize())) {
+                        gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
                     }
                 }
             }
         }
+
     }
 
     public void suppEnnemi() {

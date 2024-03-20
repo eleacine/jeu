@@ -41,7 +41,7 @@ public class SettingsPage extends GameScene {
 		private ImageIcon soundDisabledIcon;
 
 		public SoundToggleButton(String enableText, String disableText, ImageIcon enabledIcon, ImageIcon disabledIcon) {
-			soundEnabled = true; // Par défaut, le son est activé
+			soundEnabled = false; // Par défaut, le son est inactivé
 			soundEnabledIcon = enabledIcon;
 			soundDisabledIcon = disabledIcon;
 			updateIcon();

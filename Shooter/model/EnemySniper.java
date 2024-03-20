@@ -9,17 +9,23 @@ public class EnemySniper extends Enemy {
         super(x, y, 50, 100, 1, 2, 20, 50, 350, 200, new Color(255, 0, 255));
     }
 
-    @Override
-    public void updateBehavior(Player player) {
-        // moveEnemyTowardsPlayer(player.x, player.y);
-    }
+    // @Override
+    // public void updateBehavior(Player player, int[][] map) {
+    //     if (isPlayerInRange(player) && !hasAWallinSight(player.getX(), player.getY(), map)){
+    //         // Positionner l'ennemi et tirer dès que le joueur est à portée
+    //         // Positionnement de l'ennemi (peut être implémenté selon les besoins spécifiques)
+    //     } else {
+    //         // Se déplacer vers le joueur pour tirer s'il n'est pas à portée
+    //         moveEnemyTowardsPlayer(player.getX(), player.getY(), map);
+    //     }
+    // }
 
     public void moveEnemyTowardsPlayer(int playerX, int playerY, int[][] map) {
-        int deltaX = (this.x < playerX) ? 1 : ((this.x > playerX) ? -1 : 0);
-        int deltaY = (this.y < playerY) ? 1 : ((this.y > playerY) ? -1 : 0);
+        int deltaX = Integer.signum(playerX - this.x); // Signum pour obtenir -1, 0 ou 1 selon la direction du mouvement
+        int deltaY = Integer.signum(playerY - this.y); // Signum pour obtenir -1, 0 ou 1 selon la direction du mouvement
 
-        int newX = this.x + deltaX;
-        int newY = this.y + deltaY;
+        int newX = this.x + deltaX * 40; // Mouvement selon la direction en tenant compte de la taille de la case
+        int newY = this.y + deltaY * 40; // Mouvement selon la direction en tenant compte de la taille de la case
 
         if (isValidMove(newX, newY, map)) {
             this.x = newX;
@@ -54,12 +60,35 @@ public class EnemySniper extends Enemy {
     private boolean isValidMove(int x, int y, int[][] map) {
         int xMap = x / 40;
         int yMap = y / 40;
-        
         return x >= 0 && x < 1500 && y >= 0 && y < 800 && ManagerCase.getCaseType(map[yMap][xMap]) != ManagerCase.MUR;
     }
 
-    private boolean isPlayerInRange(Player player) {
-        return Math.sqrt(Math.pow(player.x - this.x, 2) + Math.pow(player.y - this.y, 2)) < 300;
-    }
-}
+    public boolean hasAWallinSight (int xTarget, int yTarget, int[][] map) {
+        int x = this.x;
+        int y = this.y;
 
+        while (x != xTarget && y != yTarget) {
+            if (isWall(x, y, map)) {
+                return true;
+            }
+            x += (xTarget - x) / Math.abs(xTarget - x);
+            y += (yTarget - y) / Math.abs(yTarget - y);
+        }
+        return false;
+    }
+
+    private boolean isWall(int x, int y, int[][] map) {
+        int xMap = x / 40;
+        int yMap = y / 40;
+        if (ManagerCase.getCaseType(map[yMap][xMap]) == ManagerCase.MUR) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPlayerInRange(Player player) {
+        return Math.sqrt(Math.pow(player.getX() - this.x, 2) + Math.pow(player.getY() - this.y, 2)) < 300;
+    }
+
+
+}

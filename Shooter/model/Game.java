@@ -29,6 +29,7 @@ public class Game extends JFrame implements Runnable {
 	public Dimension size_screen;
 	public CardLayout cardLayout;
 	public JPanel cardPanel;
+
 	// Classes
 	private MenuPage menu;
 	private PlayPage playing;
@@ -41,7 +42,7 @@ public class Game extends JFrame implements Runnable {
 
 	public GameManager gameManager;
 
-	protected boolean soundEnabled = true;
+	protected boolean soundEnabled = false;
 
 	public Game() {
 
@@ -56,15 +57,17 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list.add(0, player);
 
 		perso_list.add(new EnemyIA(1000, 150));
+		// perso_list.add(new EnemySniper(1000, 150));
 
 		// print enemy list to check
-		System.out.println("Enemy List:");
-		for (Personnage enemy : perso_list) {
-			System.out.println("Type: " + enemy.getClass().getSimpleName());
-			System.out.println("Coordinates: (" + enemy.getX() + ", " + enemy.getY() + ")");
-			System.out.println("---");
-		}
-		System.out.println("Total Enemies: " + perso_list.size());
+		// System.out.println("Enemy List:");
+		// for (Personnage enemy : perso_list) {
+		// 	System.out.println("Type: " + enemy.getClass().getSimpleName());
+		// 	System.out.println("Coordinates: (" + enemy.getX() + ", " + enemy.getY() + ")");
+		// 	System.out.println("---");
+		// }
+		// System.out.println("Total Enemies: " + perso_list.size());
+		
 
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau();
@@ -160,6 +163,8 @@ public class Game extends JFrame implements Runnable {
 					SwingUtilities.invokeLater(() -> {
 						updateGame();
 					});
+
+
 				}
 				lastUpdate = now;
 				// updates++;
@@ -195,8 +200,6 @@ public class Game extends JFrame implements Runnable {
 		tmp.add(perso_list.get(0));
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(gameManager.getPlayer().getLevel());
 		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
-
-		// tmp = enemyLoader.createEnemiesForLevel();
 		tmp.addAll(enemyLoader.createEnemiesForLevel());
 
 		// Vérifier si le premier élément est une instance de Player avant la conversion
@@ -222,9 +225,7 @@ public class Game extends JFrame implements Runnable {
 			} else {
 				// Afficher la page noire pendant un court laps de temps
                 showBlackScreenForDelay(1000); // Durée en millisecondes, ajustez si nécessaire
-				// System.out.println(gameManager.getPlayer().getLevel());
 				nextLevel();
-				// System.out.println(gameManager.getPlayer().getLevel());
 				begin = true;
 			}
 		}
@@ -258,9 +259,7 @@ public class Game extends JFrame implements Runnable {
         blackFrame.dispose();
     }
 
-	public void updateSound(boolean soundEnabled) {
-		this.soundEnabled = soundEnabled;
-	}
+
 
 	// --------- GETTERS et SETTERS -----------
 	public MenuPage getMenu() {
@@ -281,6 +280,10 @@ public class Game extends JFrame implements Runnable {
 
 	public boolean getSound () {
 		return soundEnabled;
+	}
+
+	public void updateSound(boolean soundEnabled) {
+		this.soundEnabled = soundEnabled;
 	}
 
 }
