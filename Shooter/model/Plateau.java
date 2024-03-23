@@ -101,6 +101,7 @@ public class Plateau extends JPanel {
         if (currentArme >= 0 && currentArme < gameManager.getPlayer().armes.size()) {
             g.drawString("type:" + armeCourante.nom, 1325, 30);
             g.drawString("munitions:" + armeCourante.munition, 1325, 50);
+            g.drawString("vie:"+ gameManager.getPlayer().sante, 1325, 70);
         }
         g.setColor(armeCourante.color);
         int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2
