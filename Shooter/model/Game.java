@@ -121,12 +121,13 @@ public class Game extends JFrame implements Runnable {
 		Game game = new Game();
 		game.setVisible(true);
 		game.run();
+		
 
 	}
 
 	@Override
 	public void run() {
-
+		
 		double timePerFrame = 1000000000.0 / FPS_SET;
 		double timePerUpdate = 1000000000.0 / UPS_SET;
 

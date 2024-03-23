@@ -160,8 +160,7 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt",
-                gameManager.getPlayer().getLevel());
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel()-1);
     }
 
     // ------------- Flood fill ----------------
@@ -222,6 +221,8 @@ public class Plateau extends JPanel {
             System.out.println();
         }
     }
+
+    
 
 
     // --------- GETTERS et SETTERS -----------
