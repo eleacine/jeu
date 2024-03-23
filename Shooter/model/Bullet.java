@@ -30,6 +30,7 @@ public class Bullet {
         this.y = y;
         this.degats = degats;
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
+        loadMunitionImage();
     }
 
     public Bullet(int x, int y, int destX, int destY, int degats, Color color) {
