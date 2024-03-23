@@ -1,6 +1,8 @@
 package Shooter.model;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 // import Shooter.Managers.ManagerCase;
 
@@ -15,7 +17,9 @@ public class Bullet {
     private int degats;
     private float slowdownFactor = 15f;  // Facteur de ralentissement pour ajuster la vitesse du projectile
     public Color color;  // Couleur du projectile
+    private BufferedImage[] mImages;
     public float distanceTraveled = 0;
+
 
     // Constructeur de la classe Bullet
     // x, y : Coordonnées initiales du projectile
@@ -34,6 +38,15 @@ public class Bullet {
         this.degats = degats;
         this.color = color;
         calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
+        loadMunitionImage();
+    }
+
+    public void loadMunitionImage(){
+        BufferedImage atlas=Enregistrement.getSpriteAtlas();
+        mImages=new BufferedImage[1];
+        mImages[0]= atlas.getSubimage(40, 3*40, 40, 40);
+
+    
     }
 
     private void updateDistanceTraveled() {
@@ -64,11 +77,24 @@ public class Bullet {
 
     // Dessine le projectile à sa position actuelle
     public void createBullet(Graphics g) {
+        
         updateDistanceTraveled();
-        g.setColor(this.color);
-        g.fillOval((int) x, (int) y, size, size);
-        this.x += differenceX;  // Met à jour la coordonnée x en fonction de la composante de mouvement en x
-        this.y += differenceY;  // Met à jour la coordonnée y en fonction de la composante de mouvement en y
+        // Cast Graphics to Graphics2D
+    Graphics2D g2d = (Graphics2D) g.create();
+
+    // Translate and rotate the graphics context
+    g2d.translate(x, y); // Translate to the position of the bullet
+    double angle = Math.atan2(differenceY, differenceX); // Calculate angle of motion
+    g2d.rotate(angle); // Rotate the image to align with the direction of motion
+
+    // Draw the bullet image
+    g2d.drawImage(mImages[0], -size / 2, -size / 2, null); // Draw from the center of the bullet
+
+    // Dispose the graphics context to release resources
+    g2d.dispose();
+    // Mettre à jour les coordonnées du projectile
+    this.x += differenceX;
+    this.y += differenceY;
     }
 
     public boolean isOutOfBounds (int width, int height){
