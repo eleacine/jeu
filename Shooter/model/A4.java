@@ -2,8 +2,11 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
 import javax.swing.Timer;
 
 import Shooter.Managers.GameManager;
@@ -19,22 +22,36 @@ public class A4 extends Armes {
     private long explosionDelay = 2000;  // Délai d'explosion
     public GameManager gameManager;
     private boolean isPlaced = false;
+    private BufferedImage[] grenadeImage;
+
     public A4() {
         super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
+        loadGrenadeImage();
     }
 
     public A4(int x, int y) {
         super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
         this.x = x;
         this.y = y;
+        loadGrenadeImage();
         setupExplosionTimer();  
+    }
+
+    private void loadGrenadeImage() {
+        // Charger l'image de la grenade ici
+        // Exemple : grenadeImage = ImageIO.read(new File("grenade.png"));
+        BufferedImage atlas=Enregistrement.getSpriteAtlas();
+        grenadeImage=new BufferedImage[1];
+        
+        grenadeImage[0]= atlas.getSubimage(8*40, 1*40, 40, 40);
+        
     }
     
     public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
       //  System.out.println("draw grenade");
       //  double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
-        if (isGrenadeActivated) {
+        /*if (isGrenadeActivated) {
         //    if (distanceToPlayer <= getDistance()) {
                 g.setColor(this.color);
                 g.fillOval(x, y, dimension, dimension);
@@ -44,7 +61,20 @@ public class A4 extends Armes {
                // double angleToPlayer = Math.atan2(playerY - y, playerX - x);
              //   x = playerX - (int) (Math.cos(angleToPlayer) * getDistance());
                // y = playerY - (int) (Math.sin(angleToPlayer) * getDistance());
-            }
+            }*/
+            if (isGrenadeActivated) {
+                // Dessinez l'image de la grenade si elle est activée
+                if (grenadeImage != null) {
+                    Graphics2D g2d = (Graphics2D) g.create();
+                    g2d.drawImage(grenadeImage[0], x, y, dimension, dimension, null);
+                    g2d.dispose();
+                } else {
+                    // Dessinez un ovale comme avant si l'image de la grenade n'est pas disponible
+                    g.setColor(this.color);
+                    g.fillOval(x, y, dimension, dimension);
+                }
+                drawExplosion(x, y, g, enemies);
+            } 
         }
    // }
     
