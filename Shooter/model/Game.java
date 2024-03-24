@@ -37,6 +37,7 @@ public class Game extends JFrame implements Runnable {
 
 	public boolean isRunning = true;
 	public boolean begin = false;
+	public boolean gameMode=false; //False: mode normal 	//True: mode créateur 
 
 	public int nbLevel = 3;
 
@@ -46,14 +47,14 @@ public class Game extends JFrame implements Runnable {
 
 	public Game() {
 
-		// load des personnages
+		// initialisation:liste de perso, perso et des loaders 
 		this.perso_list = new ArrayList<>();
 		Player player = new Player(null);
 		EnemyLevelLoader enemyLoader = new EnemyLevelLoader(player.getLevel());
-		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt");
+
+		//ajout: enemies et perso
+		enemyLoader.loadLevelEnemies("Shooter/factory/EnemiesForLevels.txt"); //peut-être faudrait load les enemies quand le bouton play est appuyé 
 		this.perso_list = enemyLoader.createEnemiesForLevel();
-
-
 		this.perso_list.add(0, player);
 
 		perso_list.add(new EnemyIA(1000, 150));
@@ -205,7 +206,6 @@ public class Game extends JFrame implements Runnable {
 
 		// Vérifier si le premier élément est une instance de Player avant la conversion
 		if (!perso_list.isEmpty()) {
-
 			// Vider la liste
 			perso_list.clear();
 			this.perso_list = tmp;
@@ -221,11 +221,10 @@ public class Game extends JFrame implements Runnable {
 
 			Player player = (Player) perso_list.get(0);
 			if (player.getLevel() == nbLevel) {
-				
 				cardLayout.show(cardPanel, "Win");
-			} else {
+			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
 				// Afficher la page noire pendant un court laps de temps
-                showBlackScreenForDelay(1000); // Durée en millisecondes, ajustez si nécessaire
+                showBlackScreenForDelay(1500); // Durée en millisecondes, ajustez si nécessaire
 				nextLevel();
 				begin = true;
 			}
@@ -233,10 +232,9 @@ public class Game extends JFrame implements Runnable {
 	}
 
 	private void nextLevel() {
-		System.out.println("I'm being called: nextLEvel");
-		reset();
+		System.out.println("I'm being called: nextLevel");
 		gameManager.getPlayer().setLevel();
-		
+		reset();
 	}
 
 	private void showBlackScreenForDelay(int delay) {
