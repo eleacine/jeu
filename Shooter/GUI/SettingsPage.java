@@ -20,7 +20,7 @@ public class SettingsPage extends GameScene {
 
 		//titre
         JLabel titleLabel = new JLabel("Settings");
-        titleLabel.setFont(TITLE_FONT); 
+        titleLabel.setFont(shooterFont); 
         titleLabel.setForeground(TITLE_COLOR); 
 
 		//composition des elements dans le grid

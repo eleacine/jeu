@@ -5,14 +5,17 @@ import javax.swing.JPanel;
 
 import Shooter.model.Game;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class MenuPage extends GameScene {
 
-    
+    Font shooterFont =loadShooterFont();
 
     public MenuPage(Game g1) {
         super(g1);
@@ -37,7 +40,7 @@ public class MenuPage extends GameScene {
 
         // Add title
         JLabel titleLabel = new JLabel("SHOOTER GAME");
-        titleLabel.setFont(TITLE_FONT);
+        titleLabel.setFont(shooterFont.deriveFont(30));
         titleLabel.setForeground(TITLE_COLOR);
         add(titleLabel, gbc);
 
@@ -47,6 +50,20 @@ public class MenuPage extends GameScene {
 		gbc.weighty=3;
         add(buttonPanel, gbc);
     }
+
+       private Font loadShooterFont() {
+         try {
+        InputStream fontStream = getClass().getResourceAsStream("../res/shooter.ttf");
+        if (fontStream == null) {
+            throw new FileNotFoundException("Fichier de police introuvable.");
+        }
+        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(130f);
+    } catch (Exception e) {
+        e.printStackTrace();
+        // En cas d'erreur :  police par défaut
+        return new Font("SansSerif", Font.PLAIN, 14);
+    }
+}
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -70,4 +87,5 @@ public class MenuPage extends GameScene {
 
         return buttonPanel;
     }
+
 }
