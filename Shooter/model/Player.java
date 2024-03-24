@@ -44,7 +44,7 @@ public class Player extends Personnage {
     }
 
     public void loadSprite() {
-        URL imageUrl = getClass().getResource("j_test.png");
+        URL imageUrl = getClass().getResource("Jj_test.png");
         ImageIcon originalImage = new ImageIcon(imageUrl);
 
         double scale = 5;

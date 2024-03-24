@@ -44,8 +44,11 @@ public class Bullet {
 
     public void loadMunitionImage(){
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
-        mImages=new BufferedImage[1];
-        mImages[0]= atlas.getSubimage(40, 3*40, 40, 40);
+        mImages=new BufferedImage[2];
+        for(int i=0;i<2;i++){
+            mImages[i]= atlas.getSubimage((6+i)*40, 1*40, 40, 40);
+        }
+        
 
     
     }
@@ -93,6 +96,29 @@ public class Bullet {
 
     // Dispose the graphics context to release resources
     g2d.dispose();
+    // Mettre à jour les coordonnées du projectile
+    this.x += differenceX;
+    this.y += differenceY;
+    }
+
+    public void createBulletEnnemy(Graphics g) {
+        
+        updateDistanceTraveled();
+        // Cast Graphics to Graphics2D
+    Graphics2D g2d = (Graphics2D) g.create();
+
+    // Translate and rotate the graphics context
+    g2d.translate(x, y); // Translate to the position of the bullet
+    double angle = Math.atan2(differenceY, differenceX); // Calculate angle of motion
+    g2d.rotate(angle); // Rotate the image to align with the direction of motion
+
+    // Draw the bullet image
+    g2d.drawImage(mImages[1], -size / 2, -size / 2, null); // Draw from the center of the bullet
+
+    // Dispose the graphics context to release resources
+    g2d.dispose();
+
+    
     // Mettre à jour les coordonnées du projectile
     this.x += differenceX;
     this.y += differenceY;

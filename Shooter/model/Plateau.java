@@ -63,7 +63,7 @@ public class Plateau extends JPanel {
 
         // Dessiner les balles des ennemis
         for (Bullet enemyBullet : gameManager.getProjectilesManager().getEnemyBullets()) {
-            enemyBullet.createBullet(g);
+            enemyBullet.createBulletEnnemy(g);
         }
 
         // Dessiner les ennemis
