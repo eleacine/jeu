@@ -3,7 +3,11 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.net.URL;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 
 import Shooter.Managers.ProjectilesManager;
 
@@ -22,6 +26,7 @@ public class Enemy extends Personnage {
 	public int tailleBar = 40;
 	public int vieTotal = 100;
 	public double direction; //direction pour ajouter le halo de vision
+	protected ImageIcon sprite;
 
 
 	public Color color;
@@ -36,6 +41,7 @@ public class Enemy extends Personnage {
 		this.frequency = frequency;
 		this.detectionRadius = detectionRadius;
 		this.color = color;
+		loadSprite();
 	}
 
 	public Enemy (int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower, int frequency, int detectionRadius, Color color){
@@ -46,7 +52,10 @@ public class Enemy extends Personnage {
 		this.frequency = frequency;
 		this.detectionRadius = detectionRadius;
 		this.color = color;
+		loadSprite();
 	}
+
+
 
 	public Enemy (int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower, int detectionRadius, Color color){
 		super(x, y, size, sante, maxSpeed);
@@ -55,7 +64,21 @@ public class Enemy extends Personnage {
 		this.collisionPower = collisionPower;
 		this.detectionRadius = detectionRadius;
 		this.color = color;
+		loadSprite();
 	}
+
+	public void loadSprite() {
+        URL imageUrl = getClass().getResource("Ee_test.png");
+    ImageIcon originalImage = new ImageIcon(imageUrl);
+
+    double scale = 5;
+    int newWidth = (int) (size * scale);
+    int newHeight = (int) (size * scale);
+
+    Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+    ImageIcon enemyImage = new ImageIcon(resizedImage);
+    this.sprite = enemyImage;
+    }
 
 	public void updateBehavior(Player player, int[][] map) {}
 
@@ -107,8 +130,16 @@ public class Enemy extends Personnage {
 	}
 
 	public void drawEnemy (Graphics g){
-		g.setColor(this.color);
-		g.fillOval(this.x, this.y, this.size, this.size);
+		// Vérifier si l'image est chargée
+		if (sprite != null && sprite.getImage() != null) {
+			// Dessiner l'image
+			g.drawImage(sprite.getImage(), x, y, size, size, null);
+		} else {
+			// Si l'image n'est pas chargée, dessiner un cercle comme auparavant
+			g.setColor(this.color);
+			g.fillOval(this.x, this.y, this.size, this.size);
+		}
+		
 	}
 
 	// ------------- Getters et setters ---------------------------
