@@ -101,7 +101,7 @@ public class Plateau extends JPanel {
         if (currentArme >= 0 && currentArme < gameManager.getPlayer().armes.size()) {
             g.drawString("type:" + armeCourante.nom, 1325, 30);
             g.drawString("munitions:" + armeCourante.munition, 1325, 50);
-            g.drawString("vie:"+ gameManager.getPlayer().sante, 1325, 70);
+            g.drawString("vie:" + gameManager.getPlayer().sante, 1325, 70);
         }
         g.setColor(armeCourante.color);
         int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2
@@ -161,11 +161,12 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel()-1);
+        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt",
+                gameManager.getPlayer().getLevel() - 1);
     }
 
     // ------------- Flood fill ----------------
-    // pour le flood fill les cases adjacentes ne doivent pas avoir le meme nombre 
+    // pour le flood fill les cases adjacentes ne doivent pas avoir le meme nombre
 
     public int[][] floodfill(int xCible, int yCible) {
         int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
@@ -185,34 +186,61 @@ public class Plateau extends JPanel {
         return res;
     }
 
+    // public int[][] floodfill2(int x, int y, int[][] res) {
+    // int v = res[x][y] + 1;
+
+    // // Liste des directions
+    // int[][] directions = {
+    // {1, 0}, {-1, 0}, {0, 1}, {0, -1},
+    // {1, 1}, {-1, -1}, {1, -1}, {-1, 1}
+    // };
+
+    // // Parcours de toutes les directions
+    // for (int[] direction : directions) {
+    // int newX = x + direction[0];
+    // int newY = y + direction[1];
+
+    // // Vérification des limites de la grille
+    // if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
+    // // Vérification si la case est vide et la valeur non mise à jour
+    // if (res[newX][newY] == -1 || res[newX][newY] > v && res[newX][newY] != 1000)
+    // {
+    // res[newX][newY] = v;
+    // // Appel récursif pour la nouvelle case
+    // floodfill2(newX, newY, res);
+    // }
+    // }
+    // }
+
+    // return res;
+    // }
+
     public int[][] floodfill2(int x, int y, int[][] res) {
         int v = res[x][y] + 1;
-    
+
         // Liste des directions
         int[][] directions = {
-            {1, 0}, {-1, 0}, {0, 1}, {0, -1},
-            {1, 1}, {-1, -1}, {1, -1}, {-1, 1}
+                { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
         };
-    
+
         // Parcours de toutes les directions
         for (int[] direction : directions) {
             int newX = x + direction[0];
             int newY = y + direction[1];
-    
+
             // Vérification des limites de la grille
             if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
                 // Vérification si la case est vide et la valeur non mise à jour
-                if (res[newX][newY] == -1 || res[newX][newY] > v && res[newX][newY] != 1000) {
+                if ((res[newX][newY] == -1 || res[newX][newY] > v) && res[newX][newY] != 1000) {
                     res[newX][newY] = v;
                     // Appel récursif pour la nouvelle case
                     floodfill2(newX, newY, res);
                 }
             }
         }
-    
+
         return res;
     }
-    
 
     public void printFloodFill(int[][] res) {
         for (int i = 0; i < res.length; i++) {
@@ -222,9 +250,6 @@ public class Plateau extends JPanel {
             System.out.println();
         }
     }
-
-    
-
 
     // --------- GETTERS et SETTERS -----------
 
