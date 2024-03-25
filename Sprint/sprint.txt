@@ -180,3 +180,8 @@ Eléacine:
     -commencer effet explosion
     -differencier arme dans le pop up
     -definir les salles des differents niveaux
+
+Leonor: 
+    - finir séparation entre jeu avec niveaux prédefinis et niveaux crées 
+    - aider à la définition des differentes "pièces de la maison"
+    - organisation des elements graphiques pour faire mode sombre 
