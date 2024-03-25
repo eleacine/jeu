@@ -55,6 +55,22 @@ public class PlateauLevelLoader{
 
         return board;
     }
+
+    //nombre de niveau
+    public static int levelmax(String filePath){
+        int levelmax = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("Level")) {
+                    levelmax++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return levelmax;
+    }
     
 
     // public static void main(String[] args) {

@@ -227,3 +227,6 @@ Eléacine :
     -design de differents éléments pour differencier les salles selon les niveaux
     -design arme au sol
     
+Majoori : 
+    -le joueur peut creer des levelpersonnalisé
+    -tentative pour modifier les levels déjà crées
