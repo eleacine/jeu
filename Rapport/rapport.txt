@@ -214,3 +214,10 @@ Leonor:
 
 Ines:
     -Amelioration du fonctionnement des armes (elle ne disparaissent plus et on ne peut pas les placer sur des nur)
+    
+Semaine 8 :
+
+Marylou :
+    - flood fill et comportement d'un ennemi fonctionnnel
+    - début d'un second ennemiIA qui tire dès qu'il peut sur le joueur 
+    
