@@ -249,7 +249,7 @@ public class EditingMode extends GameScene {
 		ArrayList<Case> l = new ArrayList<>();
 		switch (s) {
 			case "Sol":
-				l= managerCase.sol;
+				//l= managerCase.sol;
 				break;
 
 			case "Mur":
