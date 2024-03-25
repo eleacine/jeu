@@ -226,10 +226,20 @@ public class Game extends JFrame implements Runnable {
 				cardLayout.show(cardPanel, "Win");
 			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
 				// Afficher la page noire pendant un court laps de temps
-                showBlackScreenForDelay(1500); // Durée en millisecondes, ajustez si nécessaire
+				waitFortransiion();
+                showBlackScreenForDelay(1500);
+				//waitFortransiion();
 				nextLevel();
 				begin = true;
 			}
+		}
+	}
+
+	public void waitFortransiion() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
