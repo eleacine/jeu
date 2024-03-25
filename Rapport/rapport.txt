@@ -219,4 +219,11 @@ Semaine 8 :
 Marylou :
     - flood fill et comportement d'un ennemi fonctionnnel
     - début d'un second ennemiIA qui tire dès qu'il peut sur le joueur 
+
+Eléacine :
+    -tentative pour bloquer a nouveau echouer 
+    -design des personnages et ennemis
+    -design munitions et tentives de les differencier entre les armes mais solution en cours d'essais
+    -design de differents éléments pour differencier les salles selon les niveaux
+    -design arme au sol
     

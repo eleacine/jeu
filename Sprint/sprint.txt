@@ -175,3 +175,8 @@ Semaine 9:
 Marylou:
     - finir l'ennemiIA 2 (se déplace vers le joueur jusqu'a etre en positon de tir)
     - page GUI
+
+Eléacine:
+    -commencer effet explosion
+    -differencier arme dans le pop up
+    -definir les salles des differents niveaux
