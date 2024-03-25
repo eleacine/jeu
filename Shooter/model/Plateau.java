@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.geom.AffineTransform;
-// import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import Shooter.Managers.*;
@@ -74,7 +73,8 @@ public class Plateau extends JPanel {
                 if (ennemi instanceof Gardien) {
                     ((Gardien) ennemi).dessinerVision(g);
 
-                } else {
+                } else  {
+                   
                     // drawDetectionRadius(g, ennemi);
                 }
                 ennemi.drawEnemy(g);
@@ -165,7 +165,6 @@ public class Plateau extends JPanel {
     }
 
     // ------------- Flood fill ----------------
-    // pour le flood fill les cases adjacentes ne doivent pas avoir le meme nombre
 
     public int[][] floodfill(int xCible, int yCible) {
         int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
@@ -173,7 +172,8 @@ public class Plateau extends JPanel {
             for (int j = 0; j < this.level_tab[i].length; j++) {
 
                 if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT) {
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE){
                     res[i][j] = 1000;
                 } else {
                     res[i][j] = -1;

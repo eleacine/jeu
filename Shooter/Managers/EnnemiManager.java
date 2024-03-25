@@ -31,21 +31,20 @@ public class EnnemiManager {
                     if (ennemi instanceof EnemyIA) {
                         EnemyIA ennemiIA = (EnemyIA) ennemi;
 
-                        // ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
                         ennemiIA.updateBehavior(player, gameManager.getGamePlateau().floodfill);
 
                     } else if (ennemi instanceof EnemySniper) {
                         EnemySniper ennemiSniper = (EnemySniper) ennemi;
-                        // ennemiSniper.updateBehavior(player, gameManager.getGamePlateau().floodfill);
-                        System.out
-                                .println(ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill));
+                    
                         if (ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill)) {
                             ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
                         } else {
                             ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
                         }
 
+
                     } else if (ennemi.isPlayerDetected(player)) {
+                        ennemi.updateBehavior(player, gameManager.getGamePlateau().floodfill);
                         ennemi.shootBehavior(player, gameManager.getProjectilesManager());
                     }
 

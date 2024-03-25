@@ -21,34 +21,50 @@ public class EnemySniper extends Enemy {
         return position / 40;
     }
 
-    
     private boolean isWallBetween(int startX, int startY, int[][] map, int targetX, int targetY) {
-        // Vérifie s'il y a un mur sur la ligne entre deux points
-        while (startX != targetX || startY != targetY) {
-            // Vérifie si la case actuelle est un mur
-            if (isWall(startX, startY, map)) {
+        // Calculer les deltas et les incréments pour les axes X et Y
+        int dx = Math.abs(targetX - startX);
+        int dy = Math.abs(targetY - startY);
+        int sx = startX < targetX ? 1 : -1;
+        int sy = startY < targetY ? 1 : -1;
+    
+        // Variables de contrôle pour l'algorithme de trajectoire
+        int err = dx - dy;
+        int err2;
+    
+        // Position initiale
+        int currentX = startX;
+        int currentY = startY;
+    
+        // Boucle à travers la trajectoire du projectile
+        while (currentX != targetX || currentY != targetY) {
+            // Vérifier si la case actuelle est un mur
+            if (isWall(currentX, currentY, map)) {
                 return true;
             }
     
-            // Déplacements en diagonale
-            if (startX != targetX && startY != targetY) {
-                int dx = startX < targetX ? 1 : -1;
-                int dy = startY < targetY ? 1 : -1;
-                startX += dx;
-                startY += dy;
-            } else {
-                startX += startX < targetX ? 1 : startX > targetX ? -1 : 0;
-                startY += startY < targetY ? 1 : startY > targetY ? -1 : 0;
+            // Calculer la prochaine position sur la trajectoire
+            err2 = 2 * err;
+            if (err2 > -dy) {
+                err -= dy;
+                currentX += sx;
+            }
+            if (err2 < dx) {
+                err += dx;
+                currentY += sy;
             }
         }
+    
+        // Si aucun mur n'est rencontré le long de la trajectoire, retourner false
         return false;
     }
+    
     
     private boolean isWall(int xPos, int yPos, int[][] map) {
         // Vérifie si une case est un mur
         int x = convertPositionToTile(xPos);
         int y = convertPositionToTile(yPos);
-        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
+        return (map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT);
     }
     
 
