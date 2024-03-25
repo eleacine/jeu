@@ -2,10 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Iterator;
 
 import Shooter.Managers.EnnemiManager;
-import Shooter.Managers.GameManager;
 
 // Mine => explose si un personnage passe dessus
 public class A3 extends Armes {
@@ -29,7 +27,6 @@ public class A3 extends Armes {
 
     
         public void draw(Graphics g, int playerX, int playerY) {
-            // System.out.println("draw mine");
             double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
           //  if (distanceToPlayer <= getDistance()) {
@@ -50,7 +47,6 @@ public class A3 extends Armes {
             }
        // }
     
-
 
     public int getX() {
         return x;

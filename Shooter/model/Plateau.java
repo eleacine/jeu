@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
+// import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import Shooter.Managers.*;
@@ -131,32 +131,31 @@ public class Plateau extends JPanel {
         g.drawImage(gameManager.getPlayer().getSprite().getImage(), at, this);
     }
 
-    private void drawDetectionRadius(Graphics g, Enemy ennemi) {
-        // if (ennemi instanceof EnemyMedium) {
-        // Convertir le centre de l'ennemi et le rayon de détection en coordonnées
-        // d'écran
-        int centerX = (int) ennemi.x;
-        int centerY = (int) ennemi.y;
-        int radius = (ennemi).getDetectionRadius();
+    // private void drawDetectionRadius(Graphics g, Enemy ennemi) {
+    //     // if (ennemi instanceof EnemyMedium) {
+    //     // Convertir le centre de l'ennemi et le rayon de détection en coordonnées
+    //     // d'écran
+    //     int centerX = (int) ennemi.x;
+    //     int centerY = (int) ennemi.y;
+    //     int radius = (ennemi).getDetectionRadius();
 
-        // Définir le niveau de transparence (0.0f complètement transparent, 1.0f
-        // complètement opaque)
-        float alpha = 0.4f;
+    //     // Définir le niveau de transparence (0.0f complètement transparent, 1.0f
+    //     // complètement opaque)
+    //     float alpha = 0.4f;
 
-        // Créer une nouvelle couleur avec la transparence appropriée
-        Color transparentColor = new Color(ennemi.color.getRed(), ennemi.color.getGreen(), ennemi.color.getBlue(),
-                (int) (alpha * 255));
+    //     // Créer une nouvelle couleur avec la transparence appropriée
+    //     Color transparentColor = new Color(ennemi.color.getRed(), ennemi.color.getGreen(), ennemi.color.getBlue(),
+    //             (int) (alpha * 255));
 
-        // Dessiner le rayon de détection comme un cercle transparent
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(transparentColor);
+    //     // Dessiner le rayon de détection comme un cercle transparent
+    //     Graphics2D g2d = (Graphics2D) g.create();
+    //     g2d.setColor(transparentColor);
 
-        Ellipse2D.Double detectionCircle = new Ellipse2D.Double(centerX - radius, centerY - radius, 2 * radius,
-                2 * radius);
-        g2d.fill(detectionCircle);
-        g2d.dispose();
-        // }
-    }
+    //     Ellipse2D.Double detectionCircle = new Ellipse2D.Double(centerX - radius, centerY - radius, 2 * radius,
+    //             2 * radius);
+    //     g2d.fill(detectionCircle);
+    //     g2d.dispose();
+    // }
 
     public void reset() {
         pieges.clear();
@@ -186,34 +185,6 @@ public class Plateau extends JPanel {
         return res;
     }
 
-    // public int[][] floodfill2(int x, int y, int[][] res) {
-    // int v = res[x][y] + 1;
-
-    // // Liste des directions
-    // int[][] directions = {
-    // {1, 0}, {-1, 0}, {0, 1}, {0, -1},
-    // {1, 1}, {-1, -1}, {1, -1}, {-1, 1}
-    // };
-
-    // // Parcours de toutes les directions
-    // for (int[] direction : directions) {
-    // int newX = x + direction[0];
-    // int newY = y + direction[1];
-
-    // // Vérification des limites de la grille
-    // if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
-    // // Vérification si la case est vide et la valeur non mise à jour
-    // if (res[newX][newY] == -1 || res[newX][newY] > v && res[newX][newY] != 1000)
-    // {
-    // res[newX][newY] = v;
-    // // Appel récursif pour la nouvelle case
-    // floodfill2(newX, newY, res);
-    // }
-    // }
-    // }
-
-    // return res;
-    // }
 
     public int[][] floodfill2(int x, int y, int[][] res) {
         int v = res[x][y] + 1;

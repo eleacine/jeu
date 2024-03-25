@@ -27,10 +27,19 @@ public class EnnemiManager {
                     // arranger ca
                     if (ennemi instanceof EnemyIA) {
                         EnemyIA ennemiIA = (EnemyIA) ennemi;
-                        // ennemiIA.moveEnemyTowardsPlayer(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
-                        //         gameManager.getGamePlateau().getLevel_tab());
-                        // ennemiIA.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().getLevel_tab());
-                        ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
+                      
+                        // ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
+                        ennemiIA.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill);
+                    
+                    } else if (ennemi instanceof EnemySniper) {
+                        EnemySniper ennemiSniper = (EnemySniper) ennemi;
+                        // ennemiSniper.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill);
+                        System.out.println(ennemiSniper.isPlayerInRange(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill));
+                        if (ennemiSniper.isPlayerInRange(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill)) {
+                            ennemiSniper.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                        } else {
+                            ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
+                        }
             
 
                     } else if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
