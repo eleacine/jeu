@@ -170,3 +170,8 @@ Leonor:
 - creer la separation entre jeu avec niveaux prédefinis et niveaux crées 
 - clarifier affichage des armes en haut à gauche, ajouter vies 
 
+Semaine 9:
+
+Marylou:
+    - finir l'ennemiIA 2 (se déplace vers le joueur jusqu'a etre en positon de tir)
+    - page GUI
