@@ -6,9 +6,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import Shooter.GUI.EditingMode;
 import Shooter.GUI.GameOverPage;
@@ -224,10 +226,20 @@ public class Game extends JFrame implements Runnable {
 				cardLayout.show(cardPanel, "Win");
 			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
 				// Afficher la page noire pendant un court laps de temps
-                showBlackScreenForDelay(1500); // Durée en millisecondes, ajustez si nécessaire
+				waitFortransiion();
+                showBlackScreenForDelay(1500);
+				//waitFortransiion();
 				nextLevel();
 				begin = true;
 			}
+		}
+	}
+
+	public void waitFortransiion() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -237,27 +249,48 @@ public class Game extends JFrame implements Runnable {
 		reset();
 	}
 
-	private void showBlackScreenForDelay(int delay) {
+	private static void showBlackScreenForDelay(int delay) {
         JFrame blackFrame = new JFrame();
         blackFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        blackFrame.setUndecorated(true); // Supprime les bordures de la fenêtre
-        blackFrame.setBackground(Color.BLACK);
+        blackFrame.setUndecorated(true);
+        blackFrame.getContentPane().setBackground(Color.BLACK);
         blackFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        blackFrame.setLocationRelativeTo(null); // Centre la fenêtre sur l'écran
-        blackFrame.setAlwaysOnTop(true); // Garde la fenêtre au-dessus de toutes les autres
+        blackFrame.setLocationRelativeTo(null);
+        blackFrame.setAlwaysOnTop(true);
 
-        // Affichage de la fenêtre noire
+        blackFrame.setOpacity(0.0f);
         blackFrame.setVisible(true);
 
-        // Attente pendant le délai spécifié
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Timer timer = new Timer(20, new ActionListener() {
+            float opacity = 0.0f;
+            float step = 0.05f;
+            boolean expanding = true;
 
-        // Fermeture de la fenêtre noire
-        blackFrame.dispose();
+            @Override
+           public void actionPerformed(ActionEvent e) {
+    if (expanding) {
+        opacity += step;
+        if (opacity >= 1.0f) {
+            expanding = false;
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+    } else {
+        opacity -= step;
+        if (opacity <= 0.0f) {
+            ((Timer) e.getSource()).stop();
+            blackFrame.dispose();
+        }
+    }
+    opacity = Math.min(Math.max(opacity, 0.0f), 1.0f);
+    blackFrame.setOpacity(opacity);
+}
+
+        });
+        timer.start();
     }
 
 

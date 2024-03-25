@@ -109,7 +109,7 @@ public class A4 extends Armes {
         g.fillOval(x - 40, y - 40, 150, 150);
 
         for (Personnage personnage : enemies) {
-            System.out.println("verif de distance");
+           // System.out.println("verif de distance");
             double distance = Math.sqrt(Math.pow(personnage.x - x, 2) + Math.pow(personnage.y - y, 2));
             if (distance <= 75) {
                 personnage.infligerDegats(10);
