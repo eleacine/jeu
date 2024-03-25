@@ -7,15 +7,18 @@ import Shooter.model.Enemy;
 import Shooter.model.EnemyIA;
 import Shooter.model.EnemySniper;
 import Shooter.model.Personnage;
+import Shooter.model.Player;
 
 public class EnnemiManager {
 
-    public GameManager gameManager;
-    public List<Personnage> perso_list;
+    private GameManager gameManager;
+    private List<Personnage> perso_list;
+    private Player player;
 
     public EnnemiManager(GameManager gameManager) {
         this.gameManager = gameManager;
         this.perso_list = gameManager.getPersoList();
+        this.player = gameManager.getPlayer();
     }
 
     public void update() {
@@ -27,28 +30,28 @@ public class EnnemiManager {
                     // arranger ca
                     if (ennemi instanceof EnemyIA) {
                         EnemyIA ennemiIA = (EnemyIA) ennemi;
-                      
-                        // ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
-                        ennemiIA.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill);
-                    
+
+                        // ennemiIA.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
+                        ennemiIA.updateBehavior(player, gameManager.getGamePlateau().floodfill);
+
                     } else if (ennemi instanceof EnemySniper) {
                         EnemySniper ennemiSniper = (EnemySniper) ennemi;
-                        // ennemiSniper.updateBehavior(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill);
-                        System.out.println(ennemiSniper.isPlayerInRange(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill));
-                        if (ennemiSniper.isPlayerInRange(gameManager.getPlayer(), gameManager.getGamePlateau().floodfill)) {
-                            ennemiSniper.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                        // ennemiSniper.updateBehavior(player, gameManager.getGamePlateau().floodfill);
+                        System.out
+                                .println(ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill));
+                        if (ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill)) {
+                            ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
                         } else {
-                            ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, gameManager.getPlayer());
+                            ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
                         }
-            
 
-                    } else if (ennemi.isPlayerDetected(gameManager.getPlayer())) {
-                        ennemi.shootBehavior(gameManager.getPlayer(), gameManager.getProjectilesManager());
+                    } else if (ennemi.isPlayerDetected(player)) {
+                        ennemi.shootBehavior(player, gameManager.getProjectilesManager());
                     }
 
-                    if (ennemi.detectCollision(gameManager.getPlayer().getX(), gameManager.getPlayer().getY(),
-                            gameManager.getPlayer().getSize())) {
-                        gameManager.getPlayer().infligerDegats(ennemi.getCollisionPower());
+                    if (ennemi.detectCollision(player.getX(), player.getY(),
+                            player.getSize())) {
+                        player.infligerDegats(ennemi.getCollisionPower());
                     }
                 }
             }
@@ -71,8 +74,13 @@ public class EnnemiManager {
         }
     }
 
+    // ------------- Getters et setters ---------------------------
     public List<Personnage> getPerso_list() {
         return perso_list;
+    }
+
+    public void setPerso_list(List<Personnage> perso_list) {
+        this.perso_list = perso_list;
     }
 
 }

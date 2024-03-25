@@ -211,7 +211,7 @@ public class Game extends JFrame implements Runnable {
 			this.perso_list = tmp;
 		}
 
-		gameManager.getEnnemiManager().perso_list = perso_list;
+		gameManager.getEnnemiManager().setPerso_list(perso_list); 
 
 	}
 

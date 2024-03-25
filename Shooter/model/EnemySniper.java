@@ -10,9 +10,8 @@ public class EnemySniper extends Enemy {
     }
 
     public boolean isPlayerInRange(Player player, int[][] map) {
-        // int distanceToPlayer = calculateDistance(player);
         if (isPlayerDetected(player)) {
-            return isWallBetween(x, y, map, player.getX(), player.getY());
+            return !isWallBetween(x, y, map, player.getX(), player.getY());
         }
         return false;
     }

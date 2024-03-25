@@ -3,16 +3,13 @@ import Shooter.model.Game;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+// import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.awt.*;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
