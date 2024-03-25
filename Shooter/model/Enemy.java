@@ -289,8 +289,13 @@ public class Enemy extends Personnage {
 	}
 
 	public void drawBarVie(Graphics g) {
+		// Déterminer les coordonnées x et y pour centrer le rectangle sur l'ennemi
+		int barX = (int) this.getX() - (getTailleBar(this) / 2)+20;
+		int barY = (int) this.getY() - 10;
+	
+		// Dessiner le rectangle de la barre de vie
 		g.setColor(Color.GREEN);
-		g.fillRect((int) this.getX() - (getTailleBar(this) / 2), (int) this.getY() - 10, getTailleBar(this), 7);
+		g.fillRect(barX, barY, getTailleBar(this), 7);
 	}
 
 }

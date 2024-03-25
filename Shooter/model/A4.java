@@ -25,12 +25,12 @@ public class A4 extends Armes {
     private BufferedImage[] grenadeImage;
 
     public A4() {
-        super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
+        super("grenade", 50, false, 5,4, 2000, 400, true);
         loadGrenadeImage();
     }
 
     public A4(int x, int y) {
-        super("grenade", 50, false, 5, Color.GRAY, 2000, 400, true);
+        super("grenade", 50, false, 5,4, 2000, 400, true);
         this.x = x;
         this.y = y;
         loadGrenadeImage();
