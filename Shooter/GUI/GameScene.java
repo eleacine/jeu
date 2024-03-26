@@ -1,5 +1,8 @@
 package Shooter.GUI;
 import Shooter.model.Game;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -96,6 +99,8 @@ public class GameScene extends JPanel {
 
 
 public class JButtonStyled extends JButton {
+    private int id;
+
     public JButtonStyled(String text, Font font) {
         super(text);
         setFocusPainted(false);
@@ -119,6 +124,12 @@ public class JButtonStyled extends JButton {
         });
     }
 
+    JButtonStyled(int id, Icon icon) {
+        super(icon);
+        
+        this.id = id;
+    }
+
     private void adjustButtonSize() {
         setVerticalTextPosition(SwingConstants.CENTER); 
         setMargin(new Insets(0, 0, 60, 0)); 
@@ -130,6 +141,10 @@ public class JButtonStyled extends JButton {
         int buttonWidth = Math.max(textWidth + extraWidth, 150); 
         int buttonHeight = Math.max(textHeight + extraHeight, 40); 
         setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    }
+
+    public int getId() {
+        return id;
     }
 }
 

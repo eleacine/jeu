@@ -28,6 +28,7 @@ public class ManagerCase {
 
     public ArrayList<Case> mur = new ArrayList<>();
     public ArrayList<Case> obstacle = new ArrayList<>();
+    public ArrayList<Case> sol = new ArrayList<>();
 
     public ManagerCase() {
         loadAtlas();
@@ -36,8 +37,8 @@ public class ManagerCase {
 
     private void createCases() {
         int id=0;
-        cases.add(SOL_CASE= new Case(getSprite(0, 0),id++,SOL));
-        cases.add(HERBE=new Case(getSprite(1, 0),id++,SOL));
+        sol.add(SOL_CASE= new Case(getSprite(0, 0),id++,SOL));
+        sol.add(HERBE=new Case(getSprite(1, 0),id++,SOL));
 
         mur.add(MUR_HAUT= new Case(getSprite(2, 0),id++,MUR));
         mur.add(MUR_BAS= new Case(getRotImg(getSprite(2, 0), 180),id++,MUR));
@@ -82,7 +83,7 @@ public class ManagerCase {
         obstacle.add(COUSSIN_MILIEU= new Case(getSprite(5, 1),id++,BLOQUE));//33
 
         
-        
+        cases.addAll(sol);
         cases.addAll(mur);
         cases.addAll(obstacle);
     }

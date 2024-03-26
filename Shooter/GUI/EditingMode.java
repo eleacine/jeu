@@ -2,40 +2,37 @@ package Shooter.GUI;
 
 import Shooter.Managers.ManagerCase;
 import Shooter.factory.PlateauLevelLoader;
-import Shooter.model.Case;
-import Shooter.model.Game;
-import Shooter.model.Plateau;
-import Shooter.model.Player;
+import Shooter.model.*;
 
 import java.awt.*;
 
-import javax.sound.sampled.AudioFileFormat.Type;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Array;
+import java.io.*;
+
 import java.util.ArrayList;
 
 
 public class EditingMode extends GameScene {
 	// contient réglages du type darkmode, musique, sauvegarde, skins, règles du jeu
-	private int levelselected;
-	private int[][] level;
+	private ManagerCase managerCase;
+	private int levelselected; // numéro du niveau selectionné par l'utilisateur (si 0, c'est un nouveau niveau sinon c'est un niveau existant)
+	private int[][] level; // niveau sélectionné par l'utilisateur
+	private ArrayList<String> ListeEnnemis;
+	private boolean levelpersonnalisé=true; // MODE PERSONNALISÉ OU CAMPAGNE
+	private int clicked;
+
 	private JPanel Plateau; 
 	private JPanel Colonne; 
-	private int clicked;
-	private boolean levelpersonnalisé=false;
-	private ManagerCase managerCase;
-
+	
+	
 	public EditingMode(Game game) {
 		super(game);
 		levelselected=0;
 		this.managerCase = new ManagerCase();
+		this.ListeEnnemis = new ArrayList<>();
 		this.level=creeLevelsimple();
 		setLayout(new BorderLayout());
 		createPlateau();
@@ -47,11 +44,11 @@ public class EditingMode extends GameScene {
 	}
 
 	public int[][] creeLevelsimple(){
-		int[][] l = new int[20][36];
-		for(int i=0;i<20;i++){
-			for(int j=0;j<36;j++){
+		int[][] l = new int[20][37];
+		for(int i=0;i<l.length;i++){
+			for(int j=0;j<l[i].length;j++){
 				if(i==0||j==0||i==19||j==35){
-					l[i][j]=2;
+					l[i][j]=7;
 				}else{
 					l[i][j]=0;
 				}
@@ -80,7 +77,7 @@ public class EditingMode extends GameScene {
 				levelselected=n-1;
 				System.out.println("n="+n);
 				if(n!=0){
-					level =PlateauLevelLoader.loadPlayingBoard(cheminFichier(), levelselected);
+					level =PlateauLevelLoader.loadPlayingBoard(cheminFichierLevel(), levelselected);
 				}else{
 					level=creeLevelsimple();
 				}
@@ -107,12 +104,13 @@ public class EditingMode extends GameScene {
 			levelmax =PlateauLevelLoader.levelmax("Shooter/factory/PlateauLevels.txt");
 		}
 		
-		String [] options = new String[levelmax+1];
+		String [] options = new String[levelmax+2];
 		System.out.println("LEVELMAX: "+levelmax);
 		options[0]="Nouveau";
-		for(int i=0;i<levelmax;i++){
+		for(int i=0;i<levelmax-1;i++){
 			options[i+1]="Level "+(i+1);
 		}
+		options[levelmax+1]="Ennemis";
 		return options;
 	}
 
@@ -163,8 +161,30 @@ public class EditingMode extends GameScene {
 		Case.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e){
-			level[li][col]=clicked;
-			Case.draw(li,col);
+			if(clicked>=100){
+				ArrayList<String> ListeEnnemis1 = ListeEnnemis();
+				if(Case.ennemie!=null){
+					for(int i=0;i<ListeEnnemis.size();i++){
+						String[] ennemi = ListeEnnemis.get(i).split(",");
+						if(Integer.parseInt(ennemi[1].replaceAll("[^0-9]", "").trim())==li*40-20 && Integer.parseInt(ennemi[2].replaceAll("[^0-9]", "").trim())==col*40-20){
+							ListeEnnemis.remove(i);
+						}
+					}
+				}
+				Case.ennemie=getSprite(ListeEnnemis1.get(clicked-100));
+				int x = (40*li)-20;
+				int y = (40*col)-20;
+
+				ListeEnnemis.add(ListeEnnemis1.get(clicked-100)+","+x+","+y+";");
+				System.out.println("ListeEnnemis");
+				for(int i=0;i<ListeEnnemis.size();i++){
+					System.out.println(ListeEnnemis.get(i));
+				}
+				Case.repaint();
+			}else{
+				level[li][col]=clicked;
+				Case.draw(li,col);
+			}
 		}			
 		});
 		return Case;
@@ -174,17 +194,20 @@ public class EditingMode extends GameScene {
 //----------------------------CREER BARRE DU BAS(LA HONTE,VRAIMENT) (SAUVEGARDER/MODIFIER)---------------------------
 	public void createBarreBas(){
 		JPanel barre =new JPanel();
-		barre.setLayout(new GridLayout(5,5));
+		barre.setLayout(new GridLayout());
 		barre.setBackground(Color.BLACK);
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.gridx=0;
 		gbc.gridy=0;
-		JButton sauvegarde = new JButton("Sauvegarder");
+		JButtonStyled sauvegarde = new JButtonStyled("Sauvegarder", new Font("SansSerif", Font.PLAIN, 14));
         sauvegarde.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-				sauvegardeAction(cheminFichier());
-                game.cardLayout.show(game.cardPanel, "Menu");
+				if(ListeEnnemis.size()>0){
+					sauvegardeAction(cheminFichierLevel(),cheminFichierEnnemi());
+					game.cardLayout.show(game.cardPanel, "Menu");
+				}
+				
 
             }
 
@@ -202,7 +225,7 @@ public class EditingMode extends GameScene {
 		barreHaut.setBackground(Color.BLACK);
 		JPanel b = new JPanel();
 		b.setBackground(Color.BLACK);
-		JComboBox<String> TypeCase = new JComboBox<>(new String[]{"Mur", "Sol", "Obstacle"});
+		JComboBox<String> TypeCase = new JComboBox<>(new String[]{"Mur", "Sol", "Obstacle","Ennemi"});
 		updatecolonne(b, "Mur");
 		TypeCase.addActionListener(new ActionListener() {
 			@Override
@@ -212,86 +235,119 @@ public class EditingMode extends GameScene {
 				
 			}
 		});
+		JScrollPane scrollPane = new JScrollPane(b);
+    	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		barreHaut.add(TypeCase);
 		Colonne.add(barreHaut,BorderLayout.NORTH);
 		Colonne.add(b,BorderLayout.CENTER);
 	}
 
-	public void updatecolonne(JPanel j, String s){
+	public void updatecolonne(JPanel j, String s) {
 		j.removeAll();
-		GridBagLayout gbl = new GridBagLayout();
-		j.setLayout(gbl);
-		GridBagConstraints c = new GridBagConstraints(); 
-		c.insets=new Insets(1, 1, 1, 1);
-		c.gridx = 0; 
-		// ligne 0
-		c.gridy = 0; 
-		
-		ArrayList<Case> l = Liste(s);
-		for(int i=0;i<l.size();i++){
-			JButton b=new JButton(Integer.toString(l.get(i).getId()),new ImageIcon(l.get(i).getSprite()));
-			b.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e){
-					clicked=Integer.parseInt(b.getText());
-				}
-			});
-			j.add(b,c);
-			c.gridy++;
+		j.setLayout(new GridLayout(0, 2)); // Layout pour empiler les boutons verticalement
+		if(s!="Ennemi"){
+			ArrayList<Case> l = Liste(s);
+			for (int i = 0; i < l.size(); i++) {
+				ImageIcon CaseImage = new ImageIcon(l.get(i).getSprite());
+				JButtonStyled b = new JButtonStyled(l.get(i).getId(), CaseImage);
+				b.setPreferredSize(new Dimension(30,30));
+				b.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						clicked = b.getId();
+					}
+				});
+				j.add(b);
+			}
+		}else{
+			ArrayList<String> l = ListeEnnemis();
+			for(int i=0;i<l.size();i++){
+				JButtonStyled b = new JButtonStyled(i+100, getSprite(l.get(i)));
+				b.setPreferredSize(new Dimension(30,30));
+				b.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						clicked = b.getId();
+					}
+				});
+				j.add(b);
+			}
 		}
+
 		j.revalidate();
 		j.repaint();
+		
 	}
 
+	public ImageIcon getSprite(String s){
+		ImageIcon i = new ImageIcon();
+		switch (s) {
+			case "Enemy 1":
+				i= new EnemyBasique(-1,-1).getSprite();
+				break;
+			case "Enemy 2":
+				i= new EnemyMedium(-1,-1).getSprite();
+				break;
+			case "Enemy 3":
+				i= new Gardien(-1,-1).getSprite();
+				break;
+			case "Enemy 4":
+				i= new EnemyIA(-1,-1).getSprite();
+				break;
+			case "Enemy 5":
+				i= new EnemySniper(-1,-1).getSprite();
+				break;
+		}
+
+		Image img = i.getImage();
+		Image resImage = img.getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		i = new ImageIcon(resImage);
+		
+		return i;
+	}
+
+	public ArrayList<String> ListeEnnemis(){
+		ArrayList<String> l = new ArrayList<>();
+		l.add( "Enemy 1");//Basique
+		l.add("Enemy 2");//Medium
+		l.add("Enemy 3");// Guardien
+		l.add("Enemy 4"); //IA
+		
+		l.add("Enemy 5"); // Sniper
+		return l;
+	}
 
 	public ArrayList<Case> Liste(String s){
 		ArrayList<Case> l = new ArrayList<>();
 		switch (s) {
 			case "Sol":
-				//l= managerCase.sol;
+				l= managerCase.sol;
 				break;
-
 			case "Mur":
 				l= managerCase.mur;
 				break;
-
 			case "Obstacle":
 				l= managerCase.obstacle;
 				break;
-			
 		}
 		return l;
 	}
-	
-
-
-	public JButton bouton(String t){
-		JButton j= new JButton(t);
-		Dimension boutonDimension = new Dimension(100, 50); // Définir la taille souhaitée pour les boutons (largeur x hauteur)
-    	j.setPreferredSize(boutonDimension); // Définir la taille préférée pour le bouton
-		j.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-				if(t=="MARCHE"){
-					clicked=0;
-				}else if(t=="OBSTACLE"){
-					clicked=1;
-				}else if (t=="MUR"){
-					clicked=2;
-				}
-			}
-		});
-		return j;
-	}
 
 //---------------------------------------------------------------------------------------
-	public String cheminFichier(){
+	public String cheminFichierLevel(){
 		if(levelpersonnalisé){
 			return "Shooter/factory/PlateauLevelsPerso.txt";
 		}
 		return "Shooter/factory/PlateauLevels.txt";
 	}
+	public String cheminFichierEnnemi(){
+		if(levelpersonnalisé){
+			return "Shooter/factory/EnemiesForLevelsPerso.txt";
+		}
+		return "Shooter/factory/EnemiesForLevels.txt";
+	}
+	
 	public void modifierAction(String cheminFichier){
 		File writer = new File(cheminFichier);
 
@@ -310,19 +366,20 @@ public class EditingMode extends GameScene {
 		File fichier = new File(cheminFichier);
 		return fichier.exists();
 	}
-    public void sauvegardeAction(String cheminFichier){
-
+    public void sauvegardeAction(String cheminFichierLevel, String cheminFichierEnnemi){
         try {
-            if (!fichierExiste(cheminFichier)) {
+            if (!fichierExiste(cheminFichierLevel) && !fichierExiste(cheminFichierEnnemi)) {
                 // S'il n'existe pas, crée le fichier
-				File fichier = new File(cheminFichier);
+				File fichier = new File(cheminFichierLevel);
                 fichier.createNewFile();
-                System.out.println("Fichier créé avec succès : " + cheminFichier);
+				fichier = new File(cheminFichierEnnemi);
+				fichier.createNewFile();
+                System.out.println("Fichiers créés avec succès : " + cheminFichierLevel+" "+cheminFichierEnnemi);
             }
-            FileWriter writer = new FileWriter(cheminFichier,true);
+            FileWriter writer = new FileWriter(cheminFichierLevel,true);
             // Écrire les données à sauvegarder dans le fichier
             // Par exemple, vous pouvez parcourir votre tableau de données et écrire chaque élément dans le fichier
-            writer.write("Level "+PlateauLevelLoader.levelmax(cheminFichier)+1+":\n");
+            writer.write("Level "+(PlateauLevelLoader.levelmax(cheminFichierLevel)+1)+":\n");
             for (int i = 0; i < level.length; i++) {
                 writer.write("{"); 
                 for (int j = 0; j < level[i].length; j++) {
@@ -334,6 +391,13 @@ public class EditingMode extends GameScene {
                 writer.write("},\n"); // Ajoutez une nouvelle ligne après chaque ligne de données
             }
             writer.close();
+			writer = new FileWriter(cheminFichierEnnemi,true);
+			writer.write((PlateauLevelLoader.levelmax(cheminFichierEnnemi)+1)+": ");
+			for(int i=0;i<ListeEnnemis.size();i++){
+				writer.write(ListeEnnemis.get(i)+" ");
+			}
+			writer.write("\n");
+			writer.close();
             System.out.println("Données sauvegardées avec succès dans le fichier texte.");
         } catch (IOException e) {
 			
@@ -344,12 +408,14 @@ public class EditingMode extends GameScene {
 	private class ImagePanel extends JPanel {
 		private ImageIcon imageIcon;
     	private ImageIcon darkenedImageIcon;
+		private ImageIcon ennemie;
 		boolean mouseOver;
 
     	public ImagePanel(int x, int y) {
 			BufferedImage sprite = managerCase.getSprite(level[x][y]);
         	this.imageIcon = new ImageIcon(sprite);
         	this.darkenedImageIcon = createDarkenedImageIcon(imageIcon);
+			ennemie=null;
 			mouseOver=false;
 
 			addMouseListener(new MouseAdapter() {
@@ -386,6 +452,7 @@ public class EditingMode extends GameScene {
 			BufferedImage sprite = managerCase.getSprite(level[x][y]);
 			this.imageIcon = new ImageIcon(sprite);
 			this.darkenedImageIcon = createDarkenedImageIcon(imageIcon);
+
 		}
 
 		@Override
@@ -397,6 +464,10 @@ public class EditingMode extends GameScene {
 			if(darkenedImageIcon!=null && mouseOver){
 				darkenedImageIcon.paintIcon(this, g,0, 0);
 			}
+			if(ennemie!=null){
+				
+				ennemie.paintIcon(this, g, 0, 0);
+			}
 		}
 
 		@Override
@@ -406,6 +477,10 @@ public class EditingMode extends GameScene {
 			} else {
 				return super.getPreferredSize();
 			}
+		}
+
+		public void setEnnemie(ImageIcon ennemie){
+			this.ennemie=ennemie;
 		}
 	}
 }
