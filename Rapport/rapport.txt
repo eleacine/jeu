@@ -231,6 +231,10 @@ Majoori :
     -le joueur peut creer des levelpersonnalisé
     -tentative pour modifier les levels déjà crées
 
+Ines :
+    -Transition entre les niveau
+    -Amelioration des page graphiques
+
 Leonor:
     - fonction d'initialisation du flood fill avec Marylou 
     - details dans l'enchainement des niveaux (re)réglés

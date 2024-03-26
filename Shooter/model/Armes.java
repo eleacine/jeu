@@ -17,7 +17,7 @@ public abstract class Armes {
     public Color color;
     public String nom;
 
-    public Armes(String nom,int power, boolean type, int munition, int typeMunition) {
+    public Armes(String nom,int power, boolean type, int munition, int typeMunition , Color color) {
         this.power = power;
         this.type = type;
         this.munition = munition;
@@ -36,6 +36,14 @@ public abstract class Armes {
         this.dureeRecharge = dureeRecharge;
         this.typeMunition=typeMunition;
         this.detruitMur=detruitMur;
+    }
+
+    public Armes(String nom, int power , boolean tyep,int  munition , Color color){
+        this.nom=nom;
+        this.power=power;
+        this.type=tyep;
+        this.munition=munition;
+        this.color=color;
     }
 
     public void shoot() {
