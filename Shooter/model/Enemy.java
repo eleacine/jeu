@@ -298,4 +298,7 @@ public class Enemy extends Personnage {
 		g.fillRect(barX, barY, getTailleBar(this), 7);
 	}
 
+	public ImageIcon getSprite(){
+		return this.sprite;
+	}
 }
