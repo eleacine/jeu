@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.geom.AffineTransform;
-// import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import Shooter.Managers.*;
@@ -50,6 +49,7 @@ public class Plateau extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
 
         // Create a new Graphics2D object for gameManager.getPlayer()
@@ -74,7 +74,8 @@ public class Plateau extends JPanel {
                 if (ennemi instanceof Gardien) {
                     ((Gardien) ennemi).dessinerVision(g);
 
-                } else {
+                } else  {
+                   
                     // drawDetectionRadius(g, ennemi);
                 }
                 ennemi.drawEnemy(g);
@@ -103,15 +104,30 @@ public class Plateau extends JPanel {
             g.drawString("munitions:" + armeCourante.munition, 1325, 50);
             g.drawString("vie:" + gameManager.getPlayer().sante, 1325, 70);
         }
-        g.setColor(armeCourante.color);
+
+        // Dessin crosshair
+        gameManager.getMyMouseListener().getCrosshair().draw(g);
+
         int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2
                 - armeCourante.distance * 2 / 2);
         int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2
                 - armeCourante.distance * 2 / 2);
-        g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+        /*g.setColor(Color.RED);
+        g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);*/
 
-        // Dessin crosshair
-        gameManager.getMyMouseListener().getCrosshair().draw(g);
+         // Définir la couleur du trait
+         g2d.setColor(Color.RED);
+
+         // Définir le style de trait discontinu
+         float[] dashPattern = {5, 5}; // Exemple : alternance de 5 pixels pleins et 5 pixels vides
+         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, dashPattern, 0.0f));
+ 
+         // Dessiner le cercle avec le contour discontinu
+         
+         int diametre = armeCourante.distance * 2;
+         g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+
+        
 
     }
 
@@ -165,7 +181,6 @@ public class Plateau extends JPanel {
     }
 
     // ------------- Flood fill ----------------
-    // pour le flood fill les cases adjacentes ne doivent pas avoir le meme nombre
 
     public int[][] floodfill(int xCible, int yCible) {
         int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
@@ -173,7 +188,8 @@ public class Plateau extends JPanel {
             for (int j = 0; j < this.level_tab[i].length; j++) {
 
                 if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT) {
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE){
                     res[i][j] = 1000;
                 } else {
                     res[i][j] = -1;

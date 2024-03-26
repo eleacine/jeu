@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 
+import Shooter.Managers.ProjectilesManager;
+
 public class EnemyBasique extends Enemy{
 
     /* est statique
@@ -18,8 +20,21 @@ public class EnemyBasique extends Enemy{
 
     public EnemyBasique(int x, int y) {
         // super(50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
-        super(x, y, 50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
+        super(x, y, 50, 100, 1, 2, 10, 50, 1000, 250, new Color(255, 0, 0));
     }
+
+    @Override
+    	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
+		// Implémentez la logique de tir spécifique pour cet ennemi
+		// Par exemple, tirer une balle vers le joueur
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastShotTime > getFrequency()) {
+			Bullet bullet = new Bullet(x, y, player.x, player.y, power);
+			projectilesManager.getEnemyBullets().add(bullet);
+			lastShotTime = currentTime;
+		}
+	}
+
 
     
 

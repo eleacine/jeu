@@ -65,7 +65,7 @@ public class ManagerCase {
         obstacle.add(EAU_COIN_GAUCHE_HAUT= new Case(getRotImg(getSprite(7, 0), 270),id++,OBSTACLE));
         obstacle.add(EAU_COIN_DROITE_BAS= new Case(getRotImg(getSprite(7, 0), 90),id++,OBSTACLE));
 
-        obstacle.add(EAU_MILIEU= new Case(getSprite(9, 0),id++,OBSTACLE));//23
+        obstacle.add(EAU_MILIEU= new Case(getSprite(8, 0),id++,OBSTACLE));//23
 
         obstacle.add(TABLE_MILIEU= new Case(getSprite(0, 1),id++,BLOQUE));//24
         obstacle.add(TABLE_BAS= new Case(getSprite(1, 1),id++,BLOQUE));//25
@@ -123,6 +123,7 @@ public class ManagerCase {
         if (xPosition + subImageWidth > atlas.getWidth() || yPosition + subImageHeight > atlas.getHeight()) {
             // Gérer cette situation d'une manière appropriée, par exemple, renvoyer une image par défaut ou lancer une exception
             System.err.println("Erreur : Coordonnées en dehors des limites de l'image atlas.");
+            System.out.println(xCord+","+yCord);
             return getDefaultSprite(); // Remplacez ceci par la logique appropriée
         }
         

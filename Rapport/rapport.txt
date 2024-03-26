@@ -230,3 +230,14 @@ Eléacine :
 Majoori : 
     -le joueur peut creer des levelpersonnalisé
     -tentative pour modifier les levels déjà crées
+
+Leonor:
+    - fonction d'initialisation du flood fill avec Marylou 
+    - details dans l'enchainement des niveaux (re)réglés
+    - detail d'affichage des vies 
+    - creation d'éléments graphiques dans les pages UI 
+    - test sur la différenciation des game modes 
+        options testées:
+        - pop-up après avoir cliqué sur play    --> pb pour loading du plateau, potentiel pb d'enchainement des niveaux 
+        - differents boutons sur menu           --> bonne option, permet de bien séparer le code d'appel 
+        - switch dans settings                  --> pas intuitif niveau game play 
