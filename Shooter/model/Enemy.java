@@ -136,15 +136,15 @@ public class Enemy extends Personnage {
 	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {
-		System.out.println("Joueur position x : " + convertPositionToTile(player.x) + " position y : " + convertPositionToTile(player.y));
+		// System.out.println("Joueur position x : " + convertPositionToTile(player.x) + " position y : " + convertPositionToTile(player.y));
 		int nextX = convertPositionToTile(x); // Convertir la position X de l'ennemi en coordonnées de tableau
 		int nextY = convertPositionToTile(y); // Convertir la position Y de l'ennemi en coordonnées de tableau
 
-		System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
+		// System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
 
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
-		System.out.println("minDistance: " + minDistance);
+		// System.out.println("minDistance: " + minDistance);
 		int dirX = 0;
 		int dirY = 0;
 
@@ -165,15 +165,15 @@ public class Enemy extends Personnage {
 			// System.out.println(" minDistance: " + minDistance + " distances[newY][newX]:
 			// " + distances[newY][newX]);
 			
-			System.out.println("newX: " + newX + " newY: " + newY);
-			System.out.println("distances[newY][newX]: " + distances[newY][newX]);
+			// System.out.println("newX: " + newX + " newY: " + newY);
+			// System.out.println("distances[newY][newX]: " + distances[newY][newX]);
 
 			// Vérifier si la case est valide et si la distance est plus courte
 			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] <= minDistance && distances[newY][newX] != 100){
-				System.out.println("test réussi");
-				System.out.println(dir[0] + " " + dir[1] );
-				System.out.println( "case de la distance : " + distances[newY][newX] );
-				System.out.println("newX: " + newX + " newY: " + newY);
+				// System.out.println("test réussi");
+				// System.out.println(dir[0] + " " + dir[1] );
+				// System.out.println( "case de la distance : " + distances[newY][newX] );
+				// System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
@@ -187,7 +187,7 @@ public class Enemy extends Personnage {
 
 		}
 
-		System.out.println(" ");
+		// System.out.println(" ");
 		// Déplacer l'ennemi dans la direction choisie
 		x += dirX; // Mettre à jour la position X de l'ennemi
 		y += dirY; // Mettre à jour la position Y de l'ennemi

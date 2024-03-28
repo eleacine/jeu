@@ -10,9 +10,7 @@ import java.util.LinkedList;
 import Shooter.Managers.*;
 import Shooter.factory.PlateauLevelLoader;
 import java.util.Queue;
-import java.util.LinkedList;
 
-// pour le flood fill cases obstacles et mur mur cassant a revoir pour eviter des erreurs pour le deplacement
 
 public class Plateau extends JPanel {
     public GameManager gameManager;
@@ -31,7 +29,6 @@ public class Plateau extends JPanel {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
         this.floodfill = new int[this.level_tab.length][level_tab[0].length];
         this.tile_manager = new ManagerCase();
-
     }
 
     public void render_plateau(Graphics g) {
@@ -43,11 +40,13 @@ public class Plateau extends JPanel {
         }
         this.plateau_graphic = g;
 
-        // this.floodfill = floodfill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40);
+        // this.floodfill = floodfill(this.gameManager.getPlayer().getY() / 40,
+        // this.gameManager.getPlayer().getX() / 40);
         // printFloodFill(floodfill);
-        this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40);
-        printFloodFill(
-                newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40));
+        this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40,
+                this.gameManager.getPlayer().getX() / 40);
+        // printFloodFill(
+        //         newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40));
     }
 
     public void update_pleateau(int x, int y, int type_case) {
@@ -57,7 +56,7 @@ public class Plateau extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
-        
+
         // Create a new Graphics2D object for gameManager.getPlayer()
         Graphics2D gPlayer = (Graphics2D) g.create();
         drawPlayerMovement(gPlayer);
@@ -118,22 +117,23 @@ public class Plateau extends JPanel {
                 - armeCourante.distance * 2 / 2);
         int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2
                 - armeCourante.distance * 2 / 2);
-        /*g.setColor(Color.RED);
-        g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);*/
+        /*
+         * g.setColor(Color.RED);
+         * g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance
+         * * 2);
+         */
 
-         // Définir la couleur du trait
-         g2d.setColor(Color.RED);
+        // Définir la couleur du trait
+        g2d.setColor(Color.RED);
 
-         // Définir le style de trait discontinu
-         float[] dashPattern = {5, 5}; // Exemple : alternance de 5 pixels pleins et 5 pixels vides
-         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, dashPattern, 0.0f));
- 
-         // Dessiner le cercle avec le contour discontinu
-         
-         int diametre = armeCourante.distance * 2;
-         g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+        // Définir le style de trait discontinu
+        float[] dashPattern = { 5, 5 }; // Exemple : alternance de 5 pixels pleins et 5 pixels vides
+        g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, dashPattern, 0.0f));
 
-        
+        // Dessiner le cercle avec le contour discontinu
+
+        int diametre = armeCourante.distance * 2;
+        g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
     }
 
@@ -231,6 +231,7 @@ public class Plateau extends JPanel {
                     floodfill2(newX, newY, res);
                 }
             }
+
         }
 
         return res;
@@ -256,15 +257,14 @@ public class Plateau extends JPanel {
         return res;
     }
 
-
     public int[][] newFloodFill2(int x, int y, int[][] res) {
         Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le parcours en largeur (BFS)
         queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
         int distance = 0;
-    
+
         // Liste des directions
         int[][] directions = {
-            { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
+                { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
         };
         // Tant que la file n'est pas vide, continuez le parcours en largeur
         while (!queue.isEmpty()) {
@@ -274,91 +274,96 @@ public class Plateau extends JPanel {
                 int[] cell = queue.poll(); // Récupérer la cellule de la file
                 int cellX = cell[0];
                 int cellY = cell[1];
-    
+
                 // Parcourir les cellules adjacentes
                 for (int[] dir : directions) {
                     int newX = cellX + dir[0];
                     int newY = cellY + dir[1];
                     // Vérifier si la cellule adjacente est dans la grille et non visitée
                     if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length && res[newX][newY] == 0 &&
-                        !isObstacle(newX, newY)) {
+                            !isObstacle(newX, newY)) {
                         res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
-                        queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la file pour exploration
+                        queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la file pour
+                                                               // exploration
                     }
                 }
             }
         }
         return res;
     }
-    
+
     // Vérifier si une cellule est un obstacle
     private boolean isObstacle(int x, int y) {
         return ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR ||
-               ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR_CASSANT ||
-               ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.BLOQUE;
+                ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR_CASSANT ||
+                ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.BLOQUE;
     }
-    
 
     // public int[][] newFloodFill2(int x, int y, int[][] res) {
-    //     Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le parcours en largeur (BFS)
-    //     queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
-    //     int distance = 0;
-    
-    //     // Liste des directions
-    //     int[][] directions = {
-    //         { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
-    //     };
-    
-    //     // Tant que la file n'est pas vide, continuez le parcours en largeur
-    //     while (!queue.isEmpty()) {
-    //         int size = queue.size(); // Taille actuelle de la file (nombre de cellules à ce niveau de distance)
-    //         distance++; // Incrémenter la distance pour le niveau suivant
-    //         for (int i = 0; i < size; i++) {
-    //             int[] cell = queue.poll(); // Récupérer la cellule de la file
-    //             int cellX = cell[0];
-    //             int cellY = cell[1];
-    
-    //             // Parcourir les cellules adjacentes
-    //             for (int[] dir : directions) {
-    //                 int newX = cellX + dir[0];
-    //                 int newY = cellY + dir[1];
-    //                 // Vérifier si la cellule adjacente est dans la grille et non visitée
-    //                 if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length && res[newX][newY] == 0 &&
-    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR &&
-    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR_CASSANT &&
-    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.BLOQUE) {
-    //                     // Vérifier si la case adjacente n'est pas un cul-de-sac
-    //                     boolean isCulDeSac = true;
-    //                     for (int[] adjDir : directions) {
-    //                         int adjX = newX + adjDir[0];
-    //                         int adjY = newY + adjDir[1];
-    //                         if (adjX >= 0 && adjX < res.length && adjY >= 0 && adjY < res[0].length &&
-    //                             (ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR &&
-    //                             ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR_CASSANT &&
-    //                             ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.BLOQUE)) {
-    //                             isCulDeSac = false;
-    //                             break;
-    //                         }
-    //                     }
-    //                     if (!isCulDeSac) {
-    //                         res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
-    //                         queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la file pour
-    //                                                                // exploration
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return res;
-    // }
+    // Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le
+    // parcours en largeur (BFS)
+    // queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
+    // int distance = 0;
 
+    // // Liste des directions
+    // int[][] directions = {
+    // { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
+    // };
+
+    // // Tant que la file n'est pas vide, continuez le parcours en largeur
+    // while (!queue.isEmpty()) {
+    // int size = queue.size(); // Taille actuelle de la file (nombre de cellules à
+    // ce niveau de distance)
+    // distance++; // Incrémenter la distance pour le niveau suivant
+    // for (int i = 0; i < size; i++) {
+    // int[] cell = queue.poll(); // Récupérer la cellule de la file
+    // int cellX = cell[0];
+    // int cellY = cell[1];
+
+    // // Parcourir les cellules adjacentes
+    // for (int[] dir : directions) {
+    // int newX = cellX + dir[0];
+    // int newY = cellY + dir[1];
+    // // Vérifier si la cellule adjacente est dans la grille et non visitée
+    // if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length &&
+    // res[newX][newY] == 0 &&
+    // ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR &&
+    // ManagerCase.getCaseType(this.level_tab[newX][newY]) !=
+    // ManagerCase.MUR_CASSANT &&
+    // ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.BLOQUE) {
+    // // Vérifier si la case adjacente n'est pas un cul-de-sac
+    // boolean isCulDeSac = true;
+    // for (int[] adjDir : directions) {
+    // int adjX = newX + adjDir[0];
+    // int adjY = newY + adjDir[1];
+    // if (adjX >= 0 && adjX < res.length && adjY >= 0 && adjY < res[0].length &&
+    // (ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR &&
+    // ManagerCase.getCaseType(this.level_tab[adjX][adjY]) !=
+    // ManagerCase.MUR_CASSANT &&
+    // ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.BLOQUE)) {
+    // isCulDeSac = false;
+    // break;
+    // }
+    // }
+    // if (!isCulDeSac) {
+    // res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
+    // queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la
+    // file pour
+    // // exploration
+    // }
+    // }
+    // }
+    // }
+    // }
+    // return res;
+    // }
 
     public void printFloodFill(int[][] res) {
         // Déterminer la largeur maximale de chaque colonne
         int numRows = res.length;
         int numCols = res[0].length;
         int[] colWidths = new int[numCols];
-    
+
         for (int j = 0; j < numCols; j++) {
             int maxWidth = 0;
             for (int i = 0; i < numRows; i++) {
@@ -367,7 +372,7 @@ public class Plateau extends JPanel {
             }
             colWidths[j] = maxWidth;
         }
-    
+
         // Afficher les éléments en alignant les colonnes
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -378,7 +383,6 @@ public class Plateau extends JPanel {
         }
         System.out.println();
     }
-    
 
     // --------- GETTERS et SETTERS -----------
 
