@@ -22,10 +22,11 @@ public class EditingMode extends GameScene {
 	private int[][] level; // niveau sélectionné par l'utilisateur
 	private ArrayList<String> ListeEnnemis;
 	private boolean levelpersonnalisé=true; // MODE PERSONNALISÉ OU CAMPAGNE
-	private int clicked;
+	private int clicked; //bouton cliquée
 
 	private JPanel Plateau; 
-	private JPanel Colonne; 
+	private JPanel Colonne;
+	private JPanel barre = new JPanel();
 	
 	
 	public EditingMode(Game game) {
@@ -43,23 +44,26 @@ public class EditingMode extends GameScene {
 		barrehaut();
 	}
 
+	//Crée level basique.
 	public int[][] creeLevelsimple(){
-		int[][] l = new int[20][37];
+		int[][] l = new int[21][37];
 		for(int i=0;i<l.length;i++){
 			for(int j=0;j<l[i].length;j++){
-				if(i==0||j==0||i==19||j==35){
+				if(i==0||j==0||i==20||j==36){
 					l[i][j]=7;
 				}else{
 					l[i][j]=0;
 				}
 			}
 		}
+		levelselected=0;
 		return l;
 	}
 
     //--------------------------------BARRE HAUT----------------------------------
 
 	public void barrehaut(){
+
 		JPanel barreNord = new JPanel();
 		barreNord.setLayout(new FlowLayout()); // Utilisez un FlowLayout pour aligner les composants horizontalement
 		barreNord.setBackground(Color.BLACK);
@@ -78,10 +82,12 @@ public class EditingMode extends GameScene {
 				System.out.println("n="+n);
 				if(n!=0){
 					level =PlateauLevelLoader.loadPlayingBoard(cheminFichierLevel(), levelselected);
+
 				}else{
 					level=creeLevelsimple();
 				}
 				updatePlateau();
+				createBarreBas();
 				
 			}
 		});
@@ -104,13 +110,12 @@ public class EditingMode extends GameScene {
 			levelmax =PlateauLevelLoader.levelmax("Shooter/factory/PlateauLevels.txt");
 		}
 		
-		String [] options = new String[levelmax+2];
+		String [] options = new String[levelmax+1];
 		System.out.println("LEVELMAX: "+levelmax);
 		options[0]="Nouveau";
-		for(int i=0;i<levelmax-1;i++){
+		for(int i=0;i<levelmax;i++){
 			options[i+1]="Level "+(i+1);
 		}
-		options[levelmax+1]="Ennemis";
 		return options;
 	}
 
@@ -193,7 +198,7 @@ public class EditingMode extends GameScene {
 
 //----------------------------CREER BARRE DU BAS(LA HONTE,VRAIMENT) (SAUVEGARDER/MODIFIER)---------------------------
 	public void createBarreBas(){
-		JPanel barre =new JPanel();
+		barre.removeAll();
 		barre.setLayout(new GridLayout());
 		barre.setBackground(Color.BLACK);
 		GridBagConstraints gbc=new GridBagConstraints();
@@ -205,15 +210,34 @@ public class EditingMode extends GameScene {
             public void actionPerformed(ActionEvent e){
 				if(ListeEnnemis.size()>0){
 					sauvegardeAction(cheminFichierLevel(),cheminFichierEnnemi());
+					creeLevelsimple();
+					updatePlateau();
+					createBarreBas();
 					game.cardLayout.show(game.cardPanel, "Menu");
 				}
-				
-
             }
 
         });
-		barre.add(sauvegarde, gbc);
 
+		barre.add(sauvegarde, gbc);
+		gbc.gridx=1;
+		JButtonStyled modifier = new JButtonStyled("Modifier", new Font("SansSerif", Font.PLAIN, 14));
+		modifier.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				//if(ListeEnnemis.size()>0){
+					modifierAction(cheminFichierLevel(),levelselected);
+					creeLevelsimple();
+					updatePlateau();
+					createBarreBas();
+					game.cardLayout.show(game.cardPanel, "Menu");
+				//}
+			}
+
+		});
+		if(levelselected!=0){
+			barre.add(modifier, gbc);
+		}
 		add(barre,BorderLayout.SOUTH);
 		
 	}
@@ -348,19 +372,27 @@ public class EditingMode extends GameScene {
 		return "Shooter/factory/EnemiesForLevels.txt";
 	}
 	
-	public void modifierAction(String cheminFichier){
-		File writer = new File(cheminFichier);
+	public String LevelEnregistré(String cheminFichier, int debut, int fin){
+		String s="";
+		for(int i=debut;i<fin+1;i++){
+			s+=PlateauLevelLoader.loadPlayingBoardString(cheminFichier, i);
+		}
+		System.out.println(s);
+		return s;
+	}
 
-		try (BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("Level "+levelselected)) {
-                    
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	public void modifierAction(String cheminFichier, int levelselected){
+		try{
+			FileWriter writer = new FileWriter(cheminFichier);
+				writer.write(LevelEnregistré(cheminFichier, 1, levelselected-1));
+				writer.write("Level "+levelselected+":\n");
+				writer.write(nouveauTableau());
+				writer.write(LevelEnregistré(cheminFichier, levelselected+1, PlateauLevelLoader.levelmax(cheminFichier)));
+				writer.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 	public boolean fichierExiste(String cheminFichier){
 		File fichier = new File(cheminFichier);
@@ -380,17 +412,9 @@ public class EditingMode extends GameScene {
             // Écrire les données à sauvegarder dans le fichier
             // Par exemple, vous pouvez parcourir votre tableau de données et écrire chaque élément dans le fichier
             writer.write("Level "+(PlateauLevelLoader.levelmax(cheminFichierLevel)+1)+":\n");
-            for (int i = 0; i < level.length; i++) {
-                writer.write("{"); 
-                for (int j = 0; j < level[i].length; j++) {
-                    writer.write(level[i][j]+"");
-                    if(j!=level[i].length-1){
-                        writer.write(", ");
-                    }
-                }
-                writer.write("},\n"); // Ajoutez une nouvelle ligne après chaque ligne de données
-            }
+            writer.write(nouveauTableau());
             writer.close();
+
 			writer = new FileWriter(cheminFichierEnnemi,true);
 			writer.write((PlateauLevelLoader.levelmax(cheminFichierEnnemi)+1)+": ");
 			for(int i=0;i<ListeEnnemis.size();i++){
@@ -404,6 +428,23 @@ public class EditingMode extends GameScene {
             System.out.println("Erreur lors de la sauvegarde des données dans le fichier texte : " + e.getMessage());
         }
     }
+
+	public String nouveauTableau(){
+		String s="";
+		for (int i = 0; i < level.length; i++) {
+			s+="{";
+			for (int j = 0; j < level[i].length; j++) {
+				s+=level[i][j];
+				if(j!=level[i].length-1){
+					s+=", ";
+				}
+			}
+			s+="}\n";
+		}
+		return s;
+	}
+
+
 //---------------------------------------------image et bouton------------------------------------------------------
 	private class ImagePanel extends JPanel {
 		private ImageIcon imageIcon;
