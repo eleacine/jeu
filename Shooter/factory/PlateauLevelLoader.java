@@ -34,6 +34,29 @@ public class PlateauLevelLoader{
         return currentBoard;
     }
 
+    public static String loadPlayingBoardString(String filePath, int level) {
+        String currentBoard = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int line_level = -1;
+            boolean isTargetLevel = false;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("Level")) {
+                    currentBoard += line;
+                    line_level++;
+                    isTargetLevel = (line_level == level);
+                }
+                if (isTargetLevel && line.trim().startsWith("{")) {
+                    currentBoard += line;
+                }
+            }
+        } catch (IOException e) {
+            //System.out.println("error");
+            e.printStackTrace();
+        }
+        return currentBoard;
+    }
+
     private static int[][] parseLine(String line) {
         line = line.trim().replaceAll("[{}]", ""); // Remove curly braces
         String[] rowTokens = line.split("},?\\s*\\{?");
