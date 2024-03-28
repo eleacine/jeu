@@ -32,6 +32,8 @@ public class Enemy extends Personnage {
 
 	public Color color;
 
+	protected int[][] direction2 = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
 	public Enemy(int size, int sante, int id, int maxSpeed, int power, int collisionPower, int frequency,
 			int detectionRadius, Color color) {
 		super(size, sante, maxSpeed);
@@ -140,7 +142,7 @@ public class Enemy extends Personnage {
 		int nextX = convertPositionToTile(x); // Convertir la position X de l'ennemi en coordonnées de tableau
 		int nextY = convertPositionToTile(y); // Convertir la position Y de l'ennemi en coordonnées de tableau
 
-		// System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
+		System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
 
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
@@ -149,50 +151,43 @@ public class Enemy extends Personnage {
 		int dirY = 0;
 
 		// Liste des directions
-		int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+		// int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
-		// Parcourir toutes les directions pour trouver la case avec la distance la plus
-		// courte
-			
+		// Parcourir les directions pour trouver la case avec une distance plus courte
 		
-		for (int[] dir : directions) {
+		for (int[] dir : direction2) {
 			int newX = nextX + dir[0];
 			// System.out.println("Avant newY: " + nextY + " dir[1]: " + dir[1]);
 			int newY = nextY + dir[1];
 			// System.out.println("Apres newY: " + newY+ " dir[1]: " + dir[1]);
 
-			// System.out.println("dirX: " + dirX + " dirY: " + dirY);
-			// System.out.println(" minDistance: " + minDistance + " distances[newY][newX]:
-			// " + distances[newY][newX]);
+			System.out.println("dirX: " + dir[0] + " dirY: " + dir[1]);
+			System.out.println("newX: " + newX + " newY: " + newY);
+			System.out.println(" distances[newY][newX]:" + distances[newY][newX]);
 			
-			// System.out.println("newX: " + newX + " newY: " + newY);
 			// System.out.println("distances[newY][newX]: " + distances[newY][newX]);
 
 			// Vérifier si la case est valide et si la distance est plus courte
-			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] <= minDistance && distances[newY][newX] != 100){
-				// System.out.println("test réussi");
-				// System.out.println(dir[0] + " " + dir[1] );
-				// System.out.println( "case de la distance : " + distances[newY][newX] );
-				// System.out.println("newX: " + newX + " newY: " + newY);
+			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] < minDistance && distances[newY][newX] != 100){
+				System.out.println("\ntest réussi");
+				System.out.println(dir[0] + " " + dir[1] );
+				System.out.println( "case de la distance : " + distances[newY][newX] );
+				System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
 				dirY = dir[1];
-				
-				
-				
-				
+				break;
+		
 			}
-			
-
+		
 		}
 
-		// System.out.println(" ");
+		System.out.println(" ");
+
 		// Déplacer l'ennemi dans la direction choisie
 		x += dirX; // Mettre à jour la position X de l'ennemi
 		y += dirY; // Mettre à jour la position Y de l'ennemi
-
-
 	}
 
 	// public boolean isPlayerInRange(Player player, int[][] map) {

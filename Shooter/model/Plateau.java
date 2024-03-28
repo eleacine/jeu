@@ -45,8 +45,7 @@ public class Plateau extends JPanel {
         // printFloodFill(floodfill);
         this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40,
                 this.gameManager.getPlayer().getX() / 40);
-        // printFloodFill(
-        //         newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40));
+    //   printFloodFill(floodfill);
     }
 
     public void update_pleateau(int x, int y, int type_case) {
