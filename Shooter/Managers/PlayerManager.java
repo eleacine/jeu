@@ -43,21 +43,6 @@ public class PlayerManager extends KeyAdapter {
 
     }
 
-    public void moveForward() {
-        int xSpeed = (int) Math.round(player.getMaxSpeed() * Math.cos(player.getDirection()));
-        int ySpeed = (int) Math.round(player.getMaxSpeed() * Math.sin(player.getDirection()));
-        player.setXSpeed(xSpeed);
-        player.setYSpeed(ySpeed);
-    }
-
-    public void moveBackward() {
-
-        int xSpeed = (int) Math.round(-player.getMaxSpeed() * Math.cos(player.getDirection()));
-        int ySpeed = (int) Math.round(-player.getMaxSpeed() * Math.sin(player.getDirection()));
-        player.setXSpeed(xSpeed);
-        player.setYSpeed(ySpeed);
-    }
-
     public void moveUp() {
         player.setYSpeed(player.getMaxSpeed() * -1);
     }
@@ -73,6 +58,21 @@ public class PlayerManager extends KeyAdapter {
     public void moveRight() {
         player.setXSpeed(player.getMaxSpeed());
     }
+
+    // public void moveForward() {
+    //     int xSpeed = (int) Math.round(player.getMaxSpeed() * Math.cos(player.getDirection()));
+    //     int ySpeed = (int) Math.round(player.getMaxSpeed() * Math.sin(player.getDirection()));
+    //     player.setXSpeed(xSpeed);
+    //     player.setYSpeed(ySpeed);
+    // }
+
+    // public void moveBackward() {
+
+    //     int xSpeed = (int) Math.round(-player.getMaxSpeed() * Math.cos(player.getDirection()));
+    //     int ySpeed = (int) Math.round(-player.getMaxSpeed() * Math.sin(player.getDirection()));
+    //     player.setXSpeed(xSpeed);
+    //     player.setYSpeed(ySpeed);
+    // }
 
     public void update() {
         checkPlayerlimits();
@@ -171,7 +171,7 @@ public class PlayerManager extends KeyAdapter {
             int caseID = gameManager.getGamePlateau().level_tab[yIndex][xIndex];
             int casetype = ManagerCase.getCaseType(caseID);
             // Vérifier si la case est un obstacle (type 2)
-            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT|| casetype == ManagerCase.BLOQUE) {
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT || casetype == ManagerCase.BLOQUE ) {
                 float newX = player.getX() + player.getXSpeed();
                 float newY = player.getY() + player.getYSpeed();
 
@@ -212,6 +212,7 @@ public class PlayerManager extends KeyAdapter {
         // déplace vers l'obstacle
         return dotProduct < 0;
     }
+
 
     public void stop() {
         player.setXSpeed(0);

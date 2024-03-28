@@ -1,9 +1,6 @@
 package Shooter.model;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +121,6 @@ public class Game extends JFrame implements Runnable {
 		Game game = new Game();
 		game.setVisible(true);
 		game.run();
-		
 
 	}
 

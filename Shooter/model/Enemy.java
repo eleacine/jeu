@@ -9,22 +9,24 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import Shooter.Managers.ManagerCase;
+// import Shooter.Managers.ManagerCase;
 import Shooter.Managers.ProjectilesManager;
 
 public class Enemy extends Personnage {
 
-	public int id;
-	public int power; // faire des dégats de collision et de tir
-	public int collisionPower;
-	public int destX;
-	public int destY;
-	public float differenceX;
-	public float differenceY;
-	public int frequency;
+	protected int id;
+	protected int power; // faire des dégats de collision et de tir
+	protected int collisionPower;
+	protected int destX;
+	protected int destY;
+	protected float differenceX;
+	protected float differenceY;
+	protected int frequency;
 	protected long lastShotTime;
-	public int detectionRadius; // Rayon de détection du joueur
-	public int tailleBar = 40;
-	public int vieTotal = 100;
+	protected int detectionRadius; // Rayon de détection du joueur
+	protected int tailleBar = 40;
+	protected int vieTotal = 100;
+
 	public double direction; // direction pour ajouter le halo de vision
 	protected ImageIcon sprite;
 
@@ -131,14 +133,18 @@ public class Enemy extends Personnage {
 		}
 
 	}
+	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {
+		System.out.println("Joueur position x : " + convertPositionToTile(player.x) + " position y : " + convertPositionToTile(player.y));
+		int nextX = convertPositionToTile(x); // Convertir la position X de l'ennemi en coordonnées de tableau
+		int nextY = convertPositionToTile(y); // Convertir la position Y de l'ennemi en coordonnées de tableau
 
-		int nextX = x / 40; // Convertir la position X de l'ennemi en coordonnées de tableau
-		int nextY = y / 40; // Convertir la position Y de l'ennemi en coordonnées de tableau
+		System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
 
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
+		System.out.println("minDistance: " + minDistance);
 		int dirX = 0;
 		int dirY = 0;
 
@@ -147,35 +153,46 @@ public class Enemy extends Personnage {
 
 		// Parcourir toutes les directions pour trouver la case avec la distance la plus
 		// courte
+			
+		
 		for (int[] dir : directions) {
 			int newX = nextX + dir[0];
+			// System.out.println("Avant newY: " + nextY + " dir[1]: " + dir[1]);
 			int newY = nextY + dir[1];
+			// System.out.println("Apres newY: " + newY+ " dir[1]: " + dir[1]);
 
 			// System.out.println("dirX: " + dirX + " dirY: " + dirY);
 			// System.out.println(" minDistance: " + minDistance + " distances[newY][newX]:
 			// " + distances[newY][newX]);
+			
+			System.out.println("newX: " + newX + " newY: " + newY);
+			System.out.println("distances[newY][newX]: " + distances[newY][newX]);
 
 			// Vérifier si la case est valide et si la distance est plus courte
-			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length
-					&& distances[newY][newX] < minDistance) {
-
-				// System.out.println(dir[0] + " " + dir[1] + " " + distances[newY][newX]);
+			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] <= minDistance && distances[newY][newX] != 100){
+				System.out.println("test réussi");
+				System.out.println(dir[0] + " " + dir[1] );
+				System.out.println( "case de la distance : " + distances[newY][newX] );
+				System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
 				dirY = dir[1];
+				
+				
+				
+				
 			}
+			
+
 		}
 
-		// System.out.println("EnemyIA: " + x + " " + y + " " + dirX + " " + dirY);
-		// System.out.println("EnemyIA: " + x / 40 + " " + y / 40);
-
+		System.out.println(" ");
 		// Déplacer l'ennemi dans la direction choisie
 		x += dirX; // Mettre à jour la position X de l'ennemi
 		y += dirY; // Mettre à jour la position Y de l'ennemi
 
-		// System.out.println("EnemyIA 2: " + x + " " + y);
-		// System.out.println("");
+
 	}
 
 	// public boolean isPlayerInRange(Player player, int[][] map) {
@@ -185,18 +202,18 @@ public class Enemy extends Personnage {
 	// 	return false;
 	// }
 
-	private int convertPositionToTile(int position) {
+	protected int convertPositionToTile(int position) {
 		// Convertit une position en coordonnées de tableau
 		return position / 40;
 	}
 
 	
-	private boolean isWall(int xPos, int yPos, int[][] map) {
-		// Vérifie si une case est un mur
-		int x = convertPositionToTile(xPos);
-		int y = convertPositionToTile(yPos);
-		return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
-	}
+	// private boolean isWall(int xPos, int yPos, int[][] map) {
+	// 	// Vérifie si une case est un mur
+	// 	int x = convertPositionToTile(xPos);
+	// 	int y = convertPositionToTile(yPos);
+	// 	return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
+	// }
 
 	// ------------- Getters et setters ---------------------------
 

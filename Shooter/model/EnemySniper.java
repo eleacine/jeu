@@ -6,7 +6,7 @@ import Shooter.Managers.ManagerCase;
 public class EnemySniper extends Enemy {
 
     public EnemySniper(int x, int y) {
-        super(x, y, 50, 100, 1, 2, 20, 50, 350, 200, new Color(255, 0, 255));
+        super(x, y, 50, 100, 1, 2, 20, 50, 350, 350, new Color(255, 0, 255));
     }
 
     public boolean isPlayerInRange(Player player, int[][] map) {
@@ -16,10 +16,6 @@ public class EnemySniper extends Enemy {
         return false;
     }
 
-    private int convertPositionToTile(int position) {
-        // Convertit une position en coordonnées de tableau
-        return position / 40;
-    }
 
     private boolean isWallBetween(int startX, int startY, int[][] map, int targetX, int targetY) {
         // Calculer les deltas et les incréments pour les axes X et Y

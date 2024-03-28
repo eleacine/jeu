@@ -126,4 +126,8 @@ public class Player extends Personnage {
         this.level++;
     }
 
+    public void setSprite (String newPath){
+        loadSprite(newPath);
+    }
+
 }

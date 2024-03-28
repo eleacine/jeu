@@ -27,7 +27,7 @@ public class A3 extends Armes {
 
     
         public void draw(Graphics g, int playerX, int playerY) {
-            double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
+            // double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
     
           //  if (distanceToPlayer <= getDistance()) {
                 g.setColor(this.color);

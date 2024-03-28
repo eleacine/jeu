@@ -1,5 +1,9 @@
 package Shooter.model;
 
+import java.net.URL;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 
 public class Personnage {
 
@@ -8,6 +12,9 @@ public class Personnage {
     protected int size;
     protected int maxSpeed;
     protected int sante; // deux foncitons infligerDegats et soigner
+
+    protected ImageIcon sprite;
+
 
     public Personnage(int x, int y, int xSpeed, int ySpeed, int size, int maxSpeed, int sante) {
         this.x = x;
@@ -19,14 +26,13 @@ public class Personnage {
         this.sante = sante;
     }
 
-
-    public Personnage  (int size, int sante, int maxSpeed){
+    public Personnage(int size, int sante, int maxSpeed) {
         this.size = size;
         this.sante = sante;
         this.maxSpeed = maxSpeed;
     }
 
-    public Personnage (int x, int y, int size, int sante, int maxSpeed){
+    public Personnage(int x, int y, int size, int sante, int maxSpeed) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -34,12 +40,25 @@ public class Personnage {
         this.maxSpeed = maxSpeed;
     }
 
-	public boolean detectCollision(float newX, float newY, int newSize){
-		if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY){
-			return true;
-		}
-		return false;
-	}
+    public boolean detectCollision(float newX, float newY, int newSize) {
+        if (x - newSize < newX && x + size > newX && y - newSize < newY && y + size > newY) {
+            return true;
+        }
+        return false;
+    }
+
+    public void loadSprite(String path) {
+        URL imageUrl = getClass().getResource(path);
+        ImageIcon originalImage = new ImageIcon(imageUrl);
+
+        double scale = 5;
+        int newWidth = (int) (size * scale);
+        int newHeight = (int) (size * scale);
+
+        Image resizedImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        ImageIcon enemyImage = new ImageIcon(resizedImage);
+        this.sprite = enemyImage;
+    }
 
     // ------------- Getters et setters ---------------------------
     public int getX() {
@@ -105,6 +124,5 @@ public class Personnage {
     public void soigner(int soin) {
         this.sante += soin;
     }
-
 
 }

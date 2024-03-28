@@ -5,9 +5,12 @@ import javax.swing.*;
 
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import Shooter.Managers.*;
 import Shooter.factory.PlateauLevelLoader;
+import java.util.Queue;
+import java.util.LinkedList;
 
 // pour le flood fill cases obstacles et mur mur cassant a revoir pour eviter des erreurs pour le deplacement
 
@@ -40,8 +43,11 @@ public class Plateau extends JPanel {
         }
         this.plateau_graphic = g;
 
-        this.floodfill = floodfill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40);
+        // this.floodfill = floodfill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40);
         // printFloodFill(floodfill);
+        this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40);
+        printFloodFill(
+                newFloodFill(this.gameManager.getPlayer().getY() / 40, this.gameManager.getPlayer().getX() / 40));
     }
 
     public void update_pleateau(int x, int y, int type_case) {
@@ -50,7 +56,7 @@ public class Plateau extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
         // Create a new Graphics2D object for gameManager.getPlayer()
         Graphics2D gPlayer = (Graphics2D) g.create();
         drawPlayerMovement(gPlayer);
@@ -73,8 +79,8 @@ public class Plateau extends JPanel {
                 if (ennemi instanceof Gardien) {
                     ((Gardien) ennemi).dessinerVision(g);
 
-                } else  {
-                   
+                } else {
+
                     // drawDetectionRadius(g, ennemi);
                 }
                 ennemi.drawEnemy(g);
@@ -132,29 +138,31 @@ public class Plateau extends JPanel {
     }
 
     // private void drawDetectionRadius(Graphics g, Enemy ennemi) {
-    //     // if (ennemi instanceof EnemyMedium) {
-    //     // Convertir le centre de l'ennemi et le rayon de détection en coordonnées
-    //     // d'écran
-    //     int centerX = (int) ennemi.x;
-    //     int centerY = (int) ennemi.y;
-    //     int radius = (ennemi).getDetectionRadius();
+    // // if (ennemi instanceof EnemyMedium) {
+    // // Convertir le centre de l'ennemi et le rayon de détection en coordonnées
+    // // d'écran
+    // int centerX = (int) ennemi.x;
+    // int centerY = (int) ennemi.y;
+    // int radius = (ennemi).getDetectionRadius();
 
-    //     // Définir le niveau de transparence (0.0f complètement transparent, 1.0f
-    //     // complètement opaque)
-    //     float alpha = 0.4f;
+    // // Définir le niveau de transparence (0.0f complètement transparent, 1.0f
+    // // complètement opaque)
+    // float alpha = 0.4f;
 
-    //     // Créer une nouvelle couleur avec la transparence appropriée
-    //     Color transparentColor = new Color(ennemi.color.getRed(), ennemi.color.getGreen(), ennemi.color.getBlue(),
-    //             (int) (alpha * 255));
+    // // Créer une nouvelle couleur avec la transparence appropriée
+    // Color transparentColor = new Color(ennemi.color.getRed(),
+    // ennemi.color.getGreen(), ennemi.color.getBlue(),
+    // (int) (alpha * 255));
 
-    //     // Dessiner le rayon de détection comme un cercle transparent
-    //     Graphics2D g2d = (Graphics2D) g.create();
-    //     g2d.setColor(transparentColor);
+    // // Dessiner le rayon de détection comme un cercle transparent
+    // Graphics2D g2d = (Graphics2D) g.create();
+    // g2d.setColor(transparentColor);
 
-    //     Ellipse2D.Double detectionCircle = new Ellipse2D.Double(centerX - radius, centerY - radius, 2 * radius,
-    //             2 * radius);
-    //     g2d.fill(detectionCircle);
-    //     g2d.dispose();
+    // Ellipse2D.Double detectionCircle = new Ellipse2D.Double(centerX - radius,
+    // centerY - radius, 2 * radius,
+    // 2 * radius);
+    // g2d.fill(detectionCircle);
+    // g2d.dispose();
     // }
 
     public void reset() {
@@ -173,8 +181,8 @@ public class Plateau extends JPanel {
 
                 if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
                         || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE){
-                    res[i][j] = 1000;
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE) {
+                    res[i][j] = 100;
                 } else {
                     res[i][j] = -1;
                 }
@@ -184,7 +192,6 @@ public class Plateau extends JPanel {
         res = floodfill2(xCible, yCible, res);
         return res;
     }
-
 
     public int[][] floodfill2(int x, int y, int[][] res) {
         int v = res[x][y] + 1;
@@ -202,7 +209,7 @@ public class Plateau extends JPanel {
             // Vérification des limites de la grille
             if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
                 // Vérification si la case est vide et la valeur non mise à jour
-                if ((res[newX][newY] == -1 || res[newX][newY] > v) && res[newX][newY] != 1000) {
+                if ((res[newX][newY] == -1 || res[newX][newY] > v) && res[newX][newY] != 100) {
                     res[newX][newY] = v;
                     // Appel récursif pour la nouvelle case
                     floodfill2(newX, newY, res);
@@ -213,14 +220,149 @@ public class Plateau extends JPanel {
         return res;
     }
 
+    public int[][] newFloodFill(int xCible, int yCible) {
+        int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
+        res[xCible][yCible] = 0; // on met la case cible à 0
+        res = newFloodFill2(xCible, yCible, res);
+
+        for (int i = 0; i < this.level_tab.length; i++) {
+            for (int j = 0; j < this.level_tab[i].length; j++) {
+                if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE) {
+                    res[i][j] = 1000;
+                }
+            }
+        }
+
+        res[xCible][yCible] = 0; // on met la case cible à 0
+
+        return res;
+    }
+
+
+    public int[][] newFloodFill2(int x, int y, int[][] res) {
+        Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le parcours en largeur (BFS)
+        queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
+        int distance = 0;
+    
+        // Liste des directions
+        int[][] directions = {
+            { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
+        };
+        // Tant que la file n'est pas vide, continuez le parcours en largeur
+        while (!queue.isEmpty()) {
+            int size = queue.size(); // Taille actuelle de la file (nombre de cellules à ce niveau de distance)
+            distance++; // Incrémenter la distance pour le niveau suivant
+            for (int i = 0; i < size; i++) {
+                int[] cell = queue.poll(); // Récupérer la cellule de la file
+                int cellX = cell[0];
+                int cellY = cell[1];
+    
+                // Parcourir les cellules adjacentes
+                for (int[] dir : directions) {
+                    int newX = cellX + dir[0];
+                    int newY = cellY + dir[1];
+                    // Vérifier si la cellule adjacente est dans la grille et non visitée
+                    if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length && res[newX][newY] == 0 &&
+                        !isObstacle(newX, newY)) {
+                        res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
+                        queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la file pour exploration
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    
+    // Vérifier si une cellule est un obstacle
+    private boolean isObstacle(int x, int y) {
+        return ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR ||
+               ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR_CASSANT ||
+               ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.BLOQUE;
+    }
+    
+
+    // public int[][] newFloodFill2(int x, int y, int[][] res) {
+    //     Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le parcours en largeur (BFS)
+    //     queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
+    //     int distance = 0;
+    
+    //     // Liste des directions
+    //     int[][] directions = {
+    //         { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
+    //     };
+    
+    //     // Tant que la file n'est pas vide, continuez le parcours en largeur
+    //     while (!queue.isEmpty()) {
+    //         int size = queue.size(); // Taille actuelle de la file (nombre de cellules à ce niveau de distance)
+    //         distance++; // Incrémenter la distance pour le niveau suivant
+    //         for (int i = 0; i < size; i++) {
+    //             int[] cell = queue.poll(); // Récupérer la cellule de la file
+    //             int cellX = cell[0];
+    //             int cellY = cell[1];
+    
+    //             // Parcourir les cellules adjacentes
+    //             for (int[] dir : directions) {
+    //                 int newX = cellX + dir[0];
+    //                 int newY = cellY + dir[1];
+    //                 // Vérifier si la cellule adjacente est dans la grille et non visitée
+    //                 if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length && res[newX][newY] == 0 &&
+    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR &&
+    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR_CASSANT &&
+    //                     ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.BLOQUE) {
+    //                     // Vérifier si la case adjacente n'est pas un cul-de-sac
+    //                     boolean isCulDeSac = true;
+    //                     for (int[] adjDir : directions) {
+    //                         int adjX = newX + adjDir[0];
+    //                         int adjY = newY + adjDir[1];
+    //                         if (adjX >= 0 && adjX < res.length && adjY >= 0 && adjY < res[0].length &&
+    //                             (ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR &&
+    //                             ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR_CASSANT &&
+    //                             ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.BLOQUE)) {
+    //                             isCulDeSac = false;
+    //                             break;
+    //                         }
+    //                     }
+    //                     if (!isCulDeSac) {
+    //                         res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
+    //                         queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la file pour
+    //                                                                // exploration
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return res;
+    // }
+
+
     public void printFloodFill(int[][] res) {
-        for (int i = 0; i < res.length; i++) {
-            for (int j = 0; j < res[i].length; j++) {
-                System.out.print(res[i][j] + " ");
+        // Déterminer la largeur maximale de chaque colonne
+        int numRows = res.length;
+        int numCols = res[0].length;
+        int[] colWidths = new int[numCols];
+    
+        for (int j = 0; j < numCols; j++) {
+            int maxWidth = 0;
+            for (int i = 0; i < numRows; i++) {
+                int width = String.valueOf(res[i][j]).length();
+                maxWidth = Math.max(maxWidth, width);
+            }
+            colWidths[j] = maxWidth;
+        }
+    
+        // Afficher les éléments en alignant les colonnes
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                // Formater chaque nombre pour s'adapter à la largeur maximale de la colonne
+                System.out.printf("%-" + (colWidths[j] + 1) + "d", res[i][j]);
             }
             System.out.println();
         }
+        System.out.println();
     }
+    
 
     // --------- GETTERS et SETTERS -----------
 
