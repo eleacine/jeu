@@ -76,13 +76,13 @@ public class EnemyLevelLoader {
         // System.out.println("Coordinates: " + xCoordinate + ", " + yCoordinate);
         switch (enemyType) {
             case "Enemy 1":
-                return new Enemy1Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+                return new Enemy1Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate)); //EnemyBasique
             case "Enemy 2":
-                return new Enemy2Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+                return new Enemy2Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));//EnemyMedium
             case "Enemy 3":
-                return new Enemy3Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+                return new Enemy3Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));//Guardien
             case "Enemy 4":
-                return new Enemy4Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+                return new Enemy4Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));//EnemyIA
             default:
                 throw new IllegalArgumentException("Unknown enemy type: " + enemyType);
         }

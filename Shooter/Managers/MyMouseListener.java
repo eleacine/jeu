@@ -37,13 +37,14 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             // double angle = Math.atan2(clickY - player.getY(), clickX - player.getX());
             // player.setDirection(angle);
 
+            //ICI !!!!!!!!
             if (player.getArmes().get(player.getCurrentArme()).getType()
                     && player.getArmes().get(player.getCurrentArme()).getMunition() > 0) {
                 player.getArmes().get(player.getCurrentArme()).shoot();
                 Bullet b = new Bullet(player.getX(), player.getY(), crosshair.getX() + crosshair.getCushion(),
                         crosshair.getY() + crosshair.getCushion(),
                         player.getArmes().get(player.getCurrentArme()).getPower(),
-                        player.getArmes().get(player.getCurrentArme()).color);
+                        player.getArmes().get(player.getCurrentArme()).getTypeMunition());
                 projectilesManager.addBulletPlayer(b);
 
                 if (soundPlayer != null && gameManager.getSound()) {

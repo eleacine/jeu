@@ -222,18 +222,20 @@ public class Game extends JFrame implements Runnable {
 				cardLayout.show(cardPanel, "Win");
 			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
 				// Afficher la page noire pendant un court laps de temps
-				waitFortransiion();
-                showBlackScreenForDelay(1500);
+			//waitFortransiion();
+			System.out.println("avant la transition ");
+              showBlackScreenForDelay(1000);
 				//waitFortransiion();
-				nextLevel();
-				begin = true;
+				//nextLevel();
+				//begin = true;
 			}
 		}
 	}
 
 	public void waitFortransiion() {
+		System.out.println("I'm being called: waitFortransiion");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -243,9 +245,11 @@ public class Game extends JFrame implements Runnable {
 		System.out.println("I'm being called: nextLevel");
 		gameManager.getPlayer().setLevel();
 		reset();
+		
 	}
 
-	private static void showBlackScreenForDelay(int delay) {
+	private void showBlackScreenForDelay(int delay) {
+		System.out.println("I'm being called: showBlackScreenForDelay");
         JFrame blackFrame = new JFrame();
         blackFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         blackFrame.setUndecorated(true);
@@ -256,37 +260,41 @@ public class Game extends JFrame implements Runnable {
 
         blackFrame.setOpacity(0.0f);
         blackFrame.setVisible(true);
-
-        Timer timer = new Timer(20, new ActionListener() {
-            float opacity = 0.0f;
-            float step = 0.05f;
-            boolean expanding = true;
-
-            @Override
-           public void actionPerformed(ActionEvent e) {
-    if (expanding) {
-        opacity += step;
-        if (opacity >= 1.0f) {
-            expanding = false;
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
-    } else {
-        opacity -= step;
-        if (opacity <= 0.0f) {
-            ((Timer) e.getSource()).stop();
-            blackFrame.dispose();
-        }
-    }
-    opacity = Math.min(Math.max(opacity, 0.0f), 1.0f);
-    blackFrame.setOpacity(opacity);
-}
-
-        });
-        timer.start();
+		System.out.println("debut");
+		Timer timer = new Timer(10, new ActionListener() {
+			float opacity = 0.0f;
+			float step = 0.06f;
+			boolean expanding = true;
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (expanding) {
+					opacity += step;
+					if (opacity >= 1.0f) {
+						expanding = false;
+						try {
+							Thread.sleep(delay);
+						} catch (InterruptedException ex) {
+							ex.printStackTrace();
+						}
+						
+						nextLevel();
+						begin = true;
+					}
+				} else {
+					opacity -= step;
+					if (opacity <= 0.0f) {
+						((Timer) e.getSource()).stop();
+						blackFrame.dispose();
+					}
+				}
+				opacity = Math.min(Math.max(opacity, 0.0f), 1.0f);
+				blackFrame.setOpacity(opacity);
+			}
+		});
+		
+		timer.start();
+			System.out.println("fin");
     }
 
 

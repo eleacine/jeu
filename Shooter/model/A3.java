@@ -14,11 +14,11 @@ public class A3 extends Armes {
     protected int dimension = 40;
     
     public A3() {
-        super("Mine",50, false, 5, Color.RED,2000,100,true);
+        super("Mine",50, false, 5, 3,2000,100,true);
     }
 
     public A3(int x, int y) {
-        super("Mine",50, false, 5, Color.RED,2000,100,true);
+        super("Mine",50, false, 5, 3,2000,100,true);
  
         this.x = x;
         this.y = y;

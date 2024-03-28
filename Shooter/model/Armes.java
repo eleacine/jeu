@@ -12,20 +12,21 @@ public abstract class Armes {
     protected int recharge; // recharge de l'arme
     protected int dureeRecharge; // durée de la recharge
     protected boolean detruitMur;
+    protected int typeMunition;
 
     public Color color;
     public String nom;
 
-    public Armes(String nom,int power, boolean type, int munition, Color color) {
+    public Armes(String nom,int power, boolean type, int munition, int typeMunition , Color color) {
         this.power = power;
         this.type = type;
         this.munition = munition;
-        this.color = color;
+        this.typeMunition=typeMunition;
         this.nom=nom;
     }
 
 
-    public Armes(String nom,int power, boolean type, int munition, Color color,int dureeRecharge,int distance,boolean detruitMur) {
+    public Armes(String nom,int power, boolean type, int munition, int typeMunition,int dureeRecharge,int distance,boolean detruitMur) {
         this.nom=nom;
         this.power = power;
         this.type = type;
@@ -33,8 +34,16 @@ public abstract class Armes {
         this.distance = distance;
         this.recharge = munition;
         this.dureeRecharge = dureeRecharge;
-        this.color = color;
+        this.typeMunition=typeMunition;
         this.detruitMur=detruitMur;
+    }
+
+    public Armes(String nom, int power , boolean tyep,int  munition , Color color){
+        this.nom=nom;
+        this.power=power;
+        this.type=tyep;
+        this.munition=munition;
+        this.color=color;
     }
 
     public void shoot() {
@@ -147,5 +156,17 @@ public abstract class Armes {
     public void setDetruitMur(boolean detruitMur) {
         this.detruitMur = detruitMur;
     }
+
+
+    public int getTypeMunition() {
+        return typeMunition;
+    }
+
+
+    public void setTypeMunition(int typeMunition) {
+        this.typeMunition = typeMunition;
+    }
+
+    
 
 }
