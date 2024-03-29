@@ -60,7 +60,7 @@ public class Player extends Personnage {
     private void updateBoundingPolygon() {
         double[] xPoints = {285, 286, 278, 277, 278};
         double[] yPoints = {234, 246, 247, 250, 265};
-        int numPoints = 5;
+        int numPoints = 4;
 
         boundingPolygon.reset();
         boundingPolygon.moveTo(xPoints[0], yPoints[0]);

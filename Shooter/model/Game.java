@@ -56,7 +56,7 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 		this.perso_list.add(0, player);
 
-		// perso_list.add(new EnemyIA(1000, 150));
+		perso_list.add(new EnemyIA(1000, 150));
 		//perso_list.add(new EnemySniper(1000, 150));
 
 		// // print enemy list to check
