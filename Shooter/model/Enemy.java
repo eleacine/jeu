@@ -131,8 +131,6 @@ public class Enemy extends Personnage {
 		if (sprite != null && sprite.getImage() != null) {
 			// Dessiner l'image
 			g.drawImage(sprite.getImage(), x, y, size, size, null);
-			System.out.println("Ennemi position x : " + x + " position y : " + y);
-			System.out.println("Ennemi position tableau x : " + convertPositionToTile(x) + " position tableau y : " + convertPositionToTile(y));
 		} else {
 			// Si l'image n'est pas chargée, dessiner un cercle comme auparavant
 			g.setColor(this.color);
@@ -156,11 +154,11 @@ public class Enemy extends Personnage {
 		}
 		
 
-		System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
+		// System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
 
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
-		System.out.println("minDistance: " + minDistance);
+		// System.out.println("minDistance: " + minDistance);
 		int dirX = 0;
 		int dirY = 0;
 
@@ -177,15 +175,15 @@ public class Enemy extends Personnage {
 
 			// System.out.println("dirX: " + dir[0] + " dirY: " + dir[1]);
 			// System.out.println("newX: " + newX + " newY: " + newY);
-			System.out.println(" distances[newY][newX]:" + distances[newY][newX]);
+			// System.out.println(" distances[newY][newX]:" + distances[newY][newX]);
 			
 
 			// Vérifier si la case est valide et si la distance est plus courte
 			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] < minDistance && distances[newY][newX] != 100){
-				System.out.println("\ntest réussi");
-				System.out.println(dir[0] + " " + dir[1] );
-				System.out.println( "case de la distance : " + distances[newY][newX] );
-				System.out.println("newX: " + newX + " newY: " + newY);
+				// System.out.println("\ntest réussi");
+				// System.out.println(dir[0] + " " + dir[1] );
+				// System.out.println( "case de la distance : " + distances[newY][newX] );
+				// System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
@@ -196,16 +194,14 @@ public class Enemy extends Personnage {
 		
 		}
 
-		System.out.println(" ");
+		// System.out.println(" ");
 
 		// // Déplacer l'ennemi dans la direction choisie
-		// x += dirX; // Mettre à jour la position X de l'ennemi
-		// y += dirY; // Mettre à jour la position Y de l'ennemi
 		move(dirX, dirY);
 	}
 
 	public void move (int x, int y){
-		System.out.println("Ennemi position avant x : " + this.x + " position y : " + this.y);
+		// System.out.println("Ennemi position avant x : " + this.x + " position y : " + this.y);
 		prevX = this.x;
 		prevY = this.y;
 		if (x == 1){
@@ -220,7 +216,7 @@ public class Enemy extends Personnage {
 			this.y -= this.maxSpeed;
 		}
 
-		System.out.println("Ennemi position apres x : " + this.x + " position y : " + this.y);
+		// System.out.println("Ennemi position apres x : " + this.x + " position y : " + this.y);
 	}
 
 	// public boolean isPlayerInRange(Player player, int[][] map) {
