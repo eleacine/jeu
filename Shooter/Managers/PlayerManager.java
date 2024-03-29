@@ -105,6 +105,22 @@ public class PlayerManager extends KeyAdapter {
             player.setXSpeed(0);
             player.setYSpeed(0);
         }
+        
+    
+        int nextTileType = gameManager.getGamePlateau().level_tab[newY/40][newX/40];
+        int casetype = ManagerCase.getCaseType(nextTileType);
+
+        switch (casetype) {
+             // Cas où le joueur rencontre un obstacle ralentisseur (eau)
+            case ManagerCase.OBSTACLE:
+                player.setMaxSpeed(1);
+                break;
+        
+            default:
+                player.setMaxSpeed(2);
+                break;
+             }
+        
     }
 
     
