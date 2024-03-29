@@ -45,7 +45,7 @@ public class Plateau extends JPanel {
         // printFloodFill(floodfill);
         this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40,
                 this.gameManager.getPlayer().getX() / 40);
-    //   printFloodFill(floodfill);
+      printFloodFill(floodfill);
     }
 
     public void update_pleateau(int x, int y, int type_case) {
@@ -55,6 +55,7 @@ public class Plateau extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
+
 
         // Create a new Graphics2D object for gameManager.getPlayer()
         Graphics2D gPlayer = (Graphics2D) g.create();
