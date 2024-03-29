@@ -107,14 +107,17 @@ public class PlayerManager extends KeyAdapter {
         }
     }
 
+    
+
     //  ajouter une méthode pour gerer les cases de ralentissement 
 
     private boolean isValidPosition(float x, float y) {
         // Vérifier si la position est à l'intérieur des limites du plateau de jeu
-        int minX = player.getSize();
-        int minY = player.getSize();
-        int maxX = 1440 - player.getSize();
-        int maxY = 840 - player.getSize();
+        int playerSize = player.getSize();
+        int minX = playerSize;
+        int minY = playerSize;
+        int maxX = 1440 - playerSize;
+        int maxY = 840 - playerSize;
 
         if (x < minX || x > maxX || y < minY || y > maxY) {
             return false;

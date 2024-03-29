@@ -130,8 +130,7 @@ public class Plateau extends JPanel {
         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, dashPattern, 0.0f));
 
         // Dessiner le cercle avec le contour discontinu
-
-        int diametre = armeCourante.distance * 2;
+        // int diametre = armeCourante.distance * 2;
         g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
     }
@@ -150,6 +149,7 @@ public class Plateau extends JPanel {
         at.rotate(gameManager.getPlayer().getDirection(), newWidth / 2, newHeight / 2);
 
         g.drawImage(gameManager.getPlayer().getSprite().getImage(), at, this);
+        gameManager.getPlayer().drawBoundingPolygon(g);
     }
 
     // private void drawDetectionRadius(Graphics g, Enemy ennemi) {
