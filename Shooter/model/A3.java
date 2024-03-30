@@ -44,7 +44,7 @@ public class A3 extends Armes {
     public void loadMineImage() {
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
         mineImage=new BufferedImage[1]; 
-        mineImage[0]= atlas.getSubimage(0*40, 2*40, 40, 40);
+        mineImage[0]= atlas.getSubimage(5*40, 4*40, 40, 40);
         
     }
 

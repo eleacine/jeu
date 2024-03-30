@@ -45,7 +45,7 @@ public class A4 extends Armes {
     private void loadGrenadeImage() {
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
         grenadeImage=new BufferedImage[1];
-        grenadeImage[0]= atlas.getSubimage(8*40, 1*40, 40, 40);
+        grenadeImage[0]= atlas.getSubimage(6*40, 4*40, 40, 40);
         
     }
 
@@ -53,7 +53,7 @@ public class A4 extends Armes {
             BufferedImage atlas=Enregistrement.getSpriteAtlas();
             explosionImage=new BufferedImage[6];
             for (int i =0 ; i <6;i++){
-                explosionImage[i]= atlas.getSubimage((i)*40, 3*40, 40, 40);
+                explosionImage[i]= atlas.getSubimage((2+i)*40, 5*40, 40, 40);
             }  
             
     }

@@ -64,7 +64,7 @@ public class Plateau extends JPanel {
         imageArmes=new BufferedImage[5];
 
         for (int i =0 ; i <5;i++){
-            imageArmes[i]= atlas.getSubimage((1+i)*40, 2*40, 40, 40);
+            imageArmes[i]= atlas.getSubimage((i)*40, 4*40, 40, 40);
         }  
     }
 
