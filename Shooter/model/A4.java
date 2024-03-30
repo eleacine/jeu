@@ -19,18 +19,23 @@ public class A4 extends Armes {
     private int dimension = 40;
     private boolean isGrenadeActivated = false;
     private Timer explosionTimer;
-    private long explosionDelay = 2000;  // Délai d'explosion
-    public GameManager gameManager;
+    private long explosionDelay = 1700; 
+    public long activationTime;
     private boolean isPlaced = false;
     private BufferedImage[] grenadeImage;
+    private BufferedImage[] explosionImage;
+    private int explosionFrameIndex = 0;
+    private Timer explosionAnimationTimer;
+    private long explosionAnimationDelay = 500; 
+
 
     public A4() {
-        super("grenade", 50, false, 5,4, 2000, 400, true);
+        super("grenade", 50, false, 5,3, 2000, 400, true);
         loadGrenadeImage();
     }
 
     public A4(int x, int y) {
-        super("grenade", 50, false, 5,4, 2000, 400, true);
+        super("grenade", 50, false, 5,3, 2000, 400, true);
         this.x = x;
         this.y = y;
         loadGrenadeImage();
@@ -38,43 +43,40 @@ public class A4 extends Armes {
     }
 
     private void loadGrenadeImage() {
-        // Charger l'image de la grenade ici
-        // Exemple : grenadeImage = ImageIO.read(new File("grenade.png"));
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
         grenadeImage=new BufferedImage[1];
-        
         grenadeImage[0]= atlas.getSubimage(8*40, 1*40, 40, 40);
         
     }
+
+    private void loadExplosionImage() {
+            BufferedImage atlas=Enregistrement.getSpriteAtlas();
+            explosionImage=new BufferedImage[6];
+            for (int i =0 ; i <6;i++){
+                explosionImage[i]= atlas.getSubimage((i)*40, 3*40, 40, 40);
+            }  
+            
+    }
     
     public void draw(Graphics g, List<Personnage> enemies, int playerX, int playerY) {
-      //  System.out.println("draw grenade");
-      //  double distanceToPlayer = Math.sqrt(Math.pow(playerX - x, 2) + Math.pow(playerY - y, 2));
-    
-        /*if (isGrenadeActivated) {
-        //    if (distanceToPlayer <= getDistance()) {
-                g.setColor(this.color);
-                g.fillOval(x, y, dimension, dimension);
-                drawExplosion(x, y, g, enemies);
+        if (isGrenadeActivated) {
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - activationTime;
+            
+            if (elapsedTime >= explosionDelay) {
+                drawExplosion(x, y, g, enemies );
             } else {
-                // Ajuster la position de la grenade en fonction de la distance par rapport au joueur
-               // double angleToPlayer = Math.atan2(playerY - y, playerX - x);
-             //   x = playerX - (int) (Math.cos(angleToPlayer) * getDistance());
-               // y = playerY - (int) (Math.sin(angleToPlayer) * getDistance());
-            }*/
-            if (isGrenadeActivated) {
-                // Dessinez l'image de la grenade si elle est activée
+                // Dessiner l'image de la grenade si le délai d'attente n'est pas écoulé
                 if (grenadeImage != null) {
                     Graphics2D g2d = (Graphics2D) g.create();
                     g2d.drawImage(grenadeImage[0], x, y, dimension, dimension, null);
                     g2d.dispose();
                 } else {
-                    // Dessinez un ovale comme avant si l'image de la grenade n'est pas disponible
                     g.setColor(this.color);
                     g.fillOval(x, y, dimension, dimension);
                 }
-                drawExplosion(x, y, g, enemies);
-            } 
+            }
+        }
         }
    // }
     
@@ -91,31 +93,54 @@ public class A4 extends Armes {
             }
         });
     }
-
     public void activateGrenade() {
-        System.out.println("activateGrenade");
         if (!isGrenadeActivated && getMunition() > 0) {
             isGrenadeActivated = true;
-         //   setupExplosionTimer();
-            explosionTimer.start();
-            shoot();
+            //activationTime = System.currentTimeMillis();
+            //startExplosionAnimation(g, ennemies); // Démarre l'animation de l'explosion
+           // shoot();
         }
     }
 
-    private void drawExplosion(int x, int y, Graphics g, List<Personnage> enemies) {
-      //  System.out.println("drawExplosion");
-        Color grayTransparent = new Color(128, 128, 128, 128);
-        g.setColor(grayTransparent);
-        g.fillOval(x - 40, y - 40, 150, 150);
+    public void startExplosionAnimation(Graphics g, List<Personnage> enemies) {
+        explosionAnimationTimer = new Timer((int) explosionAnimationDelay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawExplosion(x, y, g, enemies);
+            }
+        });
+        explosionAnimationTimer.start();
+    }
 
-        for (Personnage personnage : enemies) {
-           // System.out.println("verif de distance");
+
+
+        private void drawExplosion(int x, int y, Graphics g, List<Personnage> enemies) {
+            loadExplosionImage();
+            if (explosionImage != null && explosionFrameIndex < explosionImage.length) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.drawImage(explosionImage[explosionFrameIndex], x , y , 2*40, 2*40, null);
+                g2d.dispose();
+    
+                explosionFrameIndex++; 
+            } else {
+                explosionAnimationTimer.stop();
+                explosionFrameIndex = 0; 
+                isGrenadeActivated = false;
+            }
+
+       for (Personnage personnage : enemies) {
             double distance = Math.sqrt(Math.pow(personnage.x - x, 2) + Math.pow(personnage.y - y, 2));
             if (distance <= 75) {
                 personnage.infligerDegats(10);
             }
         }
+      
+
     }
+
+
+       
+    
 /* 
     public void deleteGrenade() {
         System.out.println("deleteGrenade");
@@ -171,4 +196,13 @@ public class A4 extends Armes {
     public void setPlaced(boolean isPlaced) {
         this.isPlaced = isPlaced;
     }
+
+
+
+    public boolean getIsGrenadeActivated(){
+        return isGrenadeActivated;
+    }
+
+
+
 }

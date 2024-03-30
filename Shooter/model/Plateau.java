@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import Shooter.Managers.*;
@@ -12,6 +13,7 @@ import Shooter.factory.PlateauLevelLoader;
 // pour le flood fill cases obstacles et mur mur cassant a revoir pour eviter des erreurs pour le deplacement
 
 public class Plateau extends JPanel {
+    public BufferedImage[] imageArmes;
     public GameManager gameManager;
 
     public int[][] level_tab;
@@ -28,6 +30,7 @@ public class Plateau extends JPanel {
         this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
         this.floodfill = new int[this.level_tab.length][level_tab[0].length];
         this.tile_manager = new ManagerCase();
+        loadArme();
 
     }
 
@@ -45,8 +48,31 @@ public class Plateau extends JPanel {
     }
 
     public void update_pleateau(int x, int y, int type_case) {
-        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40, null);
+        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40,null);
     }
+
+    private void loadArme() {
+        BufferedImage atlas=Enregistrement.getSpriteAtlas();
+
+        imageArmes=new BufferedImage[5];
+
+        for (int i =0 ; i <5;i++){
+            imageArmes[i]= atlas.getSubimage((1+i)*40, 2*40, 40, 40);
+        }  
+    }
+
+    
+
+    public void waitFortransiion() {
+        System.out.println("I'm being called: waitFortransiion");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -83,13 +109,68 @@ public class Plateau extends JPanel {
             }
         }
 
+  
+
+
         // Dessiner les pièges
-        for (A3 piege : pieges) {
-            piege.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+        for (A3 mine : pieges) {
+            if (gameManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+              //  System.out.println("collision mine");
+                gameManager.getPlayer().infligerDegats(mine.getPower());
+               // waitFortransiion();
+                mine.drawExplosion(mine.getX(), mine.getY(), g);
+                   // mine.dimension = 0;s
+            
+                   mine.setDimension(0);
+            } else{
+                mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+                
+            }if (gameManager.getEnnemiManager().getPerso_list().size() > 1){
+ 
+                for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()){
+       
+                    if(perso instanceof Enemy){
+           
+                        Enemy ennemi=(Enemy)perso;
+                    
+                        if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+            
+                            ennemi.infligerDegats(mine.getPower());
+                       
+                       
+                            mine.drawExplosion(mine.getX(), mine.getY(), g);
+                      
+                            // mine.dimension = 0;
+                            mine.setDimension(0);
+                         
+                         }    
+                    }
+                }
+                } else {
+                  //  System.out.println("14");
+                        mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+                 }
+
+           // piege.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
         }
+
         for (A4 grenade : grenade) {
             grenade.draw(g, gameManager.getPersoList(), gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
-        }
+            if(grenade.getIsGrenadeActivated()==true){
+               // System.out.println("grenade"+grenade.isGrenadeActivated());
+          /*   for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list()) {
+                double distance = Math.sqrt(Math.pow(personnage.x - grenade.getX(), 2) + Math.pow(personnage.y - grenade.getY(), 2));
+                if (distance <= 75) {
+                    personnage.infligerDegats(10);
+                }
+            }  */
+             if (grenade.getIsGrenadeActivated()){
+               grenade.activationTime = System.currentTimeMillis();
+               grenade.startExplosionAnimation(g, gameManager.getPersoList()); 
+                grenade.shoot();
+             }
+            }
+         }
 
         // print arme et nombre munitions
         int currentArme = gameManager.getPlayer().currentArme;
@@ -97,13 +178,14 @@ public class Plateau extends JPanel {
 
         g.setColor(Color.BLACK);
         g.fillRect(1300, 1, 125, 100);
-
+        g.drawImage(imageArmes[armeCourante.getTypeMunition()], 1325, 10, null);
         g.setColor(Color.WHITE);
         if (currentArme >= 0 && currentArme < gameManager.getPlayer().armes.size()) {
-            g.drawString("type:" + armeCourante.nom, 1325, 30);
-            g.drawString("munitions:" + armeCourante.munition, 1325, 50);
-            g.drawString("vie:" + gameManager.getPlayer().sante, 1325, 70);
+            g.drawString("type:" + armeCourante.nom, 1325, 70);
+            g.drawString("munitions:" + armeCourante.munition, 1325, 80);
+            g.drawString("vie:" + gameManager.getPlayer().sante, 1325, 90);
         }
+
 
         // Dessin crosshair
         gameManager.getMyMouseListener().getCrosshair().draw(g);

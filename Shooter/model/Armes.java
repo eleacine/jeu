@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.Color;
+
 public abstract class Armes {
     protected int power;
     protected boolean type; // true pour arme portée à la main et false pour arme de sol
@@ -13,6 +18,7 @@ public abstract class Armes {
     protected int dureeRecharge; // durée de la recharge
     protected boolean detruitMur;
     protected int typeMunition;
+
 
     public Color color;
     public String nom;
@@ -36,6 +42,7 @@ public abstract class Armes {
         this.dureeRecharge = dureeRecharge;
         this.typeMunition=typeMunition;
         this.detruitMur=detruitMur;
+
     }
 
     public Armes(String nom, int power , boolean tyep,int  munition , Color color){
@@ -44,6 +51,7 @@ public abstract class Armes {
         this.type=tyep;
         this.munition=munition;
         this.color=color;
+
     }
 
     public void shoot() {
@@ -90,6 +98,8 @@ public abstract class Armes {
     public void reinitialiser() {
         this.munition = this.recharge;
     }
+
+    
 
     // ---------- Getters & Setters ----------
 

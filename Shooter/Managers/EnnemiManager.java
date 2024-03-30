@@ -82,4 +82,12 @@ public class EnnemiManager {
         this.perso_list = perso_list;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
 }

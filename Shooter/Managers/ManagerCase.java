@@ -151,4 +151,8 @@ public class ManagerCase {
         return -1; // Remplacez ceci par la valeur par défaut ou la logique appropriée.
     }
 
+    public Case getMUR() {
+        return MUR_HAUT;
+    }
+
 }

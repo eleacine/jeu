@@ -1,7 +1,9 @@
 package Shooter.Managers;
 
+import java.awt.Graphics;
 import java.util.List;
 
+import Shooter.model.A3;
 import Shooter.model.Crosshair;
 import Shooter.model.Plateau;
 import Shooter.model.Player;
@@ -18,7 +20,6 @@ public class GameManager {
     private EnnemiManager ennemiManager;
     public ManagerArmes managerArmes;
     protected Game game;
-
     public GameManager(Game g, Plateau gamePlateau, Player player) {
         
         this.game=g;

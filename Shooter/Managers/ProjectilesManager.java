@@ -1,13 +1,22 @@
 package Shooter.Managers;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import Shooter.model.Enemy;
+import Shooter.model.Enregistrement;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.A3;
 import Shooter.model.Bullet;
+import Shooter.model.A4;
 
 public class ProjectilesManager {
 
@@ -17,6 +26,17 @@ public class ProjectilesManager {
     protected ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
     protected ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
     protected GameManager gameManager;
+
+    private Timer explosionTimer;
+    private long explosionDelay = 1700; 
+    private boolean isGrenadeActivated = false;
+    private BufferedImage[] explosionImage;
+    private int explosionFrameIndex = 0;
+    private Timer explosionAnimationTimer;
+    private long explosionAnimationDelay = 500;
+
+
+   
 
     
     public ProjectilesManager(Player player, GameManager gameManager ) {
@@ -46,6 +66,8 @@ public class ProjectilesManager {
 
     }
 
+    
+    
     public void hitPlayer() {
         for (Bullet bullet : enemyBullets) {
          //   System.out.println("player size"+player.size);
@@ -91,11 +113,34 @@ public class ProjectilesManager {
         }
     }
 
-    public void hitMine (){
-        for (A3 mine : gameManager.getGamePlateau().pieges){
-            if (player.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
-                player.infligerDegats(mine.getPower());
-                // mine.dimension = 0;
+
+
+   /* 
+    public static void loadMineExplosion(){
+        System.out.println("dans load a load");
+        BufferedImage atlas=Enregistrement.getSpriteAtlas();
+        explosionImage=new BufferedImage[1];
+        
+        explosionImage[0]= atlas.getSubimage(7*40, 2*40, 40, 40);
+    }
+
+    public void drawExplosion(int x, int y, Graphics g){
+        System.out.println("draw explosion");
+        loadMineExplosion();
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.drawImage(explosionImage[0], x , y , 2*40, 2*40, null);
+        g2d.dispose();
+    }
+
+
+ public void HitMine (Graphics g){
+        this.g = g;
+        for (A3 mine : ennemiManager.getGameManager().getGamePlateau().pieges){
+            if (ennemiManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+             System.out.println("collision mine");
+             ennemiManager.getPlayer().infligerDegats(mine.getPower());
+             drawExplosion(mine.getX(), mine.getY(), g);
+                // mine.dimension = 0;s
                 mine.setDimension(0);
             }
 
@@ -104,7 +149,9 @@ public class ProjectilesManager {
                     if(perso instanceof Enemy){
                         Enemy ennemi=(Enemy)perso;
                         if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+                        
                             ennemi.infligerDegats(mine.getPower());
+                            drawExplosion(mine.getX(), mine.getY(), g);
                             // mine.dimension = 0;
                             mine.setDimension(0);
                         }
@@ -113,10 +160,7 @@ public class ProjectilesManager {
             }
         }
     }
-
     
-
-
 
     public void suppMine(){
         Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
@@ -127,7 +171,7 @@ public class ProjectilesManager {
             }
         }
     }
-
+*/
     private void checkAndDestroyBulletOnWall(Bullet bullet) {
         int currentXIndex = (int) (bullet.getX() / 40);
         int currentYIndex = (int) (bullet.getY() / 40);
@@ -150,8 +194,8 @@ public class ProjectilesManager {
         suppBulletEnnemi();
         hitEnnemi();
         hitPlayer();
-        hitMine();
-        suppMine();
+        //HitMine(g);
+        //suppMine();
     }
 
     // Vérifie et met à jour la case si le projectile est sur une case de type 2 (obstacle)
