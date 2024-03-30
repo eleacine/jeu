@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import java.awt.*;
 
+import java.awt.geom.Path2D;
+
 public class Player extends Personnage {
 
     protected String pseudo;
@@ -19,8 +21,10 @@ public class Player extends Personnage {
     protected int level = 1;
     protected ImageIcon sprite;
 
+    protected Path2D.Double boundingPolygon; // Polygone englobant le joueur
+
     public Player(String pseudo) {
-        super(1000, 500, 0, 0, 45, 2, 1000);
+        super(1000, 500, 0, 0, 50, 2, 1000);
         this.pseudo = pseudo;
 
         this.armes.add(new A1());
@@ -31,6 +35,45 @@ public class Player extends Personnage {
         currentArme = 0;
 
         loadSprite();
+        createBoundingPolygon(); // Créer le polygone englobant une fois que le sprite est chargé
+
+    }
+
+    // Méthode pour créer le polygone englobant basé sur les coordonnées de l'image
+    private void createBoundingPolygon() {
+        // Définissez les coordonnées des sommets de votre forme de joueur
+        double[] xPoints = { x, x + sprite.getIconWidth(), x + sprite.getIconWidth(), x };
+        double[] yPoints = { y, y, y + sprite.getIconHeight(), y + sprite.getIconHeight() };
+        int numPoints = 4; // Nombre de sommets (dans ce cas, un rectangle)
+
+        // Créez le polygone englobant en utilisant les coordonnées définies
+        boundingPolygon = new Path2D.Double();
+        boundingPolygon.moveTo(xPoints[0], yPoints[0]);
+        for (int i = 1; i < numPoints; i++) {
+            boundingPolygon.lineTo(xPoints[i], yPoints[i]);
+        }
+        boundingPolygon.closePath();
+    }
+
+    // Méthode pour mettre à jour les coordonnées du polygone englobant en fonction
+    // de la position du joueur
+    private void updateBoundingPolygon() {
+        double[] xPoints = {285, 286, 278, 277, 278};
+        double[] yPoints = {234, 246, 247, 250, 265};
+        int numPoints = 4;
+
+        boundingPolygon.reset();
+        boundingPolygon.moveTo(xPoints[0], yPoints[0]);
+        for (int i = 1; i < numPoints; i++) {
+            boundingPolygon.lineTo(xPoints[i], yPoints[i]);
+        }
+        boundingPolygon.closePath();
+    }
+
+    // Méthode pour dessiner le polygone englobant avec un contour coloré
+    public void drawBoundingPolygon(Graphics2D g2d) {
+        g2d.setColor(Color.RED); // Couleur du contour
+        g2d.draw(boundingPolygon); // Dessiner le contour du polygone
     }
 
     // récupérer une éventuelle sauvegarde
@@ -70,6 +113,23 @@ public class Player extends Personnage {
     }
 
     // ------ Getter et Setter ---------
+
+    // Redéfinissez les méthodes setX() et setY() pour mettre à jour le polygone à
+    // chaque fois que la position du joueur change
+    @Override
+    public void setX(int x) {
+        super.setX(x);
+        updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en X du joueur est
+                                 // modifiée
+    }
+
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+        updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en Y du joueur est
+                                 // modifiée
+    }
+
     public String getPseudo() {
         return this.pseudo;
     }
@@ -124,6 +184,10 @@ public class Player extends Personnage {
 
     public void setLevel() {
         this.level++;
+    }
+
+    public void setSprite(String newPath) {
+        loadSprite(newPath);
     }
 
 }

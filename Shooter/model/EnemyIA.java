@@ -13,6 +13,4 @@ public class EnemyIA extends Enemy {
         moveTowardsPlayer(map, player);
     }
 
-   
-
 }

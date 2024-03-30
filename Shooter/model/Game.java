@@ -1,9 +1,6 @@
 package Shooter.model;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,8 +56,8 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 		this.perso_list.add(0, player);
 
-		// perso_list.add(new EnemyIA(1000, 150));
-		perso_list.add(new EnemySniper(1000, 150));
+		perso_list.add(new EnemyIA(1000, 150));
+		//perso_list.add(new EnemySniper(1000, 150));
 
 		// // print enemy list to check
 		// System.out.println("Enemy List:");
@@ -124,7 +121,6 @@ public class Game extends JFrame implements Runnable {
 		Game game = new Game();
 		game.setVisible(true);
 		game.run();
-		
 
 	}
 

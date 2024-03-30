@@ -34,7 +34,7 @@ public class GameManager {
     }
 
     public void update() {
-        playerManager.handleKeyPress();
+        // playerManager.handleKeyPress();
         ennemiManager.update();
         ennemiManager.suppEnnemi();
         playerManager.update();
