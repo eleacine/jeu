@@ -26,16 +26,13 @@ public class EnnemiManager {
             if (perso instanceof Enemy) {
                 Enemy ennemi = (Enemy) perso;
                 if (ennemi.getSize() >= 0) {
-
                     // arranger ca
                     if (ennemi instanceof EnemyIA) {
                         EnemyIA ennemiIA = (EnemyIA) ennemi;
-
                         ennemiIA.updateBehavior(player, gameManager.getGamePlateau().floodfill);
 
                     } else if (ennemi instanceof EnemySniper) {
                         EnemySniper ennemiSniper = (EnemySniper) ennemi;
-                    
                         if (ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill)) {
                             ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
                         } else {
@@ -48,8 +45,7 @@ public class EnnemiManager {
                         ennemi.shootBehavior(player, gameManager.getProjectilesManager());
                     }
 
-                    if (ennemi.detectCollision(player.getX(), player.getY(),
-                            player.getSize())) {
+                    if (ennemi.detectCollision(player.getX(), player.getY(), player.getSize())) {
                         player.infligerDegats(ennemi.getCollisionPower());
                         ennemi.setSize(0);
                     }

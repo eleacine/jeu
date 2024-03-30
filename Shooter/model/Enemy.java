@@ -191,6 +191,13 @@ public class Enemy extends Personnage {
 				break;
 		
 			}
+			/*else{
+				System.out.println("NOT OKAY");
+				System.out.println("distances[newY][newX] < minDistance: " + (distances[newY][newX] < minDistance));
+				System.out.println("distances[newY][newX]: " + distances[newY][newX]);
+				System.out.println("minDistance: " + minDistance);
+				System.out.println("distances[newY][newX] != 1000: " + (distances[newY][newX] != 1000)+"\n");
+			}*/
 		
 		}
 

@@ -27,8 +27,13 @@ public class Plateau extends JPanel {
 
     public int[][] floodfill;;
 
-    public Plateau() {
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
+    public Plateau(boolean gameMode) {
+        if(!gameMode){
+            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
+        }
+        else{
+            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevelsPerso.txt", 0);
+        }
         this.floodfill = new int[this.level_tab.length][level_tab[0].length];
         this.tile_manager = new ManagerCase();
         loadArme();
@@ -264,8 +269,12 @@ public class Plateau extends JPanel {
     public void reset() {
         pieges.clear();
         grenade.clear();
-        this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt",
-                gameManager.getPlayer().getLevel() - 1);
+        if(!gameManager.getGame().gameMode){
+            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel() - 1);
+        }
+        else{
+            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevelsPerso.txt", 0);
+        }
     }
 
     // ------------- Flood fill ----------------

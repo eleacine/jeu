@@ -70,7 +70,7 @@ public class Game extends JFrame implements Runnable {
 		
 
 		// initialisation du plateau et du game Manager
-		this.gamePlateau = new Plateau();
+		this.gamePlateau = new Plateau(gameMode);
 		this.gameManager = new GameManager(this, gamePlateau, player);
 		this.gamePlateau.gameManager = gameManager;
 
