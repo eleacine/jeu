@@ -185,3 +185,8 @@ Leonor:
     - finir séparation entre jeu avec niveaux prédefinis et niveaux crées 
     - aider à la définition des differentes "pièces de la maison"
     - organisation des elements graphiques pour faire mode sombre 
+
+Ines :
+    -Avancer sur le graphisme des armes
+    -Ajouter des caracteristique au armes (si une grenade explose sur une mine les deux explosent faire en sorte qu'ell detruisent les murs cassable etc)
+    -Si tout ça est fini avancer sur les graphisme du jeu en general ou travailler sur d'autre aspect (aider sur les niveau peut etre ? )
