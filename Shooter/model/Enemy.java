@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Random;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
@@ -26,7 +29,10 @@ public class Enemy extends Personnage {
 	protected int detectionRadius; // Rayon de détection du joueur
 	protected int tailleBar = 40;
 	protected int vieTotal = 100;
-
+	private Deque<Point> previousPositions; 
+    private static final int MAX_PREVIOUS_POSITIONS = 5;
+	
+	
 	public double direction; // direction pour ajouter le halo de vision
 	protected ImageIcon sprite;
 
@@ -40,6 +46,7 @@ public class Enemy extends Personnage {
 	public Enemy(int size, int sante, int id, int maxSpeed, int power, int collisionPower, int frequency,
 			int detectionRadius, Color color) {
 		super(size, sante, maxSpeed);
+		previousPositions = new ArrayDeque<>();
 		this.x = new Random().nextInt(1400);
 		this.y = new Random().nextInt(800);
 		this.id = id;
@@ -54,6 +61,7 @@ public class Enemy extends Personnage {
 	public Enemy(int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower, int frequency,
 			int detectionRadius, Color color) {
 		super(x, y, size, sante, maxSpeed);
+		previousPositions = new ArrayDeque<>();
 		this.id = id;
 		this.power = power;
 		this.collisionPower = collisionPower;
@@ -66,6 +74,7 @@ public class Enemy extends Personnage {
 	public Enemy(int x, int y, int size, int sante, int maxSpeed, int id, int power, int collisionPower,
 			int detectionRadius, Color color) {
 		super(x, y, size, sante, maxSpeed);
+		previousPositions = new ArrayDeque<>();
 		this.id = id;
 		this.power = power;
 		this.collisionPower = collisionPower;
@@ -89,6 +98,8 @@ public class Enemy extends Personnage {
 
 	public void updateBehavior(Player player, int[][] map) {
 	}
+
+	
 
 	// public void shootBehavior(Player player, ProjectilesManager
 	// projectilesManager) {
@@ -127,17 +138,21 @@ public class Enemy extends Personnage {
 	}
 
 	public void drawEnemy(Graphics g) {
-		// Vérifier si l'image est chargée
-		if (sprite != null && sprite.getImage() != null) {
-			// Dessiner l'image
-			g.drawImage(sprite.getImage(), x, y, size, size, null);
-		} else {
-			// Si l'image n'est pas chargée, dessiner un cercle comme auparavant
-			g.setColor(this.color);
-			g.fillOval(this.x, this.y, this.size, this.size);
-		}
+		// Dessiner l'ennemi à sa position actuelle
+        if (sprite != null && sprite.getImage() != null) {
+            g.drawImage(sprite.getImage(), x, y, size, size, null);
+        } else {
+            g.setColor(this.color);
+            g.fillOval(this.x, this.y, this.size, this.size);
+        }
 
-	}
+        
+        g.setColor(Color.BLACK); 
+        for (Point point : previousPositions) {
+            g.fillOval(point.x+40, point.y+15, 5, 15); 
+        }
+    }
+	
 	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {
@@ -207,23 +222,36 @@ public class Enemy extends Personnage {
 		move(dirX, dirY);
 	}
 
-	public void move (int x, int y){
-		// System.out.println("Ennemi position avant x : " + this.x + " position y : " + this.y);
+	public void move(int x, int y) {
 		prevX = this.x;
 		prevY = this.y;
-		if (x == 1){
+		if (x == 1) {
 			this.x += this.maxSpeed;
-		} else if (x == -1){
+		} else if (x == -1) {
 			this.x -= this.maxSpeed;
 		}
-
-		if (y == 1){
+	
+		if (y == 1) {
 			this.y += this.maxSpeed;
-		} else if (y == -1){
+		} else if (y == -1) {
 			this.y -= this.maxSpeed;
 		}
 
-		// System.out.println("Ennemi position apres x : " + this.x + " position y : " + this.y);
+		
+		Point newPoint = new Point(this.x, this.y);
+		if (previousPositions.isEmpty() || distanceBetweenPoints(previousPositions.getFirst(), newPoint) >= 10) {
+			previousPositions.addFirst(newPoint);
+			
+			
+			while (previousPositions.size() > MAX_PREVIOUS_POSITIONS) {
+				previousPositions.removeLast();
+			}
+		}
+	}
+	
+	
+	private double distanceBetweenPoints(Point p1, Point p2) {
+		return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 	}
 
 	// public boolean isPlayerInRange(Player player, int[][] map) {

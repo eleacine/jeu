@@ -72,8 +72,8 @@ public class Player extends Personnage {
 
     // Méthode pour dessiner le polygone englobant avec un contour coloré
     public void drawBoundingPolygon(Graphics2D g2d) {
-        g2d.setColor(Color.RED); // Couleur du contour
-        g2d.draw(boundingPolygon); // Dessiner le contour du polygone
+       // g2d.setColor(Color.RED); // Couleur du contour
+        //g2d.draw(boundingPolygon); // Dessiner le contour du polygone
     }
 
     // récupérer une éventuelle sauvegarde
