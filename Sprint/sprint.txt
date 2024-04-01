@@ -204,4 +204,4 @@ Eléacine :
     -finir definir la force final des differentes armes
     -finir de creer les niveaux avec les bon ennemies ,bonne décoration
     -finir les pas des ennemis , peut-être déplacer pour le joueur
-    
+    -première page
