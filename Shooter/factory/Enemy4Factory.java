@@ -1,9 +1,8 @@
 package Shooter.factory;
 import java.util.AbstractMap;
 import java.util.Map.Entry;
-
 import Shooter.model.*;
-//comment ines
+
 public class Enemy4Factory implements PersonnageFactory {
     private int x;
     private int y;
