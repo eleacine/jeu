@@ -205,3 +205,4 @@ Eléacine :
     -finir de creer les niveaux avec les bon ennemies ,bonne décoration
     -finir les pas des ennemis , peut-être déplacer pour le joueur
     -première page
+    -mouvement de marche pour les ennemis et joueur
