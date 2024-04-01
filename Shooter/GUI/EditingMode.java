@@ -391,6 +391,7 @@ public class EditingMode extends GameScene {
 		return l;
 	}
 
+	//A VOIR 
 	public ArrayList<JButtonStyled> ListeBouton(String s){
 		ArrayList<JButtonStyled> l = new ArrayList<>();
 		switch (s) {
