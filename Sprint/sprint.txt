@@ -197,3 +197,11 @@ Marylou :
     - finition du dernier ennemi
     - aide sur d'autres parties du code si besoin
     - 
+
+Eléacine : 
+    -ameliorer la distance avec les obstacles pour le joueur
+    -ameliorer les collisions du côté du joueur ou des ennemis
+    -finir definir la force final des differentes armes
+    -finir de creer les niveaux avec les bon ennemies ,bonne décoration
+    -finir les pas des ennemis , peut-être déplacer pour le joueur
+    

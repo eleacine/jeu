@@ -254,3 +254,10 @@ Marylou :
     - ennemiIA qui se déplace vers le joueur en évitant les obstacles
     - ennemiSniper (se déplace vers le joueur pour lui tirer dessus dès qu'il est a sa portee) presque fini
     - aide pour le blocage du joueur 
+
+Eléacine :
+    -blocage du joueur résolue avec Marylou
+    -réalisation de nouveau design de tuiles et niveau du jeu
+    -essaye des effets d'explosion pour la grenade, pas fonctionné
+    -première élaboration des traces de pas,pour les ennemis, une simple élaboration il faut juste importer les images
+    
