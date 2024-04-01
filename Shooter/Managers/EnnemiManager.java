@@ -27,26 +27,28 @@ public class EnnemiManager {
                 Enemy ennemi = (Enemy) perso;
                 if (ennemi.getSize() >= 0) {
                     // arranger ca
-                    if (ennemi instanceof EnemyIA) {
-                        EnemyIA ennemiIA = (EnemyIA) ennemi;
-                        ennemiIA.updateBehavior(player, gameManager.getGamePlateau().floodfill);
+                    // if (ennemi instanceof EnemyIA) {
+                    //     EnemyIA ennemiIA = (EnemyIA) ennemi;
+                    //     ennemiIA.updateBehavior(player, gameManager.getGamePlateau().floodfill);
 
-                    } else if (ennemi instanceof EnemySniper) {
-                        EnemySniper ennemiSniper = (EnemySniper) ennemi;
+                    // } else if (ennemi instanceof EnemySniper) {
+                    //     EnemySniper ennemiSniper = (EnemySniper) ennemi;
                         
-                        // System.out.println("player detected" + ennemiSniper.isPlayerDetected(player));
-                        // System.out.println(ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()));
-                        if (ennemiSniper.isPlayerDetected(player) && ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()) == false){
-                            ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
-                        } else {
-                            ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
-                        }
+                    //     // System.out.println("player detected" + ennemiSniper.isPlayerDetected(player));
+                    //     // System.out.println(ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()));
+                    //     if (ennemiSniper.isPlayerDetected(player) && ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()) == false){
+                    //         ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
+                    //     } else {
+                    //         ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);
+                    //     }
 
 
-                    } else if (ennemi.isPlayerDetected(player)) {
-                        ennemi.updateBehavior(player, gameManager.getGamePlateau().floodfill);
-                        ennemi.shootBehavior(player, gameManager.getProjectilesManager());
-                    }
+                    // } else if (ennemi.isPlayerDetected(player)) {
+                    //     ennemi.updateBehavior(player, gameManager.getGamePlateau().floodfill);
+                    //     ennemi.shootBehavior(player, gameManager.getProjectilesManager());
+                    // }
+
+                    ennemi.updateBehavior(player, gameManager.getGamePlateau().floodfill, gameManager.getProjectilesManager());
 
                     if (ennemi.detectCollision(player.getX(), player.getY(), player.getSize())) {
                         player.infligerDegats(ennemi.getCollisionPower());

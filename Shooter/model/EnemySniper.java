@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import Shooter.Managers.ManagerCase;
 import Shooter.Managers.ProjectilesManager;
 
 public class EnemySniper extends Enemy {
@@ -22,6 +21,17 @@ public class EnemySniper extends Enemy {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
+        if (isPlayerInRange(player, map)) {
+            if (isWallBetween(x, y, map, player.getX(), player.getY()) == false) {
+                shootBehavior(player, projectilesManager);
+            }
+        } else {
+            moveTowardsPlayer(map, player);
+        }
     }
 
     @Override
@@ -75,13 +85,6 @@ public class EnemySniper extends Enemy {
         }
 
         return lineOfSight;
-    }
-
-    private boolean isWall(int xPos, int yPos, int[][] map) {
-        // Vérifie si une case est un mur
-        int x = convertPositionToTile(xPos);
-        int y = convertPositionToTile(yPos);
-        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
     }
 
 }

@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 
+import Shooter.Managers.ProjectilesManager;
+
 public class EnemyIA extends Enemy {
 
     public EnemyIA(int x, int y) {
@@ -9,7 +11,7 @@ public class EnemyIA extends Enemy {
     }
 
     @Override
-    public void updateBehavior(Player player, int[][] map) {
+    public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
         moveTowardsPlayer(map, player);
     }
 

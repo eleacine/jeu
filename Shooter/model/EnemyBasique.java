@@ -4,9 +4,10 @@ import java.awt.Color;
 
 import Shooter.Managers.ProjectilesManager;
 
-public class EnemyBasique extends Enemy{
+public class EnemyBasique extends Enemy {
 
-    /* est statique
+    /*
+     * est statique
      * position x : 50
      * position y : 100
      * taille : 50
@@ -24,13 +25,18 @@ public class EnemyBasique extends Enemy{
     }
 
     @Override
-    	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
-            shoot(player, projectilesManager);
-	}
+    public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
+        shoot(player, projectilesManager);
+    }
 
+    @Override
+    public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
+        if (isPlayerDetected(player)) {
+            if (isWallBetween(x, y, map, player.getX(), player.getY()) == false) {
+                shootBehavior(player, projectilesManager);
+            }
+        }
 
-    
-
-  
+    }
 
 }
