@@ -54,6 +54,9 @@ public class GameScene extends JPanel {
                 else if(pageName.equals( "Menu") && game.isBegin()){
                     game.reset();
                 }
+                else if(pageName.equals("Creative") && game.isBegin()){
+                    game.begin=true;
+                }
                 layout.show(panel, pageName);
             }
         });
@@ -145,6 +148,9 @@ public class JButtonStyled extends JButton {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

@@ -76,6 +76,8 @@ public class MenuPage extends GameScene {
         // Add buttons to buttonPanel
         buttonPanel.add(createButton("Play", "Play"), gbc);
         gbc.gridy++;
+        buttonPanel.add(createButton("Creative", "Play"), gbc);
+        gbc.gridy++;
         buttonPanel.add(createButton("Settings", "Settings"), gbc);
         gbc.gridy++;
         buttonPanel.add(createButton("Editing", "Editing"), gbc);

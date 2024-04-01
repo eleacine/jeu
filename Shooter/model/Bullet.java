@@ -55,7 +55,7 @@ public class Bullet {
         BufferedImage atlas = Enregistrement.getSpriteAtlas();
         mImages = new BufferedImage[2];
         for (int i = 0; i < 2; i++) {
-            mImages[i] = atlas.getSubimage((6 + i) * 40, 1 * 40, 40, 40);
+            mImages[i] = atlas.getSubimage((7 + i) * 40, 4 * 40, 40, 40);
         }
 
     }

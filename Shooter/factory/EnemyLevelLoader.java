@@ -71,6 +71,7 @@ public class EnemyLevelLoader {
         return factories;
     }
 
+
     private PersonnageFactory createFactoryForEnemyType(String enemyType, String xCoordinate, String yCoordinate) {
         // System.out.println("Enemy Type: " + enemyType);
         // System.out.println("Coordinates: " + xCoordinate + ", " + yCoordinate);
@@ -87,4 +88,49 @@ public class EnemyLevelLoader {
                 throw new IllegalArgumentException("Unknown enemy type: " + enemyType);
         }
     }
+
+    public static ArrayList<String> EnnemiDuNiveau(String filePath, int level){
+        ArrayList<String> ennemis = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    int read_level = Integer.parseInt(parts[0].trim());
+                    if (read_level == level) {
+                        String enemyData = parts[1].trim();
+                        String[] enemyList = enemyData.split(";");
+                        for (String enemy : enemyList) {
+                            ennemis.add(enemy+";");
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ennemis;
+    }
+
+    public static String EnnemiNiveau(String filepath, int level){
+        String ennemi = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    int read_level = Integer.parseInt(parts[0].trim());
+                    if (read_level == level) {
+                        ennemi = read_level + ": ";
+                        ennemi += parts[1].trim();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ennemi += "\n";
+        return ennemi;
+    }
+
 }

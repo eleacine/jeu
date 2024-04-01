@@ -53,6 +53,10 @@ public class GameManager {
         return gamePlateau;
     }
 
+    public Game getGame(){
+        return this.game;
+    }
+
     public void setGamePlateau(Plateau gamePlateau) {
         this.gamePlateau = gamePlateau;
     }
