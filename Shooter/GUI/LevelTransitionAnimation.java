@@ -47,14 +47,14 @@ public class LevelTransitionAnimation extends JFrame {
         timer.start();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                LevelTransitionAnimation animation = new LevelTransitionAnimation();
-                animation.setVisible(true);
+    // public static void main(String[] args) {
+    //     SwingUtilities.invokeLater(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             LevelTransitionAnimation animation = new LevelTransitionAnimation();
+    //             animation.setVisible(true);
 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
 }

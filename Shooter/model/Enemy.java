@@ -90,29 +90,17 @@ public class Enemy extends Personnage {
 	public void updateBehavior(Player player, int[][] map) {
 	}
 
-	// public void shootBehavior(Player player, ProjectilesManager
-	// projectilesManager) {
-	// // Implémentez la logique de tir spécifique pour cet ennemi
-	// // Par exemple, tirer une balle vers le joueur
-	// long currentTime = System.currentTimeMillis();
-	// if (currentTime - lastShotTime > getFrequency()) {
-	// Bullet bullet = new Bullet(x, y, player.x, player.y, power);
-	// projectilesManager.getEnemyBullets().add(bullet);
-	// lastShotTime = currentTime;
-	// }
-	// }
-
 	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
 	}
 
-	protected float calculateAngle(int x1, int y1, int x2, int y2) {
-		return (float) Math.atan2(y2 - y1, x2 - x1);
-	}
+	// protected float calculateAngle(int x1, int y1, int x2, int y2) {
+	// 	return (float) Math.atan2(y2 - y1, x2 - x1);
+	// }
 
-	public void calculateDifferences(float angle) {
-		this.differenceX = (float) Math.cos(angle) * this.maxSpeed;
-		this.differenceY = (float) Math.sin(angle) * this.maxSpeed;
-	}
+	// public void calculateDifferences(float angle) {
+	// 	this.differenceX = (float) Math.cos(angle) * this.maxSpeed;
+	// 	this.differenceY = (float) Math.sin(angle) * this.maxSpeed;
+	// }
 
 	public boolean isPlayerDetected(Player player) {
 		// Calculer la distance entre l'ennemi et le joueur
@@ -141,7 +129,6 @@ public class Enemy extends Personnage {
 	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {
-		// System.out.println("Joueur position x : " + convertPositionToTile(player.x) + " position y : " + convertPositionToTile(player.y));
 		int nextX = convertPositionToTile(x); // Convertir la position X de l'ennemi en coordonnées de tableau
 		int nextY = convertPositionToTile(y); // Convertir la position Y de l'ennemi en coordonnées de tableau
 
@@ -153,37 +140,18 @@ public class Enemy extends Personnage {
 			nextY += 1; // Convertir la position Y de l'ennemi en coordonnées de tableau
 		}
 		
-
-		// System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
-
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
-		// System.out.println("minDistance: " + minDistance);
 		int dirX = 0;
 		int dirY = 0;
 
-		// Liste des directions
-		// int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-
 		// Parcourir les directions pour trouver la case avec une distance plus courte
-		
 		for (int[] dir : direction2) {
 			int newX = nextX + dir[0];
-			// System.out.println("Avant newY: " + nextY + " dir[1]: " + dir[1]);
 			int newY = nextY + dir[1];
-			// System.out.println("Apres newY: " + newY+ " dir[1]: " + dir[1]);
-
-			// System.out.println("dirX: " + dir[0] + " dirY: " + dir[1]);
-			// System.out.println("newX: " + newX + " newY: " + newY);
-			// System.out.println(" distances[newY][newX]:" + distances[newY][newX]);
-			
 
 			// Vérifier si la case est valide et si la distance est plus courte
 			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] < minDistance && distances[newY][newX] != 100){
-				// System.out.println("\ntest réussi");
-				// System.out.println(dir[0] + " " + dir[1] );
-				// System.out.println( "case de la distance : " + distances[newY][newX] );
-				// System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
@@ -194,14 +162,11 @@ public class Enemy extends Personnage {
 		
 		}
 
-		// System.out.println(" ");
-
-		// // Déplacer l'ennemi dans la direction choisie
+		// Déplacer l'ennemi dans la direction choisie
 		move(dirX, dirY);
 	}
 
 	public void move (int x, int y){
-		// System.out.println("Ennemi position avant x : " + this.x + " position y : " + this.y);
 		prevX = this.x;
 		prevY = this.y;
 		if (x == 1){
@@ -216,28 +181,25 @@ public class Enemy extends Personnage {
 			this.y -= this.maxSpeed;
 		}
 
-		// System.out.println("Ennemi position apres x : " + this.x + " position y : " + this.y);
 	}
 
-	// public boolean isPlayerInRange(Player player, int[][] map) {
-	// 	if (isPlayerDetected(player)) {
-	// 		return !isWallBetween(x, y, map, player.getX(), player.getY());
-	// 	}
-	// 	return false;
-	// }
+
+    public void shoot(Player player, ProjectilesManager projectilesManager) {
+        // Implémentez la logique de tir spécifique pour cet ennemi
+        // Par exemple, tirer une balle vers le joueur
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastShotTime > getFrequency()) {
+            Bullet bullet = new Bullet(x, y, player.x, player.y, power);
+            projectilesManager.getEnemyBullets().add(bullet);
+            lastShotTime = currentTime;
+        }
+    }
 
 	protected int convertPositionToTile(int position) {
 		// Convertit une position en coordonnées de tableau
 		return position / 40;
 	}
 
-	
-	// private boolean isWall(int xPos, int yPos, int[][] map) {
-	// 	// Vérifie si une case est un mur
-	// 	int x = convertPositionToTile(xPos);
-	// 	int y = convertPositionToTile(yPos);
-	// 	return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
-	// }
 
 	// ------------- Getters et setters ---------------------------
 

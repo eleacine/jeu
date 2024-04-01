@@ -2,66 +2,59 @@ package Shooter.model;
 
 import java.awt.Color;
 import Shooter.Managers.ManagerCase;
+import Shooter.Managers.ProjectilesManager;
 
 public class EnemySniper extends Enemy {
 
     public EnemySniper(int x, int y) {
-        super(x, y, 50, 100, 1, 2, 20, 50, 350, 350, new Color(255, 0, 255));
+        super(x, y, 50, 100, 1, 2, 20, 50, 400, 1000, new Color(255, 0, 255));
     }
 
     public boolean isPlayerInRange(Player player, int[][] map) {
-        if (isPlayerDetected(player)) {
-            return !isWallBetween(x, y, map, player.getX(), player.getY());
-        }
-        return false;
-    }
-
-
-    private boolean isWallBetween(int startX, int startY, int[][] map, int targetX, int targetY) {
-        // Calculer les deltas et les incréments pour les axes X et Y
-        int dx = Math.abs(targetX - startX);
-        int dy = Math.abs(targetY - startY);
-        int sx = startX < targetX ? 1 : -1;
-        int sy = startY < targetY ? 1 : -1;
-    
-        // Variables de contrôle pour l'algorithme de trajectoire
-        int err = dx - dy;
-        int err2;
-    
-        // Position initiale
-        int currentX = startX;
-        int currentY = startY;
-    
-        // Boucle à travers la trajectoire du projectile
-        while (currentX != targetX || currentY != targetY) {
-            // Vérifier si la case actuelle est un mur
-            if (isWall(currentX, currentY, map)) {
+        // if (isPlayerDetected(player)) {
+        //     return !isWallBetween(x, y, map, player.getX(), player.getY());
+        // }
+        // return false;
+        // return isPlayerDetected(player) && isWallBetween(x, y, map, player.getX(), player.getY());
+        if (isWallBetween(x, y, map, x, y)){
+            if (isPlayerDetected(player)) {
                 return true;
             }
-    
-            // Calculer la prochaine position sur la trajectoire
-            err2 = 2 * err;
-            if (err2 > -dy) {
-                err -= dy;
-                currentX += sx;
-            }
-            if (err2 < dx) {
-                err += dx;
-                currentY += sy;
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
+        shoot(player, projectilesManager);
+    }
+
+    protected boolean isWallBetween(int x1, int y1, int[][] map, int x2, int y2) {
+        // Vérifie si un mur est entre deux points
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+        int steps = Math.max(Math.abs(dx), Math.abs(dy));
+        float xIncrement = (float) dx / steps;
+        float yIncrement = (float) dy / steps;
+        float x = x1;
+        float y = y1;
+        for (int i = 0; i < steps; i++) {
+            x += xIncrement;
+            y += yIncrement;
+            if (isWall((int) x, (int) y, map)) {
+                return true;
             }
         }
-    
-        // Si aucun mur n'est rencontré le long de la trajectoire, retourner false
         return false;
     }
     
-    
+
     private boolean isWall(int xPos, int yPos, int[][] map) {
         // Vérifie si une case est un mur
         int x = convertPositionToTile(xPos);
         int y = convertPositionToTile(yPos);
-        return (map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT);
+        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
     }
-    
 
 }

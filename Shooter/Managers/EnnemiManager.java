@@ -51,7 +51,7 @@ public class EnnemiManager {
                     if (ennemi.detectCollision(player.getX(), player.getY(),
                             player.getSize())) {
                         player.infligerDegats(ennemi.getCollisionPower());
-                        ennemi.setSize(0);
+                        // ennemi.setSize(0);
                     }
                 }
             }

@@ -25,14 +25,7 @@ public class EnemyBasique extends Enemy{
 
     @Override
     	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
-		// Implémentez la logique de tir spécifique pour cet ennemi
-		// Par exemple, tirer une balle vers le joueur
-		long currentTime = System.currentTimeMillis();
-		if (currentTime - lastShotTime > getFrequency()) {
-			Bullet bullet = new Bullet(x, y, player.x, player.y, power);
-			projectilesManager.getEnemyBullets().add(bullet);
-			lastShotTime = currentTime;
-		}
+            shoot(player, projectilesManager);
 	}
 
 

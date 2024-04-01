@@ -56,8 +56,8 @@ public class Game extends JFrame implements Runnable {
 		this.perso_list = enemyLoader.createEnemiesForLevel();
 		this.perso_list.add(0, player);
 
-		perso_list.add(new EnemyIA(1000, 150));
-		//perso_list.add(new EnemySniper(1000, 150));
+		// perso_list.add(new EnemyIA(1000, 150));
+		perso_list.add(new EnemySniper(1000, 150));
 
 		// // print enemy list to check
 		// System.out.println("Enemy List:");
@@ -139,21 +139,16 @@ public class Game extends JFrame implements Runnable {
 
 		long now;
 
-
-
 		// while (true) {
 		while (isRunning) {
-
 
 			now = System.nanoTime();
 
 			// Render
 			if (now - lastFrame >= timePerFrame) {
-
 				repaint();
 				lastFrame = now;
 				// frames++;
-
 			}
 
 			// Update
@@ -163,7 +158,6 @@ public class Game extends JFrame implements Runnable {
 					SwingUtilities.invokeLater(() -> {
 						updateGame();
 					});
-
 
 				}
 				lastUpdate = now;
@@ -176,9 +170,7 @@ public class Game extends JFrame implements Runnable {
 				// updates = 0;
 				lastTimeCheck = System.currentTimeMillis();
 			}
-
 		}
-
 	}
 
 	public void isGameOver() {
@@ -223,7 +215,7 @@ public class Game extends JFrame implements Runnable {
 			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
 				// Afficher la page noire pendant un court laps de temps
 			//waitFortransiion();
-			System.out.println("avant la transition ");
+			// System.out.println("avant la transition ");
               showBlackScreenForDelay(1000);
 				//waitFortransiion();
 				//nextLevel();
@@ -233,7 +225,7 @@ public class Game extends JFrame implements Runnable {
 	}
 
 	public void waitFortransiion() {
-		System.out.println("I'm being called: waitFortransiion");
+		// System.out.println("I'm being called: waitFortransiion");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -242,14 +234,14 @@ public class Game extends JFrame implements Runnable {
 	}
 
 	private void nextLevel() {
-		System.out.println("I'm being called: nextLevel");
+		// System.out.println("I'm being called: nextLevel");
 		gameManager.getPlayer().setLevel();
 		reset();
 		
 	}
 
 	private void showBlackScreenForDelay(int delay) {
-		System.out.println("I'm being called: showBlackScreenForDelay");
+		// System.out.println("I'm being called: showBlackScreenForDelay");
         JFrame blackFrame = new JFrame();
         blackFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         blackFrame.setUndecorated(true);
@@ -260,7 +252,7 @@ public class Game extends JFrame implements Runnable {
 
         blackFrame.setOpacity(0.0f);
         blackFrame.setVisible(true);
-		System.out.println("debut");
+		// System.out.println("debut");
 		Timer timer = new Timer(10, new ActionListener() {
 			float opacity = 0.0f;
 			float step = 0.06f;
@@ -294,7 +286,7 @@ public class Game extends JFrame implements Runnable {
 		});
 		
 		timer.start();
-			System.out.println("fin");
+			// System.out.println("fin");
     }
 
 
