@@ -261,3 +261,10 @@ Eléacine :
     -essaye des effets d'explosion pour la grenade, pas fonctionné
     -première élaboration des traces de pas,pour les ennemis, une simple élaboration il faut juste importer les images
     
+Leonor:
+    - début de séparation des modes (bouton, attribut de classe)
+    - creation de cases graphiques
+    - mise en place de niveaux dans txt de niveaux 
+    - test pour mode édition --> button pour "faire tourner" les cases au lieu d'avoir toutes les possibilités affichées 
+                             --> test echoué: la distinction entre les cases "tournable" et les cases "non tournable" n'était pas bonne
+                             --> possibilitée: le faire avec un key listener et regroupes les cases "tournables" dans une sous-liste

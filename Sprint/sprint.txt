@@ -206,3 +206,8 @@ Eléacine :
     -finir les pas des ennemis , peut-être déplacer pour le joueur
     -première page
     -mouvement de marche pour les ennemis et joueur
+
+Leonor:
+    - finir séparation entre jeu avec niveaux prédefinis et niveaux crées
+    - aider sur finitions de l'éditeur 
+    - trouver et mettre des images de fond pour les pages UI
