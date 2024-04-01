@@ -1,7 +1,10 @@
 package Shooter.factory;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class PlateauLevelLoader{
 
@@ -34,27 +37,31 @@ public class PlateauLevelLoader{
         return currentBoard;
     }
 
-    public static String loadPlayingBoardString(String filePath, int level) {
-        String currentBoard = "";
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static String getLevelString(String filepath, int level){
+        String levelString ="";
+        StringBuilder texte = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
-            int line_level = -1;
+            
             boolean isTargetLevel = false;
             while ((line = br.readLine()) != null) {
-                if (line.startsWith("Level")) {
-                    currentBoard += line;
-                    line_level++;
-                    isTargetLevel = (line_level == level);
+                if (line.startsWith("Level "+level)) {
+                    isTargetLevel =true;
                 }
-                if (isTargetLevel && line.trim().startsWith("{")) {
-                    currentBoard += line;
+                if(line.startsWith("Level "+(level+1))){
+                    isTargetLevel = false;
+                    break;
+                }
+                if (isTargetLevel) {
+                    texte.append(line);
+                    texte.append("\n");
                 }
             }
         } catch (IOException e) {
-            //System.out.println("error");
             e.printStackTrace();
         }
-        return currentBoard;
+        levelString = texte.toString();
+        return levelString;
     }
 
     private static int[][] parseLine(String line) {
