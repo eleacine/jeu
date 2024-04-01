@@ -190,3 +190,10 @@ Ines :
     -Avancer sur le graphisme des armes
     -Ajouter des caracteristique au armes (si une grenade explose sur une mine les deux explosent faire en sorte qu'ell detruisent les murs cassable etc)
     -Si tout ça est fini avancer sur les graphisme du jeu en general ou travailler sur d'autre aspect (aider sur les niveau peut etre ? )
+
+Semaine 10 :
+
+Marylou : 
+    - finition du dernier ennemi
+    - aide sur d'autres parties du code si besoin
+    - 

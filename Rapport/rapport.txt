@@ -245,3 +245,12 @@ Leonor:
         - pop-up après avoir cliqué sur play    --> pb pour loading du plateau, potentiel pb d'enchainement des niveaux 
         - differents boutons sur menu           --> bonne option, permet de bien séparer le code d'appel 
         - switch dans settings                  --> pas intuitif niveau game play 
+
+
+Semaine 9 :
+
+Marylou :
+    - révision du flood fill (ne marchait pas correctement avant )
+    - ennemiIA qui se déplace vers le joueur en évitant les obstacles
+    - ennemiSniper (se déplace vers le joueur pour lui tirer dessus dès qu'il est a sa portee) presque fini
+    - aide pour le blocage du joueur 

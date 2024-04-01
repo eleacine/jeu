@@ -33,7 +33,10 @@ public class EnnemiManager {
 
                     } else if (ennemi instanceof EnemySniper) {
                         EnemySniper ennemiSniper = (EnemySniper) ennemi;
-                        if (ennemiSniper.isPlayerInRange(player, gameManager.getGamePlateau().floodfill)) {
+                        
+                        // System.out.println("player detected" + ennemiSniper.isPlayerDetected(player));
+                        // System.out.println(ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()));
+                        if (ennemiSniper.isPlayerDetected(player) && ennemiSniper.isWallBetween(ennemiSniper.getX(), ennemiSniper.getY(), gameManager.getGamePlateau().floodfill, player.getX(), player.getY()) == false){
                             ennemiSniper.shootBehavior(player, gameManager.getProjectilesManager());
                         } else {
                             ennemiSniper.moveTowardsPlayer(gameManager.getGamePlateau().floodfill, player);

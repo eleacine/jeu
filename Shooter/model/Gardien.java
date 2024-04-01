@@ -85,20 +85,20 @@ public class Gardien extends Enemy {
     }
 
  
-    @Override
-    public void updateBehavior(Player player, int[][] map) {
-        if (!isPlayerDetected(player) && playerDetected == false) {
-            deplacer();
-            deplacerVision(player);
+    // @Override
+    // public void updateBehavior(Player player, int[][] map) {
+    //     if (!isPlayerDetected(player) && playerDetected == false) {
+    //         deplacer();
+    //         deplacerVision(player);
     
-            double angleToPlayer = calculateAngle(x, y, player.x, player.y);
+    //         double angleToPlayer = calculateAngle(x, y, player.x, player.y);
     
-            if (isPlayerInVisionAngle(angleToPlayer)) {
-                playerDetected = true;
-            }
-        } else {
-            suivreJoueur(player);
-        }
-    }
+    //         if (isPlayerInVisionAngle(angleToPlayer)) {
+    //             playerDetected = true;
+    //         }
+    //     } else {
+    //         suivreJoueur(player);
+    //     }
+    // }
     
 }

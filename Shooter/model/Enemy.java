@@ -139,6 +139,7 @@ public class Enemy extends Personnage {
         for (Point point : previousPositions) {
             g.fillOval(point.x+40, point.y+15, 5, 15); 
         }
+
     }
 	
 	
@@ -195,7 +196,6 @@ public class Enemy extends Personnage {
 		} else if (y == -1) {
 			this.y -= this.maxSpeed;
 		}
-
 		
 		Point newPoint = new Point(this.x, this.y);
 		if (previousPositions.isEmpty() || distanceBetweenPoints(previousPositions.getFirst(), newPoint) >= 10) {
@@ -211,15 +211,7 @@ public class Enemy extends Personnage {
 	
 	private double distanceBetweenPoints(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-	}
-
-	// public boolean isPlayerInRange(Player player, int[][] map) {
-	// 	if (isPlayerDetected(player)) {
-	// 		return !isWallBetween(x, y, map, player.getX(), player.getY());
-	// 	}
-	// 	return false;
-	// }
-	}
+	}	
 
 
     public void shoot(Player player, ProjectilesManager projectilesManager) {
