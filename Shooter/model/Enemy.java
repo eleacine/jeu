@@ -101,8 +101,6 @@ public class Enemy extends Personnage {
 	public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
 	}
 
-	
-
 	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
 	}
 
@@ -143,7 +141,6 @@ public class Enemy extends Personnage {
         }
 
     }
-	
 	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {

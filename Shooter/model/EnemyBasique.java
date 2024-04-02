@@ -25,11 +25,6 @@ public class EnemyBasique extends Enemy {
     }
 
     @Override
-    public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
-        shoot(player, projectilesManager);
-    }
-
-    @Override
     public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
         if (isPlayerDetected(player)) {
             if (isWallBetween(x, y, map, player.getX(), player.getY()) == false) {
@@ -37,6 +32,11 @@ public class EnemyBasique extends Enemy {
             }
         }
 
+    }
+
+    @Override   
+    public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
+        shoot(player, projectilesManager);
     }
 
 }
