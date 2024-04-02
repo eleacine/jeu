@@ -1,17 +1,17 @@
 package Shooter.model;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
+// import java.nio.Buffer;
 
-import javax.swing.SwingUtilities;
+// import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import Shooter.Managers.GameManager;
+// import Shooter.Managers.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,13 +205,13 @@ import java.util.List;
 //     }
 // }
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
+// import javax.swing.*;
+// import java.awt.*;
+// import java.awt.event.ActionEvent;
+// import java.awt.event.ActionListener;
+// import java.awt.image.BufferedImage;
+// import java.util.ArrayList;
+// import java.util.List;
 
 public class A4 extends Armes {
     private int x;

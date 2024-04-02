@@ -1,13 +1,13 @@
 package Shooter.model;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-import java.util.Iterator;
+// import java.nio.Buffer;
+// import java.util.Iterator;
 import java.util.Timer;
-import java.util.TimerTask;
+// import java.util.TimerTask;
 
 import Shooter.Managers.EnnemiManager;
 

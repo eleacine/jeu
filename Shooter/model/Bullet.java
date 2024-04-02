@@ -21,6 +21,8 @@ public class Bullet {
     public float distanceTraveled = 0;
     public int typeMunitionArme;
 
+    public boolean rebond = false;
+
     // Constructeur de la classe Bullet
     // x, y : Coordonnées initiales du projectile
     // destX, destY : Coordonnées de la destination du projectile
@@ -34,22 +36,34 @@ public class Bullet {
         loadMunitionImage();
     }
 
-    public Bullet(int x, int y, int destX, int destY, int degats) {
+    public Bullet(int x, int y, int destX, int destY, int degats, int typeMunitionArme, boolean rebond) {
         this.x = x;
         this.y = y;
         this.degats = degats;
+        this.typeMunitionArme = typeMunitionArme;
+        this.rebond = rebond;
         calculateMovement(destX, destY); // Calcul des composantes de mouvement en fonction de la destination
         loadMunitionImage();
     }
 
-    public Bullet(int x, int y, int destX, int destY, int degats, Color color) {
-        this.x = x;
-        this.y = y;
-        this.degats = degats;
-        this.color = color;
-        calculateMovement(destX, destY); // Calcul des composantes de mouvement en fonction de la destination
-        loadMunitionImage();
-    }
+    // public Bullet(int x, int y, int destX, int destY, int degats) {
+    //     this.x = x;
+    //     this.y = y;
+    //     this.degats = degats;
+    //     calculateMovement(destX, destY); // Calcul des composantes de mouvement en fonction de la destination
+    //     loadMunitionImage();
+    // }
+
+    // public Bullet(int x, int y, int destX, int destY, int degats, Color color) {
+    //     this.x = x;
+    //     this.y = y;
+    //     this.degats = degats;
+    //     this.color = color;
+    //     calculateMovement(destX, destY); // Calcul des composantes de mouvement en fonction de la destination
+    //     loadMunitionImage();
+    // }
+
+
 
     public void loadMunitionImage() {
         BufferedImage atlas = Enregistrement.getSpriteAtlas();
@@ -139,7 +153,15 @@ public class Bullet {
         return false;
     }
 
-    
+    public void rebound (){
+        this.differenceX = -this.differenceX;
+        this.differenceY = -this.differenceY;
+        
+    }
+
+
+
+    // --------- Getters et Setters ---------
 
     public int getDegats() {
         return this.degats;
@@ -196,4 +218,38 @@ public class Bullet {
     public float getDistanceTraveled() {
         return distanceTraveled;
     }
+
+    public void setDegats(int degats) {
+        this.degats = degats;
+    }
+
+    public BufferedImage[] getmImages() {
+        return mImages;
+    }
+
+    public void setmImages(BufferedImage[] mImages) {
+        this.mImages = mImages;
+    }
+
+    public void setDistanceTraveled(float distanceTraveled) {
+        this.distanceTraveled = distanceTraveled;
+    }
+
+    public int getTypeMunitionArme() {
+        return typeMunitionArme;
+    }
+
+    public void setTypeMunitionArme(int typeMunitionArme) {
+        this.typeMunitionArme = typeMunitionArme;
+    }
+
+    public boolean getRebond() {
+        return rebond;
+    }
+
+    public void setRebond(boolean rebond) {
+        this.rebond = rebond;
+    }
+
+    
 }

@@ -223,6 +223,15 @@ public class Enemy extends Personnage {
         }
     }
 
+	public void infligerDegatsCollision(Player player) {
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastShotTime > getFrequency()) {
+			player.infligerDegats(collisionPower);
+			lastShotTime = currentTime;
+		}
+	}
+
+
 	  public boolean isWallBetween(int x1, int y1, int[][] map, int x2, int y2) {
         // Calculer les coordonnées des cases de la ligne de mire entre (x1, y1) et (x2,
         // y2)

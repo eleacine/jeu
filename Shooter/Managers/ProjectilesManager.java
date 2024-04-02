@@ -1,20 +1,19 @@
 package Shooter.Managers;
 
-import java.awt.image.BufferedImage;
+// import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+// import javax.swing.Timer;
+// import java.awt.event.ActionEvent;
+// import java.awt.event.ActionListener;
 
 import Shooter.model.Enemy;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.Bullet;
 import Shooter.model.A4;
-
 
 
 public class ProjectilesManager {
@@ -28,9 +27,6 @@ public class ProjectilesManager {
     protected GameManager gameManager;
 
 
-   
-
-    
     public ProjectilesManager(Player player, GameManager gameManager ) {
 
     // private Timer explosionTimer;
@@ -40,8 +36,6 @@ public class ProjectilesManager {
     // private int explosionFrameIndex = 0;
     // private Timer explosionAnimationTimer;
     // private long explosionAnimationDelay = 500;
-
-
 
         this.player = player;
         this.gameManager = gameManager;
@@ -246,10 +240,15 @@ public class ProjectilesManager {
             int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
             int casetype = ManagerCase.getCaseType(caseID);
             // Vérifiez si la munition est sur une case murale
-            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
-                // Marquez la munition comme détruite
-                bullet.setSize(0);
-            }
+            if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT){
+                if (!bullet.getRebond()) {
+                    // Marquez la munition comme détruite
+                    bullet.setSize(0);
+                } else {
+                    // Faire rebondir la balle
+                    bullet.rebound();
+                }
+            } 
         }
     }
 
