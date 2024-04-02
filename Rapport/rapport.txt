@@ -213,6 +213,8 @@ Leonor:
     - bon enchainement des niveaux 
 
 Ines:
+    -Transition entre les niveau
+    -Amelioration des page graphiques
     
 Semaine 8 :
 
@@ -232,8 +234,11 @@ Majoori :
     -tentative pour modifier les levels déjà crées
 
 Ines :
-    -Transition entre les niveau
-    -Amelioration des page graphiques
+    -Re-arangement de la classe A4 et MyMouseListener pour qu'elle soit plus propre et ontionnelle (changement de l'emplacement de certaine dontion dans plateau ou dasn projectileManager)
+    -Continuation du travail sur les armes (implementation d'image pour creer une animation d'explosion) : petit pb d'affichage
+    -Ajout de caracterisqtique aux armes posée au sol (destruction de mur,explosion simultanée de mine et de grenade)
+    -Dessin de certaien partie des pieces qui doiveny etre implementer
+    -rencontre de problemes : le jeu devines lent lorsque l'animation des armes commencence
 
 Leonor:
     - fonction d'initialisation du flood fill avec Marylou 

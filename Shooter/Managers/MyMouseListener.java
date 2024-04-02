@@ -231,7 +231,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                                         double distanceToPlayer = Math.sqrt(Math.pow(player.getX() - grenade.getX(), 2) + Math.pow(player.getY() - grenade.getY(), 2));
                                         if (distanceToPlayer <= grenade.getDistance()) {
                                             gameManager.getGamePlateau().grenade.add(grenade);
-                                            grenade.activateGrenade();
+                                            //grenade.activateGrenade();
                                             player.getArmes().get(player.getCurrentArme()).shoot();
                                         } else {
                                             System.out.println("Impossible de placer la grenade en dehors de la distance.");

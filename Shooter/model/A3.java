@@ -49,20 +49,22 @@ public class A3 extends Armes {
     }
 
     public static void loadMineExplosion(){
-        System.out.println("dans load a load");
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
-        explosionImage=new BufferedImage[1];
-        
-        explosionImage[0]= atlas.getSubimage(7*40, 2*40, 40, 40);
+        explosionImage=new BufferedImage[6];
+        for (int i =0 ; i <6;i++){
+            explosionImage[i]= atlas.getSubimage((2+i)*40, 5*40, 40, 40);
+        }  
     }
 
 public void drawExplosion(int x, int y, Graphics g) {
-        System.out.println("draw explosion");
+      //  System.out.println("draw explosion");
         loadMineExplosion();
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.drawImage(explosionImage[0], x , y , 2*40, 2*40, null);
+        for(int i = 0; i < explosionImage.length; i++){
+        g2d.drawImage(explosionImage[i], x , y , 2*40, 2*40, null);
         g2d.dispose();
-
+        }
+      
     }
 
 /* 

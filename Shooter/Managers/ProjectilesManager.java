@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -25,15 +26,8 @@ public class ProjectilesManager {
     protected Player player;
     protected ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
     protected ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
+    protected List<Personnage> enemies;
     protected GameManager gameManager;
-
-    private Timer explosionTimer;
-    private long explosionDelay = 1700; 
-    private boolean isGrenadeActivated = false;
-    private BufferedImage[] explosionImage;
-    private int explosionFrameIndex = 0;
-    private Timer explosionAnimationTimer;
-    private long explosionAnimationDelay = 500;
 
 
    
@@ -113,6 +107,37 @@ public class ProjectilesManager {
         }
     }
 
+    public void grenadeDegat(List<Personnage> ennemis, A4 grenade) {
+        if(grenade.getIsActivated()==true){
+
+        
+        for (Personnage personnage : enemies) {
+            double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
+            if (distance <= 75) {
+                personnage.infligerDegats(10);
+            }
+        }
+    }
+    }
+
+/* 
+    public void grenadeDegat(List<Personnage> ennemis, A4 grenade) {
+        if(grenade.getIsActivated()==true){
+
+        
+        for (Personnage personnage : enemies) {
+            double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
+            if (distance <= 75) {
+                personnage.infligerDegats(10);
+            }
+        }
+    }
+    }
+
+*/
+
+
+
 
 
    /* 
@@ -188,6 +213,8 @@ public class ProjectilesManager {
             }
         }
     }
+
+
 
     public void update() {
         suppBulletPlayer();
