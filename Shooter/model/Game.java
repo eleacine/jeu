@@ -38,7 +38,7 @@ public class Game extends JFrame implements Runnable {
 	public boolean begin = false;
 	public boolean gameMode=false; //False: mode normal 	//True: mode créateur 
 
-	public int nbLevel = 3;
+	public int nbLevel = 5;
 
 	public GameManager gameManager;
 

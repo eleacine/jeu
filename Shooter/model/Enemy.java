@@ -14,7 +14,6 @@ import java.awt.Point;
 import javax.swing.ImageIcon;
 
 import Shooter.Managers.ManagerCase;
-// import Shooter.Managers.ManagerCase;
 import Shooter.Managers.ProjectilesManager;
 
 public class Enemy extends Personnage {
