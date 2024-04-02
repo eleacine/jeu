@@ -3,6 +3,7 @@ package Shooter.Managers;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,9 @@ import Shooter.model.Enemy;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.Bullet;
+import Shooter.model.A4;
+
+
 
 public class ProjectilesManager {
 
@@ -20,7 +24,14 @@ public class ProjectilesManager {
     protected Player player;
     protected ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
     protected ArrayList<Bullet> playerBullets = new ArrayList<Bullet>();
+    protected List<Personnage> enemies;
     protected GameManager gameManager;
+
+
+   
+
+    
+    public ProjectilesManager(Player player, GameManager gameManager ) {
 
     // private Timer explosionTimer;
     // private long explosionDelay = 1700;
@@ -30,7 +41,8 @@ public class ProjectilesManager {
     // private Timer explosionAnimationTimer;
     // private long explosionAnimationDelay = 500;
 
-    public ProjectilesManager(Player player, GameManager gameManager) {
+
+
         this.player = player;
         this.gameManager = gameManager;
         this.m = gameManager.getPlayerManager();
@@ -96,7 +108,68 @@ public class ProjectilesManager {
         Iterator<Bullet> it = enemyBullets.iterator();
         while (it.hasNext()) {
             Bullet bullet = it.next();
+             // Vérifiez la collision avec le mur
+            
+            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0) {
+                it.remove();
+            }
+            
+        }
+    }
+
+    public void grenadeDegat(List<Personnage> ennemis, A4 grenade) {
+        if(grenade.getIsActivated()==true){
+
+        
+        for (Personnage personnage : enemies) {
+            double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
+            if (distance <= 75) {
+                personnage.infligerDegats(10);
+            }
+        }
+    }
+    }
+
+/* 
+    public void grenadeDegat(List<Personnage> ennemis, A4 grenade) {
+        if(grenade.getIsActivated()==true){
+
+        
+        for (Personnage personnage : enemies) {
+            double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
+            if (distance <= 75) {
+                personnage.infligerDegats(10);
+            }
+        }
+    }
+    }
+
+*/
+
+
+
+
+
+   /* 
+    public static void loadMineExplosion(){
+        System.out.println("dans load a load");
+        BufferedImage atlas=Enregistrement.getSpriteAtlas();
+        explosionImage=new BufferedImage[1];
+        
+        explosionImage[0]= atlas.getSubimage(7*40, 2*40, 40, 40);
+    }
+
+    public void drawExplosion(int x, int y, Graphics g){
+        System.out.println("draw explosion");
+        loadMineExplosion();
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.drawImage(explosionImage[0], x , y , 2*40, 2*40, null);
+        g2d.dispose();
+    }
+
+=======
             // Vérifiez la collision avec le mur
+>>>>>>> 291fb0c289e1225be6e6ae4c35556c582981f022
 
             if (bullet.isOutOfBounds(1480, 840) || bullet.getSize() == 0) {
                 it.remove();
@@ -179,6 +252,8 @@ public class ProjectilesManager {
             }
         }
     }
+
+
 
     public void update() {
         suppBulletPlayer();
