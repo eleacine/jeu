@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.Random;
 import java.awt.Point;
 
@@ -96,34 +98,20 @@ public class Enemy extends Personnage {
 		this.sprite = enemyImage;
 	}
 
-	public void updateBehavior(Player player, int[][] map) {
+	public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
 	}
-
-	
-
-	// public void shootBehavior(Player player, ProjectilesManager
-	// projectilesManager) {
-	// // Implémentez la logique de tir spécifique pour cet ennemi
-	// // Par exemple, tirer une balle vers le joueur
-	// long currentTime = System.currentTimeMillis();
-	// if (currentTime - lastShotTime > getFrequency()) {
-	// Bullet bullet = new Bullet(x, y, player.x, player.y, power);
-	// projectilesManager.getEnemyBullets().add(bullet);
-	// lastShotTime = currentTime;
-	// }
-	// }
 
 	public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
 	}
 
-	protected float calculateAngle(int x1, int y1, int x2, int y2) {
-		return (float) Math.atan2(y2 - y1, x2 - x1);
-	}
+	// protected float calculateAngle(int x1, int y1, int x2, int y2) {
+	// 	return (float) Math.atan2(y2 - y1, x2 - x1);
+	// }
 
-	public void calculateDifferences(float angle) {
-		this.differenceX = (float) Math.cos(angle) * this.maxSpeed;
-		this.differenceY = (float) Math.sin(angle) * this.maxSpeed;
-	}
+	// public void calculateDifferences(float angle) {
+	// 	this.differenceX = (float) Math.cos(angle) * this.maxSpeed;
+	// 	this.differenceY = (float) Math.sin(angle) * this.maxSpeed;
+	// }
 
 	public boolean isPlayerDetected(Player player) {
 		// Calculer la distance entre l'ennemi et le joueur
@@ -151,12 +139,11 @@ public class Enemy extends Personnage {
         for (Point point : previousPositions) {
             g.fillOval(point.x+40, point.y+15, 5, 15); 
         }
+
     }
-	
 	
 
 	public void moveTowardsPlayer(int[][] distances, Player player) {
-		// System.out.println("Joueur position x : " + convertPositionToTile(player.x) + " position y : " + convertPositionToTile(player.y));
 		int nextX = convertPositionToTile(x); // Convertir la position X de l'ennemi en coordonnées de tableau
 		int nextY = convertPositionToTile(y); // Convertir la position Y de l'ennemi en coordonnées de tableau
 
@@ -168,37 +155,18 @@ public class Enemy extends Personnage {
 			nextY += 1; // Convertir la position Y de l'ennemi en coordonnées de tableau
 		}
 		
-
-		// System.out.println("Ennemi position x : " + nextX + " position y : " + nextY);
-
 		// Déterminer la direction vers la case avec la distance la plus courte
 		int minDistance = distances[nextY][nextX];
-		// System.out.println("minDistance: " + minDistance);
 		int dirX = 0;
 		int dirY = 0;
 
-		// Liste des directions
-		// int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-
 		// Parcourir les directions pour trouver la case avec une distance plus courte
-		
 		for (int[] dir : direction2) {
 			int newX = nextX + dir[0];
-			// System.out.println("Avant newY: " + nextY + " dir[1]: " + dir[1]);
 			int newY = nextY + dir[1];
-			// System.out.println("Apres newY: " + newY+ " dir[1]: " + dir[1]);
-
-			// System.out.println("dirX: " + dir[0] + " dirY: " + dir[1]);
-			// System.out.println("newX: " + newX + " newY: " + newY);
-			// System.out.println(" distances[newY][newX]:" + distances[newY][newX]);
-			
 
 			// Vérifier si la case est valide et si la distance est plus courte
 			if (newX >= 0 && newX < distances[0].length && newY >= 0 && newY < distances.length && distances[newY][newX] < minDistance && distances[newY][newX] != 100){
-				// System.out.println("\ntest réussi");
-				// System.out.println(dir[0] + " " + dir[1] );
-				// System.out.println( "case de la distance : " + distances[newY][newX] );
-				// System.out.println("newX: " + newX + " newY: " + newY);
 
 				minDistance = distances[newY][newX];
 				dirX = dir[0];
@@ -206,23 +174,14 @@ public class Enemy extends Personnage {
 				break;
 		
 			}
-			/*else{
-				System.out.println("NOT OKAY");
-				System.out.println("distances[newY][newX] < minDistance: " + (distances[newY][newX] < minDistance));
-				System.out.println("distances[newY][newX]: " + distances[newY][newX]);
-				System.out.println("minDistance: " + minDistance);
-				System.out.println("distances[newY][newX] != 1000: " + (distances[newY][newX] != 1000)+"\n");
-			}*/
 		
 		}
 
-		// System.out.println(" ");
-
-		// // Déplacer l'ennemi dans la direction choisie
+		// Déplacer l'ennemi dans la direction choisie
 		move(dirX, dirY);
 	}
 
-	public void move(int x, int y) {
+	public void move (int x, int y){
 		prevX = this.x;
 		prevY = this.y;
 		if (x == 1) {
@@ -236,7 +195,6 @@ public class Enemy extends Personnage {
 		} else if (y == -1) {
 			this.y -= this.maxSpeed;
 		}
-
 		
 		Point newPoint = new Point(this.x, this.y);
 		if (previousPositions.isEmpty() || distanceBetweenPoints(previousPositions.getFirst(), newPoint) >= 10) {
@@ -252,14 +210,67 @@ public class Enemy extends Personnage {
 	
 	private double distanceBetweenPoints(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-	}
+	}	
 
-	// public boolean isPlayerInRange(Player player, int[][] map) {
-	// 	if (isPlayerDetected(player)) {
-	// 		return !isWallBetween(x, y, map, player.getX(), player.getY());
-	// 	}
-	// 	return false;
-	// }
+
+    public void shoot(Player player, ProjectilesManager projectilesManager) {
+        // Implémentez la logique de tir spécifique pour cet ennemi
+        // Par exemple, tirer une balle vers le joueur
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastShotTime > getFrequency()) {
+            Bullet bullet = new Bullet(x, y, player.x, player.y, power);
+            projectilesManager.getEnemyBullets().add(bullet);
+            lastShotTime = currentTime;
+        }
+    }
+
+	  public boolean isWallBetween(int x1, int y1, int[][] map, int x2, int y2) {
+        // Calculer les coordonnées des cases de la ligne de mire entre (x1, y1) et (x2,
+        // y2)
+        List<Point> lineOfSight = calculateLineOfSight(x1, y1, x2, y2);
+
+        // Vérifier chaque case de la ligne de mire pour la présence d'un mur
+        for (Point p : lineOfSight) {
+
+            if (isWall(p.x, p.y, map)) {
+                return false; // Un mur a été trouvé sur la ligne de mire
+            }
+        }
+
+        return true; // Aucun mur trouvé sur la ligne de mire
+    }
+
+    private List<Point> calculateLineOfSight(int x1, int y1, int x2, int y2) {
+        List<Point> lineOfSight = new ArrayList<>();
+
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+        int sx = x1 < x2 ? 1 : -1;
+        int sy = y1 < y2 ? 1 : -1;
+        int err = dx - dy;
+        int currentX = x1;
+        int currentY = y1;
+
+        while (true) {
+            lineOfSight.add(new Point(currentX, currentY));
+
+            if (currentX == x2 && currentY == y2) {
+                break;
+            }
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                currentX += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                currentY += sy;
+            }
+        }
+
+        return lineOfSight;
+    }
 
 	protected int convertPositionToTile(int position) {
 		// Convertit une position en coordonnées de tableau
@@ -267,12 +278,14 @@ public class Enemy extends Personnage {
 	}
 
 	
-	// private boolean isWall(int xPos, int yPos, int[][] map) {
-	// 	// Vérifie si une case est un mur
-	// 	int x = convertPositionToTile(xPos);
-	// 	int y = convertPositionToTile(yPos);
-	// 	return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
-	// }
+    protected boolean isWall(int xPos, int yPos, int[][] map) {
+        // Vérifie si une case est un mur
+        int x = convertPositionToTile(xPos);
+        int y = convertPositionToTile(yPos);
+        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
+    }
+
+
 
 	// ------------- Getters et setters ---------------------------
 

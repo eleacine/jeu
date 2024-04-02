@@ -250,3 +250,26 @@ Leonor:
         - pop-up après avoir cliqué sur play    --> pb pour loading du plateau, potentiel pb d'enchainement des niveaux 
         - differents boutons sur menu           --> bonne option, permet de bien séparer le code d'appel 
         - switch dans settings                  --> pas intuitif niveau game play 
+
+
+Semaine 9 :
+
+Marylou :
+    - révision du flood fill (ne marchait pas correctement avant )
+    - ennemiIA qui se déplace vers le joueur en évitant les obstacles
+    - ennemiSniper (se déplace vers le joueur pour lui tirer dessus dès qu'il est a sa portee) presque fini
+    - aide pour le blocage du joueur 
+
+Eléacine :
+    -blocage du joueur résolue avec Marylou
+    -réalisation de nouveau design de tuiles et niveau du jeu
+    -essaye des effets d'explosion pour la grenade, pas fonctionné
+    -première élaboration des traces de pas,pour les ennemis, une simple élaboration il faut juste importer les images
+    
+Leonor:
+    - début de séparation des modes (bouton, attribut de classe)
+    - creation de cases graphiques
+    - mise en place de niveaux dans txt de niveaux 
+    - test pour mode édition --> button pour "faire tourner" les cases au lieu d'avoir toutes les possibilités affichées 
+                             --> test echoué: la distinction entre les cases "tournable" et les cases "non tournable" n'était pas bonne
+                             --> possibilitée: le faire avec un key listener et regroupes les cases "tournables" dans une sous-liste

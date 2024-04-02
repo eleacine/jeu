@@ -29,10 +29,11 @@ public class Bullet {
         this.x = x;
         this.y = y;
         this.degats = degats;
-        this.typeMunitionArme=typeMunitionArme;
-        calculateMovement(destX, destY);  // Calcul des composantes de mouvement en fonction de la destination
+        this.typeMunitionArme = typeMunitionArme;
+        calculateMovement(destX, destY); // Calcul des composantes de mouvement en fonction de la destination
         loadMunitionImage();
     }
+
     public Bullet(int x, int y, int destX, int destY, int degats) {
         this.x = x;
         this.y = y;
@@ -99,8 +100,8 @@ public class Bullet {
         double angle = Math.atan2(differenceY, differenceX); // Calculate angle of motion
         g2d.rotate(angle); // Rotate the image to align with the direction of motion
 
-    // Draw the bullet image
-    g2d.drawImage(mImages[typeMunitionArme], -size / 2, -size / 2, null); // Draw from the center of the bullet
+        // Draw the bullet image
+        g2d.drawImage(mImages[typeMunitionArme], -size / 2, -size / 2, null); // Draw from the center of the bullet
 
         // Dispose the graphics context to release resources
         g2d.dispose();
@@ -120,16 +121,15 @@ public class Bullet {
         double angle = Math.atan2(differenceY, differenceX); // Calculate angle of motion
         g2d.rotate(angle); // Rotate the image to align with the direction of motion
 
-    // Draw the bullet image
-    g2d.drawImage(mImages[0], -size / 2, -size / 2, null); // Draw from the center of the bullet
+        // Draw the bullet image
+        g2d.drawImage(mImages[0], -size / 2, -size / 2, null); // Draw from the center of the bullet
 
-    // Dispose the graphics context to release resources
-    g2d.dispose();
+        // Dispose the graphics context to release resources
+        g2d.dispose();
 
-    
-    // Mettre à jour les coordonnées du projectile
-    this.x += differenceX;
-    this.y += differenceY;
+        // Mettre à jour les coordonnées du projectile
+        this.x += differenceX;
+        this.y += differenceY;
     }
 
     public boolean isOutOfBounds(int width, int height) {
@@ -138,6 +138,8 @@ public class Bullet {
         }
         return false;
     }
+
+    
 
     public int getDegats() {
         return this.degats;

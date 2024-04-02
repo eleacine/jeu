@@ -156,6 +156,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     if (soundPlayer != null && gameManager.getSound()) {
                         soundPlayer.playSound("Shooter/res/tir_sound.wav");
                     }
+                    
                 }  else {
                     // Gère les paramètres des mines et des grenades
                     if (player.getArmes().get(player.getCurrentArme()).getMunition() > 0 && !player.getArmes().get(player.getCurrentArme()).getType()) {
@@ -168,7 +169,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
         
                             if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length && currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
                                 int caseType = gameManager.getGamePlateau().getTile_manager().getCaseType(gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex]);
-                                if (caseType == ManagerCase.MUR || caseType == ManagerCase.OBSTACLE || caseType == ManagerCase.MUR_CASSANT) {
+                                if (caseType == ManagerCase.MUR || caseType == ManagerCase.BLOQUE || caseType == ManagerCase.MUR_CASSANT) {
                                     System.out.println("Impossible de placer la mine sur un mur.");
                                 } else {
                                         boolean canPlace = true;

@@ -2,6 +2,8 @@ package Shooter.model;
 
 import java.awt.Color;
 
+import Shooter.Managers.ProjectilesManager;
+
 public class E3 extends Enemy {
 
     // Attributs spécifiques à E3
@@ -20,7 +22,7 @@ public class E3 extends Enemy {
 
     // Méthode de mise à jour du comportement
     @Override
-    public void updateBehavior(Player player, int[][] map) {
+    public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
         if (isPlayerDetected(player)) {
             playerDetected = true;
 

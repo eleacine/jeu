@@ -1,7 +1,5 @@
 package Shooter.Managers;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,12 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Shooter.model.Enemy;
-import Shooter.model.Enregistrement;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
-import Shooter.model.A3;
 import Shooter.model.Bullet;
 import Shooter.model.A4;
+
+
 
 public class ProjectilesManager {
 
@@ -34,6 +32,17 @@ public class ProjectilesManager {
 
     
     public ProjectilesManager(Player player, GameManager gameManager ) {
+
+    // private Timer explosionTimer;
+    // private long explosionDelay = 1700;
+    // private boolean isGrenadeActivated = false;
+    // private BufferedImage[] explosionImage;
+    // private int explosionFrameIndex = 0;
+    // private Timer explosionAnimationTimer;
+    // private long explosionAnimationDelay = 500;
+
+
+
         this.player = player;
         this.gameManager = gameManager;
         this.m = gameManager.getPlayerManager();
@@ -43,11 +52,12 @@ public class ProjectilesManager {
     public void hitEnnemi() {
         for (Bullet bullet : playerBullets) {
             for (Personnage perso : ennemiManager.getPerso_list()) {
-                if(perso instanceof Enemy){
-                    Enemy ennemi=(Enemy)perso;
+                if (perso instanceof Enemy) {
+                    Enemy ennemi = (Enemy) perso;
                     if (ennemi.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize())) {
                         ennemi.infligerDegats(bullet.getDegats());
-                        // System.out.println("Santé restante ennemi " + ennemi.id + " : " + ennemi.sante);
+                        // System.out.println("Santé restante ennemi " + ennemi.id + " : " +
+                        // ennemi.sante);
                         bullet.size = 0;
                         if (ennemi.getSante() <= 0) {
                             // System.err.println("ennemi mort");
@@ -60,22 +70,21 @@ public class ProjectilesManager {
 
     }
 
-    
-    
     public void hitPlayer() {
         for (Bullet bullet : enemyBullets) {
-         //   System.out.println("player size"+player.size);
-            if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize()) && bullet.getSize() != 0){
+            // System.out.println("player size"+player.size);
+            checkAndDestroyBulletOnWall(bullet);
+            if (player.detectCollision(bullet.getX(), bullet.getY(), bullet.getSize()) && bullet.getSize() != 0) {
                 // player.sante -= bullet.getDegats();
                 player.infligerDegats(bullet.getDegats());
                 bullet.size = 0;
                 // if (player.sante <= 0) {
-                //     player.size = 0;
+                // player.size = 0;
                 // }
             }
         }
     }
-    
+
     public void suppBulletPlayer() {
         // Supprimer les projectiles hors des limites
         Iterator<Bullet> it = playerBullets.iterator();
@@ -86,11 +95,12 @@ public class ProjectilesManager {
             // Vérifiez la collision avec le mur
             checkAndDestroyBulletOnWall(bullet);
 
-            if (bullet.isOutOfBounds(1480, 840)|| bullet.getSize() == 0 || bullet.getDistanceTraveled()>= m.getPlayer().getArmes().get(currentArme).getDistance()) {
+            if (bullet.isOutOfBounds(1480, 840) || bullet.getSize() == 0
+                    || bullet.getDistanceTraveled() >= m.getPlayer().getArmes().get(currentArme).getDistance()) {
                 it.remove();
             }
             checkAndUpdateCase(bullet);
-        }       
+        }
     }
 
     public void suppBulletEnnemi() {
@@ -157,55 +167,84 @@ public class ProjectilesManager {
         g2d.dispose();
     }
 
+=======
+            // Vérifiez la collision avec le mur
+>>>>>>> 291fb0c289e1225be6e6ae4c35556c582981f022
 
- public void HitMine (Graphics g){
-        this.g = g;
-        for (A3 mine : ennemiManager.getGameManager().getGamePlateau().pieges){
-            if (ennemiManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
-             System.out.println("collision mine");
-             ennemiManager.getPlayer().infligerDegats(mine.getPower());
-             drawExplosion(mine.getX(), mine.getY(), g);
-                // mine.dimension = 0;s
-                mine.setDimension(0);
-            }
-
-            if (ennemiManager.getPerso_list().size() > 1){
-                for (Personnage perso : ennemiManager.getPerso_list()){
-                    if(perso instanceof Enemy){
-                        Enemy ennemi=(Enemy)perso;
-                        if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
-                        
-                            ennemi.infligerDegats(mine.getPower());
-                            drawExplosion(mine.getX(), mine.getY(), g);
-                            // mine.dimension = 0;
-                            mine.setDimension(0);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-
-    public void suppMine(){
-        Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
-        while (it.hasNext()) {
-            A3 mine = it.next();
-            if (mine.getDimension() == 0) {
+            if (bullet.isOutOfBounds(1480, 840) || bullet.getSize() == 0) {
                 it.remove();
             }
+
         }
     }
-*/
+
+    /*
+     * public static void loadMineExplosion(){
+     * System.out.println("dans load a load");
+     * BufferedImage atlas=Enregistrement.getSpriteAtlas();
+     * explosionImage=new BufferedImage[1];
+     * 
+     * explosionImage[0]= atlas.getSubimage(7*40, 2*40, 40, 40);
+     * }
+     * 
+     * public void drawExplosion(int x, int y, Graphics g){
+     * System.out.println("draw explosion");
+     * loadMineExplosion();
+     * Graphics2D g2d = (Graphics2D) g.create();
+     * g2d.drawImage(explosionImage[0], x , y , 2*40, 2*40, null);
+     * g2d.dispose();
+     * }
+     * 
+     * 
+     * public void HitMine (Graphics g){
+     * this.g = g;
+     * for (A3 mine : ennemiManager.getGameManager().getGamePlateau().pieges){
+     * if (ennemiManager.getPlayer().detectCollision(mine.getX(), mine.getY(),
+     * mine.getDimension())){
+     * System.out.println("collision mine");
+     * ennemiManager.getPlayer().infligerDegats(mine.getPower());
+     * drawExplosion(mine.getX(), mine.getY(), g);
+     * // mine.dimension = 0;s
+     * mine.setDimension(0);
+     * }
+     * 
+     * if (ennemiManager.getPerso_list().size() > 1){
+     * for (Personnage perso : ennemiManager.getPerso_list()){
+     * if(perso instanceof Enemy){
+     * Enemy ennemi=(Enemy)perso;
+     * if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
+     * 
+     * ennemi.infligerDegats(mine.getPower());
+     * drawExplosion(mine.getX(), mine.getY(), g);
+     * // mine.dimension = 0;
+     * mine.setDimension(0);
+     * }
+     * }
+     * }
+     * }
+     * }
+     * }
+     * 
+     * 
+     * public void suppMine(){
+     * Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
+     * while (it.hasNext()) {
+     * A3 mine = it.next();
+     * if (mine.getDimension() == 0) {
+     * it.remove();
+     * }
+     * }
+     * }
+     */
     private void checkAndDestroyBulletOnWall(Bullet bullet) {
         int currentXIndex = (int) (bullet.getX() / 40);
         int currentYIndex = (int) (bullet.getY() / 40);
-    
+
         if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
-            currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+                currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
 
             int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-            int casetype=ManagerCase.getCaseType(caseID);
+            int casetype = ManagerCase.getCaseType(caseID);
             // Vérifiez si la munition est sur une case murale
             if (casetype == ManagerCase.MUR || casetype == ManagerCase.MUR_CASSANT) {
                 // Marquez la munition comme détruite
@@ -221,30 +260,31 @@ public class ProjectilesManager {
         suppBulletEnnemi();
         hitEnnemi();
         hitPlayer();
-        //HitMine(g);
-        //suppMine();
+        // HitMine(g);
+        // suppMine();
     }
 
-    // Vérifie et met à jour la case si le projectile est sur une case de type 2 (obstacle)
+    // Vérifie et met à jour la case si le projectile est sur une case de type 2
+    // (obstacle)
     private void checkAndUpdateCase(Bullet bullet) {
         int currentXIndex = (int) (bullet.getX() / 40);
         int currentYIndex = (int) (bullet.getY() / 40);
 
         if (currentXIndex >= 0 && currentXIndex < gameManager.getGamePlateau().level_tab[0].length &&
-        currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
+                currentYIndex >= 0 && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
 
-        // Vérifier que detruitMur est vrai avant de mettre à jour la case
-        int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
-        int casetype=ManagerCase.getCaseType(caseID);
+            // Vérifier que detruitMur est vrai avant de mettre à jour la case
+            int caseID = gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex];
+            int casetype = ManagerCase.getCaseType(caseID);
 
-        if (casetype == ManagerCase.MUR_CASSANT && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
+            if (casetype == ManagerCase.MUR_CASSANT
+                    && m.getPlayer().getArmes().get(m.getPlayer().getCurrentArme()).getDetruitMur()) {
 
-            // La case est de type 2 (obstacle), la changer en type 1 (marche)
-            gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = ManagerCase.SOL;
+                // La case est de type 2 (obstacle), la changer en type 1 (marche)
+                gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex] = ManagerCase.SOL;
+            }
         }
     }
-}
-   
 
     public void addBulletPlayer(Bullet b) {
         playerBullets.add(b);
@@ -254,7 +294,6 @@ public class ProjectilesManager {
         enemyBullets.add(b);
     }
 
-
     public ArrayList<Bullet> getEnemyBullets() {
         return enemyBullets;
     }
@@ -262,5 +301,5 @@ public class ProjectilesManager {
     public ArrayList<Bullet> getplayerBullets() {
         return playerBullets;
     }
-    
+
 }

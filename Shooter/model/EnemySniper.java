@@ -1,67 +1,91 @@
 package Shooter.model;
 
 import java.awt.Color;
-import Shooter.Managers.ManagerCase;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import Shooter.Managers.ProjectilesManager;
 
 public class EnemySniper extends Enemy {
 
     public EnemySniper(int x, int y) {
-        super(x, y, 50, 100, 1, 2, 20, 50, 350, 350, new Color(255, 0, 255));
+        super(x, y, 50, 100, 1, 2, 20, 50, 400, 250, new Color(255, 0, 255));
     }
 
     public boolean isPlayerInRange(Player player, int[][] map) {
-        if (isPlayerDetected(player)) {
-            return !isWallBetween(x, y, map, player.getX(), player.getY());
+        if (isWallBetween(x, y, map, x, y)) {
+            if (isPlayerDetected(player)) {
+                return true;
+            }
+            return false;
         }
         return false;
     }
 
-
-    private boolean isWallBetween(int startX, int startY, int[][] map, int targetX, int targetY) {
-        // Calculer les deltas et les incréments pour les axes X et Y
-        int dx = Math.abs(targetX - startX);
-        int dy = Math.abs(targetY - startY);
-        int sx = startX < targetX ? 1 : -1;
-        int sy = startY < targetY ? 1 : -1;
-    
-        // Variables de contrôle pour l'algorithme de trajectoire
-        int err = dx - dy;
-        int err2;
-    
-        // Position initiale
-        int currentX = startX;
-        int currentY = startY;
-    
-        // Boucle à travers la trajectoire du projectile
-        while (currentX != targetX || currentY != targetY) {
-            // Vérifier si la case actuelle est un mur
-            if (isWall(currentX, currentY, map)) {
-                return true;
+    @Override
+    public void updateBehavior(Player player, int[][] map, ProjectilesManager projectilesManager) {
+        if (isPlayerInRange(player, map)) {
+            if (isWallBetween(x, y, map, player.getX(), player.getY()) == false) {
+                shootBehavior(player, projectilesManager);
             }
-    
-            // Calculer la prochaine position sur la trajectoire
-            err2 = 2 * err;
-            if (err2 > -dy) {
+        } else {
+            moveTowardsPlayer(map, player);
+        }
+    }
+
+    @Override   
+    public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
+        shoot(player, projectilesManager);
+    }
+
+
+    public boolean isWallBetween(int x1, int y1, int[][] map, int x2, int y2) {
+        // Calculer les coordonnées des cases de la ligne de mire entre (x1, y1) et (x2,
+        // y2)
+        List<Point> lineOfSight = calculateLineOfSight(x1, y1, x2, y2);
+
+        // Vérifier chaque case de la ligne de mire pour la présence d'un mur
+        for (Point p : lineOfSight) {
+
+            if (isWall(p.x, p.y, map)) {
+                return false; // Un mur a été trouvé sur la ligne de mire
+            }
+        }
+
+        return true; // Aucun mur trouvé sur la ligne de mire
+    }
+
+    private List<Point> calculateLineOfSight(int x1, int y1, int x2, int y2) {
+        List<Point> lineOfSight = new ArrayList<>();
+
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+        int sx = x1 < x2 ? 1 : -1;
+        int sy = y1 < y2 ? 1 : -1;
+        int err = dx - dy;
+        int currentX = x1;
+        int currentY = y1;
+
+        while (true) {
+            lineOfSight.add(new Point(currentX, currentY));
+
+            if (currentX == x2 && currentY == y2) {
+                break;
+            }
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
                 err -= dy;
                 currentX += sx;
             }
-            if (err2 < dx) {
+            if (e2 < dx) {
                 err += dx;
                 currentY += sy;
             }
         }
-    
-        // Si aucun mur n'est rencontré le long de la trajectoire, retourner false
-        return false;
+
+        return lineOfSight;
     }
-    
-    
-    private boolean isWall(int xPos, int yPos, int[][] map) {
-        // Vérifie si une case est un mur
-        int x = convertPositionToTile(xPos);
-        int y = convertPositionToTile(yPos);
-        return (map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT);
-    }
-    
 
 }
