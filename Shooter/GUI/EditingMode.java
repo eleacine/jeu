@@ -21,7 +21,7 @@ public class EditingMode extends GameScene {
 	private int levelselected; // numéro du niveau selectionné par l'utilisateur (si 0, c'est un nouveau niveau sinon c'est un niveau existant)
 	private int[][] level; // niveau sélectionné par l'utilisateur
 	private ArrayList<String> ListeEnnemis;
-	private boolean levelpersonnalisé=false; // MODE PERSONNALISÉ OU CAMPAGNE
+	private boolean levelpersonnalisé=true; // MODE PERSONNALISÉ OU CAMPAGNE
 	private int clicked; //bouton cliquée
 
 	private JPanel Plateau; 
