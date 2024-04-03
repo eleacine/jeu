@@ -13,6 +13,7 @@ import Shooter.model.Enemy;
 import Shooter.model.Personnage;
 import Shooter.model.Player;
 import Shooter.model.Bullet;
+import Shooter.model.A3;
 import Shooter.model.A4;
 
 
@@ -140,10 +141,6 @@ public class ProjectilesManager {
 
 */
 
-
-
-
-
    /* 
     public static void loadMineExplosion(){
         System.out.println("dans load a load");
@@ -218,18 +215,19 @@ public class ProjectilesManager {
      * }
      * }
      * }
-     * 
-     * 
-     * public void suppMine(){
-     * Iterator<A3> it = gameManager.getGamePlateau().pieges.iterator();
-     * while (it.hasNext()) {
-     * A3 mine = it.next();
-     * if (mine.getDimension() == 0) {
-     * it.remove();
-     * }
-     * }
-     * }
+     *
      */
+
+    public void suppMine(){
+        Iterator<A3> it = gameManager.getGamePlateau().mines.iterator();
+        while (it.hasNext()) {
+            A3 mine = it.next();
+            if (mine.getDimension() == 0) {
+                it.remove();
+            }
+        }
+    }
+
     private void checkAndDestroyBulletOnWall(Bullet bullet) {
         int currentXIndex = (int) (bullet.getX() / 40);
         int currentYIndex = (int) (bullet.getY() / 40);
@@ -260,7 +258,7 @@ public class ProjectilesManager {
         hitEnnemi();
         hitPlayer();
         // HitMine(g);
-        // suppMine();
+        suppMine();
     }
 
     // Vérifie et met à jour la case si le projectile est sur une case de type 2

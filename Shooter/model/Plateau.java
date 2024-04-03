@@ -12,7 +12,6 @@ import Shooter.Managers.*;
 import Shooter.factory.PlateauLevelLoader;
 import java.util.Queue;
 
-
 public class Plateau extends JPanel {
     public BufferedImage[] imageArmes;
     public GameManager gameManager;
@@ -22,16 +21,15 @@ public class Plateau extends JPanel {
     public Graphics plateau_graphic; // on utilise pour "enregistrer" notre image graphique puis pouvoir la modifier
                                      // dans le update
 
-    public ArrayList<A3> pieges = new ArrayList<A3>();
-    public ArrayList<A4> grenade = new ArrayList<A4>();
+    public ArrayList<A3> mines = new ArrayList<A3>();
+    public ArrayList<A4> grenades = new ArrayList<A4>();
 
     public int[][] floodfill;;
 
     public Plateau(boolean gameMode) {
-        if(!gameMode){
+        if (!gameMode) {
             this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", 0);
-        }
-        else{
+        } else {
             this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevelsPerso.txt", 0);
         }
         this.floodfill = new int[this.level_tab.length][level_tab[0].length];
@@ -54,16 +52,16 @@ public class Plateau extends JPanel {
     }
 
     public void update_pleateau(int x, int y, int type_case) {
-        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40,null);
+        plateau_graphic.drawImage(tile_manager.getSprite(type_case), x * 40, y * 40, null);
     }
 
     private void loadArme() {
-        BufferedImage atlas=Enregistrement.getSpriteAtlas();
-        imageArmes=new BufferedImage[5];
+        BufferedImage atlas = Enregistrement.getSpriteAtlas();
+        imageArmes = new BufferedImage[5];
 
-        for (int i =0 ; i <5;i++){
-            imageArmes[i]= atlas.getSubimage((i)*40, 4*40, 40, 40);
-        }  
+        for (int i = 0; i < 5; i++) {
+            imageArmes[i] = atlas.getSubimage((i) * 40, 4 * 40, 40, 40);
+        }
     }
 
     public void waitFortransiion() {
@@ -74,7 +72,6 @@ public class Plateau extends JPanel {
             e.printStackTrace();
         }
     }
-
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -112,104 +109,126 @@ public class Plateau extends JPanel {
         }
 
         // Dessiner les pièges
-        for (A3 mine : pieges) {
-            if (gameManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
-              //  System.out.println("collision mine");
+        for (A3 mine : mines) {
+            if (gameManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())) {
+                // System.out.println("collision mine");
                 gameManager.getPlayer().infligerDegats(mine.getPower());
-               // waitFortransiion();
+                // waitFortransiion();
                 mine.drawExplosion(mine.getX(), mine.getY(), g);
-                   // mine.dimension = 0;s
-            
-                   mine.setDimension(0);
-            } else{
+                // mine.dimension = 0;s
+
+                mine.setDimension(0);
+            } else {
                 mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
-                
-            }if (gameManager.getEnnemiManager().getPerso_list().size() > 1){
- 
-                for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()){
-       
-                    if(perso instanceof Enemy){
-           
-                        Enemy ennemi=(Enemy)perso;
-                    
-                        if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
-            
+            }
+
+            if (gameManager.getEnnemiManager().getPerso_list().size() > 1) {
+
+                for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()) {
+
+                    if (perso instanceof Enemy) {
+
+                        Enemy ennemi = (Enemy) perso;
+
+                        if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())) {
+
                             ennemi.infligerDegats(mine.getPower());
                             mine.drawExplosion(mine.getX(), mine.getY(), g);
-                      
-                            // mine.dimension = 0;
                             mine.setDimension(0);
-                         
-                         }    
+
+                        }
                     }
                 }
-                } else {
-                  //  System.out.println("14");
-                        mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
-                 }
+            } else {
+                // System.out.println("14");
+                mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+            }
 
-           // piege.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+            // piege.draw(g, gameManager.getPlayer().getX(),
+            // gameManager.getPlayer().getY());
         }
 
-        for (A4 grenade : grenade) {
+        //  Revu des mines 
+        // for (A3 mine : mines) {
+        //     if (mine.getDimension() != 0) {
+        //         for (Personnage perso : gameManager.getEnnemiManager().getPerso_list()) {
+        //             if (perso.detectCollision(mine.getX(), mine.getY(), mine.getDimension())) {
+        //                 perso.infligerDegats(mine.getPower());
+        //                 mine.drawExplosion(mine.getX(), mine.getY(), g);
+        //                 mine.setDimension(0);
+        //             } else {
+        //                 mine.draw(g, gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
+        //             }
+                
+        //         }
+        //     }
+        // }
+
+        for (A4 grenade : grenades) {
 
             grenade.drawGrenade(g);
-            //grenade.drawExplosion(g);
-   
-                int grenadeX = (int) (grenade.getX() / 40);
-                int grenadeY = (int) (grenade.getY() / 40);
+            grenade.drawExplosion(g);
 
-                for (int x = grenadeX - 2; x <= grenadeX + 2; x++) {
-                    for (int y = grenadeY - 2; y <= grenadeY + 2; y++) {
-  
-                        if (x >= 0 && x < gameManager.getGamePlateau().level_tab[0].length &&
+            int grenadeX = (int) (grenade.getX() / 40);
+            int grenadeY = (int) (grenade.getY() / 40);
+
+            for (int x = grenadeX - 2; x <= grenadeX + 2; x++) {
+                for (int y = grenadeY - 2; y <= grenadeY + 2; y++) {
+
+                    if (x >= 0 && x < gameManager.getGamePlateau().level_tab[0].length &&
                             y >= 0 && y < gameManager.getGamePlateau().level_tab.length) {
-                               double distance = Math.sqrt(Math.pow(x - grenadeX, 2) + Math.pow(y - grenadeY, 2));
-                            if (distance <= 2) {
-                                int caseID = gameManager.getGamePlateau().level_tab[y][x];
-                                int caseType = ManagerCase.getCaseType(caseID);
-                                if (caseType == ManagerCase.MUR_CASSANT) {
-                                    gameManager.getGamePlateau().level_tab[y][x] = ManagerCase.SOL;
-                                }
+                        double distance = Math.sqrt(Math.pow(x - grenadeX, 2) + Math.pow(y - grenadeY, 2));
+                        if (distance <= 2) {
+                            int caseID = gameManager.getGamePlateau().level_tab[y][x];
+                            int caseType = ManagerCase.getCaseType(caseID);
+                            if (caseType == ManagerCase.MUR_CASSANT) {
+                                gameManager.getGamePlateau().level_tab[y][x] = ManagerCase.SOL;
                             }
                         }
-            
                     }
+
                 }
-                
-            for (A3 mine : pieges) {
-                double distance = Math.sqrt(Math.pow(mine.getX() - grenade.getX(), 2) + Math.pow(mine.getY() - grenade.getY(), 2));
-                if (distance <= 75) { 
+            }
+
+            for (A3 mine : mines) {
+                double distance = Math
+                        .sqrt(Math.pow(mine.getX() - grenade.getX(), 2) + Math.pow(mine.getY() - grenade.getY(), 2));
+                if (distance <= 75) {
                     mine.drawExplosion(mine.getX(), mine.getY(), g);
                     mine.setDimension(0);
                 }
-            
-            } 
-                for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list()) {
-                     double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
-                    if (distance <= 75) {
-                        personnage.infligerDegats(10);
-                    }               
+
             }
-        
-    }
-        /* 
-           if(grenade.getIsGrenadeActivated()==true){
-               // System.out.println("grenade"+grenade.isGrenadeActivated());
-          /*   for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list()) {
-                double distance = Math.sqrt(Math.pow(personnage.x - grenade.getX(), 2) + Math.pow(personnage.y - grenade.getY(), 2));
-                if (distance <= 75) {
-                    personnage.infligerDegats(10);
-                }
-            }  
-             if (grenade.getIsGrenadeActivated()){
-            //   grenade.activationTime = System.currentTimeMillis();
-               grenade.startExplosionAnimation(g, gameManager.getPersoList()); 
-                grenade.shoot();
-             }
-             */
-            //}
-         
+
+            // fait des dégats dans le rayon de la grenade mais incorrect
+            // for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list())
+            // {
+            // double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2)
+            // + Math.pow(personnage.getY() - grenade.getY(), 2));
+            // if (distance <= 75) {
+            // personnage.infligerDegats(10);
+            // }
+            // }
+
+        }
+        /*
+         * if(grenade.getIsGrenadeActivated()==true){
+         * // System.out.println("grenade"+grenade.isGrenadeActivated());
+         * /* for (Personnage personnage :
+         * gameManager.getEnnemiManager().getPerso_list()) {
+         * double distance = Math.sqrt(Math.pow(personnage.x - grenade.getX(), 2) +
+         * Math.pow(personnage.y - grenade.getY(), 2));
+         * if (distance <= 75) {
+         * personnage.infligerDegats(10);
+         * }
+         * }
+         * if (grenade.getIsGrenadeActivated()){
+         * // grenade.activationTime = System.currentTimeMillis();
+         * grenade.startExplosionAnimation(g, gameManager.getPersoList());
+         * grenade.shoot();
+         * }
+         */
+        // }
 
         // print arme et nombre munitions
         int currentArme = gameManager.getPlayer().currentArme;
@@ -224,7 +243,6 @@ public class Plateau extends JPanel {
             g.drawString("munitions:" + armeCourante.munition, 1325, 80);
             g.drawString("vie:" + gameManager.getPlayer().sante, 1325, 90);
         }
-
 
         // Dessin crosshair
         gameManager.getMyMouseListener().getCrosshair().draw(g);
@@ -246,9 +264,10 @@ public class Plateau extends JPanel {
 
         // Dessiner le cercle avec le contour discontinu
         // int diametre = armeCourante.distance * 2;
-        // g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+        // g2d.drawOval(centerX, centerY, armeCourante.distance * 2,
+        // armeCourante.distance * 2);
 
-        g2d.drawOval( centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+        g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
     }
 
     private void drawPlayerMovement(Graphics2D g) {
@@ -297,64 +316,65 @@ public class Plateau extends JPanel {
     // }
 
     public void reset() {
-        pieges.clear();
-        grenade.clear();
-        if(!gameManager.getGame().gameMode){
-            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt", gameManager.getPlayer().getLevel() - 1);
-        }
-        else{
+        mines.clear();
+        grenades.clear();
+        if (!gameManager.getGame().gameMode) {
+            this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevels.txt",
+                    gameManager.getPlayer().getLevel() - 1);
+        } else {
             this.level_tab = PlateauLevelLoader.loadPlayingBoard("Shooter/factory/PlateauLevelsPerso.txt", 0);
         }
     }
 
     // ------------- Flood fill ----------------
 
-    public int[][] floodfill(int xCible, int yCible) {
-        int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
-        for (int i = 0; i < this.level_tab.length; i++) {
-            for (int j = 0; j < this.level_tab[i].length; j++) {
+    // public int[][] floodfill(int xCible, int yCible) {
+    // int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
+    // for (int i = 0; i < this.level_tab.length; i++) {
+    // for (int j = 0; j < this.level_tab[i].length; j++) {
 
-                if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE) {
-                    res[i][j] = 100;
-                } else {
-                    res[i][j] = -1;
-                }
-            }
-        }
-        res[xCible][yCible] = 0; // on met la case cible à 0
-        res = floodfill2(xCible, yCible, res);
-        return res;
-    }
+    // if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
+    // || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
+    // || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE) {
+    // res[i][j] = 100;
+    // } else {
+    // res[i][j] = -1;
+    // }
+    // }
+    // }
+    // res[xCible][yCible] = 0; // on met la case cible à 0
+    // res = floodfill2(xCible, yCible, res);
+    // return res;
+    // }
 
-    public int[][] floodfill2(int x, int y, int[][] res) {
-        int v = res[x][y] + 1;
+    // public int[][] floodfill2(int x, int y, int[][] res) {
+    // int v = res[x][y] + 1;
 
-        // Liste des directions
-        int[][] directions = {
-                { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
-        };
+    // // Liste des directions
+    // int[][] directions = {
+    // { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
+    // };
 
-        // Parcours de toutes les directions
-        for (int[] direction : directions) {
-            int newX = x + direction[0];
-            int newY = y + direction[1];
+    // // Parcours de toutes les directions
+    // for (int[] direction : directions) {
+    // int newX = x + direction[0];
+    // int newY = y + direction[1];
 
-            // Vérification des limites de la grille
-            if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
-                // Vérification si la case est vide et la valeur non mise à jour
-                if ((res[newX][newY] == -1 || res[newX][newY] > v) && res[newX][newY] != 100) {
-                    res[newX][newY] = v;
-                    // Appel récursif pour la nouvelle case
-                    floodfill2(newX, newY, res);
-                }
-            }
+    // // Vérification des limites de la grille
+    // if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length) {
+    // // Vérification si la case est vide et la valeur non mise à jour
+    // if ((res[newX][newY] == -1 || res[newX][newY] > v) && res[newX][newY] != 100)
+    // {
+    // res[newX][newY] = v;
+    // // Appel récursif pour la nouvelle case
+    // floodfill2(newX, newY, res);
+    // }
+    // }
 
-        }
+    // }
 
-        return res;
-    }
+    // return res;
+    // }
 
     public int[][] newFloodFill(int xCible, int yCible) {
         int[][] res = new int[this.level_tab.length][this.level_tab[0].length];
@@ -418,65 +438,6 @@ public class Plateau extends JPanel {
                 ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.BLOQUE;
     }
 
-    // public int[][] newFloodFill2(int x, int y, int[][] res) {
-    // Queue<int[]> queue = new LinkedList<>(); // Utiliser une file pour le
-    // parcours en largeur (BFS)
-    // queue.offer(new int[] { x, y }); // Ajouter la cellule initiale à la file
-    // int distance = 0;
-
-    // // Liste des directions
-    // int[][] directions = {
-    // { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }
-    // };
-
-    // // Tant que la file n'est pas vide, continuez le parcours en largeur
-    // while (!queue.isEmpty()) {
-    // int size = queue.size(); // Taille actuelle de la file (nombre de cellules à
-    // ce niveau de distance)
-    // distance++; // Incrémenter la distance pour le niveau suivant
-    // for (int i = 0; i < size; i++) {
-    // int[] cell = queue.poll(); // Récupérer la cellule de la file
-    // int cellX = cell[0];
-    // int cellY = cell[1];
-
-    // // Parcourir les cellules adjacentes
-    // for (int[] dir : directions) {
-    // int newX = cellX + dir[0];
-    // int newY = cellY + dir[1];
-    // // Vérifier si la cellule adjacente est dans la grille et non visitée
-    // if (newX >= 0 && newX < res.length && newY >= 0 && newY < res[0].length &&
-    // res[newX][newY] == 0 &&
-    // ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.MUR &&
-    // ManagerCase.getCaseType(this.level_tab[newX][newY]) !=
-    // ManagerCase.MUR_CASSANT &&
-    // ManagerCase.getCaseType(this.level_tab[newX][newY]) != ManagerCase.BLOQUE) {
-    // // Vérifier si la case adjacente n'est pas un cul-de-sac
-    // boolean isCulDeSac = true;
-    // for (int[] adjDir : directions) {
-    // int adjX = newX + adjDir[0];
-    // int adjY = newY + adjDir[1];
-    // if (adjX >= 0 && adjX < res.length && adjY >= 0 && adjY < res[0].length &&
-    // (ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.MUR &&
-    // ManagerCase.getCaseType(this.level_tab[adjX][adjY]) !=
-    // ManagerCase.MUR_CASSANT &&
-    // ManagerCase.getCaseType(this.level_tab[adjX][adjY]) != ManagerCase.BLOQUE)) {
-    // isCulDeSac = false;
-    // break;
-    // }
-    // }
-    // if (!isCulDeSac) {
-    // res[newX][newY] = distance; // Assigner la distance à la cellule adjacente
-    // queue.offer(new int[] { newX, newY }); // Ajouter la cellule adjacente à la
-    // file pour
-    // // exploration
-    // }
-    // }
-    // }
-    // }
-    // }
-    // return res;
-    // }
-
     public void printFloodFill(int[][] res) {
         // Déterminer la largeur maximale de chaque colonne
         int numRows = res.length;
@@ -518,17 +479,15 @@ public class Plateau extends JPanel {
     }
 
     public ArrayList<A3> getPieges() {
-        return pieges;
+        return mines;
     }
 
     public ArrayList<A4> getGrenade() {
-        return grenade;
+        return grenades;
     }
 
     public GameManager getGameManager() {
         return gameManager;
     }
-    
-
 
 }

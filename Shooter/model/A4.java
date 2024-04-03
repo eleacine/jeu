@@ -254,27 +254,42 @@ public class A4 extends Armes {
         }
     }
 
-    public void activateGrenade(Graphics g) {
+    // public void activateGrenade(Graphics g) {
+    //     isActivated = true;
+    //     isExploding = false;
+    //     explosionTimer = new Timer(1000, new ActionListener() {
+    //         @Override
+    //         public void actionPerformed(ActionEvent e) {
+    //             isExploding = true;
+    //             drawExplosion(g);
+    //             explosionTimers.remove(explosionTimer);
+    //             explosionTimer.stop();
+    //         }
+    //     });
+    //     explosionTimers.add(explosionTimer);
+    //     explosionTimer.start();
+    // }
+
+    public void activateGrenade() {
         isActivated = true;
-        isExploding = false;
+        // isExploding = false;
         explosionTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isExploding = true;
-                drawExplosion(g);
-                explosionTimers.remove(explosionTimer);
                 explosionTimer.stop();
             }
         });
-        explosionTimers.add(explosionTimer);
         explosionTimer.start();
     }
+    
 
     public void drawGrenade(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.drawImage(grenadeImage[0], x, y, 40, 40, null);
         g2d.dispose();
-        activateGrenade(g2d);
+        // activateGrenade(g2d);
+        activateGrenade();
     }
 
     public void drawExplosion(Graphics g) {
