@@ -48,7 +48,7 @@ public class MenuPage extends GameScene {
         // Add buttons
         JPanel buttonPanel = createButtonPanel();
         gbc.gridy = 1; // Position below the title
-		gbc.weighty=3;
+		gbc.weighty=80;
         add(buttonPanel, gbc);
     }
 
@@ -85,28 +85,36 @@ private void loadBackgroundImage() {
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBackground(Color.BLACK); // Set background color
-
+        buttonPanel.setOpaque(false); // Set background color
+    
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.ipadx = 10;
         gbc.ipady = 10;
         gbc.insets.top = 10;
-
+        gbc.insets.right = 15; // Add right padding between buttons
+    
         // Add buttons to buttonPanel
         buttonPanel.add(createButton("Play", "Play"), gbc);
-        gbc.gridy++;
+        
+        gbc.gridx++; // Move to the next column
         buttonPanel.add(createButton("Creative", "Play"), gbc);
-        gbc.gridy++;
+        
+        gbc.gridx++; // Move to the next column
         buttonPanel.add(createButton("Settings", "Settings"), gbc);
-        gbc.gridy++;
+        
+        gbc.gridx++; // Move to the next column
         buttonPanel.add(createButton("Editing", "Editing"), gbc);
-        gbc.gridy++;
+        
+        gbc.gridx++; // Move to the next column
+        gbc.insets.right = 0; // Remove right padding for the last button
         buttonPanel.add(createButtonExit("Quit"), gbc);
-
+    
         return buttonPanel;
     }
+    
+    
 
 }
 
