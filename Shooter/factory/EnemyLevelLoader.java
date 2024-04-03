@@ -73,8 +73,6 @@ public class EnemyLevelLoader {
 
 
     private PersonnageFactory createFactoryForEnemyType(String enemyType, String xCoordinate, String yCoordinate) {
-        // System.out.println("Enemy Type: " + enemyType);
-        // System.out.println("Coordinates: " + xCoordinate + ", " + yCoordinate);
         switch (enemyType) {
             case "Enemy 1":
                 return new Enemy1Factory(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate)); //EnemyBasique

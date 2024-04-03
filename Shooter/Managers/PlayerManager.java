@@ -9,12 +9,6 @@ public class PlayerManager extends KeyAdapter {
 
     protected GameManager gameManager;
     protected Player player;
-    // private boolean upPressed;
-    // private boolean downPressed;
-    // private boolean leftPressed;
-    // private boolean rightPressed;
-
-    // private boolean canMove = false;
 
     public PlayerManager(GameManager gameManager) {
         this.gameManager = gameManager;

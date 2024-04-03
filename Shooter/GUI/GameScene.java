@@ -1,5 +1,4 @@
 package Shooter.GUI;
-import Shooter.GUI.GameScene.JButtonStyled;
 import Shooter.model.Game;
 
 import javax.imageio.ImageIO;
@@ -26,8 +25,6 @@ public class GameScene extends JPanel {
     protected Font shooterFont =loadShooterFont();
     protected Image backgroundImage;
     protected static final Color TITLE_COLOR = Color.WHITE;
-    //protected static final Font TITLE_FONT = new Font("Comic Sans MS", Font.BOLD, 40);
-    //protected static final Color BUTTON_COLOR = new Color(59, 89, 182);
     protected static final Color BUTTON_TEXT_COLOR = Color.WHITE;
     protected final Font BUTTON_FONT = shooterFont;
 
@@ -40,10 +37,8 @@ public class GameScene extends JPanel {
         return game;
     }
 
-    // Creation des boutons
     public JButtonStyled createButton(String text, String pageName) {
         JButtonStyled button = new JButtonStyled(text, shooterFont);
-        //styleButton(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,14 +60,11 @@ public class GameScene extends JPanel {
         return button;
     }
 
-    // creates a button to exit the game
     public JButtonStyled createButtonExit(String text) {
         JButtonStyled button = new JButtonStyled(text, shooterFont);
-        //styleButton(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Close the entire window and exit the program
                 System.exit(0);
             }
         });
@@ -115,19 +107,10 @@ protected void loadBackgroundImage(int i) {
 protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     if (backgroundImage != null) {
-        // Draw the background image
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
-/* 
-    //fonction pour styliser les bouttons
-    private void styleButton(JButton button) {
-        button.setBackground(BUTTON_COLOR);
-        button.setForeground(BUTTON_TEXT_COLOR);
-        button.setFont(BUTTON_FONT);
-        button.setBorder(new EmptyBorder(10, 10, 10, 10));
-    }
-*/
+
 
 
 public class JButtonStyled extends JButton {

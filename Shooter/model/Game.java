@@ -55,16 +55,6 @@ public class Game extends JFrame implements Runnable {
 		// perso_list.add(new EnemySniper(1000, 150));
 		perso_list.add(new Enemy5(1000, 150));
 
-		// // print enemy list to check
-		// System.out.println("Enemy List:");
-		// for (Personnage enemy : perso_list) {
-		// 	System.out.println("Type: " + enemy.getClass().getSimpleName());
-		// 	System.out.println("Coordinates: (" + enemy.getX() + ", " + enemy.getY() + ")");
-		// 	System.out.println("---");
-		// }
-		// System.out.println("Total Enemies: " + perso_list.size());
-		
-
 		// initialisation du plateau et du game Manager
 		this.gamePlateau = new Plateau(gameMode);
 		this.gameManager = new GameManager(this, gamePlateau, player);
@@ -135,7 +125,6 @@ public class Game extends JFrame implements Runnable {
 
 		long now;
 
-		// while (true) {
 		while (isRunning) {
 
 			now = System.nanoTime();
@@ -208,14 +197,9 @@ public class Game extends JFrame implements Runnable {
 			Player player = (Player) perso_list.get(0);
 			if (player.getLevel() == nbLevel) {
 				cardLayout.show(cardPanel, "Win");
-			} else { //je ne vois pas l'effet de la page noire, juste le jeu "freeze" puis reprends le niveau suivant 
-				// Afficher la page noire pendant un court laps de temps
-			//waitFortransiion();
-			// System.out.println("avant la transition ");
+			} else { 
               showBlackScreenForDelay(1000);
-				//waitFortransiion();
-				//nextLevel();
-				//begin = true;
+				
 			}
 		}
 	}

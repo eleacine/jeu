@@ -101,21 +101,5 @@ public class PlateauLevelLoader{
         }
         return levelmax;
     }
-    
-
-    // public static void main(String[] args) {
-    //    String filePath = "C:\\\\Users\\\\Leono\\\\OneDrive\\\\Documentos\\\\UNI\\\\CS\\\\M\\\\jeu\\\\Shooter\\\\factory\\\\PlateauLevels.txt";
-    //     int targetLevel = 1; // Set the desired level
-
-    //     int[][] playingBoard = loadPlayingBoard(filePath, targetLevel);
-
-    //     // Example: Print the loaded playing board
-    //     System.out.println("Level " + targetLevel + ":");
-    //     for (int[] row : playingBoard) {
-    //         for (int cell : row) {
-    //             System.out.print(cell + " ");
-    //         }
-    //         System.out.println();
-    //     }
-    // } 
+   
 }

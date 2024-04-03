@@ -1,13 +1,8 @@
 package Shooter.GUI;
-import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Shooter.model.Game;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.awt.*;
 
 
@@ -35,17 +30,16 @@ public class MenuPage extends GameScene {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weighty = 1; // Allow vertical centering
+        gbc.weighty = 1; 
 
-        // Add title
         JLabel titleLabel = new JLabel("Home Invasion");
         titleLabel.setFont(shooterFont);
         titleLabel.setForeground(TITLE_COLOR);
         add(titleLabel, gbc);
 
-        // Add buttons
+  
         JPanel buttonPanel = createButtonPanel();
-        gbc.gridy = 1; // Position below the title
+        gbc.gridy = 1; 
 		gbc.weighty=80;
         add(buttonPanel, gbc);
     }
@@ -55,7 +49,7 @@ public class MenuPage extends GameScene {
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setOpaque(false); // Set background color
+        buttonPanel.setOpaque(false); 
     
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -63,22 +57,21 @@ public class MenuPage extends GameScene {
         gbc.ipadx = 10;
         gbc.ipady = 10;
         gbc.insets.top = 10;
-        gbc.insets.right = 15; // Add right padding between buttons
+        gbc.insets.right = 15;
     
-        // Add buttons to buttonPanel
         buttonPanel.add(createButton("Play", "Play"), gbc);
         
-        gbc.gridx++; // Move to the next column
+        gbc.gridx++; 
         buttonPanel.add(createButton("Creative", "Play"), gbc);
         
-        gbc.gridx++; // Move to the next column
+        gbc.gridx++; 
         buttonPanel.add(createButton("Settings", "Settings"), gbc);
         
-        gbc.gridx++; // Move to the next column
+        gbc.gridx++; 
         buttonPanel.add(createButton("Editing", "Editing"), gbc);
         
-        gbc.gridx++; // Move to the next column
-        gbc.insets.right = 0; // Remove right padding for the last button
+        gbc.gridx++; 
+        gbc.insets.right = 0; 
         buttonPanel.add(createButtonExit("Quit"), gbc);
     
         return buttonPanel;
