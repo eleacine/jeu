@@ -20,7 +20,6 @@ public class EnemyBasique extends Enemy {
      */
 
     public EnemyBasique(int x, int y) {
-        // super(50, 100, 1, 2, 10, 50, 1000, 500, new Color(255, 0, 0));
         super(x, y, 50, 100, 1, 2, 10, 50, 1000, 250, new Color(255, 0, 0));
     }
 

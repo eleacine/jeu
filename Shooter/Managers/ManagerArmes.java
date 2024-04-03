@@ -5,7 +5,7 @@ import Shooter.model.Player;
 
 public class ManagerArmes {
     //contient fonctions pour les actions de Armes
-    // public ArrayList<Armes> armes = new ArrayList<Armes>();
+    
     public Player player;
     public GameManager gameManager;
 

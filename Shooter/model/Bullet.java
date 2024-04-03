@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-// import Shooter.Managers.ManagerCase;
-
 public class Bullet {
 
     public int size = 10; // Taille du projectile

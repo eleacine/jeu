@@ -1,8 +1,5 @@
 package Shooter.model;
 
-// import java.awt.Color;
-// import java.awt.image.BufferedImage;
-
 public class A2 extends Armes{
 
     public A2(){

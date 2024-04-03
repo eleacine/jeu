@@ -19,13 +19,13 @@ public class GameOverPage extends GameScene {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weighty = 1; // Allow vertical centering
+        gbc.weighty = 1; 
         JLabel gameOverLabel = new JLabel("Game Over", SwingConstants.CENTER);
         gameOverLabel.setFont(shooterFont);
         gameOverLabel.setForeground(Color.RED);
         add(gameOverLabel, gbc);
         JPanel buttonPanel=initButtons();
-        gbc.gridy = 1; // Position below the title
+        gbc.gridy = 1; // Position sous le titre
 		gbc.weighty=80;
         add(buttonPanel, gbc);
 

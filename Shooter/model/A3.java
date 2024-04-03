@@ -1,13 +1,9 @@
 package Shooter.model;
 
-// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-// import java.nio.Buffer;
-// import java.util.Iterator;
 import java.util.Timer;
-// import java.util.TimerTask;
 
 import Shooter.Managers.EnnemiManager;
 
@@ -22,7 +18,6 @@ public class A3 extends Armes {
     private static BufferedImage[] explosionImage;
     private Timer explosionTimer;
     private long explosionDelay = 1700; 
-   // private Graphics g;
 
 
     
@@ -57,7 +52,6 @@ public class A3 extends Armes {
     }
 
 public void drawExplosion(int x, int y, Graphics g) {
-      //  System.out.println("draw explosion");
         loadMineExplosion();
         Graphics2D g2d = (Graphics2D) g.create();
         for(int i = 0; i < explosionImage.length; i++){

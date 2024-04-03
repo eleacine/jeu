@@ -21,13 +21,13 @@ public class GameWinPage extends GameScene {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weighty = 1; // Allow vertical centering
+        gbc.weighty = 1; 
         JLabel gameWinLabel = new JLabel("Game Win !", SwingConstants.CENTER);
         gameWinLabel.setFont(shooterFont);
         gameWinLabel.setForeground(Color.WHITE);
         add(gameWinLabel, gbc);
         JPanel buttonPanel=initButtons();
-        gbc.gridy = 1; // Position below the title
+        gbc.gridy = 1; 
 		gbc.weighty=80;
         add(buttonPanel, gbc);
 
@@ -40,7 +40,6 @@ public class GameWinPage extends GameScene {
         gbc.gridx = 0;
         gbc.gridy = 0;
         buttonPanel.add(createButton("Menu", "Menu"));
-        //buttonPanel.add(createButton("Continue","Play"));
         return buttonPanel;
     }
 

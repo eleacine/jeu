@@ -1,7 +1,5 @@
 package Shooter.model;
 
-// import java.awt.image.BufferedImage;
-
 public class A1 extends Armes{
 
     public A1(){
