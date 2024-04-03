@@ -1,7 +1,4 @@
 package Shooter.GUI;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import Shooter.model.Game;
 
 import java.io.FileNotFoundException;
@@ -9,15 +6,20 @@ import java.io.InputStream;
 import java.awt.*;
 
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.IOException;
 
 public class MenuPage extends GameScene {
 
-    Font shooterFont =loadShooterFont();
+    Font shooterFont = loadShooterFont();
+    private Image backgroundImage;
 
     public MenuPage(Game g1) {
         super(g1);
         setPanelSize();
         initUI();
+        //loadBackgroundImage(); // Load the background image
     }
 
     private void setPanelSize() {
@@ -28,43 +30,48 @@ public class MenuPage extends GameScene {
 
     private void initUI() {
         setLayout(new GridBagLayout());
+        // Set background color if image fails to load or while it's loading
         setBackground(Color.BLACK);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weighty = 1; // Allow vertical centering
-
-        // Add title
-        JLabel titleLabel = new JLabel("SHOOTER GAME");
-        titleLabel.setFont(shooterFont.deriveFont(30));
-        titleLabel.setForeground(TITLE_COLOR);
-        add(titleLabel, gbc);
-
-        // Add buttons
-        JPanel buttonPanel = createButtonPanel();
-        gbc.gridy = 1; // Position below the title
-		gbc.weighty=3;
-        add(buttonPanel, gbc);
     }
 
-       private Font loadShooterFont() {
-         try {
-        InputStream fontStream = getClass().getResourceAsStream("../res/shooter.ttf");
-        if (fontStream == null) {
-            throw new FileNotFoundException("Fichier de police introuvable.");
+    /*private void loadBackgroundImage() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("Shooter/images/background.jpg");
+            if (inputStream != null) {
+                backgroundImage = ImageIO.read(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("fail");
         }
-        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(130f);
-    } catch (Exception e) {
-        e.printStackTrace();
-        // En cas d'erreur :  police par défaut
-        return new Font("SansSerif", Font.PLAIN, 14);
+    }*/
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            // Draw the background image
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
-}
+
+    private Font loadShooterFont() {
+        try {
+            InputStream fontStream = getClass().getResourceAsStream("../res/shooter.ttf");
+            if (fontStream == null) {
+                throw new FileNotFoundException("Fichier de police introuvable.");
+            }
+            return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(130f);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // In case of an error, return a default font
+            return new Font("SansSerif", Font.PLAIN, 14);
+        }
+    }
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBackground(Color.BLACK); // Set background color
+        buttonPanel.setBackground(new Color(0, 0, 0, 0)); // Set transparent background
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -86,5 +93,7 @@ public class MenuPage extends GameScene {
 
         return buttonPanel;
     }
+
+    // Other methods...
 
 }

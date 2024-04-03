@@ -56,6 +56,7 @@ public class GameScene extends JPanel {
                 }
                 else if(pageName.equals("Creative") && game.isBegin()){
                     game.begin=true;
+                    
                 }
                 layout.show(panel, pageName);
             }
