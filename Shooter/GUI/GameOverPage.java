@@ -7,25 +7,38 @@ import javax.swing.*;
 import Shooter.model.Game;
 
 public class GameOverPage extends GameScene {
-    //*page qui s’affiche si le niveau est perdu*
     
     public GameOverPage(Game game) {
-        super(game);
-        // setLayout(new GridLayout(3, 1));  
-        drawGameOver();
-        initButtons();
+        super(game); 
+        initUI();
     }
 
-    private void drawGameOver() {
+    private void initUI() {
+        loadBackgroundImage(2);
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weighty = 1; // Allow vertical centering
         JLabel gameOverLabel = new JLabel("Game Over", SwingConstants.CENTER);
-        gameOverLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        gameOverLabel.setForeground(Color.WHITE);
-        add(gameOverLabel);
+        gameOverLabel.setFont(shooterFont);
+        gameOverLabel.setForeground(Color.RED);
+        add(gameOverLabel, gbc);
+        JPanel buttonPanel=initButtons();
+        gbc.gridy = 1; // Position below the title
+		gbc.weighty=80;
+        add(buttonPanel, gbc);
+
+
     }
 
-    public void initButtons() {
-        add(createButton("Menu", "Menu"));
-        // add(createButton("Replay", "Play"));
+    private JPanel initButtons() {
+        JPanel buttonPanel=new JPanel();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        buttonPanel.add(createButton("Menu", "Menu"));
+        return buttonPanel;
     }
 
 

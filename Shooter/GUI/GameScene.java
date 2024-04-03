@@ -1,6 +1,8 @@
 package Shooter.GUI;
+import Shooter.GUI.GameScene.JButtonStyled;
 import Shooter.model.Game;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,6 +12,7 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -20,7 +23,8 @@ public class GameScene extends JPanel {
     public Game game;
 
     //Constantes pour les couleurs et fonts
-     Font shooterFont =loadShooterFont();
+    protected Font shooterFont =loadShooterFont();
+    protected Image backgroundImage;
     protected static final Color TITLE_COLOR = Color.WHITE;
     //protected static final Font TITLE_FONT = new Font("Comic Sans MS", Font.BOLD, 40);
     //protected static final Color BUTTON_COLOR = new Color(59, 89, 182);
@@ -30,7 +34,6 @@ public class GameScene extends JPanel {
 
     public GameScene(Game game) {
         this.game = game;
-        setBackground(Color.BLACK);
     }
 
     public Game getGame() {
@@ -76,9 +79,9 @@ public class GameScene extends JPanel {
         return button;
     }
 
-           private  Font loadShooterFont() {
+        protected Font loadShooterFont() {
          try {
-        InputStream fontStream = getClass().getResourceAsStream("../res/shooter.ttf");
+        InputStream fontStream = getClass().getResourceAsStream("../../image/Cream Cake.otf");
         if (fontStream == null) {
             throw new FileNotFoundException("Fichier de police introuvable.");
         }
@@ -87,6 +90,33 @@ public class GameScene extends JPanel {
         e.printStackTrace();
         // En cas d'erreur :  police par défaut
         return new Font("SansSerif", Font.PLAIN, 14);
+    }
+}
+
+protected void loadBackgroundImage(int i) {
+    try {
+        InputStream inputStream;
+        switch(i){
+            case 1:inputStream = getClass().getResourceAsStream("../../image/background.jpg");
+            break;
+            case 2: inputStream = getClass().getResourceAsStream("../../image/background2.jpg");
+            break;
+            case 3: inputStream = getClass().getResourceAsStream("../../image/background3.jpg");
+            break;
+            default: inputStream = getClass().getResourceAsStream("../../image/background.jpg");
+        }
+        if (inputStream != null) {
+            backgroundImage = ImageIO.read(inputStream);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    if (backgroundImage != null) {
+        // Draw the background image
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
 /* 

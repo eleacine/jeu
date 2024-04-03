@@ -21,7 +21,7 @@ public class EditingMode extends GameScene {
 	private int levelselected; // numéro du niveau selectionné par l'utilisateur (si 0, c'est un nouveau niveau sinon c'est un niveau existant)
 	private int[][] level; // niveau sélectionné par l'utilisateur
 	private ArrayList<String> ListeEnnemis;
-	private boolean levelpersonnalisé=true; // MODE PERSONNALISÉ OU CAMPAGNE
+	private boolean levelpersonnalisé=false; // MODE PERSONNALISÉ OU CAMPAGNE
 	private int clicked; //bouton cliquée
 
 	private JPanel Plateau; 
@@ -227,7 +227,7 @@ public class EditingMode extends GameScene {
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.gridx=0;
 		gbc.gridy=0;
-		JButtonStyled sauvegarde = new JButtonStyled("Sauvegarder", new Font("SansSerif", Font.PLAIN, 14));
+		JButtonStyled sauvegarde = new JButtonStyled("Sauvegarder", shooterFont);
         sauvegarde.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
@@ -241,7 +241,7 @@ public class EditingMode extends GameScene {
 
 		barre.add(sauvegarde, gbc);
 		gbc.gridx=1;
-		JButtonStyled modifier = new JButtonStyled("Modifier", new Font("SansSerif", Font.PLAIN, 14));
+		JButtonStyled modifier = new JButtonStyled("Modifier", shooterFont);
 		modifier.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){

@@ -15,13 +15,12 @@ import java.awt.*;
 public class MenuPage extends GameScene {
 
     Font shooterFont =loadShooterFont();
-    private Image backgroundImage;
 
     public MenuPage(Game g1) {
         super(g1);
         setPanelSize();
         initUI();
-        loadBackgroundImage();
+        loadBackgroundImage(1);
     }
 
     private void setPanelSize() {
@@ -32,7 +31,6 @@ public class MenuPage extends GameScene {
 
     private void initUI() {
         setLayout(new GridBagLayout());
-        setBackground(Color.BLACK);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -40,8 +38,8 @@ public class MenuPage extends GameScene {
         gbc.weighty = 1; // Allow vertical centering
 
         // Add title
-        JLabel titleLabel = new JLabel("SHOOTER GAME");
-        titleLabel.setFont(shooterFont.deriveFont(30));
+        JLabel titleLabel = new JLabel("Home Invasion");
+        titleLabel.setFont(shooterFont);
         titleLabel.setForeground(TITLE_COLOR);
         add(titleLabel, gbc);
 
@@ -52,36 +50,8 @@ public class MenuPage extends GameScene {
         add(buttonPanel, gbc);
     }
 
-       private Font loadShooterFont() {
-         try {
-        InputStream fontStream = getClass().getResourceAsStream("../res/shooter.ttf");
-        if (fontStream == null) {
-            throw new FileNotFoundException("Fichier de police introuvable.");
-        }
-        return Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(130f);
-    } catch (Exception e) {
-        e.printStackTrace();
-        // En cas d'erreur :  police par défaut
-        return new Font("SansSerif", Font.PLAIN, 14);
-    }
-}
-private void loadBackgroundImage() {
-        try {
-            InputStream inputStream = getClass().getResourceAsStream("../../image/background.jpg");
-            if (inputStream != null) {
-                backgroundImage = ImageIO.read(inputStream);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (backgroundImage != null) {
-            // Draw the background image
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        }
-    }
+       
+
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());

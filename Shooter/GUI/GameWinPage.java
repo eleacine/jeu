@@ -1,9 +1,48 @@
 package Shooter.GUI;
 
-import javax.swing.JButton;
 
-public class GameWinPage {
-    //page qui s’affiche si le niveau est gagné
-    JButton nextButton;     //--> permet de continuer de jouer sur le niveau suivant sans revenir au menu
-    JButton meButton;       //--> permet de revenir sur la page menu
+import java.awt.*;
+import javax.swing.*;
+
+import Shooter.model.Game;
+
+public class GameWinPage extends GameScene {
+        
+    
+    public GameWinPage(Game game) {
+        super(game); 
+        initUI();
+        
+    }
+
+    private void initUI() {
+        loadBackgroundImage(1);
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weighty = 1; // Allow vertical centering
+        JLabel gameWinLabel = new JLabel("Game Win !", SwingConstants.CENTER);
+        gameWinLabel.setFont(shooterFont);
+        gameWinLabel.setForeground(Color.WHITE);
+        add(gameWinLabel, gbc);
+        JPanel buttonPanel=initButtons();
+        gbc.gridy = 1; // Position below the title
+		gbc.weighty=80;
+        add(buttonPanel, gbc);
+
+
+    }
+
+    private JPanel initButtons() {
+        JPanel buttonPanel=new JPanel();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        buttonPanel.add(createButton("Menu", "Menu"));
+        //buttonPanel.add(createButton("Continue","Play"));
+        return buttonPanel;
+    }
+
+
 }

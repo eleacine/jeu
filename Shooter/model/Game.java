@@ -9,12 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Shooter.GUI.EditingMode;
-import Shooter.GUI.GameOverPage;
-import Shooter.GUI.WinPage;
-import Shooter.GUI.MenuPage;
-import Shooter.GUI.PlayPage;
-import Shooter.GUI.SettingsPage;
+import Shooter.GUI.*;
 import Shooter.Managers.GameManager;
 import Shooter.factory.EnemyLevelLoader;
 
@@ -105,7 +100,7 @@ public class Game extends JFrame implements Runnable {
 		cardPanel.add(new SettingsPage(this), "Settings");
 		cardPanel.add(new EditingMode(this), "Editing");
 		cardPanel.add(new GameOverPage(this), "GameOver");
-		cardPanel.add(new WinPage(this), "Win");
+		cardPanel.add(new GameWinPage(this), "GameWin");
 		cardLayout.show(cardPanel, "Menu");
 
 	}

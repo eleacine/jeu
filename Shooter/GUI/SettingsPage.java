@@ -15,7 +15,12 @@ public class SettingsPage extends GameScene {
 
     public SettingsPage(Game game) {
         super(game);
+        initUI();
+        loadBackgroundImage(1);
+        
+    }
 
+    private void initUI(){
         setLayout(new GridBagLayout()); // GridBagLayout pour tout organiser
 
 		//titre
@@ -35,9 +40,7 @@ public class SettingsPage extends GameScene {
         ImageIcon muteIcon = new ImageIcon("Shooter/res/mute.png");
         soundOnIcon = scaleImageIcon(soundOnIcon, 50, 50);
         muteIcon = scaleImageIcon(muteIcon, 50, 50);
-
-        soundToggleButton = new SoundToggleButton("Activer son", "Désactiver son",
-                soundOnIcon, muteIcon);
+        soundToggleButton = new SoundToggleButton("Activer son", "Désactiver son", soundOnIcon, muteIcon);
         gbc.gridy++;
         gbc.anchor = GridBagConstraints.CENTER; // Center le bouton de son 
         add(soundToggleButton, gbc);
@@ -53,7 +56,7 @@ public class SettingsPage extends GameScene {
         return new ImageIcon(scaledImage);
     }
 
-    public class SoundToggleButton extends JButton {
+    public class SoundToggleButton extends JButton { //nested class 
         private boolean soundEnabled;
         private ImageIcon soundEnabledIcon;
         private ImageIcon soundDisabledIcon;
@@ -69,8 +72,6 @@ public class SettingsPage extends GameScene {
                 public void actionPerformed(ActionEvent e) {
                     soundEnabled = !soundEnabled;
                     updateIcon();
-                    // Ajoutez ici le code pour activer ou désactiver le son dans votre jeu
-                    // Par exemple, vous pourriez appeler une méthode de votre objet Game pour gérer
                     game.updateSound(soundEnabled);
                 }
             });
@@ -79,12 +80,10 @@ public class SettingsPage extends GameScene {
         private void updateIcon() {
             if (soundEnabled) {
                 setIcon(soundEnabledIcon);
-                // System.out.println("Son desactivé");
                 soundPlayer.playSound("Shooter/res/geometryDash.wav");
 
             } else {
                 setIcon(soundDisabledIcon);
-                // System.out.println("son active");
                 soundPlayer.stop();
             }
         }
