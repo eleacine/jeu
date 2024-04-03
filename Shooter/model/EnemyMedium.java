@@ -39,9 +39,10 @@ public class EnemyMedium extends Enemy {
         }
     }
 
-    @Override
+    @Override   
     public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
         shoot(player, projectilesManager);
     }
+
 
 }

@@ -1,6 +1,6 @@
 package Shooter.model;
 
-import java.awt.Color;
+// import java.awt.Color;
 
 
 public class A5 extends Armes {

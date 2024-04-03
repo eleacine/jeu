@@ -51,7 +51,6 @@ public class Plateau extends JPanel {
 
         this.floodfill = newFloodFill(this.gameManager.getPlayer().getY() / 40,
                 this.gameManager.getPlayer().getX() / 40);
-    //   printFloodFill(floodfill);
     }
 
     public void update_pleateau(int x, int y, int type_case) {
@@ -60,15 +59,12 @@ public class Plateau extends JPanel {
 
     private void loadArme() {
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
-
         imageArmes=new BufferedImage[5];
 
         for (int i =0 ; i <5;i++){
             imageArmes[i]= atlas.getSubimage((i)*40, 4*40, 40, 40);
         }  
     }
-
-    
 
     public void waitFortransiion() {
         System.out.println("I'm being called: waitFortransiion");
@@ -80,11 +76,9 @@ public class Plateau extends JPanel {
     }
 
 
-
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
-
 
         // Create a new Graphics2D object for gameManager.getPlayer()
         Graphics2D gPlayer = (Graphics2D) g.create();
@@ -117,9 +111,6 @@ public class Plateau extends JPanel {
             }
         }
 
-  
-
-
         // Dessiner les pièges
         for (A3 mine : pieges) {
             if (gameManager.getPlayer().detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
@@ -144,8 +135,6 @@ public class Plateau extends JPanel {
                         if (ennemi.detectCollision(mine.getX(), mine.getY(), mine.getDimension())){
             
                             ennemi.infligerDegats(mine.getPower());
-                       
-                       
                             mine.drawExplosion(mine.getX(), mine.getY(), g);
                       
                             // mine.dimension = 0;
@@ -163,22 +152,64 @@ public class Plateau extends JPanel {
         }
 
         for (A4 grenade : grenade) {
-            grenade.draw(g, gameManager.getPersoList(), gameManager.getPlayer().getX(), gameManager.getPlayer().getY());
-            if(grenade.getIsGrenadeActivated()==true){
+
+            grenade.drawGrenade(g);
+            //grenade.drawExplosion(g);
+   
+                int grenadeX = (int) (grenade.getX() / 40);
+                int grenadeY = (int) (grenade.getY() / 40);
+
+                for (int x = grenadeX - 2; x <= grenadeX + 2; x++) {
+                    for (int y = grenadeY - 2; y <= grenadeY + 2; y++) {
+  
+                        if (x >= 0 && x < gameManager.getGamePlateau().level_tab[0].length &&
+                            y >= 0 && y < gameManager.getGamePlateau().level_tab.length) {
+                               double distance = Math.sqrt(Math.pow(x - grenadeX, 2) + Math.pow(y - grenadeY, 2));
+                            if (distance <= 2) {
+                                int caseID = gameManager.getGamePlateau().level_tab[y][x];
+                                int caseType = ManagerCase.getCaseType(caseID);
+                                if (caseType == ManagerCase.MUR_CASSANT) {
+                                    gameManager.getGamePlateau().level_tab[y][x] = ManagerCase.SOL;
+                                }
+                            }
+                        }
+            
+                    }
+                }
+                
+            for (A3 mine : pieges) {
+                double distance = Math.sqrt(Math.pow(mine.getX() - grenade.getX(), 2) + Math.pow(mine.getY() - grenade.getY(), 2));
+                if (distance <= 75) { 
+                    mine.drawExplosion(mine.getX(), mine.getY(), g);
+                    mine.setDimension(0);
+                }
+            
+            } 
+                for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list()) {
+                     double distance = Math.sqrt(Math.pow(personnage.getX() - grenade.getX(), 2) + Math.pow(personnage.getY() - grenade.getY(), 2));
+                    if (distance <= 75) {
+                        personnage.infligerDegats(10);
+                    }               
+            }
+        
+    }
+        /* 
+           if(grenade.getIsGrenadeActivated()==true){
                // System.out.println("grenade"+grenade.isGrenadeActivated());
           /*   for (Personnage personnage : gameManager.getEnnemiManager().getPerso_list()) {
                 double distance = Math.sqrt(Math.pow(personnage.x - grenade.getX(), 2) + Math.pow(personnage.y - grenade.getY(), 2));
                 if (distance <= 75) {
                     personnage.infligerDegats(10);
                 }
-            }  */
+            }  
              if (grenade.getIsGrenadeActivated()){
-               grenade.activationTime = System.currentTimeMillis();
+            //   grenade.activationTime = System.currentTimeMillis();
                grenade.startExplosionAnimation(g, gameManager.getPersoList()); 
                 grenade.shoot();
              }
-            }
-         }
+             */
+            //}
+         
 
         // print arme et nombre munitions
         int currentArme = gameManager.getPlayer().currentArme;
@@ -198,10 +229,8 @@ public class Plateau extends JPanel {
         // Dessin crosshair
         gameManager.getMyMouseListener().getCrosshair().draw(g);
 
-        int centerX = (int) (gameManager.getPlayer().getX() + gameManager.getPlayer().getSize() / 2
-                - armeCourante.distance * 2 / 2);
-        int centerY = (int) (gameManager.getPlayer().getY() + gameManager.getPlayer().getSize() / 2
-                - armeCourante.distance * 2 / 2);
+        int centerX = (int) gameManager.getPlayer().getX() - armeCourante.distance;
+        int centerY = (int) gameManager.getPlayer().getY() - armeCourante.distance;
         /*
          * g.setColor(Color.RED);
          * g.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance
@@ -217,8 +246,9 @@ public class Plateau extends JPanel {
 
         // Dessiner le cercle avec le contour discontinu
         // int diametre = armeCourante.distance * 2;
-        g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
+        // g2d.drawOval(centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
 
+        g2d.drawOval( centerX, centerY, armeCourante.distance * 2, armeCourante.distance * 2);
     }
 
     private void drawPlayerMovement(Graphics2D g) {
@@ -498,5 +528,7 @@ public class Plateau extends JPanel {
     public GameManager getGameManager() {
         return gameManager;
     }
+    
+
 
 }

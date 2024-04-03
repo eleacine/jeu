@@ -34,10 +34,11 @@ public class EnemySniper extends Enemy {
         }
     }
 
-    @Override
+    @Override   
     public void shootBehavior(Player player, ProjectilesManager projectilesManager) {
         shoot(player, projectilesManager);
     }
+
 
     public boolean isWallBetween(int x1, int y1, int[][] map, int x2, int y2) {
         // Calculer les coordonnées des cases de la ligne de mire entre (x1, y1) et (x2,

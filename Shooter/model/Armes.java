@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.awt.Color;
+// import java.awt.Graphics;
+// import java.awt.Graphics2D;
+// import java.awt.image.BufferedImage;
+// import java.awt.Color;
 
 public abstract class Armes {
     protected int power;
