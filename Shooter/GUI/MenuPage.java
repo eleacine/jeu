@@ -1,10 +1,12 @@
 package Shooter.GUI;
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Shooter.model.Game;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.awt.*;
 
@@ -13,11 +15,13 @@ import java.awt.*;
 public class MenuPage extends GameScene {
 
     Font shooterFont =loadShooterFont();
+    private Image backgroundImage;
 
     public MenuPage(Game g1) {
         super(g1);
         setPanelSize();
         initUI();
+        loadBackgroundImage();
     }
 
     private void setPanelSize() {
@@ -61,6 +65,23 @@ public class MenuPage extends GameScene {
         return new Font("SansSerif", Font.PLAIN, 14);
     }
 }
+private void loadBackgroundImage() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("../../image/background.jpg");
+            if (inputStream != null) {
+                backgroundImage = ImageIO.read(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            // Draw the background image
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
