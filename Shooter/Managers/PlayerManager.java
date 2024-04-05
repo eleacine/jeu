@@ -108,10 +108,12 @@ public class PlayerManager extends KeyAdapter {
              // Cas où le joueur rencontre un obstacle ralentisseur (eau)
             case ManagerCase.OBSTACLE:
                 player.setMaxSpeed(1);
+                gameManager.getGamePlateau().setANIMATION_SPEED(50);
                 break;
         
             default:
                 player.setMaxSpeed(2);
+                gameManager.getGamePlateau().setANIMATION_SPEED(30);
                 break;
              }
         

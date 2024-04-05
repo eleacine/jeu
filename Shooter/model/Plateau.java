@@ -24,7 +24,10 @@ public class Plateau extends JPanel {
     public ArrayList<A3> mines = new ArrayList<A3>();
     public ArrayList<A4> grenades = new ArrayList<A4>();
 
-    public int[][] floodfill;;
+    public int[][] floodfill;
+    protected int animationIndex;
+	protected int tick;  
+	protected int ANIMATION_SPEED = 30;
 
     public Plateau(boolean gameMode) {
         if (!gameMode) {
@@ -37,6 +40,18 @@ public class Plateau extends JPanel {
         loadArme();
 
     }
+
+    protected void updateTick() {
+		tick++;
+		//cela régule la vitesse de l'animation, plus le nombre est élevé, plus l'animation est lente
+		if(tick >= ANIMATION_SPEED) {   
+			tick = 0;
+			animationIndex++;
+			if(animationIndex >= 3) {
+				animationIndex = 0;
+			}
+		}
+	}
 
     public void render_plateau(Graphics g) {
         for (int y = 0; y < level_tab.length; y++) {
@@ -282,9 +297,14 @@ public class Plateau extends JPanel {
         AffineTransform at = new AffineTransform();
         at.translate(x - newWidth / 2, y - newHeight / 2);
         at.rotate(gameManager.getPlayer().getDirection(), newWidth / 2, newHeight / 2);
-
-        g.drawImage(gameManager.getPlayer().getSprite().getImage(), at, this);
-        gameManager.getPlayer().drawBoundingPolygon(g);
+        //ici dessin joueur
+        //g.drawImage(gameManager.getPlayer().getSprite().getImage(), at, this);
+       g.drawImage(gameManager.getPlayer().imagePlayer(animationIndex), at, this);
+       //gameManager.getPlayer().setSprite(gameManager.getPlayer().imagePlayer(animationIndex), at, this);
+       if(gameManager.getPlayer().getXSpeed()!=0 || gameManager.getPlayer().getYSpeed()!=0){
+        updateTick();
+       }
+       
     }
 
     // private void drawDetectionRadius(Graphics g, Enemy ennemi) {
@@ -489,5 +509,15 @@ public class Plateau extends JPanel {
     public GameManager getGameManager() {
         return gameManager;
     }
+
+    public int getANIMATION_SPEED() {
+        return ANIMATION_SPEED;
+    }
+
+    public void setANIMATION_SPEED(int aNIMATION_SPEED) {
+        ANIMATION_SPEED = aNIMATION_SPEED;
+    }
+
+    
 
 }

@@ -21,7 +21,11 @@ public class Player extends Personnage {
     protected int level = 1;
     protected ImageIcon sprite;
 
-    protected Path2D.Double boundingPolygon; // Polygone englobant le joueur
+    //protected Path2D.Double boundingPolygon; // Polygone englobant le joueur
+
+    // Chargement des images de marche
+    private ImageIcon[] walkSprites;
+    private static final int NUM_WALK_FRAMES = 3;
 
     public Player(String pseudo) {
         super(1000, 500, 0, 0, 50, 2, 1000);
@@ -34,13 +38,42 @@ public class Player extends Personnage {
         this.armes.add(new A5());
         currentArme = 0;
 
-        loadSprite();
-        createBoundingPolygon(); // Créer le polygone englobant une fois que le sprite est chargé
+    
+        loadWalkSprites();
+        //createBoundingPolygon(); // Créer le polygone englobant une fois que le sprite est chargé
+        
+        
+    }
 
+    // Chargement des images de marche depuis des fichiers ou des ressources
+    private void loadWalkSprites() {
+        walkSprites = new ImageIcon[NUM_WALK_FRAMES]; // NUM_WALK_FRAMES est le nombre total de frames de marche
+        for (int i = 0; i < NUM_WALK_FRAMES; i++) {
+            String filename = "walk_" + i + ".png"; // Nom du fichier de l'image de marche
+            
+            URL imageUrl = getClass().getResource(filename);
+            ImageIcon walkSprite = new ImageIcon(imageUrl);
+
+            double scale = 5;
+            int newWidth = (int) (size * scale);
+            int newHeight = (int) (size * scale);
+
+            Image resizedImage = walkSprite.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+            ImageIcon joueurImage = new ImageIcon(resizedImage);
+            walkSprites[i] = joueurImage;
+        }
+        
+    }
+
+
+    // Méthode pour dessiner le joueur en utilisant l'image de marche actuelle
+    public Image imagePlayer(int animationIndex) {
+        //System.out.println(currentWalkFrame);
+        return walkSprites[animationIndex].getImage();
     }
 
     // Méthode pour créer le polygone englobant basé sur les coordonnées de l'image
-    private void createBoundingPolygon() {
+    /*private void createBoundingPolygon() {
         // Définissez les coordonnées des sommets de votre forme de joueur
         double[] xPoints = { x, x + sprite.getIconWidth(), x + sprite.getIconWidth(), x };
         double[] yPoints = { y, y, y + sprite.getIconHeight(), y + sprite.getIconHeight() };
@@ -53,11 +86,11 @@ public class Player extends Personnage {
             boundingPolygon.lineTo(xPoints[i], yPoints[i]);
         }
         boundingPolygon.closePath();
-    }
+    }*/
 
     // Méthode pour mettre à jour les coordonnées du polygone englobant en fonction
     // de la position du joueur
-    private void updateBoundingPolygon() {
+   /*  private void updateBoundingPolygon() {
         double[] xPoints = {285, 286, 278, 277, 278};
         double[] yPoints = {234, 246, 247, 250, 265};
         int numPoints = 4;
@@ -74,7 +107,7 @@ public class Player extends Personnage {
     public void drawBoundingPolygon(Graphics2D g2d) {
        // g2d.setColor(Color.RED); // Couleur du contour
         //g2d.draw(boundingPolygon); // Dessiner le contour du polygone
-    }
+    }*/
 
     // récupérer une éventuelle sauvegarde
     public static Player loadPlayer() {
@@ -87,7 +120,7 @@ public class Player extends Personnage {
     }
 
     public void loadSprite() {
-        URL imageUrl = getClass().getResource("Jj_test.png");
+        URL imageUrl = getClass().getResource("walk_0.png");
         ImageIcon originalImage = new ImageIcon(imageUrl);
 
         double scale = 5;
@@ -119,14 +152,14 @@ public class Player extends Personnage {
     @Override
     public void setX(int x) {
         super.setX(x);
-        updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en X du joueur est
+        //updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en X du joueur est
                                  // modifiée
     }
 
     @Override
     public void setY(int y) {
         super.setY(y);
-        updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en Y du joueur est
+        //updateBoundingPolygon(); // Mettre à jour le polygone englobant lorsque la position en Y du joueur est
                                  // modifiée
     }
 
