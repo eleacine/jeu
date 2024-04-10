@@ -144,7 +144,7 @@ public class PlayerManager extends KeyAdapter {
         int caseType = ManagerCase.getCaseType(gameManager.getGamePlateau().level_tab[yIndex][xIndex]);
 
         // Vérifier si la case est un mur, un mur cassant ou une case bloquante
-        return (caseType != ManagerCase.MUR && caseType != ManagerCase.MUR_CASSANT && caseType != ManagerCase.BLOQUE);
+        return (caseType != ManagerCase.MUR && caseType != ManagerCase.CASSANT && caseType != ManagerCase.BLOQUE);
     }
 
     // -----------------------------------------------------------------------

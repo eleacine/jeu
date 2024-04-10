@@ -39,15 +39,15 @@ public class A3 extends Armes {
     public void loadMineImage() {
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
         mineImage=new BufferedImage[1]; 
-        mineImage[0]= atlas.getSubimage(5*40, 4*40, 40, 40);
+        mineImage[0]= atlas.getSubimage(2*40, 8*40, 40, 40);
         
     }
 
     public static void loadMineExplosion(){
         BufferedImage atlas=Enregistrement.getSpriteAtlas();
-        explosionImage=new BufferedImage[6];
-        for (int i =0 ; i <6;i++){
-            explosionImage[i]= atlas.getSubimage((2+i)*40, 5*40, 40, 40);
+        explosionImage=new BufferedImage[5];
+        for (int i =0 ; i <5;i++){
+            explosionImage[i]= atlas.getSubimage(i*40, 9*40, 40, 40);
         }  
     }
 

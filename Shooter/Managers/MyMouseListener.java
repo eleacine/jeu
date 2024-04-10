@@ -73,7 +73,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                                     && currentYIndex < gameManager.getGamePlateau().level_tab.length) {
                                 int caseType = gameManager.getGamePlateau().getTile_manager().getCaseType(gameManager.getGamePlateau().level_tab[currentYIndex][currentXIndex]);
                                 if (caseType == ManagerCase.MUR || caseType == ManagerCase.BLOQUE
-                                        || caseType == ManagerCase.MUR_CASSANT) {
+                                        || caseType == ManagerCase.CASSANT) {
                                     System.out.println("Impossible de placer la mine sur un mur.");
                                 } else {
                                     boolean canPlace = true;

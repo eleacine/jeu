@@ -290,7 +290,7 @@ public class Enemy extends Personnage {
         // Vérifie si une case est un mur
         int x = convertPositionToTile(xPos);
         int y = convertPositionToTile(yPos);
-        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.MUR_CASSANT;
+        return map[y][x] == ManagerCase.MUR || map[y][x] == ManagerCase.CASSANT;
     }
 
 

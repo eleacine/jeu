@@ -75,7 +75,7 @@ public class Plateau extends JPanel {
         imageArmes = new BufferedImage[5];
 
         for (int i = 0; i < 5; i++) {
-            imageArmes[i] = atlas.getSubimage((i) * 40, 4 * 40, 40, 40);
+            imageArmes[i] = atlas.getSubimage((i) * 40, 8 * 40, 40, 40);
         }
     }
 
@@ -196,7 +196,7 @@ public class Plateau extends JPanel {
                         if (distance <= 2) {
                             int caseID = gameManager.getGamePlateau().level_tab[y][x];
                             int caseType = ManagerCase.getCaseType(caseID);
-                            if (caseType == ManagerCase.MUR_CASSANT) {
+                            if (caseType == ManagerCase.CASSANT) {
                                 gameManager.getGamePlateau().level_tab[y][x] = ManagerCase.SOL;
                             }
                         }
@@ -404,7 +404,7 @@ public class Plateau extends JPanel {
         for (int i = 0; i < this.level_tab.length; i++) {
             for (int j = 0; j < this.level_tab[i].length; j++) {
                 if (ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR
-                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.MUR_CASSANT
+                        || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.CASSANT
                         || ManagerCase.getCaseType(this.level_tab[i][j]) == ManagerCase.BLOQUE) {
                     res[i][j] = 1000;
                 }
@@ -454,7 +454,7 @@ public class Plateau extends JPanel {
     // Vérifier si une cellule est un obstacle
     private boolean isObstacle(int x, int y) {
         return ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR ||
-                ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.MUR_CASSANT ||
+                ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.CASSANT ||
                 ManagerCase.getCaseType(this.level_tab[x][y]) == ManagerCase.BLOQUE;
     }
 
